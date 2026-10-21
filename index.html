@@ -624,15 +624,6 @@
         margin-top: 0;
         z-index: 40;
       }
-      /* At phone widths the docked bar keeps its reduced width
-         (retained from the previous bottom-dock layout). */
-      @media (max-width: 40rem) {
-        .section-dock.is-docked {
-          left: var(--grid-gutter);
-          transform: none;
-          width: calc(100vw - var(--grid-gutter) - 7.5rem);
-        }
-      }
       .dock-placeholder { display: none; }
       .dock-scroll {
         position: relative;
