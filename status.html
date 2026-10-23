@@ -1,0 +1,1976 @@
+<!doctype html>
+<html lang="en" data-mode="system">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>Design Language — Status</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:SOFT,WONK,ital,opsz,wght@0..100,0,0,9..144,100..900;0..100,0,1,9..144,100..900;0..100,1,0,9..144,100..900;0..100,1,1,9..144,100..900&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <style>
+      /* ============================================================
+         DESIGN LANGUAGE TOKENS — the subset this page renders from,
+         inlined verbatim from the same sources as the specimen
+         (colors.css, fonts.css, type.css, space.css, grid.css). The
+         full token set lives on the specimen page.
+         ============================================================ */
+
+      /* ---- Colour (colors.css) ---- */
+      :root {
+        /* Midnight */
+        --midnight-1000: oklch(16.11% 0.0639 276.48);
+        --midnight-950: oklch(17.5% 0.066 285.88);
+        --midnight-900: oklch(22.5% 0.088 285.88);
+        --midnight-800: oklch(31.5% 0.125 285.88);
+        --midnight-700: oklch(43% 0.171 285.88);
+        --midnight-500: oklch(57% 0.17 285.88);
+        --midnight-300: oklch(70.5% 0.11 285.88);
+        --midnight-200: oklch(82.5% 0.059 285.88);
+        --midnight-100: oklch(91% 0.026 285.88);
+        --midnight-50: oklch(96% 0.01 285.88);
+        --midnight-25: oklch(98% 0.004 285.88);
+
+        /* Haze (formerly Neutral) */
+        --haze-1000: oklch(16.11% 0.0639 276.48);
+        --haze-950: oklch(17.5% 0.054 285.88);
+        --haze-900: oklch(22.5% 0.046 285.88);
+        --haze-800: oklch(31.5% 0.04 285.88);
+        --haze-700: oklch(43% 0.034 285.88);
+        --haze-500: oklch(57% 0.03 285.88);
+        --haze-300: oklch(70.5% 0.026 285.88);
+        --haze-200: oklch(82.5% 0.022 285.88);
+        --haze-100: oklch(91% 0.018 285.88);
+        --haze-50: oklch(96% 0.012 285.88);
+        --haze-25: oklch(98% 0.004 285.88);
+
+        /* Purple Rain */
+        --purple-rain-1000: oklch(16% 0.058 310.12);
+        --purple-rain-950: oklch(18.5% 0.093 310.12);
+        --purple-rain-900: oklch(25% 0.126 310.12);
+        --purple-rain-800: oklch(34.5% 0.15 310.12);
+        --purple-rain-700: oklch(45.5% 0.164 310.12);
+        --purple-rain-500: oklch(57.5% 0.166 310.12);
+        --purple-rain-300: oklch(69.5% 0.16 310.12);
+        --purple-rain-200: oklch(81% 0.128 310.12);
+        --purple-rain-100: oklch(90% 0.065 310.12);
+        --purple-rain-50: oklch(96% 0.025 310.12);
+        --purple-rain-25: oklch(98% 0.006 310.12);
+
+        /* Fern (formerly Shamrock) — hue torsions teal (199.8°) → green (158°) */
+        --fern-1000: oklch(16% 0.026 199.8);
+        --fern-950: oklch(16.5% 0.028 196.2);
+        --fern-900: oklch(21.5% 0.036 192);
+        --fern-800: oklch(30% 0.052 187.7);
+        --fern-700: oklch(41% 0.072 183.3);
+        --fern-500: oklch(53.5% 0.098 178.9);
+        --fern-300: oklch(66.5% 0.125 174.5);
+        --fern-200: oklch(78% 0.136 170.1);
+        --fern-100: oklch(88% 0.12 165.8);
+        --fern-50: oklch(95% 0.075 161.6);
+        --fern-25: oklch(98% 0.016 158.01);
+
+        /* Cerise (formerly Razzmatazz) */
+        --cerise-1000: oklch(16% 0.06 4.7);
+        --cerise-950: oklch(17.5% 0.07 4.7);
+        --cerise-900: oklch(22.4% 0.09 4.7);
+        --cerise-800: oklch(31.5% 0.126 4.7);
+        --cerise-700: oklch(43% 0.172 4.7);
+        --cerise-500: oklch(56.5% 0.202 4.7);
+        --cerise-300: oklch(69.5% 0.188 4.7);
+        --cerise-200: oklch(81.5% 0.109 4.7);
+        --cerise-100: oklch(90.6% 0.051 4.7);
+        --cerise-50: oklch(96.1% 0.02 4.7);
+        --cerise-25: oklch(98% 0.008 4.7);
+
+        /* Marigold (formerly Buddha Gold) — deliberate hue torsion 60.7° → 100.4° */
+        --marigold-1000: oklch(16% 0.036 60.7);
+        --marigold-950: oklch(21% 0.039 64.1);
+        --marigold-900: oklch(27% 0.049 68.1);
+        --marigold-800: oklch(35% 0.067 72.2);
+        --marigold-700: oklch(44.5% 0.09 76.4);
+        --marigold-500: oklch(56.6% 0.117 80.6);
+        --marigold-300: oklch(73.7% 0.151 84.7);
+        --marigold-200: oklch(81.3% 0.166 88.9);
+        --marigold-100: oklch(90.5% 0.136 93);
+        --marigold-50: oklch(96% 0.071 97);
+        --marigold-25: oklch(98% 0.045 100.4);
+
+        /* Cobalt (formerly Tory Blue) */
+        --cobalt-1000: oklch(16% 0.05 260.5);
+        --cobalt-950: oklch(18% 0.073 260.5);
+        --cobalt-900: oklch(24.5% 0.094 260.5);
+        --cobalt-800: oklch(34.5% 0.132 260.5);
+        --cobalt-700: oklch(47.5% 0.156 260.5);
+        --cobalt-500: oklch(61% 0.142 260.5);
+        --cobalt-300: oklch(73.5% 0.134 260.5);
+        --cobalt-200: oklch(81.4% 0.093 260.5);
+        --cobalt-100: oklch(90.7% 0.045 260.5);
+        --cobalt-50: oklch(95.5% 0.019 260.5);
+        --cobalt-25: oklch(98% 0.006 260.5);
+      }
+
+      /* ---- Font families (fonts.css) ---- */
+      /* Design Language — Font-family tokens. The convention is three
+         semantic slots, not per-typeface names: --font-main (the brand's
+         primary text face), --font-alt (its display/alternate face) and
+         --font-mono. Different brands assign different typefaces to the
+         slots, and because leading and tracking values do not transfer
+         consistently across fonts, the --leading-* / --tracking-* values
+         in typography.css count as per-brand values too — set alongside
+         these assignments, not shared between brands.
+         This brand's assignments: main = IBM Plex Sans, alt = Fraunces,
+         mono = IBM Plex Mono. (IBM Plex Mono is not loaded yet — nothing
+         renders in it until a component needs it; until then the mono
+         stack falls back to the system monospace.) */
+      :root {
+        --font-main: "IBM Plex Sans", sans-serif;
+        --font-alt: "Fraunces", serif;
+        --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+      }
+
+      /* ---- Fluid type (type.css) ---- */
+      /* Design Language — Fluid typography.
+         Configuration as supplied by Andii 2026-10-20 (Utopia): 360px → 18px base
+         @ 1.125 scale; 1240px → 20px base @ 1.2 scale.
+         @link https://utopia.fyi/type/calculator?c=360,18,1.125,1240,20,1.2,8,3,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12
+
+         REFACTORED 2026-10-22 (Andii's direction) from per-step clamp() magic
+         numbers to the shared-progress model (Kevin Powell, "No more clamp()
+         magic numbers"; Master.dev, "Fluid Typography with progress()"; MDN
+         progress() reference): one --_progress value — how far the viewport sits
+         between 360px and 1240px, 0 → 1 — drives every step. Each step is
+         derived from the configuration by formula: its size at 360px is
+         --type-min-base × --type-min-ratio^step, at 1240px --type-max-base ×
+         --type-max-ratio^step, interpolated by --_progress. Changing the
+         configuration (base sizes, ratios, viewport range) re-derives the whole
+         scale; nothing can fall out of sync.
+
+         Variable NAMES unchanged (unified percentage convention, 100 = base):
+         60/70/80/100/120/140/160/180/200/250/300/350 = Utopia steps -3..8.
+         Rendered VALUES preserved: endpoints identical to the previous Utopia
+         clamp() output at all 12 steps; mid-range deviation ≤ 0.0013px (the old
+         clamps' rounded slope/intercept). Steps 60/70 keep their negative slope
+         (min size > max size) — the interpolation handles it directly.
+
+         Fallback architecture: the original clamp() definitions stand below and
+         apply wherever neither progress() nor the tan(atan2()) route is
+         supported. Inside the @supports block, --_progress is computed with
+         tan(atan2()) (works in every current browser); where progress() itself
+         is supported it replaces that computation. */
+
+      :root {
+        --step-60: clamp(0.7234rem, 0.8174rem + -0.1214vw, 0.7901rem);
+        --step-70: clamp(0.8681rem, 0.8974rem + -0.0379vw, 0.8889rem);
+        --step-80: clamp(1rem, 0.983rem + 0.0758vw, 1.0417rem);
+        --step-100: clamp(1.125rem, 1.0739rem + 0.2273vw, 1.25rem);
+        --step-120: clamp(1.2656rem, 1.1697rem + 0.4261vw, 1.5rem);
+        --step-140: clamp(1.4238rem, 1.2699rem + 0.6839vw, 1.8rem);
+        --step-160: clamp(1.6018rem, 1.3735rem + 1.0149vw, 2.16rem);
+        --step-180: clamp(1.802rem, 1.4789rem + 1.4363vw, 2.592rem);
+        --step-200: clamp(2.0273rem, 1.5842rem + 1.9693vw, 3.1104rem);
+        --step-250: clamp(2.2807rem, 1.6868rem + 2.6396vw, 3.7325rem);
+        --step-300: clamp(2.5658rem, 1.7831rem + 3.4785vw, 4.479rem);
+        --step-350: clamp(2.8865rem, 1.8686rem + 4.5241vw, 5.3748rem);
+      }
+
+      /* Registered so atan2() receives a resolved <length> (CSS-Tricks recipe). */
+      @property --_100vw {
+        syntax: "<length>";
+        initial-value: 0px;
+        inherits: false;
+      }
+
+      @supports (opacity: progress(1px, 0px, 1px)) or (width: calc(1px * tan(atan2(1px, 1px)))) {
+        :root {
+          /* The configuration — the only numbers a future change touches. */
+          --type-min-viewport: 360px;
+          --type-max-viewport: 1240px;
+          --type-min-base: 1.125rem; /* 18px at 360px */
+          --type-max-base: 1.25rem; /* 20px at 1240px */
+          --type-min-ratio: 1.125;
+          --type-max-ratio: 1.2;
+
+          /* Shared progress, 0 at 360px → 1 at 1240px, clamped outside.
+             Default route: tan(atan2()) strips the unit from the viewport
+             width so the ratio can be computed by hand. The bounds below are
+             the unitless forms of --type-min/max-viewport. */
+          --_100vw: 100vw;
+          --_viewport-int: calc(10000 * tan(atan2(var(--_100vw), 10000px)));
+          --_progress: calc((clamp(360, var(--_viewport-int), 1240) - 360) / (1240 - 360));
+
+          /* Steps: min + progress × (max − min), endpoints derived by pow(). */
+          --_min-60: calc(var(--type-min-base) * pow(var(--type-min-ratio), -3));
+          --_max-60: calc(var(--type-max-base) * pow(var(--type-max-ratio), -3));
+          --step-60: calc(var(--_min-60) + var(--_progress) * (var(--_max-60) - var(--_min-60)));
+
+          --_min-70: calc(var(--type-min-base) * pow(var(--type-min-ratio), -2));
+          --_max-70: calc(var(--type-max-base) * pow(var(--type-max-ratio), -2));
+          --step-70: calc(var(--_min-70) + var(--_progress) * (var(--_max-70) - var(--_min-70)));
+
+          --_min-80: calc(var(--type-min-base) * pow(var(--type-min-ratio), -1));
+          --_max-80: calc(var(--type-max-base) * pow(var(--type-max-ratio), -1));
+          --step-80: calc(var(--_min-80) + var(--_progress) * (var(--_max-80) - var(--_min-80)));
+
+          --_min-100: var(--type-min-base);
+          --_max-100: var(--type-max-base);
+          --step-100: calc(var(--_min-100) + var(--_progress) * (var(--_max-100) - var(--_min-100)));
+
+          --_min-120: calc(var(--type-min-base) * pow(var(--type-min-ratio), 1));
+          --_max-120: calc(var(--type-max-base) * pow(var(--type-max-ratio), 1));
+          --step-120: calc(var(--_min-120) + var(--_progress) * (var(--_max-120) - var(--_min-120)));
+
+          --_min-140: calc(var(--type-min-base) * pow(var(--type-min-ratio), 2));
+          --_max-140: calc(var(--type-max-base) * pow(var(--type-max-ratio), 2));
+          --step-140: calc(var(--_min-140) + var(--_progress) * (var(--_max-140) - var(--_min-140)));
+
+          --_min-160: calc(var(--type-min-base) * pow(var(--type-min-ratio), 3));
+          --_max-160: calc(var(--type-max-base) * pow(var(--type-max-ratio), 3));
+          --step-160: calc(var(--_min-160) + var(--_progress) * (var(--_max-160) - var(--_min-160)));
+
+          --_min-180: calc(var(--type-min-base) * pow(var(--type-min-ratio), 4));
+          --_max-180: calc(var(--type-max-base) * pow(var(--type-max-ratio), 4));
+          --step-180: calc(var(--_min-180) + var(--_progress) * (var(--_max-180) - var(--_min-180)));
+
+          --_min-200: calc(var(--type-min-base) * pow(var(--type-min-ratio), 5));
+          --_max-200: calc(var(--type-max-base) * pow(var(--type-max-ratio), 5));
+          --step-200: calc(var(--_min-200) + var(--_progress) * (var(--_max-200) - var(--_min-200)));
+
+          --_min-250: calc(var(--type-min-base) * pow(var(--type-min-ratio), 6));
+          --_max-250: calc(var(--type-max-base) * pow(var(--type-max-ratio), 6));
+          --step-250: calc(var(--_min-250) + var(--_progress) * (var(--_max-250) - var(--_min-250)));
+
+          --_min-300: calc(var(--type-min-base) * pow(var(--type-min-ratio), 7));
+          --_max-300: calc(var(--type-max-base) * pow(var(--type-max-ratio), 7));
+          --step-300: calc(var(--_min-300) + var(--_progress) * (var(--_max-300) - var(--_min-300)));
+
+          --_min-350: calc(var(--type-min-base) * pow(var(--type-min-ratio), 8));
+          --_max-350: calc(var(--type-max-base) * pow(var(--type-max-ratio), 8));
+          --step-350: calc(var(--_min-350) + var(--_progress) * (var(--_max-350) - var(--_min-350)));
+        }
+
+        /* Where progress() itself is supported, it computes the shared value. */
+        @supports (opacity: progress(1px, 0px, 1px)) {
+          :root {
+            --_progress: progress(100vw, var(--type-min-viewport), var(--type-max-viewport));
+          }
+        }
+      }
+
+      /* ---- Fluid space (space.css) ---- */
+      /* Design Language — Fluid spacing.
+         Configuration as supplied by Andii 2026-10-20 (Utopia space scale on the
+         same config as the type scale: 360px/18px → 1240px/20px).
+         Note: --space-100 is identical to --step-100 by design (spacing anchors
+         to the base font size).
+         @link https://utopia.fyi/space/calculator?c=360,18,1.125,1240,20,1.2,8,3,&s=0.8|0.7|0.6|0.5|0.25|0.125,1.25|1.5|2|3|4|5,&g=s,l,xl,12
+
+         REFACTORED 2026-10-22 (Andii's direction), following the type.css
+         refactor of the same day: no per-step clamp() magic numbers. This file
+         consumes the shared configuration and --_progress defined in type.css
+         (the two files are one set — type.css loads first) and derives every
+         step from its multiplier of the base size:
+
+           step endpoints = round(multiplier × base, 0.0625rem)
+           step value     = min + --_progress × (max − min)
+
+         The 0.0625rem rounding interval (1px at the 16px reference root)
+         reproduces Utopia's whole-pixel endpoint rounding exactly — including
+         --space-30, whose endpoints coincide (0.25 × 18px rounds to 5px;
+         0.25 × 20px is 5px), making it constant. Multipliers: 10→0.125,
+         30→0.25, 50→0.5, 60→0.6, 70→0.7, 80→0.8, 100→1, 125→1.25, 150→1.5,
+         200→2, 300→3, 400→4, 500→5.
+
+         One-up pairs need no numbers of their own: a pair interpolates from
+         the lower step's minimum to the upper step's maximum, referencing the
+         derived endpoints directly. (The grid gutter's --space-100-200 is not
+         defined in this file — grid.css keeps its own clamp() fallback, out of
+         scope here.)
+
+         NAMES unchanged (unified percentage convention, 100 = base):
+         10/30/50/60/70/80/100/125/150/200/300/400/500, pairs <low>-<high>.
+         Rendered VALUES preserved: every step and pair endpoint is identical
+         to the previous Utopia clamp() output (verified numerically);
+         mid-range deviation is the same ≤0.0013px rounding residue as type.
+
+         Fallback: the original clamp() definitions stand below and apply
+         wherever the shared-progress block in type.css is inactive or round()
+         is unsupported. */
+
+      :root {
+        --space-10: clamp(0.125rem, 0.0994rem + 0.1136vw, 0.1875rem);
+        --space-30: clamp(0.3125rem, 0.3125rem + 0vw, 0.3125rem);
+        --space-50: clamp(0.5625rem, 0.5369rem + 0.1136vw, 0.625rem);
+        --space-60: clamp(0.6875rem, 0.6619rem + 0.1136vw, 0.75rem);
+        --space-70: clamp(0.8125rem, 0.7869rem + 0.1136vw, 0.875rem);
+        --space-80: clamp(0.875rem, 0.8239rem + 0.2273vw, 1rem);
+        --space-100: clamp(1.125rem, 1.0739rem + 0.2273vw, 1.25rem);
+        --space-125: clamp(1.4375rem, 1.3864rem + 0.2273vw, 1.5625rem);
+        --space-150: clamp(1.6875rem, 1.6108rem + 0.3409vw, 1.875rem);
+        --space-200: clamp(2.25rem, 2.1477rem + 0.4545vw, 2.5rem);
+        --space-300: clamp(3.375rem, 3.2216rem + 0.6818vw, 3.75rem);
+        --space-400: clamp(4.5rem, 4.2955rem + 0.9091vw, 5rem);
+        --space-500: clamp(5.625rem, 5.3693rem + 1.1364vw, 6.25rem);
+
+        /* One-up pairs */
+        --space-10-30: clamp(0.125rem, 0.0483rem + 0.3409vw, 0.3125rem);
+        --space-30-50: clamp(0.3125rem, 0.1847rem + 0.5682vw, 0.625rem);
+        --space-50-60: clamp(0.5625rem, 0.4858rem + 0.3409vw, 0.75rem);
+        --space-60-70: clamp(0.6875rem, 0.6108rem + 0.3409vw, 0.875rem);
+        --space-70-80: clamp(0.8125rem, 0.7358rem + 0.3409vw, 1rem);
+        --space-80-100: clamp(0.875rem, 0.7216rem + 0.6818vw, 1.25rem);
+        --space-100-125: clamp(1.125rem, 0.946rem + 0.7955vw, 1.5625rem);
+        --space-125-150: clamp(1.4375rem, 1.2585rem + 0.7955vw, 1.875rem);
+        --space-150-200: clamp(1.6875rem, 1.3551rem + 1.4773vw, 2.5rem);
+        --space-200-300: clamp(2.25rem, 1.6364rem + 2.7273vw, 3.75rem);
+        --space-300-400: clamp(3.375rem, 2.7102rem + 2.9545vw, 5rem);
+        --space-400-500: clamp(4.5rem, 3.7841rem + 3.1818vw, 6.25rem);
+      }
+
+      @supports (width: round(1.5px, 1px)) and ((opacity: progress(1px, 0px, 1px)) or (width: calc(1px * tan(atan2(1px, 1px))))) {
+        :root {
+          /* Step endpoints: round(multiplier × base, 0.0625rem). */
+          --_space-min-10: round(calc(var(--type-min-base) * 0.125), 0.0625rem);
+          --_space-max-10: round(calc(var(--type-max-base) * 0.125), 0.0625rem);
+          --space-10: calc(var(--_space-min-10) + var(--_progress) * (var(--_space-max-10) - var(--_space-min-10)));
+
+          --_space-min-30: round(calc(var(--type-min-base) * 0.25), 0.0625rem);
+          --_space-max-30: round(calc(var(--type-max-base) * 0.25), 0.0625rem);
+          --space-30: calc(var(--_space-min-30) + var(--_progress) * (var(--_space-max-30) - var(--_space-min-30)));
+
+          --_space-min-50: round(calc(var(--type-min-base) * 0.5), 0.0625rem);
+          --_space-max-50: round(calc(var(--type-max-base) * 0.5), 0.0625rem);
+          --space-50: calc(var(--_space-min-50) + var(--_progress) * (var(--_space-max-50) - var(--_space-min-50)));
+
+          --_space-min-60: round(calc(var(--type-min-base) * 0.6), 0.0625rem);
+          --_space-max-60: round(calc(var(--type-max-base) * 0.6), 0.0625rem);
+          --space-60: calc(var(--_space-min-60) + var(--_progress) * (var(--_space-max-60) - var(--_space-min-60)));
+
+          --_space-min-70: round(calc(var(--type-min-base) * 0.7), 0.0625rem);
+          --_space-max-70: round(calc(var(--type-max-base) * 0.7), 0.0625rem);
+          --space-70: calc(var(--_space-min-70) + var(--_progress) * (var(--_space-max-70) - var(--_space-min-70)));
+
+          --_space-min-80: round(calc(var(--type-min-base) * 0.8), 0.0625rem);
+          --_space-max-80: round(calc(var(--type-max-base) * 0.8), 0.0625rem);
+          --space-80: calc(var(--_space-min-80) + var(--_progress) * (var(--_space-max-80) - var(--_space-min-80)));
+
+          --_space-min-100: round(calc(var(--type-min-base) * 1), 0.0625rem);
+          --_space-max-100: round(calc(var(--type-max-base) * 1), 0.0625rem);
+          --space-100: calc(var(--_space-min-100) + var(--_progress) * (var(--_space-max-100) - var(--_space-min-100)));
+
+          --_space-min-125: round(calc(var(--type-min-base) * 1.25), 0.0625rem);
+          --_space-max-125: round(calc(var(--type-max-base) * 1.25), 0.0625rem);
+          --space-125: calc(var(--_space-min-125) + var(--_progress) * (var(--_space-max-125) - var(--_space-min-125)));
+
+          --_space-min-150: round(calc(var(--type-min-base) * 1.5), 0.0625rem);
+          --_space-max-150: round(calc(var(--type-max-base) * 1.5), 0.0625rem);
+          --space-150: calc(var(--_space-min-150) + var(--_progress) * (var(--_space-max-150) - var(--_space-min-150)));
+
+          --_space-min-200: round(calc(var(--type-min-base) * 2), 0.0625rem);
+          --_space-max-200: round(calc(var(--type-max-base) * 2), 0.0625rem);
+          --space-200: calc(var(--_space-min-200) + var(--_progress) * (var(--_space-max-200) - var(--_space-min-200)));
+
+          --_space-min-300: round(calc(var(--type-min-base) * 3), 0.0625rem);
+          --_space-max-300: round(calc(var(--type-max-base) * 3), 0.0625rem);
+          --space-300: calc(var(--_space-min-300) + var(--_progress) * (var(--_space-max-300) - var(--_space-min-300)));
+
+          --_space-min-400: round(calc(var(--type-min-base) * 4), 0.0625rem);
+          --_space-max-400: round(calc(var(--type-max-base) * 4), 0.0625rem);
+          --space-400: calc(var(--_space-min-400) + var(--_progress) * (var(--_space-max-400) - var(--_space-min-400)));
+
+          --_space-min-500: round(calc(var(--type-min-base) * 5), 0.0625rem);
+          --_space-max-500: round(calc(var(--type-max-base) * 5), 0.0625rem);
+          --space-500: calc(var(--_space-min-500) + var(--_progress) * (var(--_space-max-500) - var(--_space-min-500)));
+
+          /* One-up pairs: lower step's minimum → upper step's maximum. */
+          --space-10-30: calc(var(--_space-min-10) + var(--_progress) * (var(--_space-max-30) - var(--_space-min-10)));
+          --space-30-50: calc(var(--_space-min-30) + var(--_progress) * (var(--_space-max-50) - var(--_space-min-30)));
+          --space-50-60: calc(var(--_space-min-50) + var(--_progress) * (var(--_space-max-60) - var(--_space-min-50)));
+          --space-60-70: calc(var(--_space-min-60) + var(--_progress) * (var(--_space-max-70) - var(--_space-min-60)));
+          --space-70-80: calc(var(--_space-min-70) + var(--_progress) * (var(--_space-max-80) - var(--_space-min-70)));
+          --space-80-100: calc(var(--_space-min-80) + var(--_progress) * (var(--_space-max-100) - var(--_space-min-80)));
+          --space-100-125: calc(var(--_space-min-100) + var(--_progress) * (var(--_space-max-125) - var(--_space-min-100)));
+          --space-125-150: calc(var(--_space-min-125) + var(--_progress) * (var(--_space-max-150) - var(--_space-min-125)));
+          --space-150-200: calc(var(--_space-min-150) + var(--_progress) * (var(--_space-max-200) - var(--_space-min-150)));
+          --space-200-300: calc(var(--_space-min-200) + var(--_progress) * (var(--_space-max-300) - var(--_space-min-200)));
+          --space-300-400: calc(var(--_space-min-300) + var(--_progress) * (var(--_space-max-400) - var(--_space-min-300)));
+          --space-400-500: calc(var(--_space-min-400) + var(--_progress) * (var(--_space-max-500) - var(--_space-min-400)));
+        }
+      }
+
+      /* ---- Grid (grid.css) ---- */
+      :root {
+        --grid-max-width: 92.50rem;
+        --grid-gutter: var(--space-100-200, clamp(1.125rem, 0.6927rem + 1.9538vw, 2.5rem));
+        --grid-columns: 12;
+      }
+      .u-container {
+        max-width: var(--grid-max-width);
+        padding-inline: var(--grid-gutter);
+        margin-inline: auto;
+      }
+      .u-grid {
+        display: grid;
+        gap: var(--grid-gutter);
+      }
+
+      /* ============================================================
+         PAGE SCOPE — the page itself is a Haze scope, filled by the
+         same slot contract as any scheme panel: the values below are
+         the haze-light recipe, and the dark blocks swap in the
+         haze-dark recipe (same steps, same roles). The nav's mode
+         switch sets data-mode on <html> — light / dark / system;
+         "system" hands the choice to prefers-color-scheme via the
+         media block. Page chrome reads the slots, plus the few
+         page-only steps the eight-slot contract doesn't cover
+         (--page-fill, --page-line, --page-dim) and the Midnight
+         brand steps (--brand-*) — never a family colour directly.
+         The switch component also takes --radius-full / --radius-250
+         / --leading-compact and the two state-layer opacities from
+         here; their values are the system's (radius scale, leading
+         scale, global opacity scale).
+         ============================================================ */
+      :root {
+        --surface-bg: var(--haze-25);
+        --surface-bg-1: var(--haze-50);
+        --text-fg-1: var(--haze-1000);
+        --text-fg-2: var(--haze-700);
+        --surface-border: var(--haze-200);
+        --action-bg-1: var(--haze-800);
+        --action-border: var(--haze-800);
+        --action-fg-1: var(--haze-25);
+        --page-fill: var(--haze-100);
+        --page-line: var(--haze-300);
+        --page-dim: var(--haze-300);
+        --brand-ink: var(--midnight-1000);
+        --brand-line: var(--midnight-900);
+        --brand-faint: var(--haze-200);
+        --radius-250: 1.25rem;
+        --radius-full: 9999px;
+        --leading-compact: 1.25;
+        --opacity-10: 0.1;
+        --opacity-15: 0.15;
+        color-scheme: light;
+      }
+      html[data-mode="system"] { color-scheme: light dark; }
+      html[data-mode="dark"] {
+        --surface-bg: var(--haze-1000);
+        --surface-bg-1: var(--haze-900);
+        --text-fg-1: var(--haze-25);
+        --text-fg-2: var(--haze-300);
+        --surface-border: var(--haze-800);
+        --action-bg-1: var(--haze-200);
+        --action-border: var(--haze-200);
+        --action-fg-1: var(--haze-1000);
+        --page-fill: var(--haze-800);
+        --page-line: var(--haze-700);
+        --page-dim: var(--haze-500);
+        --brand-ink: var(--midnight-200);
+        --brand-line: var(--midnight-300);
+        --brand-faint: var(--haze-800);
+        color-scheme: dark;
+      }
+      @media (prefers-color-scheme: dark) {
+        html[data-mode="system"] {
+          --surface-bg: var(--haze-1000);
+          --surface-bg-1: var(--haze-900);
+          --text-fg-1: var(--haze-25);
+          --text-fg-2: var(--haze-300);
+          --surface-border: var(--haze-800);
+          --action-bg-1: var(--haze-200);
+          --action-border: var(--haze-200);
+          --action-fg-1: var(--haze-1000);
+          --page-fill: var(--haze-800);
+          --page-line: var(--haze-700);
+          --page-dim: var(--haze-500);
+          --brand-ink: var(--midnight-200);
+          --brand-line: var(--midnight-300);
+          --brand-faint: var(--haze-800);
+          color-scheme: dark;
+        }
+      }
+
+      /* ============================================================
+         PAGE CHROME — built from the system itself
+         ============================================================ */
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      /* Guard against stray horizontal overflow inside the frame the page
+         is given: overflow-x: clip (not hidden) creates no scroll
+         container, so the sticky top nav keeps sticking. The document
+         itself is a normal block root — it fills its frame's width by
+         default; the frame's size is the host's, not the page's. */
+      html, body { overflow-x: clip; }
+      body {
+        margin: 0;
+        background: var(--surface-bg);
+        color: var(--text-fg-1);
+        font-family: var(--font-main);
+        font-optical-sizing: auto;
+        font-style: normal;
+        font-variation-settings: "wdth" 100;
+        font-size: var(--step-100);
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+      }
+      h1, h2, h3, .display {
+        font-family: var(--font-alt);
+        font-optical-sizing: auto;
+        font-weight: 600;
+        font-style: normal;
+        font-variation-settings: "SOFT" 0, "WONK" 1;
+        line-height: 1.08;
+        letter-spacing: -0.01em;
+        margin: 0;
+      }
+      p { margin: 0; }
+      code, .mono {
+        font-family: var(--font-mono);
+        font-size: 0.86em;
+      }
+      :focus-visible {
+        outline: 3px solid var(--action-border);
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+      section { padding-block: var(--space-300-400); scroll-margin-top: 76px; }
+      section + section { border-top: 1px solid var(--surface-border); }
+      /* No width cap on .section-head itself: sections span the full
+         .u-container content box, so the lede's max-width: 60% below
+         resolves against the container — not against a capped parent. */
+      .section-head { margin-bottom: var(--space-200); }
+      .section-head h2 { font-size: var(--step-180); margin-bottom: var(--space-60); }
+      .section-head p { color: var(--text-fg-2); font-size: var(--step-80); max-width: 60%; text-wrap: pretty; }
+      .kicker {
+        font-size: var(--step-70);
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-fg-2);
+        margin-bottom: var(--space-60);
+      }
+
+      /* Header + top row */
+      .site-head { padding-top: var(--space-200-300); padding-bottom: var(--space-150); }
+      /* The wordmark is the one Midnight brand moment on the page; every
+         other default is sourced from Haze, the page-level workhorse. */
+      .site-head h1 { font-size: var(--step-300); font-weight: 700; color: var(--brand-ink); }
+      .site-head .subtitle {
+        margin-top: var(--space-60);
+        font-size: var(--step-120);
+        color: var(--text-fg-2);
+        max-width: 60%;
+        text-wrap: pretty;
+      }
+      /* Top row — a static row above the header: brand logo left, page
+         links and the colour-mode switch right. Not sticky, no background, no border. The current
+         page's link is ink with a Midnight underline that grows left to
+         right on load, timed by the motion tokens (--duration-100 /
+         --ease-out, with fallbacks for pages that don't inline the
+         motion set). The keyframes animate FROM scaleX(0) only, so the
+         resting state is scaleX(1): under reduced motion the underline
+         rests complete. */
+      .top-row { position: relative; padding-block: var(--space-150); }
+      .top-row .u-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: var(--space-60) var(--space-100);
+      }
+      .brand-logo { display: block; height: 1.333rem; width: auto; }
+      .page-links { display: flex; align-items: center; gap: var(--space-100); }
+      .page-links a {
+        position: relative;
+        color: var(--page-dim);
+        text-decoration: none;
+        font-size: var(--step-100);
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .page-links a[aria-current="page"] { color: var(--text-fg-1); }
+      .page-links a[aria-current="page"]::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: calc(100% + var(--space-30));
+        width: 100%;
+        height: 0.222rem;
+        background: var(--brand-line);
+        transform-origin: left center;
+        animation: page-link-underline var(--duration-100, 200ms) var(--ease-out, cubic-bezier(0, 0, 0.2, 1));
+      }
+      @keyframes page-link-underline {
+        from { transform: scaleX(0); }
+      }
+
+      /* Navigation cluster — the page links and the colour-mode
+         switch sit side by side, separated by --space-200. The
+         switch is NOT a navigation item: it lives outside the
+         <nav> element, in this cluster wrapper, so the two groups
+         read — and are announced — as different kinds of thing. */
+      .nav-cluster {
+        display: flex;
+        align-items: center;
+        gap: var(--space-200);
+      }
+
+      /* Colour-mode switch — the codified .mode-switch component,
+         transplanted from the specimen. Collapsed, it shows only
+         the current selection (System by default) as a single pill
+         carrying the pressed treatment. Activating it slides the
+         three options out below it in a panel; choosing one sets
+         data-mode on <html> (the page-scope block above does the
+         rest), updates the pill, and closes the panel. Inside the
+         panel only the selected option carries the filled pill;
+         deselected options sit bare (a transparent border keeps
+         their box identical to the selected pill's) and take the
+         pill shape back as the hover highlight in --page-fill.
+         Interactive states follow the system's standard mapping:
+         the button's own ink as a state layer at --opacity-10 on
+         hover and --opacity-15 on active, laid on with an inset
+         shadow, and the solid --action-border ring on
+         focus-visible. */
+      .mode-switch { position: relative; flex: none; }
+      .mode-switch-trigger,
+      .mode-switch-option {
+        --mode-state-ink: var(--text-fg-1);
+        appearance: none;
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-30);
+        font: inherit;
+        font-size: var(--step-80);
+        font-weight: 500;
+        line-height: var(--leading-compact);
+        padding: 5px 12px;
+        border: 1px solid transparent;
+        border-radius: var(--radius-full);
+        background: transparent;
+        color: var(--text-fg-1);
+        cursor: pointer;
+        transition:
+          box-shadow var(--duration-50, 100ms) var(--ease-in-out, cubic-bezier(0.4, 0, 0.2, 1)),
+          background-color var(--duration-50, 100ms) var(--ease-in-out, cubic-bezier(0.4, 0, 0.2, 1)),
+          border-color var(--duration-50, 100ms) var(--ease-in-out, cubic-bezier(0.4, 0, 0.2, 1)),
+          color var(--duration-50, 100ms) var(--ease-in-out, cubic-bezier(0.4, 0, 0.2, 1));
+      }
+      .mode-switch-trigger {
+        --mode-state-ink: var(--surface-bg);
+        min-width: 7.25rem;
+        justify-content: space-between;
+        background: var(--text-fg-1);
+        border-color: var(--text-fg-1);
+        color: var(--surface-bg);
+      }
+      .mode-switch-trigger:hover,
+      .mode-switch-option[aria-pressed="true"]:hover {
+        box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--mode-state-ink) calc(var(--opacity-10) * 100%), transparent);
+      }
+      .mode-switch-option:not([aria-pressed="true"]):hover {
+        background: var(--page-fill);
+      }
+      .mode-switch-trigger:active,
+      .mode-switch-option:active {
+        box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--mode-state-ink) calc(var(--opacity-15) * 100%), transparent);
+      }
+      .mode-switch-trigger:focus-visible,
+      .mode-switch-option:focus-visible {
+        outline: 3px solid var(--action-border);
+        outline-offset: 2px;
+      }
+      .mode-switch svg { width: 0.9rem; height: 0.9rem; flex: none; }
+      /* The trigger carries all three glyphs; the one matching the
+         current data-mode shows, the rest stay display:none. */
+      .mode-switch-current { display: inline-flex; flex: none; }
+      .mode-switch-current svg { display: none; }
+      html[data-mode="light"] .mode-switch-current svg[data-mode-icon="light"],
+      html[data-mode="system"] .mode-switch-current svg[data-mode-icon="system"],
+      html[data-mode="dark"] .mode-switch-current svg[data-mode-icon="dark"] { display: block; }
+      .mode-switch .mode-switch-chevron {
+        width: 0.75rem;
+        height: 0.75rem;
+        transition: transform var(--duration-100, 200ms) var(--ease-out, cubic-bezier(0, 0, 0.2, 1));
+      }
+      .mode-switch[data-open="true"] .mode-switch-chevron { transform: rotate(180deg); }
+      /* The options panel — slides out below the pill and overlays
+         the page, so opening it never shifts the top row's layout.
+         Hidden with visibility as well as opacity, which also keeps
+         the options out of the tab order while closed. */
+      .mode-switch-options {
+        position: absolute;
+        top: calc(100% + var(--space-30));
+        right: 0;
+        z-index: 60;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-30);
+        width: max-content;
+        min-width: 100%;
+        padding: var(--space-30);
+        border: 1px solid var(--surface-border);
+        border-radius: var(--radius-250);
+        background: var(--surface-bg);
+        box-shadow: var(--elevation-medium);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(calc(var(--space-30) * -1));
+        transition:
+          opacity var(--duration-100, 200ms) var(--ease-out, cubic-bezier(0, 0, 0.2, 1)),
+          transform var(--duration-100, 200ms) var(--ease-out, cubic-bezier(0, 0, 0.2, 1)),
+          visibility 0s linear var(--duration-100, 200ms);
+      }
+      .mode-switch[data-open="true"] .mode-switch-options {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+        transition:
+          opacity var(--duration-100, 200ms) var(--ease-out, cubic-bezier(0, 0, 0.2, 1)),
+          transform var(--duration-100, 200ms) var(--ease-out, cubic-bezier(0, 0, 0.2, 1)),
+          visibility 0s;
+      }
+      .mode-switch-option { justify-content: flex-start; width: 100%; white-space: nowrap; }
+      .mode-switch-option[aria-pressed="true"] {
+        --mode-state-ink: var(--surface-bg);
+        background: var(--text-fg-1);
+        border-color: var(--text-fg-1);
+        color: var(--surface-bg);
+      }
+
+      /* Nav tiers below the single row, per the Figma nav designs:
+         · Intermediate (≤48rem): the top row wraps to two rows — the
+           logo takes the first row; the links and the mode switch
+           share the second, links left and the switch right, all
+           labels visible.
+         · Extra compact (≤30rem): the row defers to a hamburger.
+           Logo left, menu button right; the button carries Tabler's
+           menu-3 glyph and swaps to a × while the menu is open. The
+           menu panel drops below the row carrying the page links
+           stacked and right-aligned in the canonical Foundations /
+           Components / Strategy / Status order, the current page
+           marked by a vertical bar at its right (the row's growing
+           underline, turned upright), and the Mode Toggle Bar at the
+           bottom of the panel as three inline pills in the switch's
+           canonical Light / System / Dark order. (Andii placed the
+           pills at the bottom, superseding the Figma annotation's
+           top placement.) The menu closes from the button, on
+           Escape, or by tapping/clicking anywhere outside it. */
+      .nav-burger {
+        appearance: none;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        width: 2.25rem;
+        height: 2.25rem;
+        padding: 0;
+        border: 1px solid transparent;
+        border-radius: 9999px;
+        background: transparent;
+        color: var(--text-fg-1);
+        cursor: pointer;
+        transition: background-color var(--duration-50, 100ms) var(--ease-in-out, cubic-bezier(0.4, 0, 0.2, 1));
+      }
+      .nav-burger:hover { background: var(--page-fill); }
+      .nav-burger:active { background: var(--surface-border); }
+      .nav-burger:focus-visible {
+        outline: 3px solid var(--action-border);
+        outline-offset: 2px;
+      }
+      .nav-burger svg { width: 1.25rem; height: 1.25rem; flex: none; }
+      .nav-burger .nav-burger-close { display: none; }
+      .nav-burger.is-open .nav-burger-close { display: block; }
+      .nav-burger.is-open .nav-burger-open { display: none; }
+      .nav-menu { display: none; }
+
+      @media (max-width: 48rem) {
+        .top-row .u-container { flex-wrap: wrap; }
+        .top-row .u-container > a { flex: 0 0 auto; }
+        .brand-logo { width: auto; height: 1.333rem; }
+        .nav-cluster { flex: 1 1 100%; justify-content: space-between; }
+      }
+
+      @media (max-width: 30rem) {
+        .top-row .u-container { flex-wrap: nowrap; }
+        .nav-cluster { display: none; }
+        .nav-burger { display: inline-flex; flex: none; }
+        .nav-menu {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          z-index: 60;
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-100);
+          padding: var(--space-100) var(--grid-gutter) var(--space-150);
+          border-bottom: 1px solid var(--surface-border);
+          background: var(--surface-bg);
+          box-shadow: var(--elevation-medium);
+          opacity: 0;
+          visibility: hidden;
+          pointer-events: none;
+          transform: translateY(calc(var(--space-30) * -1));
+          transition:
+            opacity var(--duration-100, 200ms) var(--ease-out, cubic-bezier(0, 0, 0.2, 1)),
+            transform var(--duration-100, 200ms) var(--ease-out, cubic-bezier(0, 0, 0.2, 1)),
+            visibility 0s linear var(--duration-100, 200ms);
+        }
+        .nav-menu.is-open {
+          opacity: 1;
+          visibility: visible;
+          pointer-events: auto;
+          transform: translateY(0);
+          transition:
+            opacity var(--duration-100, 200ms) var(--ease-out, cubic-bezier(0, 0, 0.2, 1)),
+            transform var(--duration-100, 200ms) var(--ease-out, cubic-bezier(0, 0, 0.2, 1)),
+            visibility 0s;
+        }
+        .menu-links {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          gap: var(--space-60);
+        }
+        .menu-links a {
+          position: relative;
+          padding-right: var(--space-100);
+          color: var(--page-dim);
+          text-decoration: none;
+          font-size: var(--step-100);
+          font-weight: 700;
+          white-space: nowrap;
+        }
+        .menu-links a[aria-current="page"] { color: var(--text-fg-1); }
+        .menu-links a[aria-current="page"]::after {
+          content: "";
+          position: absolute;
+          right: 0;
+          top: 0;
+          width: 0.222rem;
+          height: 100%;
+          background: var(--brand-line);
+        }
+        /* The menu's mode switch — the .mode-switch state recipes as
+           three inline pills in a segmented container, at the bottom
+           of the panel. The selected pill carries the filled
+           treatment; deselected pills sit bare and take the pill
+           shape back as the hover highlight, exactly as in the
+           switch's own panel. */
+        .menu-mode {
+          display: flex;
+          gap: var(--space-30);
+          padding: var(--space-30);
+          border: 1px solid var(--surface-border);
+          border-radius: var(--radius-full);
+        }
+        .menu-mode-option {
+          --mode-state-ink: var(--text-fg-1);
+          appearance: none;
+          flex: 1;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: var(--space-30);
+          font: inherit;
+          font-size: var(--step-80);
+          font-weight: 500;
+          line-height: var(--leading-compact);
+          padding: 5px 10px;
+          border: 1px solid transparent;
+          border-radius: var(--radius-full);
+          background: transparent;
+          color: var(--text-fg-1);
+          cursor: pointer;
+          transition:
+            box-shadow var(--duration-50, 100ms) var(--ease-in-out, cubic-bezier(0.4, 0, 0.2, 1)),
+            background-color var(--duration-50, 100ms) var(--ease-in-out, cubic-bezier(0.4, 0, 0.2, 1)),
+            border-color var(--duration-50, 100ms) var(--ease-in-out, cubic-bezier(0.4, 0, 0.2, 1)),
+            color var(--duration-50, 100ms) var(--ease-in-out, cubic-bezier(0.4, 0, 0.2, 1));
+        }
+        .menu-mode-option svg { width: 0.9rem; height: 0.9rem; flex: none; }
+        .menu-mode-option[aria-pressed="true"] {
+          --mode-state-ink: var(--surface-bg);
+          background: var(--text-fg-1);
+          border-color: var(--text-fg-1);
+          color: var(--surface-bg);
+        }
+        .menu-mode-option[aria-pressed="true"]:hover {
+          box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--mode-state-ink) calc(var(--opacity-10) * 100%), transparent);
+        }
+        .menu-mode-option:not([aria-pressed="true"]):hover {
+          background: var(--page-fill);
+        }
+        .menu-mode-option:active {
+          box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--mode-state-ink) calc(var(--opacity-15) * 100%), transparent);
+        }
+        .menu-mode-option:focus-visible {
+          outline: 3px solid var(--action-border);
+          outline-offset: 2px;
+        }
+      }
+
+      /* Ledes go full width on phone widths (60% rule lives on
+         .site-head .subtitle and .section-head p above). */
+      @media (max-width: 40rem) {
+        .site-head .subtitle, .section-head p { max-width: 100%; }
+      }
+
+      /* ---------- Status page ----------
+         Page default throughout: Haze, as on the other pages. The
+         items are grouped by system area; each one is tracked as an
+         issue in andiihei/ahha, and its row links to that issue.
+         State pills follow the page's state language: Captured is a
+         filled chip, Still open an outlined one. */
+      .status-wrap { padding-block: var(--space-200) var(--space-300); }
+      .status-title { font-size: var(--step-250); font-weight: 700; margin-bottom: var(--space-200); }
+
+      /* Summary band: counts, milestone progress, tracker links */
+      .status-summary {
+        background: var(--surface-bg-1);
+        border: 1px solid var(--surface-border);
+        border-radius: 16px;
+        padding: var(--space-125) var(--space-150);
+        display: grid;
+        gap: var(--space-100);
+      }
+      .status-stats { display: flex; flex-wrap: wrap; gap: var(--space-80) var(--space-200); }
+      .stat { display: flex; align-items: baseline; gap: var(--space-50); }
+      .stat-num { font-family: var(--font-alt); font-size: var(--step-160); font-weight: 700; line-height: 1; }
+      .stat-label { font-size: var(--step-80); color: var(--text-fg-2); }
+      .ms-line { font-size: var(--step-80); margin-bottom: var(--space-50); }
+      .ms-line a { color: var(--text-fg-1); font-weight: 600; }
+      .ms-bar { height: 0.5rem; background: var(--page-fill); border-radius: 9999px; overflow: hidden; }
+      .ms-fill { height: 100%; background: var(--brand-line); }
+      .status-meta { font-size: var(--step-80); color: var(--text-fg-2); }
+      .status-meta a { color: var(--text-fg-1); }
+
+      /* Area groups + item rows */
+      .area-group { padding-block: var(--space-150); }
+      .area-group + .area-group { border-top: 1px solid var(--surface-border); }
+      .area-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: var(--space-50) var(--space-100);
+        margin-bottom: var(--space-60);
+      }
+      .area-head h3 { font-size: var(--step-140); }
+      .area-count { font-size: var(--step-70); color: var(--text-fg-2); }
+      .item-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        column-gap: var(--space-100);
+        padding-block: var(--space-80);
+      }
+      .item-row + .item-row { border-top: 1px solid var(--page-fill); }
+      .item-title {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: var(--space-50) var(--space-60);
+        font-size: var(--step-100);
+      }
+      .item-desc { font-size: var(--step-80); margin-top: var(--space-30); max-width: 80ch; }
+      .pill {
+        font-size: var(--step-60);
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        line-height: 1;
+        padding: 0.3rem 0.625rem;
+        border-radius: 9999px;
+        white-space: nowrap;
+      }
+      .pill-captured { background: var(--page-fill); border: 1px solid var(--surface-border); color: var(--text-fg-1); }
+      .pill-open { background: transparent; border: 1px solid var(--text-fg-2); color: var(--text-fg-2); }
+      .issue-link {
+        font-family: var(--font-mono);
+        font-size: var(--step-80);
+        color: var(--text-fg-2);
+        text-decoration: none;
+        white-space: nowrap;
+        padding-top: 0.2rem;
+      }
+      .issue-link:hover { color: var(--text-fg-1); text-decoration: underline; }
+
+      /* Copied toast */
+      .toast {
+        position: fixed;
+        left: 50%;
+        bottom: 24px;
+        transform: translateX(-50%) translateY(16px);
+        background: var(--text-fg-1);
+        color: var(--surface-bg);
+        font-size: var(--step-80);
+        font-weight: 500;
+        padding: 9px 18px;
+        border-radius: 9999px;
+        box-shadow: var(--elevation-high);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 160ms ease, transform 160ms ease;
+        z-index: 100;
+        max-width: calc(100vw - 32px);
+        overflow-wrap: anywhere;
+        text-align: center;
+      }
+      .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+      /* ---------- Element inspector (debug tool) ----------
+         Fixed overlay UI, so it never shifts page layout. Styled from the
+         page defaults (Haze) with a Midnight brand outline on the toggle —
+         the one deliberate brand accent, matching the wordmark. */
+      #inspector-root { position: fixed; inset: 0; z-index: 90; pointer-events: none; }
+      #inspect-toggle {
+        pointer-events: auto;
+        position: absolute;
+        right: 16px;
+        bottom: 16px;
+        appearance: none;
+        font: inherit;
+        font-size: var(--step-80);
+        font-weight: 600;
+        padding: 8px 18px;
+        border-radius: 9999px;
+        border: 2px solid var(--brand-line);
+        background: var(--surface-bg);
+        color: var(--text-fg-1);
+        box-shadow: var(--elevation-medium);
+        cursor: pointer;
+      }
+      #inspect-toggle[aria-pressed="true"] { background: var(--text-fg-1); color: var(--surface-bg); }
+      #insp-hover-box, #insp-sel-box {
+        position: fixed;
+        display: none;
+        pointer-events: none;
+      }
+      #insp-hover-box { border: 1.5px dashed var(--brand-line); }
+      #insp-sel-box { border: 2px solid var(--brand-line); }
+      #insp-hover-tag {
+        position: absolute;
+        top: -1.6rem;
+        left: -1.5px;
+        background: var(--brand-ink);
+        color: var(--surface-bg);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        line-height: 1.4;
+        padding: 2px 7px;
+        border-radius: 4px;
+        white-space: nowrap;
+        max-width: 80vw;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        pointer-events: none;
+      }
+      #insp-panel {
+        pointer-events: auto;
+        position: absolute;
+        right: 16px;
+        bottom: 64px;
+        width: min(380px, calc(100vw - 32px));
+        max-height: min(72vh, calc(100vh - 96px));
+        display: flex;
+        flex-direction: column;
+        background: var(--surface-bg);
+        color: var(--text-fg-1);
+        border: 1px solid var(--page-line);
+        border-radius: 12px;
+        box-shadow: var(--elevation-high);
+        font-size: var(--step-80);
+      }
+      #insp-panel[hidden] { display: none; }
+      .insp-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-60);
+        padding: 9px 14px;
+        border-bottom: 1px solid var(--surface-border);
+        font-weight: 600;
+      }
+      .insp-close {
+        appearance: none;
+        font: inherit;
+        font-size: 1.1em;
+        line-height: 1;
+        width: 28px;
+        height: 28px;
+        border-radius: 9999px;
+        border: 1px solid var(--page-line);
+        background: var(--surface-bg-1);
+        color: var(--text-fg-1);
+        cursor: pointer;
+      }
+      .insp-body { overflow-y: auto; padding: 10px 14px; }
+      .insp-sec-title {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-fg-2);
+        margin: 12px 0 3px;
+      }
+      .insp-sec-title:first-child { margin-top: 0; }
+      .insp-row {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        line-height: 1.55;
+        overflow-wrap: anywhere;
+      }
+      .insp-row.insp-selector { font-weight: 600; font-size: 12.5px; }
+      .insp-actions {
+        display: flex;
+        align-items: center;
+        gap: var(--space-60);
+        padding: 10px 14px;
+        border-top: 1px solid var(--surface-border);
+      }
+      #insp-copy {
+        appearance: none;
+        font: inherit;
+        font-size: var(--step-80);
+        font-weight: 600;
+        padding: 7px 16px;
+        border-radius: 9999px;
+        border: 1px solid var(--text-fg-1);
+        background: var(--text-fg-1);
+        color: var(--surface-bg);
+        cursor: pointer;
+      }
+      .insp-hint { font-size: var(--step-70); color: var(--text-fg-2); }
+      #insp-fallback {
+        margin: 0 14px 12px;
+        width: calc(100% - 28px);
+        min-height: 130px;
+        font-family: var(--font-mono);
+        font-size: 11.5px;
+        line-height: 1.5;
+        color: var(--text-fg-1);
+        background: var(--surface-bg-1);
+        border: 1px solid var(--page-line);
+        border-radius: 8px;
+        padding: 8px;
+        resize: vertical;
+      }
+      #insp-fallback[hidden] { display: none; }
+      body.inspecting *:not(#inspector-root):not(#inspector-root *) { cursor: crosshair !important; }
+      @media (max-width: 640px) {
+        #inspect-toggle { right: 12px; bottom: 12px; }
+        #insp-panel {
+          left: 8px;
+          right: 8px;
+          bottom: 60px;
+          width: auto;
+          max-height: 56vh;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after { transition: none !important; animation: none !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-row">
+      <div class="u-container">
+        <a href="./"><svg class="brand-logo" viewBox="0 0 160 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Andii Hei"><g clip-path="url(#clip0_12_27)"><g style="fill: var(--brand-ink)"><path d="M10.2128 3.8147e-06H15.0482L25.261 24.0035H19.7794L17.6014 18.6574H7.52756L5.3426 24.0104H-7.62939e-06L10.2128 3.8147e-06ZM15.729 14.0269L12.561 6.2944L9.39643 14.0235L15.729 14.0269Z"/><path d="M28.9362 0.170212H33.7681L44.9362 14.8432V0.170212H50.112V24.0104H45.6657L34.1224 8.85801V24.0104H28.9362V0.170212Z"/><path d="M55.8298 0.170212H65.1185C72.6079 0.170212 77.7838 5.31134 77.7838 12.0191V12.0851C77.7872 18.7998 72.6114 24.0104 65.1185 24.0104H55.8298V0.170212ZM61.0716 4.90491V19.2722H65.1185C69.4086 19.2722 72.3022 16.3786 72.3022 12.1581V12.0886C72.3022 7.868 69.4086 4.90491 65.1185 4.90491H61.0716Z"/><path d="M82.6887 0.170212H87.9305V24.0104H82.6887V0.170212Z"/><path d="M94.1277 0.170212H99.3695V24.0104H94.1277V0.170212Z"/></g><g style="fill: var(--brand-faint)"><path d="M159.726 24.0104H154.484V14.4368H144.813V24.0104H139.571V0.170212H144.813V9.60139H154.484V0.170212H159.726V24.0104Z"/><path d="M133.853 24.0104H115.706V19.3382H128.646V14.3326H117.412V9.67086H128.646V4.83543H115.88V0.170212H133.853V24.0104Z"/><path d="M110.809 24.0104H105.563V0.170212H110.809V24.0104Z"/></g></g><defs><clipPath id="clip0_12_27"><rect width="159.729" height="24"/></clipPath></defs></svg></a>
+        <div class="nav-cluster">
+          <nav class="page-links" aria-label="Pages">
+            <a href="./">Foundations</a>
+            <a href="components.html">Components</a>
+            <a href="strategy.html">Strategy</a>
+            <a href="status.html" aria-current="page">Status</a>
+          </nav>
+          <div class="mode-switch" data-mode-switch data-open="false">
+            <button type="button" class="mode-switch-trigger" data-mode-trigger aria-haspopup="true" aria-expanded="false" aria-controls="mode-options" aria-label="Colour mode: System">
+              <span class="mode-switch-current" aria-hidden="true"><svg data-mode-icon="light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M6.34 17.66l-1.41 1.41"/><path d="M19.07 4.93l-1.41 1.41"/></svg><svg data-mode-icon="system" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18V3z" fill="currentColor" stroke="none"/></svg><svg data-mode-icon="dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+              <span class="mode-switch-text" data-mode-current-label>System</span>
+              <svg class="mode-switch-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="mode-switch-options" id="mode-options" role="group" aria-label="Colour mode options">
+              <button type="button" class="mode-switch-option" data-mode-option="light" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M6.34 17.66l-1.41 1.41"/><path d="M19.07 4.93l-1.41 1.41"/></svg><span class="mode-switch-text">Light</span></button>
+              <button type="button" class="mode-switch-option" data-mode-option="system" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18V3z" fill="currentColor" stroke="none"/></svg><span class="mode-switch-text">System</span></button>
+              <button type="button" class="mode-switch-option" data-mode-option="dark" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><span class="mode-switch-text">Dark</span></button>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="nav-burger" data-nav-burger aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
+          <svg class="nav-burger-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16"/><path d="M7 12h13"/><path d="M10 18h10"/></svg>
+          <svg class="nav-burger-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <div class="nav-menu" id="nav-menu" data-nav-menu>
+        <nav class="menu-links" aria-label="Pages">
+          <a href="./">Foundations</a>
+          <a href="components.html">Components</a>
+          <a href="strategy.html">Strategy</a>
+          <a href="status.html" aria-current="page">Status</a>
+        </nav>
+        <div class="menu-mode" role="group" aria-label="Colour mode">
+          <button type="button" class="menu-mode-option" data-menu-mode-option="light" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M6.34 17.66l-1.41 1.41"/><path d="M19.07 4.93l-1.41 1.41"/></svg><span>Light</span></button>
+          <button type="button" class="menu-mode-option" data-menu-mode-option="system" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18V3z" fill="currentColor" stroke="none"/></svg><span>System</span></button>
+          <button type="button" class="menu-mode-option" data-menu-mode-option="dark" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><span>Dark</span></button>
+        </div>
+      </div>
+    </div>
+
+    <header class="site-head">
+      <div class="u-container">
+        <h1>Design Language</h1>
+        <p class="subtitle">Foundations — Andii&rsquo;s personal design system, captured so far. Every value on this page is rendered live from the real tokens: resize the window and the fluid scales breathe.</p>
+      </div>
+    </header>
+
+    <main class="u-container">
+      <div class="status-wrap">
+        <p class="kicker">State of the capture</p>
+        <h2 class="status-title">Status</h2>
+        <div class="status-summary">
+          <div class="status-stats">
+            <div class="stat"><span class="stat-num">14</span><span class="stat-label">Captured</span></div>
+            <div class="stat"><span class="stat-num">1</span><span class="stat-label">Still open</span></div>
+            <div class="stat"><span class="stat-num">15</span><span class="stat-label">Issues in the tracker</span></div>
+          </div>
+          <div class="ms-progress">
+            <p class="ms-line"><a href="https://github.com/andiihei/ahha/milestone/1">Milestone: Design Language capture</a> — 14 of 15 issues closed</p>
+            <div class="ms-bar" role="img" aria-label="Milestone progress: 14 of 15 issues closed, 93 percent"><div class="ms-fill" style="width: 93.3%"></div></div>
+          </div>
+          <p class="status-meta">Tracked in <a href="https://github.com/andiihei/ahha/issues">GitHub Issues — andiihei/ahha</a> and on the <a href="https://github.com/users/andiihei/projects/1">AHHA — Status</a> board, grouped by area below; each item links to its issue. Updated 22 October 2026.</p>
+        </div>
+        <div class="area-group" id="area-colour">
+          <div class="area-head">
+            <h3>Colour</h3>
+            <span class="area-count">1 captured</span>
+          </div>
+          <div class="item-row">
+            <div class="item-main">
+              <p class="item-title"><strong>Colour</strong> <span class="pill pill-captured">Captured</span></p>
+              <p class="item-desc">7 families &times; 11 steps, APCA-based, OKLCH</p>
+            </div>
+            <a class="issue-link" href="https://github.com/andiihei/ahha/issues/1" aria-label="Colour — GitHub issue 1">#1 &#8599;</a>
+          </div>
+        </div>
+        <div class="area-group" id="area-typography">
+          <div class="area-head">
+            <h3>Typography</h3>
+            <span class="area-count">4 captured</span>
+          </div>
+          <div class="item-row">
+            <div class="item-main">
+              <p class="item-title"><strong>Fluid type scale</strong> <span class="pill pill-captured">Captured</span></p>
+              <p class="item-desc">Utopia, 360/18/1.125 &rarr; 1240/20/1.2; refactored 2026-10-22 — no per-step <code>clamp()</code>: one shared <code>--_progress</code> (0 at 360px &rarr; 1 at 1240px) drives all twelve steps, each derived from the configuration as <code>base &times; ratio<sup>step</sup></code> at both ends and interpolated by it; the progress is computed by <code>progress()</code> where supported, the <code>tan(atan2())</code> construction elsewhere, with the original <code>clamp()</code> definitions kept as the floor for engines with neither; names and rendered values unchanged</p>
+            </div>
+            <a class="issue-link" href="https://github.com/andiihei/ahha/issues/4" aria-label="Fluid type scale — GitHub issue 4">#4 &#8599;</a>
+          </div>
+          <div class="item-row">
+            <div class="item-main">
+              <p class="item-title"><strong>Typography utility classes</strong> <span class="pill pill-captured">Captured</span></p>
+              <p class="item-desc">ratified; one <code>.u-*</code> class per Text Component role, sizes mapped 75&rarr;60, 90&rarr;70, 100&rarr;80, 110&rarr;100, 150&rarr;120, 200&rarr;160, 300&rarr;250, 400&rarr;350 (the unified percentage step names)</p>
+            </div>
+            <a class="issue-link" href="https://github.com/andiihei/ahha/issues/10" aria-label="Typography utility classes — GitHub issue 10">#10 &#8599;</a>
+          </div>
+          <div class="item-row">
+            <div class="item-main">
+              <p class="item-title"><strong>Leading &amp; tracking variables</strong> <span class="pill pill-captured">Captured</span></p>
+              <p class="item-desc"><code>--leading-none/compact/relaxed</code> (1 / 1.25 / 1.5) and <code>--tracking-tight/none/loose/extra-loose</code> (&minus;0.03 / 0 / 0.05 / 0.1em), ratified</p>
+            </div>
+            <a class="issue-link" href="https://github.com/andiihei/ahha/issues/11" aria-label="Leading & tracking variables — GitHub issue 11">#11 &#8599;</a>
+          </div>
+          <div class="item-row">
+            <div class="item-main">
+              <p class="item-title"><strong>Paragraph &amp; list rhythm rules</strong> <span class="pill pill-captured">Captured</span></p>
+              <p class="item-desc"><code>.u-flow</code>: paragraph gap = 1em, list-item gap = 0.5em of the prevailing font size, ratified</p>
+            </div>
+            <a class="issue-link" href="https://github.com/andiihei/ahha/issues/12" aria-label="Paragraph & list rhythm rules — GitHub issue 12">#12 &#8599;</a>
+          </div>
+        </div>
+        <div class="area-group" id="area-spacing">
+          <div class="area-head">
+            <h3>Spacing</h3>
+            <span class="area-count">2 captured</span>
+          </div>
+          <div class="item-row">
+            <div class="item-main">
+              <p class="item-title"><strong>Fluid space scale</strong> <span class="pill pill-captured">Captured</span></p>
+              <p class="item-desc">13 steps plus 12 one-up pairs; refactored 2026-10-22 — no per-step <code>clamp()</code>: consumes the type scale&rsquo;s shared <code>--_progress</code> and configuration, each step derived as <code>round(multiplier &times; base, 0.0625rem)</code> at both ends and interpolated by it (so <code>--space-30</code>&rsquo;s constant 5px falls out of the rounding), and each pair interpolates from the lower step&rsquo;s minimum to the upper step&rsquo;s maximum with no numbers of its own; the original <code>clamp()</code> definitions kept as the floor where the shared-progress block is inactive or <code>round()</code> is unsupported; names and rendered values unchanged</p>
+            </div>
+            <a class="issue-link" href="https://github.com/andiihei/ahha/issues/2" aria-label="Fluid space scale — GitHub issue 2">#2 &#8599;</a>
+          </div>
+          <div class="item-row">
+            <div class="item-main">
+              <p class="item-title"><strong>Static spacing</strong> <span class="pill pill-captured">Captured</span></p>
+              <p class="item-desc">adopted: the fluid ladder frozen at a fixed 20px base, in rem (<code>--space-static-10…500</code> = 2–100px); fluid = layout-level, static = component-internal; deliberately no static pairs</p>
+            </div>
+            <a class="issue-link" href="https://github.com/andiihei/ahha/issues/3" aria-label="Static spacing — GitHub issue 3">#3 &#8599;</a>
+          </div>
+        </div>
+        <div class="area-group" id="area-grid">
+          <div class="area-head">
+            <h3>Grid</h3>
+            <span class="area-count">1 captured &middot; 1 still open</span>
+          </div>
+          <div class="item-row">
+            <div class="item-main">
+              <p class="item-title"><strong>Grid</strong> <span class="pill pill-captured">Captured</span></p>
+              <p class="item-desc">Utopia, with the template caveat in the still-open item below</p>
+            </div>
+            <a class="issue-link" href="https://github.com/andiihei/ahha/issues/7" aria-label="Grid — GitHub issue 7">#7 &#8599;</a>
+          </div>
+          <div class="item-row">
+            <div class="item-main">
+              <p class="item-title"><strong>Grid template line</strong> <span class="pill pill-open">Still open</span></p>
+              <p class="item-desc">whether <code>grid.css</code> itself gains it</p>
+            </div>
+            <a class="issue-link" href="https://github.com/andiihei/ahha/issues/13" aria-label="Grid template line — GitHub issue 13">#13 &#8599;</a>
+          </div>
+        </div>
+        <div class="area-group" id="area-elevation">
+          <div class="area-head">
+            <h3>Elevation</h3>
+            <span class="area-count">1 captured</span>
+          </div>
+          <div class="item-row">
+            <div class="item-main">
+              <p class="item-title"><strong>Elevation</strong> <span class="pill pill-captured">Captured</span></p>
+              <p class="item-desc">extracted from Figma, including the exact six-layer shadow stacks</p>
+            </div>
+            <a class="issue-link" href="https://github.com/andiihei/ahha/issues/5" aria-label="Elevation — GitHub issue 5">#5 &#8599;</a>
+          </div>
+        </div>
+        <div class="area-group" id="area-radius">
+          <div class="area-head">
+            <h3>Radius</h3>
+            <span class="area-count">1 captured</span>
+          </div>
+          <div class="item-row">
+            <div class="item-main">
+              <p class="item-title"><strong>Radius</strong> <span class="pill pill-captured">Captured</span></p>
+              <p class="item-desc">scale renamed to the unified percentage convention (<code>--radius-0/25/50/100/150/250/300/full</code>, 0.5rem/8px = base 100, expressed in rem) <em>and</em> the concentric mechanism decided: nested radius = governing radius &minus; total inset, via <code>.u-concentric</code></p>
+            </div>
+            <a class="issue-link" href="https://github.com/andiihei/ahha/issues/6" aria-label="Radius — GitHub issue 6">#6 &#8599;</a>
+          </div>
+        </div>
+        <div class="area-group" id="area-motion">
+          <div class="area-head">
+            <h3>Motion</h3>
+            <span class="area-count">1 captured</span>
+          </div>
+          <div class="item-row">
+            <div class="item-main">
+              <p class="item-title"><strong>Motion</strong> <span class="pill pill-captured">Captured</span></p>
+              <p class="item-desc">duration ladder (<code>--duration-0…400</code>, 100 = 200ms base), four easings (<code>--ease-in / --ease-out / --ease-in-out / --ease-emphasized</code>) and <code>--stagger</code>; delays reuse the duration tokens, movement offsets reuse the spacing tokens, keyframes stay in components, and the reduced-motion contract collapses durations to 0ms at token level — ratified; effect factors added 2026-10-21: <code>--parallax</code> 0.3, <code>--scale-enlarge</code> 1.06, <code>--scale-zoom</code> 1.5</p>
+            </div>
+            <a class="issue-link" href="https://github.com/andiihei/ahha/issues/8" aria-label="Motion — GitHub issue 8">#8 &#8599;</a>
+          </div>
+        </div>
+        <div class="area-group" id="area-opacity">
+          <div class="area-head">
+            <h3>Opacity</h3>
+            <span class="area-count">1 captured</span>
+          </div>
+          <div class="item-row">
+            <div class="item-main">
+              <p class="item-title"><strong>Opacity</strong> <span class="pill pill-captured">Captured</span></p>
+              <p class="item-desc">one global Layer 1 scale (<code>--opacity-0/5/10/15/20/30/40/50/65/80/100</code> = 0–1), defined once and never re-scoped per scheme; schemes stay at eight slots. Consumed directly as <code>opacity</code> or in <code>color-mix</code> via <code>calc(var(--opacity-N) * 100%)</code> — ratified</p>
+            </div>
+            <a class="issue-link" href="https://github.com/andiihei/ahha/issues/15" aria-label="Opacity — GitHub issue 15">#15 &#8599;</a>
+          </div>
+        </div>
+        <div class="area-group" id="area-states">
+          <div class="area-head">
+            <h3>States</h3>
+            <span class="area-count">1 captured</span>
+          </div>
+          <div class="item-row">
+            <div class="item-main">
+              <p class="item-title"><strong>Interactive states</strong> <span class="pill pill-captured">Captured</span></p>
+              <p class="item-desc">standard mapping on the global opacity scale: hover = state layer of the component&rsquo;s ink colour at <code>--opacity-10</code>, active = <code>--opacity-15</code>, disabled content at <code>--opacity-40</code> with states inert; focus-visible is a solid <code>--action-border</code> ring with an offset, not opacity-led — ratified</p>
+            </div>
+            <a class="issue-link" href="https://github.com/andiihei/ahha/issues/14" aria-label="Interactive states — GitHub issue 14">#14 &#8599;</a>
+          </div>
+        </div>
+        <div class="area-group" id="area-schemes">
+          <div class="area-head">
+            <h3>Schemes</h3>
+            <span class="area-count">1 captured</span>
+          </div>
+          <div class="item-row">
+            <div class="item-main">
+              <p class="item-title"><strong>Scheme slot contract</strong> <span class="pill pill-captured">Captured</span></p>
+              <p class="item-desc">recipe and naming both decided; naming follows <em>Mise en Mode</em>, in the shortened form</p>
+            </div>
+            <a class="issue-link" href="https://github.com/andiihei/ahha/issues/9" aria-label="Scheme slot contract — GitHub issue 9">#9 &#8599;</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <!-- Element inspector (debug tool) — overlay UI; inert when off -->
+    <div id="inspector-root">
+      <div id="insp-sel-box" aria-hidden="true"></div>
+      <div id="insp-hover-box" aria-hidden="true"><span id="insp-hover-tag"></span></div>
+      <div id="insp-panel" hidden role="dialog" aria-label="Element inspector">
+        <div class="insp-head">
+          <span>Element inspector</span>
+          <button type="button" class="insp-close" id="insp-close" aria-label="Close inspector panel">&times;</button>
+        </div>
+        <div class="insp-body" id="insp-body"></div>
+        <textarea id="insp-fallback" hidden readonly aria-label="Inspector report — select the text and copy it"></textarea>
+        <div class="insp-actions">
+          <button type="button" id="insp-copy">Copy report</button>
+          <span class="insp-hint">Esc exits inspect mode</span>
+        </div>
+      </div>
+      <button type="button" id="inspect-toggle" aria-pressed="false">Inspect</button>
+    </div>
+
+    <script>
+      (function () {
+        "use strict";
+        var rootStyle = getComputedStyle(document.documentElement);
+        function fmtPx(v) {
+          return (Math.round(v * 10) / 10).toString().replace(/\.0$/, "") + "px";
+        }
+
+        /* ---------- Toast ---------- */
+        var toast = document.getElementById("toast");
+        var toastTimer = null;
+        function showToast(msg) {
+          toast.textContent = msg;
+          toast.classList.add("show");
+          clearTimeout(toastTimer);
+          toastTimer = setTimeout(function () { toast.classList.remove("show"); }, 2200);
+        }
+
+        /* ---------- 12. Element inspector ---------- */
+        /* Debug tool: reference elements by selector + data instead of
+           screenshots. Off by default — when off, no listeners are attached
+           and the page behaves exactly as before. While on, clicks are
+           captured at the document and swallowed, so inspecting never
+           triggers the element's own behaviour. */
+        var SLOT_NAMES = ["--surface-bg", "--surface-bg-1", "--surface-border", "--text-fg-1", "--text-fg-2", "--action-bg-1", "--action-fg-1", "--action-border"];
+        var PALETTE_FAMILIES = ["midnight", "haze", "purple-rain", "fern", "cerise", "marigold", "cobalt"];
+        var PALETTE_STEPS = [1000, 950, 900, 800, 700, 500, 300, 200, 100, 50, 25];
+        function normVal(v) { return (v || "").replace(/\s+/g, " ").trim(); }
+        /* Map every resolved palette value back to its token name, so a
+           resolved slot can be annotated with the step it came from
+           (e.g. oklch(…) → --cerise-200). First writer wins on collisions
+           (Haze and Midnight share some endpoint values). */
+        var valueToToken = {};
+        PALETTE_FAMILIES.forEach(function (f) {
+          PALETTE_STEPS.forEach(function (s) {
+            var v = normVal(rootStyle.getPropertyValue("--" + f + "-" + s));
+            if (v && !valueToToken[v]) valueToToken[v] = "--" + f + "-" + s;
+          });
+        });
+        function tokenForValue(value, family) {
+          var v = normVal(value);
+          if (!v) return "";
+          if (family) {
+            for (var i = 0; i < PALETTE_STEPS.length; i++) {
+              if (normVal(rootStyle.getPropertyValue("--" + family + "-" + PALETTE_STEPS[i])) === v) {
+                return "--" + family + "-" + PALETTE_STEPS[i];
+              }
+            }
+          }
+          return valueToToken[v] || "";
+        }
+
+        /* ---- Applied-token annotation ----
+           For each reported property, find the declaration that actually
+           wins the cascade for this element — matched rules only, ordered
+           by !important, inline, specificity, then source order, with
+           @media groups counted only when their condition holds — and
+           show it as written: var(--token) for a token, the full
+           expression for a derived value (calc, color-mix, …) so its base
+           tokens stay visible, or the word "literal" for a plain value.
+           Nothing is guessed from the computed value. Inherited
+           properties with no declaration of their own walk up to the
+           ancestor whose declaration supplies the value, marked as
+           inherited. */
+        var INHERITED_PROPS = { "color": 1, "font-family": 1, "font-size": 1, "font-weight": 1, "font-style": 1, "letter-spacing": 1, "line-height": 1, "text-transform": 1, "visibility": 1 };
+
+        function selectorSpecificity(sel) {
+          var a = 0, b = 0, c = 0;
+          var s = sel.replace(/\[[^\]]*\]/g, function () { b++; return " "; });
+          s = s.replace(/#[\w-]+/g, function () { a++; return " "; });
+          s = s.replace(/::[\w-]+/g, function () { c++; return " "; });
+          s = s.replace(/\.[\w-]+/g, function () { b++; return " "; });
+          s = s.replace(/:[\w-]+(\([^()]*\))?/g, function () { b++; return " "; });
+          s.split(/[\s>+~]+/).forEach(function (tok) { if (/^[a-zA-Z][\w-]*$/.test(tok)) c++; });
+          return [a, b, c];
+        }
+
+        function eachStyleRule(fn) {
+          var order = 0;
+          function walk(rules) {
+            if (!rules) return;
+            for (var i = 0; i < rules.length; i++) {
+              var rule = rules[i];
+              try {
+                if (rule.selectorText !== undefined && rule.style) {
+                  fn(rule, order++);
+                } else if (rule.cssRules) {
+                  var applies = true;
+                  if (rule.media) applies = window.matchMedia(rule.media.mediaText).matches;
+                  else if (rule.conditionText !== undefined && window.CSS && CSS.supports) applies = CSS.supports(rule.conditionText);
+                  if (applies) walk(rule.cssRules);
+                }
+              } catch (err) { /* unsupported or cross-origin rule — skip it */ }
+            }
+          }
+          for (var s = 0; s < document.styleSheets.length; s++) {
+            try { walk(document.styleSheets[s].cssRules); } catch (err) { /* cross-origin sheet — skip it */ }
+          }
+        }
+
+        var matchedCache = null;
+        function matchedRules(el) {
+          if (matchedCache && matchedCache.el === el) return matchedCache.rules;
+          var rules = [];
+          eachStyleRule(function (rule, order) {
+            var spec = null;
+            rule.selectorText.split(",").forEach(function (part) {
+              var p = part.trim();
+              if (!p) return;
+              var ok = false;
+              try { ok = el.matches(p); } catch (err) { ok = false; }
+              if (!ok) return;
+              var sp = selectorSpecificity(p);
+              if (!spec || sp[0] > spec[0] || (sp[0] === spec[0] && (sp[1] > spec[1] || (sp[1] === spec[1] && sp[2] > spec[2])))) spec = sp;
+            });
+            if (spec) rules.push({ style: rule.style, spec: spec, order: order });
+          });
+          matchedCache = { el: el, rules: rules };
+          return rules;
+        }
+
+        function winningDecl(el, propNames) {
+          var best = null;
+          function consider(value, important, inline, spec, order) {
+            if (!value) return;
+            var key = [important ? 1 : 0, inline ? 1 : 0, spec[0], spec[1], spec[2], order];
+            if (best) {
+              var wins = false, decided = false;
+              for (var i = 0; i < key.length; i++) {
+                if (key[i] !== best.key[i]) { wins = key[i] > best.key[i]; decided = true; break; }
+              }
+              if (!decided || !wins) return;
+            }
+            best = { value: value, key: key };
+          }
+          matchedRules(el).forEach(function (r) {
+            propNames.forEach(function (prop) {
+              consider(r.style.getPropertyValue(prop), r.style.getPropertyPriority(prop) === "important", false, r.spec, r.order);
+            });
+          });
+          propNames.forEach(function (prop) {
+            consider(el.style.getPropertyValue(prop), el.style.getPropertyPriority(prop) === "important", true, [0, 0, 0], 1e9);
+          });
+          return best;
+        }
+
+        function appliedAnnotation(el, propNames) {
+          var node = el, inherited = false, decl = null;
+          while (node && node.nodeType === 1) {
+            decl = winningDecl(node, propNames);
+            if (decl) break;
+            if (!INHERITED_PROPS[propNames[0]]) return "";
+            node = node.parentElement;
+            inherited = true;
+          }
+          if (!decl) return "";
+          var v = normVal(decl.value);
+          var suffix = inherited ? " (inherited)" : "";
+          if (/^(inherit|initial|unset|revert|revert-layer)$/.test(v)) return " ← " + v + suffix;
+          if (/var\(|calc\(|color-mix\(|clamp\(|min\(|max\(/.test(v)) {
+            if (v.length > 110) v = v.slice(0, 110) + "…";
+            return " ← " + v + suffix;
+          }
+          return " ← literal" + suffix;
+        }
+
+        function segmentFor(el) {
+          var seg = el.tagName.toLowerCase();
+          if (el.id) seg += "#" + el.id;
+          var classes = (el.getAttribute("class") || "").trim().split(/\s+/).filter(Boolean);
+          classes.slice(0, 3).forEach(function (c) { seg += "." + c; });
+          if (el.hasAttribute("data-scheme")) seg += '[data-scheme="' + el.getAttribute("data-scheme") + '"]';
+          return seg;
+        }
+        function selectorPath(el) {
+          var parts = [];
+          var node = el;
+          while (node && node !== document.body && node !== document.documentElement) {
+            var seg = segmentFor(node);
+            var parent = node.parentElement;
+            if (parent && !node.id) {
+              var sameTag = Array.prototype.filter.call(parent.children, function (ch) { return ch.tagName === node.tagName; });
+              var sameDesc = sameTag.filter(function (ch) { return segmentFor(ch) === seg; });
+              if (sameDesc.length > 1) seg += ":nth-of-type(" + (sameTag.indexOf(node) + 1) + ")";
+            }
+            parts.unshift(seg);
+            if (node.id) break;
+            node = node.parentElement;
+          }
+          return parts.join(" > ");
+        }
+
+        function scopeOf(el) {
+          var scoped = el.closest ? el.closest("[data-scheme]") : null;
+          if (!scoped) return { el: null, value: null, family: null, mode: null, text: "page default (Haze)" };
+          var v = scoped.getAttribute("data-scheme");
+          var mode = /-dark$/.test(v) ? "dark" : (/-light$/.test(v) ? "light" : "");
+          var family = mode ? v.slice(0, v.length - mode.length - 1) : v;
+          return {
+            el: scoped, value: v, family: family, mode: mode,
+            text: v + " (family: " + family + (mode ? ", mode: " + mode : "") + ")",
+            elementSeg: segmentFor(scoped)
+          };
+        }
+
+        function implicitRole(el) {
+          var tag = el.tagName.toLowerCase();
+          if (tag === "button") return "button";
+          if (tag === "a" && el.hasAttribute("href")) return "link";
+          if (tag === "input") return "textbox";
+          if (tag === "select") return "combobox";
+          if (tag === "textarea") return "textbox";
+          if (/^h[1-6]$/.test(tag)) return "heading";
+          if (tag === "img") return "img";
+          if (tag === "nav") return "navigation";
+          if (tag === "main") return "main";
+          return "";
+        }
+
+        function borderSummary(cs) {
+          var sides = ["Top", "Right", "Bottom", "Left"];
+          var widths = sides.map(function (s) { return cs["border" + s + "Width"]; });
+          if (widths.every(function (w) { return w === "0px"; })) return "none";
+          var vals = sides.map(function (s) {
+            return cs["border" + s + "Width"] + " " + cs["border" + s + "Style"] + " " + cs["border" + s + "Color"];
+          });
+          if (vals.every(function (v) { return v === vals[0]; })) return vals[0];
+          var out = [];
+          sides.forEach(function (s, i) { if (widths[i] !== "0px") out.push(s.toLowerCase() + ": " + vals[i]); });
+          return out.join(" · ");
+        }
+
+        function buildReport(el) {
+          var cs = getComputedStyle(el);
+          var rect = el.getBoundingClientRect();
+          var scope = scopeOf(el);
+          var role = el.getAttribute("role") || implicitRole(el);
+          var text = (el.innerText || el.textContent || "").replace(/\s+/g, " ").trim();
+          if (text.length > 90) text = text.slice(0, 90) + "…";
+
+          var sections = [];
+          sections.push({ title: "Selector", lines: [selectorPath(el)], selector: true });
+
+          var elLines = ["<" + el.tagName.toLowerCase() + ">" + (role ? " · role: " + role : "")];
+          if (text) elLines.push('text: "' + text + '"');
+          sections.push({ title: "Element", lines: elLines });
+
+          var scopeLines = [scope.text];
+          if (scope.el && scope.el !== el) scopeLines.push("scoped by: " + scope.elementSeg);
+          sections.push({ title: "Scope", lines: scopeLines });
+
+          var geoLines = ["size: " + fmtPx(rect.width) + " × " + fmtPx(rect.height)];
+          if (cs.padding !== "0px") geoLines.push("padding: " + cs.padding);
+          if (cs.margin !== "0px") geoLines.push("margin: " + cs.margin);
+          if ((cs.rowGap && cs.rowGap !== "normal" && cs.rowGap !== "0px") || (cs.columnGap && cs.columnGap !== "normal" && cs.columnGap !== "0px")) {
+            geoLines.push("gap: " + cs.rowGap + " / " + cs.columnGap);
+          }
+          sections.push({ title: "Geometry", lines: geoLines });
+
+          var fontFamily = (cs.fontFamily || "").split(",")[0].trim();
+          var borderAnn = appliedAnnotation(el, ["border", "border-top"]);
+          if (!borderAnn) borderAnn = appliedAnnotation(el, ["border-color", "border-top-color", "border-width", "border-top-width", "border-style", "border-top-style"]);
+          sections.push({ title: "Computed styles", lines: [
+            "background-color: " + cs.backgroundColor + appliedAnnotation(el, ["background-color", "background"]),
+            "color: " + cs.color + appliedAnnotation(el, ["color"]),
+            "border: " + borderSummary(cs) + borderAnn,
+            "border-radius: " + cs.borderRadius + appliedAnnotation(el, ["border-radius"]),
+            "font-family: " + fontFamily + appliedAnnotation(el, ["font-family"]),
+            "font-size: " + cs.fontSize + appliedAnnotation(el, ["font-size"]),
+            "font-weight: " + cs.fontWeight + appliedAnnotation(el, ["font-weight"]),
+            "opacity: " + cs.opacity + appliedAnnotation(el, ["opacity"])
+          ]});
+
+          var slotLines = [];
+          if (scope.el) {
+            var scopeCs = getComputedStyle(scope.el);
+            SLOT_NAMES.forEach(function (name) {
+              var v = normVal(scopeCs.getPropertyValue(name));
+              var tok = tokenForValue(v, scope.family);
+              slotLines.push(name + ": " + (v || "(unset)") + (tok ? "  (= " + tok + ")" : ""));
+            });
+            sections.push({ title: "Scheme slots — " + scope.value, lines: slotLines });
+          } else {
+            sections.push({ title: "Scheme slots", lines: ["not defined — no [data-scheme] scope; the page default (Haze) defines no scheme slots"] });
+          }
+          return sections;
+        }
+
+        function reportText(sections) {
+          return "Element inspector report\n\n" + sections.map(function (sec) {
+            return sec.title.toUpperCase() + "\n" + sec.lines.map(function (l) { return "  " + l; }).join("\n");
+          }).join("\n\n");
+        }
+
+        var inspRoot = document.getElementById("inspector-root");
+        var inspToggle = document.getElementById("inspect-toggle");
+        var inspPanel = document.getElementById("insp-panel");
+        var inspBody = document.getElementById("insp-body");
+        var inspHoverBox = document.getElementById("insp-hover-box");
+        var inspHoverTag = document.getElementById("insp-hover-tag");
+        var inspSelBox = document.getElementById("insp-sel-box");
+        var inspFallback = document.getElementById("insp-fallback");
+        var inspecting = false;
+        var hoverEl = null;
+        var selectedEl = null;
+        var lastReport = "";
+
+        function inInspector(node) {
+          return !!(node && node.closest && node.closest("#inspector-root"));
+        }
+        function placeBox(box, el) {
+          var r = el.getBoundingClientRect();
+          box.style.display = "block";
+          box.style.left = r.left + "px";
+          box.style.top = r.top + "px";
+          box.style.width = r.width + "px";
+          box.style.height = r.height + "px";
+        }
+        function refreshBoxes() {
+          if (!inspecting) return;
+          if (hoverEl && document.contains(hoverEl)) placeBox(inspHoverBox, hoverEl);
+          if (selectedEl && document.contains(selectedEl)) placeBox(inspSelBox, selectedEl);
+        }
+
+        function selectElement(el) {
+          selectedEl = el;
+          var sections = buildReport(el);
+          lastReport = reportText(sections);
+          inspFallback.hidden = true;
+          inspBody.innerHTML = "";
+          sections.forEach(function (sec) {
+            var t = document.createElement("div");
+            t.className = "insp-sec-title";
+            t.textContent = sec.title;
+            inspBody.appendChild(t);
+            sec.lines.forEach(function (line) {
+              var d = document.createElement("div");
+              d.className = "insp-row" + (sec.selector ? " insp-selector" : "");
+              d.textContent = line;
+              inspBody.appendChild(d);
+            });
+          });
+          inspPanel.hidden = false;
+          placeBox(inspSelBox, el);
+        }
+
+        function onInspPointerMove(e) {
+          if (!(e.target instanceof Element) || inInspector(e.target)) {
+            hoverEl = null;
+            inspHoverBox.style.display = "none";
+            return;
+          }
+          hoverEl = e.target;
+          placeBox(inspHoverBox, hoverEl);
+          var r = hoverEl.getBoundingClientRect();
+          var classes = (hoverEl.getAttribute("class") || "").trim().split(/\s+/).filter(Boolean);
+          inspHoverTag.textContent = hoverEl.tagName.toLowerCase() +
+            (classes.length ? "." + classes.slice(0, 2).join(".") : "") +
+            " · " + fmtPx(r.width) + " × " + fmtPx(r.height);
+        }
+        function onInspClick(e) {
+          if (inInspector(e.target)) return;
+          e.preventDefault();
+          e.stopPropagation();
+          if (e.target instanceof Element) selectElement(e.target);
+        }
+        function onInspKeydown(e) {
+          if (e.key === "Escape") setInspecting(false);
+        }
+
+        function setInspecting(on) {
+          if (on === inspecting) return;
+          inspecting = on;
+          inspToggle.setAttribute("aria-pressed", on ? "true" : "false");
+          document.body.classList.toggle("inspecting", on);
+          if (on) {
+            document.addEventListener("pointermove", onInspPointerMove, true);
+            document.addEventListener("click", onInspClick, true);
+            document.addEventListener("keydown", onInspKeydown, true);
+            window.addEventListener("scroll", refreshBoxes, true);
+            window.addEventListener("resize", refreshBoxes);
+          } else {
+            document.removeEventListener("pointermove", onInspPointerMove, true);
+            document.removeEventListener("click", onInspClick, true);
+            document.removeEventListener("keydown", onInspKeydown, true);
+            window.removeEventListener("scroll", refreshBoxes, true);
+            window.removeEventListener("resize", refreshBoxes);
+            hoverEl = null;
+            selectedEl = null;
+            lastReport = "";
+            inspHoverBox.style.display = "none";
+            inspSelBox.style.display = "none";
+            inspPanel.hidden = true;
+          }
+        }
+        inspToggle.addEventListener("click", function () { setInspecting(!inspecting); });
+        document.getElementById("insp-close").addEventListener("click", function () {
+          inspPanel.hidden = true;
+          selectedEl = null;
+          lastReport = "";
+          inspSelBox.style.display = "none";
+        });
+        document.getElementById("insp-copy").addEventListener("click", function () {
+          if (!lastReport) return;
+          function showFallback() {
+            inspFallback.value = lastReport;
+            inspFallback.hidden = false;
+            inspFallback.focus();
+            inspFallback.select();
+            showToast("Clipboard unavailable — the report is in the panel; select it and copy");
+          }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(lastReport).then(function () {
+              inspFallback.hidden = true;
+              showToast("Inspector report copied");
+            }, showFallback);
+          } else {
+            showFallback();
+          }
+        });
+      })();
+    </script>
+    <script>
+      (function () {
+        "use strict";
+
+        /* ---------- Colour-mode switch (top row) ----------
+           The .mode-switch component: a trigger pill showing the
+           current selection (System by default) and an options panel
+           that slides out below it. Choosing an option sets data-mode
+           on <html>; the page-scope CSS does everything else —
+           "system" resolves through prefers-color-scheme in CSS, so
+           OS changes apply live with no JS involvement. The choice is
+           held for this page view only. */
+        var modeSwitch = document.querySelector("[data-mode-switch]");
+        var modeButtons = Array.prototype.slice.call(document.querySelectorAll("[data-mode-option]"));
+        var menuModeButtons = Array.prototype.slice.call(document.querySelectorAll("[data-menu-mode-option]"));
+        if (modeSwitch && modeButtons.length) {
+          var modeTrigger = modeSwitch.querySelector("[data-mode-trigger]");
+          var modeCurrentLabel = modeSwitch.querySelector("[data-mode-current-label]");
+          var modeNames = { light: "Light", system: "System", dark: "Dark" };
+          var setOpen = function (open) {
+            modeSwitch.setAttribute("data-open", open ? "true" : "false");
+            modeTrigger.setAttribute("aria-expanded", open ? "true" : "false");
+          };
+          var isOpen = function () { return modeSwitch.getAttribute("data-open") === "true"; };
+          var setMode = function (mode) {
+            document.documentElement.setAttribute("data-mode", mode);
+            modeButtons.forEach(function (b) {
+              b.setAttribute("aria-pressed", b.getAttribute("data-mode-option") === mode ? "true" : "false");
+            });
+            menuModeButtons.forEach(function (b) {
+              b.setAttribute("aria-pressed", b.getAttribute("data-menu-mode-option") === mode ? "true" : "false");
+            });
+            modeCurrentLabel.textContent = modeNames[mode] || modeNames.system;
+            modeTrigger.setAttribute("aria-label", "Colour mode: " + (modeNames[mode] || modeNames.system));
+          };
+          var focusOption = function (mode) {
+            var target = modeButtons.filter(function (b) {
+              return b.getAttribute("data-mode-option") === mode;
+            })[0] || modeButtons[0];
+            if (target) target.focus();
+          };
+          modeTrigger.addEventListener("click", function () { setOpen(!isOpen()); });
+          modeButtons.forEach(function (b, index) {
+            b.addEventListener("click", function () {
+              setMode(b.getAttribute("data-mode-option"));
+              setOpen(false);
+              modeTrigger.focus();
+            });
+            b.addEventListener("keydown", function (event) {
+              var next = null;
+              if (event.key === "ArrowDown") next = modeButtons[(index + 1) % modeButtons.length];
+              else if (event.key === "ArrowUp") next = modeButtons[(index - 1 + modeButtons.length) % modeButtons.length];
+              else if (event.key === "Home") next = modeButtons[0];
+              else if (event.key === "End") next = modeButtons[modeButtons.length - 1];
+              if (next) { event.preventDefault(); next.focus(); }
+            });
+          });
+          modeSwitch.addEventListener("keydown", function (event) {
+            if (event.key === "Escape" && isOpen()) {
+              event.preventDefault();
+              setOpen(false);
+              modeTrigger.focus();
+            }
+          });
+          modeTrigger.addEventListener("keydown", function (event) {
+            if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+              event.preventDefault();
+              setOpen(true);
+              focusOption(document.documentElement.getAttribute("data-mode") || "system");
+            }
+          });
+          document.addEventListener("click", function (event) {
+            if (isOpen() && !modeSwitch.contains(event.target)) setOpen(false);
+          });
+          document.addEventListener("focusin", function (event) {
+            if (isOpen() && !modeSwitch.contains(event.target)) setOpen(false);
+          });
+
+          /* ---------- Extra-compact nav menu ----------
+             At the extra-compact tier the top row defers to the
+             hamburger button. Its panel carries the page links above
+             the mode switch at the bottom as three inline pills — the
+             same setMode, so the two switches can never disagree.
+             The menu closes from the button (its glyph swaps to a
+             × while open), on Escape, or on any tap/click outside
+             the panel. Choosing a mode keeps the menu open so the
+             change is visible in place. */
+          var navBurger = document.querySelector("[data-nav-burger]");
+          var navMenu = document.querySelector("[data-nav-menu]");
+          if (navBurger && navMenu) {
+            var setMenuOpen = function (open) {
+              navMenu.classList.toggle("is-open", open);
+              navBurger.classList.toggle("is-open", open);
+              navBurger.setAttribute("aria-expanded", open ? "true" : "false");
+              navBurger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+            };
+            var menuIsOpen = function () { return navMenu.classList.contains("is-open"); };
+            navBurger.addEventListener("click", function () { setMenuOpen(!menuIsOpen()); });
+            menuModeButtons.forEach(function (b) {
+              b.addEventListener("click", function () {
+                setMode(b.getAttribute("data-menu-mode-option"));
+              });
+            });
+            document.addEventListener("click", function (event) {
+              if (menuIsOpen() && !navMenu.contains(event.target) && !navBurger.contains(event.target)) setMenuOpen(false);
+            });
+            document.addEventListener("keydown", function (event) {
+              if (event.key === "Escape" && menuIsOpen()) {
+                setMenuOpen(false);
+                navBurger.focus();
+              }
+            });
+          }
+          setMode(document.documentElement.getAttribute("data-mode") || "system");
+          setOpen(false);
+        }
+      })();
+    </script>
+  </body>
+</html>

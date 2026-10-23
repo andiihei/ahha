@@ -1,0 +1,2914 @@
+<!doctype html>
+<html lang="en" data-mode="system">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>Design Language — Components</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:SOFT,WONK,ital,opsz,wght@0..100,0,0,9..144,100..900;0..100,0,1,9..144,100..900;0..100,1,0,9..144,100..900;0..100,1,1,9..144,100..900&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <style>
+      /* ============================================================
+         DESIGN LANGUAGE TOKENS — inlined verbatim from the specimen
+         page (itself inlined from the Design Language CSS files:
+         colour, fluid type, fonts, typography, fluid space, static
+         space, grid, elevation, radius, motion, opacity), followed
+         by the scheme slot contract, the page scope, and the page
+         chrome. Do not edit values here; edit the source files.
+         ============================================================ */
+
+      /* ---- Colour (colors.css) ---- */
+      :root {
+        /* Midnight */
+        --midnight-1000: oklch(16.11% 0.0639 276.48);
+        --midnight-950: oklch(17.5% 0.066 285.88);
+        --midnight-900: oklch(22.5% 0.088 285.88);
+        --midnight-800: oklch(31.5% 0.125 285.88);
+        --midnight-700: oklch(43% 0.171 285.88);
+        --midnight-500: oklch(57% 0.17 285.88);
+        --midnight-300: oklch(70.5% 0.11 285.88);
+        --midnight-200: oklch(82.5% 0.059 285.88);
+        --midnight-100: oklch(91% 0.026 285.88);
+        --midnight-50: oklch(96% 0.01 285.88);
+        --midnight-25: oklch(98% 0.004 285.88);
+
+        /* Haze (formerly Neutral) */
+        --haze-1000: oklch(16.11% 0.0639 276.48);
+        --haze-950: oklch(17.5% 0.054 285.88);
+        --haze-900: oklch(22.5% 0.046 285.88);
+        --haze-800: oklch(31.5% 0.04 285.88);
+        --haze-700: oklch(43% 0.034 285.88);
+        --haze-500: oklch(57% 0.03 285.88);
+        --haze-300: oklch(70.5% 0.026 285.88);
+        --haze-200: oklch(82.5% 0.022 285.88);
+        --haze-100: oklch(91% 0.018 285.88);
+        --haze-50: oklch(96% 0.012 285.88);
+        --haze-25: oklch(98% 0.004 285.88);
+
+        /* Purple Rain */
+        --purple-rain-1000: oklch(16% 0.058 310.12);
+        --purple-rain-950: oklch(18.5% 0.093 310.12);
+        --purple-rain-900: oklch(25% 0.126 310.12);
+        --purple-rain-800: oklch(34.5% 0.15 310.12);
+        --purple-rain-700: oklch(45.5% 0.164 310.12);
+        --purple-rain-500: oklch(57.5% 0.166 310.12);
+        --purple-rain-300: oklch(69.5% 0.16 310.12);
+        --purple-rain-200: oklch(81% 0.128 310.12);
+        --purple-rain-100: oklch(90% 0.065 310.12);
+        --purple-rain-50: oklch(96% 0.025 310.12);
+        --purple-rain-25: oklch(98% 0.006 310.12);
+
+        /* Fern (formerly Shamrock) — hue torsions teal (199.8°) → green (158°) */
+        --fern-1000: oklch(16% 0.026 199.8);
+        --fern-950: oklch(16.5% 0.028 196.2);
+        --fern-900: oklch(21.5% 0.036 192);
+        --fern-800: oklch(30% 0.052 187.7);
+        --fern-700: oklch(41% 0.072 183.3);
+        --fern-500: oklch(53.5% 0.098 178.9);
+        --fern-300: oklch(66.5% 0.125 174.5);
+        --fern-200: oklch(78% 0.136 170.1);
+        --fern-100: oklch(88% 0.12 165.8);
+        --fern-50: oklch(95% 0.075 161.6);
+        --fern-25: oklch(98% 0.016 158.01);
+
+        /* Cerise (formerly Razzmatazz) */
+        --cerise-1000: oklch(16% 0.06 4.7);
+        --cerise-950: oklch(17.5% 0.07 4.7);
+        --cerise-900: oklch(22.4% 0.09 4.7);
+        --cerise-800: oklch(31.5% 0.126 4.7);
+        --cerise-700: oklch(43% 0.172 4.7);
+        --cerise-500: oklch(56.5% 0.202 4.7);
+        --cerise-300: oklch(69.5% 0.188 4.7);
+        --cerise-200: oklch(81.5% 0.109 4.7);
+        --cerise-100: oklch(90.6% 0.051 4.7);
+        --cerise-50: oklch(96.1% 0.02 4.7);
+        --cerise-25: oklch(98% 0.008 4.7);
+
+        /* Marigold (formerly Buddha Gold) — deliberate hue torsion 60.7° → 100.4° */
+        --marigold-1000: oklch(16% 0.036 60.7);
+        --marigold-950: oklch(21% 0.039 64.1);
+        --marigold-900: oklch(27% 0.049 68.1);
+        --marigold-800: oklch(35% 0.067 72.2);
+        --marigold-700: oklch(44.5% 0.09 76.4);
+        --marigold-500: oklch(56.6% 0.117 80.6);
+        --marigold-300: oklch(73.7% 0.151 84.7);
+        --marigold-200: oklch(81.3% 0.166 88.9);
+        --marigold-100: oklch(90.5% 0.136 93);
+        --marigold-50: oklch(96% 0.071 97);
+        --marigold-25: oklch(98% 0.045 100.4);
+
+        /* Cobalt (formerly Tory Blue) */
+        --cobalt-1000: oklch(16% 0.05 260.5);
+        --cobalt-950: oklch(18% 0.073 260.5);
+        --cobalt-900: oklch(24.5% 0.094 260.5);
+        --cobalt-800: oklch(34.5% 0.132 260.5);
+        --cobalt-700: oklch(47.5% 0.156 260.5);
+        --cobalt-500: oklch(61% 0.142 260.5);
+        --cobalt-300: oklch(73.5% 0.134 260.5);
+        --cobalt-200: oklch(81.4% 0.093 260.5);
+        --cobalt-100: oklch(90.7% 0.045 260.5);
+        --cobalt-50: oklch(95.5% 0.019 260.5);
+        --cobalt-25: oklch(98% 0.006 260.5);
+      }
+
+      /* ---- Fluid type (type.css) ---- */
+      /* Design Language — Fluid typography.
+         Configuration as supplied by Andii 2026-10-20 (Utopia): 360px → 18px base
+         @ 1.125 scale; 1240px → 20px base @ 1.2 scale.
+         @link https://utopia.fyi/type/calculator?c=360,18,1.125,1240,20,1.2,8,3,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12
+
+         REFACTORED 2026-10-22 (Andii's direction) from per-step clamp() magic
+         numbers to the shared-progress model (Kevin Powell, "No more clamp()
+         magic numbers"; Master.dev, "Fluid Typography with progress()"; MDN
+         progress() reference): one --_progress value — how far the viewport sits
+         between 360px and 1240px, 0 → 1 — drives every step. Each step is
+         derived from the configuration by formula: its size at 360px is
+         --type-min-base × --type-min-ratio^step, at 1240px --type-max-base ×
+         --type-max-ratio^step, interpolated by --_progress. Changing the
+         configuration (base sizes, ratios, viewport range) re-derives the whole
+         scale; nothing can fall out of sync.
+
+         Variable NAMES unchanged (unified percentage convention, 100 = base):
+         60/70/80/100/120/140/160/180/200/250/300/350 = Utopia steps -3..8.
+         Rendered VALUES preserved: endpoints identical to the previous Utopia
+         clamp() output at all 12 steps; mid-range deviation ≤ 0.0013px (the old
+         clamps' rounded slope/intercept). Steps 60/70 keep their negative slope
+         (min size > max size) — the interpolation handles it directly.
+
+         Fallback architecture: the original clamp() definitions stand below and
+         apply wherever neither progress() nor the tan(atan2()) route is
+         supported. Inside the @supports block, --_progress is computed with
+         tan(atan2()) (works in every current browser); where progress() itself
+         is supported it replaces that computation. */
+
+      :root {
+        --step-60: clamp(0.7234rem, 0.8174rem + -0.1214vw, 0.7901rem);
+        --step-70: clamp(0.8681rem, 0.8974rem + -0.0379vw, 0.8889rem);
+        --step-80: clamp(1rem, 0.983rem + 0.0758vw, 1.0417rem);
+        --step-100: clamp(1.125rem, 1.0739rem + 0.2273vw, 1.25rem);
+        --step-120: clamp(1.2656rem, 1.1697rem + 0.4261vw, 1.5rem);
+        --step-140: clamp(1.4238rem, 1.2699rem + 0.6839vw, 1.8rem);
+        --step-160: clamp(1.6018rem, 1.3735rem + 1.0149vw, 2.16rem);
+        --step-180: clamp(1.802rem, 1.4789rem + 1.4363vw, 2.592rem);
+        --step-200: clamp(2.0273rem, 1.5842rem + 1.9693vw, 3.1104rem);
+        --step-250: clamp(2.2807rem, 1.6868rem + 2.6396vw, 3.7325rem);
+        --step-300: clamp(2.5658rem, 1.7831rem + 3.4785vw, 4.479rem);
+        --step-350: clamp(2.8865rem, 1.8686rem + 4.5241vw, 5.3748rem);
+      }
+
+      /* Registered so atan2() receives a resolved <length> (CSS-Tricks recipe). */
+      @property --_100vw {
+        syntax: "<length>";
+        initial-value: 0px;
+        inherits: false;
+      }
+
+      @supports (opacity: progress(1px, 0px, 1px)) or (width: calc(1px * tan(atan2(1px, 1px)))) {
+        :root {
+          /* The configuration — the only numbers a future change touches. */
+          --type-min-viewport: 360px;
+          --type-max-viewport: 1240px;
+          --type-min-base: 1.125rem; /* 18px at 360px */
+          --type-max-base: 1.25rem; /* 20px at 1240px */
+          --type-min-ratio: 1.125;
+          --type-max-ratio: 1.2;
+
+          /* Shared progress, 0 at 360px → 1 at 1240px, clamped outside.
+             Default route: tan(atan2()) strips the unit from the viewport
+             width so the ratio can be computed by hand. The bounds below are
+             the unitless forms of --type-min/max-viewport. */
+          --_100vw: 100vw;
+          --_viewport-int: calc(10000 * tan(atan2(var(--_100vw), 10000px)));
+          --_progress: calc((clamp(360, var(--_viewport-int), 1240) - 360) / (1240 - 360));
+
+          /* Steps: min + progress × (max − min), endpoints derived by pow(). */
+          --_min-60: calc(var(--type-min-base) * pow(var(--type-min-ratio), -3));
+          --_max-60: calc(var(--type-max-base) * pow(var(--type-max-ratio), -3));
+          --step-60: calc(var(--_min-60) + var(--_progress) * (var(--_max-60) - var(--_min-60)));
+
+          --_min-70: calc(var(--type-min-base) * pow(var(--type-min-ratio), -2));
+          --_max-70: calc(var(--type-max-base) * pow(var(--type-max-ratio), -2));
+          --step-70: calc(var(--_min-70) + var(--_progress) * (var(--_max-70) - var(--_min-70)));
+
+          --_min-80: calc(var(--type-min-base) * pow(var(--type-min-ratio), -1));
+          --_max-80: calc(var(--type-max-base) * pow(var(--type-max-ratio), -1));
+          --step-80: calc(var(--_min-80) + var(--_progress) * (var(--_max-80) - var(--_min-80)));
+
+          --_min-100: var(--type-min-base);
+          --_max-100: var(--type-max-base);
+          --step-100: calc(var(--_min-100) + var(--_progress) * (var(--_max-100) - var(--_min-100)));
+
+          --_min-120: calc(var(--type-min-base) * pow(var(--type-min-ratio), 1));
+          --_max-120: calc(var(--type-max-base) * pow(var(--type-max-ratio), 1));
+          --step-120: calc(var(--_min-120) + var(--_progress) * (var(--_max-120) - var(--_min-120)));
+
+          --_min-140: calc(var(--type-min-base) * pow(var(--type-min-ratio), 2));
+          --_max-140: calc(var(--type-max-base) * pow(var(--type-max-ratio), 2));
+          --step-140: calc(var(--_min-140) + var(--_progress) * (var(--_max-140) - var(--_min-140)));
+
+          --_min-160: calc(var(--type-min-base) * pow(var(--type-min-ratio), 3));
+          --_max-160: calc(var(--type-max-base) * pow(var(--type-max-ratio), 3));
+          --step-160: calc(var(--_min-160) + var(--_progress) * (var(--_max-160) - var(--_min-160)));
+
+          --_min-180: calc(var(--type-min-base) * pow(var(--type-min-ratio), 4));
+          --_max-180: calc(var(--type-max-base) * pow(var(--type-max-ratio), 4));
+          --step-180: calc(var(--_min-180) + var(--_progress) * (var(--_max-180) - var(--_min-180)));
+
+          --_min-200: calc(var(--type-min-base) * pow(var(--type-min-ratio), 5));
+          --_max-200: calc(var(--type-max-base) * pow(var(--type-max-ratio), 5));
+          --step-200: calc(var(--_min-200) + var(--_progress) * (var(--_max-200) - var(--_min-200)));
+
+          --_min-250: calc(var(--type-min-base) * pow(var(--type-min-ratio), 6));
+          --_max-250: calc(var(--type-max-base) * pow(var(--type-max-ratio), 6));
+          --step-250: calc(var(--_min-250) + var(--_progress) * (var(--_max-250) - var(--_min-250)));
+
+          --_min-300: calc(var(--type-min-base) * pow(var(--type-min-ratio), 7));
+          --_max-300: calc(var(--type-max-base) * pow(var(--type-max-ratio), 7));
+          --step-300: calc(var(--_min-300) + var(--_progress) * (var(--_max-300) - var(--_min-300)));
+
+          --_min-350: calc(var(--type-min-base) * pow(var(--type-min-ratio), 8));
+          --_max-350: calc(var(--type-max-base) * pow(var(--type-max-ratio), 8));
+          --step-350: calc(var(--_min-350) + var(--_progress) * (var(--_max-350) - var(--_min-350)));
+        }
+
+        /* Where progress() itself is supported, it computes the shared value. */
+        @supports (opacity: progress(1px, 0px, 1px)) {
+          :root {
+            --_progress: progress(100vw, var(--type-min-viewport), var(--type-max-viewport));
+          }
+        }
+      }
+
+      /* ---- Font families (fonts.css) ---- */
+      /* Design Language — Font families (brand pack).
+         Convention DECIDED by Andii 2026-10-22: three family tokens —
+         --font-main, --font-alt, --font-mono — so a brand pack can swap
+         typefaces without touching role classes or components.
+         This brand's assignments:
+           --font-main = "IBM Plex Sans" (interface/body)
+           --font-alt  = "Fraunces" (display/headings + lead paragraphs)
+           --font-mono = "IBM Plex Mono" (code/data)
+         Per-brand note (Andii, 2026-10-22): leading and tracking values do not
+         transfer consistently across typefaces, so the --leading-* and
+         --tracking-* scales are brand-pack values too. They are currently
+         declared in typography.css and ship with the brand pack when the
+         package is assembled. The fluid type configuration in type.css
+         (--type-min/max-base, --type-min/max-ratio) is likewise per-brand.
+         Loading: see fonts.md. IBM Plex Mono is assigned here but is NOT yet
+         in the Google Fonts embed or the self-hosting spec — nothing renders
+         in it yet; add it when a component first uses --font-mono. */
+
+      :root {
+        --font-main: "IBM Plex Sans", sans-serif;
+        --font-alt: "Fraunces", serif;
+        --font-mono: "IBM Plex Mono", monospace;
+      }
+
+      /* ---- Typography utilities (typography.css) ---- */
+      /* Design Language — Typography utilities. RATIFIED by Andii 2026-10-20,
+         including his size mapping (px-anchored): 75→--step-60, 90→--step-70,
+         100→--step-80, 110→--step-100, 150→--step-120, 200→--step-160,
+         300→--step-250, 400→--step-350 (step names = the unified % convention).
+         Sources: role recipes extracted read-only from Andii's Figma Text Components
+         (Foundations S1.1, Typography page); sizes map each role's %-of-root onto the
+         fluid scale in type.css (load type.css first). Leading/tracking values are
+         Andii's documented scales. Paragraph/list spacing are Andii's rules, stated
+         2026-10-20: paragraph spacing = the prevailing font size (1em);
+         list spacing = 50% of the prevailing font size (0.5em). */
+
+      :root {
+        /* Line heights — Andii's names: None / Compact / Relaxed
+           (the Paragraph component calls Compact "Normal" and Relaxed "Comfy"). */
+        --leading-none: 1;
+        --leading-compact: 1.25;
+        --leading-relaxed: 1.5;
+
+        /* Letter spacing — Tight / None / Loose / Extra Loose. */
+        --tracking-tight: -0.03em;
+        --tracking-none: 0em;
+        --tracking-loose: 0.05em;
+        --tracking-extra-loose: 0.1em;
+      }
+
+      /* Family bases — variation/feature settings as set in Andii's Figma components.
+         Family stacks come from the brand tokens in fonts.css (load fonts.css
+         first): --font-main = IBM Plex Sans, --font-alt = Fraunces,
+         --font-mono = IBM Plex Mono (Andii, 2026-10-22). */
+      .u-fraunces {
+        font-family: var(--font-alt);
+        font-optical-sizing: auto;
+        font-variation-settings: "SOFT" 0, "WONK" 1;
+      }
+      .u-plex {
+        font-family: var(--font-main);
+        font-optical-sizing: auto;
+        font-variation-settings: "wdth" 100;
+        font-feature-settings: "lnum" 1, "pnum" 1;
+      }
+
+      /* Family utilities — plain family application from the brand tokens. */
+      .u-font-main { font-family: var(--font-main); }
+      .u-font-alt  { font-family: var(--font-alt); }
+      .u-font-mono { font-family: var(--font-mono); }
+
+      /* Headings — Fraunces, Tight tracking. Heading 400/300 default to leading None
+         (the components' lineHeight toggle switches them to Compact). */
+      .u-heading-400 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: "SOFT" 0, "WONK" 1; font-size: var(--step-350); font-weight: 700; line-height: var(--leading-none); letter-spacing: var(--tracking-tight); text-transform: capitalize; }
+      .u-heading-300 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: "SOFT" 0, "WONK" 1; font-size: var(--step-250); font-weight: 700; line-height: var(--leading-none); letter-spacing: var(--tracking-tight); text-transform: capitalize; }
+      .u-heading-200 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: "SOFT" 0, "WONK" 1; font-size: var(--step-160); font-weight: 400; line-height: var(--leading-compact); letter-spacing: var(--tracking-tight); }
+      .u-heading-150 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: "SOFT" 0, "WONK" 1; font-size: var(--step-120); font-weight: 600; line-height: var(--leading-compact); letter-spacing: var(--tracking-tight); }
+
+      /* Paragraphs. P200/P150 are Fraunces (lead text); P110/P100 are Plex.
+         P100's Comfy variant = .u-paragraph-100 with .u-leading-relaxed applied. */
+      .u-paragraph-200  { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: "SOFT" 0, "WONK" 1; font-size: var(--step-160); font-weight: 700; line-height: var(--leading-compact); }
+      .u-paragraph-150    { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: "SOFT" 0, "WONK" 1; font-size: var(--step-120); font-weight: 400; line-height: var(--leading-compact); }
+      .u-paragraph-110 { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: "wdth" 100; font-feature-settings: "lnum" 1, "pnum" 1; font-size: var(--step-100); font-weight: 400; line-height: var(--leading-relaxed); }
+      .u-paragraph-100    { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: "wdth" 100; font-feature-settings: "lnum" 1, "pnum" 1; font-size: var(--step-80); font-weight: 400; line-height: var(--leading-compact); }
+
+      /* Actions — Plex Bold. Uppercase was a component toggle in Figma (default on);
+         here it is the atomic .text-caps modifier, appended when needed. */
+      .u-action-110      { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: "wdth" 100; font-feature-settings: "lnum" 1, "pnum" 1; font-size: var(--step-100); font-weight: 700; line-height: var(--leading-compact); }
+      .u-action-100      { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: "wdth" 100; font-feature-settings: "lnum" 1, "pnum" 1; font-size: var(--step-80); font-weight: 700; line-height: var(--leading-compact); }
+      .u-action-75       { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: "wdth" 100; font-feature-settings: "lnum" 1, "pnum" 1; font-size: var(--step-60); font-weight: 700; line-height: var(--leading-compact); }
+
+      /* Detail (formerly Labels & Data / LD) — Plex SemiBold, Compact leading. */
+      .u-detail-100     { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: "wdth" 100; font-feature-settings: "lnum" 1, "pnum" 1; font-size: var(--step-80); font-weight: 600; line-height: var(--leading-compact); }
+      .u-detail-90      { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: "wdth" 100; font-feature-settings: "lnum" 1, "pnum" 1; font-size: var(--step-70); font-weight: 600; line-height: var(--leading-compact); }
+      .u-detail-75      { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: "wdth" 100; font-feature-settings: "lnum" 1, "pnum" 1; font-size: var(--step-60); font-weight: 600; line-height: var(--leading-compact); }
+
+      /* Atomic modifiers — appended to any role class (Andii, 2026-10-20: variant
+         classes like -bold/-caps are unnecessary duplication). These rules come
+         AFTER the role classes so they win at equal specificity.
+         .text-caps also carries Loose tracking: in the Figma components, caps
+         always pairs with +5% letter spacing. */
+      .text-regular  { font-weight: 400; }
+      .text-medium   { font-weight: 500; }
+      .text-semibold { font-weight: 600; }
+      .text-bold     { font-weight: 700; }
+      .text-caps     { text-transform: uppercase; letter-spacing: var(--tracking-loose); }
+
+      /* Leading overrides (the components' lineHeight toggles, as utilities). */
+      .u-leading-none    { line-height: var(--leading-none); }
+      .u-leading-compact { line-height: var(--leading-compact); }
+      .u-leading-relaxed { line-height: var(--leading-relaxed); }
+
+      /* Vertical rhythm — Andii's rules (2026-10-20). em-based, so the gap always
+         equals the prevailing font size of the text it separates. Apply .u-flow to
+         a prose container. */
+      .u-flow > p + p,
+      .u-flow > p + ul, .u-flow > p + ol,
+      .u-flow > ul + p, .u-flow > ol + p { margin-block-start: 1em; }
+      .u-flow li + li { margin-block-start: 0.5em; }
+
+      /* ---- Fluid space (space.css) ---- */
+      /* Design Language — Fluid spacing.
+         Configuration as supplied by Andii 2026-10-20 (Utopia space scale on the
+         same config as the type scale: 360px/18px → 1240px/20px).
+         Note: --space-100 is identical to --step-100 by design (spacing anchors
+         to the base font size).
+         @link https://utopia.fyi/space/calculator?c=360,18,1.125,1240,20,1.2,8,3,&s=0.8|0.7|0.6|0.5|0.25|0.125,1.25|1.5|2|3|4|5,&g=s,l,xl,12
+
+         REFACTORED 2026-10-22 (Andii's direction), following the type.css
+         refactor of the same day: no per-step clamp() magic numbers. This file
+         consumes the shared configuration and --_progress defined in type.css
+         (the two files are one set — type.css loads first) and derives every
+         step from its multiplier of the base size:
+
+           step endpoints = round(multiplier × base, 0.0625rem)
+           step value     = min + --_progress × (max − min)
+
+         The 0.0625rem rounding interval (1px at the 16px reference root)
+         reproduces Utopia's whole-pixel endpoint rounding exactly — including
+         --space-30, whose endpoints coincide (0.25 × 18px rounds to 5px;
+         0.25 × 20px is 5px), making it constant. Multipliers: 10→0.125,
+         30→0.25, 50→0.5, 60→0.6, 70→0.7, 80→0.8, 100→1, 125→1.25, 150→1.5,
+         200→2, 300→3, 400→4, 500→5.
+
+         One-up pairs need no numbers of their own: a pair interpolates from
+         the lower step's minimum to the upper step's maximum, referencing the
+         derived endpoints directly. (The grid gutter's --space-100-200 is not
+         defined in this file — grid.css keeps its own clamp() fallback, out of
+         scope here.)
+
+         NAMES unchanged (unified percentage convention, 100 = base):
+         10/30/50/60/70/80/100/125/150/200/300/400/500, pairs <low>-<high>.
+         Rendered VALUES preserved: every step and pair endpoint is identical
+         to the previous Utopia clamp() output (verified numerically);
+         mid-range deviation is the same ≤0.0013px rounding residue as type.
+
+         Fallback: the original clamp() definitions stand below and apply
+         wherever the shared-progress block in type.css is inactive or round()
+         is unsupported. */
+
+      :root {
+        --space-10: clamp(0.125rem, 0.0994rem + 0.1136vw, 0.1875rem);
+        --space-30: clamp(0.3125rem, 0.3125rem + 0vw, 0.3125rem);
+        --space-50: clamp(0.5625rem, 0.5369rem + 0.1136vw, 0.625rem);
+        --space-60: clamp(0.6875rem, 0.6619rem + 0.1136vw, 0.75rem);
+        --space-70: clamp(0.8125rem, 0.7869rem + 0.1136vw, 0.875rem);
+        --space-80: clamp(0.875rem, 0.8239rem + 0.2273vw, 1rem);
+        --space-100: clamp(1.125rem, 1.0739rem + 0.2273vw, 1.25rem);
+        --space-125: clamp(1.4375rem, 1.3864rem + 0.2273vw, 1.5625rem);
+        --space-150: clamp(1.6875rem, 1.6108rem + 0.3409vw, 1.875rem);
+        --space-200: clamp(2.25rem, 2.1477rem + 0.4545vw, 2.5rem);
+        --space-300: clamp(3.375rem, 3.2216rem + 0.6818vw, 3.75rem);
+        --space-400: clamp(4.5rem, 4.2955rem + 0.9091vw, 5rem);
+        --space-500: clamp(5.625rem, 5.3693rem + 1.1364vw, 6.25rem);
+
+        /* One-up pairs */
+        --space-10-30: clamp(0.125rem, 0.0483rem + 0.3409vw, 0.3125rem);
+        --space-30-50: clamp(0.3125rem, 0.1847rem + 0.5682vw, 0.625rem);
+        --space-50-60: clamp(0.5625rem, 0.4858rem + 0.3409vw, 0.75rem);
+        --space-60-70: clamp(0.6875rem, 0.6108rem + 0.3409vw, 0.875rem);
+        --space-70-80: clamp(0.8125rem, 0.7358rem + 0.3409vw, 1rem);
+        --space-80-100: clamp(0.875rem, 0.7216rem + 0.6818vw, 1.25rem);
+        --space-100-125: clamp(1.125rem, 0.946rem + 0.7955vw, 1.5625rem);
+        --space-125-150: clamp(1.4375rem, 1.2585rem + 0.7955vw, 1.875rem);
+        --space-150-200: clamp(1.6875rem, 1.3551rem + 1.4773vw, 2.5rem);
+        --space-200-300: clamp(2.25rem, 1.6364rem + 2.7273vw, 3.75rem);
+        --space-300-400: clamp(3.375rem, 2.7102rem + 2.9545vw, 5rem);
+        --space-400-500: clamp(4.5rem, 3.7841rem + 3.1818vw, 6.25rem);
+      }
+
+      @supports (width: round(1.5px, 1px)) and ((opacity: progress(1px, 0px, 1px)) or (width: calc(1px * tan(atan2(1px, 1px))))) {
+        :root {
+          /* Step endpoints: round(multiplier × base, 0.0625rem). */
+          --_space-min-10: round(calc(var(--type-min-base) * 0.125), 0.0625rem);
+          --_space-max-10: round(calc(var(--type-max-base) * 0.125), 0.0625rem);
+          --space-10: calc(var(--_space-min-10) + var(--_progress) * (var(--_space-max-10) - var(--_space-min-10)));
+
+          --_space-min-30: round(calc(var(--type-min-base) * 0.25), 0.0625rem);
+          --_space-max-30: round(calc(var(--type-max-base) * 0.25), 0.0625rem);
+          --space-30: calc(var(--_space-min-30) + var(--_progress) * (var(--_space-max-30) - var(--_space-min-30)));
+
+          --_space-min-50: round(calc(var(--type-min-base) * 0.5), 0.0625rem);
+          --_space-max-50: round(calc(var(--type-max-base) * 0.5), 0.0625rem);
+          --space-50: calc(var(--_space-min-50) + var(--_progress) * (var(--_space-max-50) - var(--_space-min-50)));
+
+          --_space-min-60: round(calc(var(--type-min-base) * 0.6), 0.0625rem);
+          --_space-max-60: round(calc(var(--type-max-base) * 0.6), 0.0625rem);
+          --space-60: calc(var(--_space-min-60) + var(--_progress) * (var(--_space-max-60) - var(--_space-min-60)));
+
+          --_space-min-70: round(calc(var(--type-min-base) * 0.7), 0.0625rem);
+          --_space-max-70: round(calc(var(--type-max-base) * 0.7), 0.0625rem);
+          --space-70: calc(var(--_space-min-70) + var(--_progress) * (var(--_space-max-70) - var(--_space-min-70)));
+
+          --_space-min-80: round(calc(var(--type-min-base) * 0.8), 0.0625rem);
+          --_space-max-80: round(calc(var(--type-max-base) * 0.8), 0.0625rem);
+          --space-80: calc(var(--_space-min-80) + var(--_progress) * (var(--_space-max-80) - var(--_space-min-80)));
+
+          --_space-min-100: round(calc(var(--type-min-base) * 1), 0.0625rem);
+          --_space-max-100: round(calc(var(--type-max-base) * 1), 0.0625rem);
+          --space-100: calc(var(--_space-min-100) + var(--_progress) * (var(--_space-max-100) - var(--_space-min-100)));
+
+          --_space-min-125: round(calc(var(--type-min-base) * 1.25), 0.0625rem);
+          --_space-max-125: round(calc(var(--type-max-base) * 1.25), 0.0625rem);
+          --space-125: calc(var(--_space-min-125) + var(--_progress) * (var(--_space-max-125) - var(--_space-min-125)));
+
+          --_space-min-150: round(calc(var(--type-min-base) * 1.5), 0.0625rem);
+          --_space-max-150: round(calc(var(--type-max-base) * 1.5), 0.0625rem);
+          --space-150: calc(var(--_space-min-150) + var(--_progress) * (var(--_space-max-150) - var(--_space-min-150)));
+
+          --_space-min-200: round(calc(var(--type-min-base) * 2), 0.0625rem);
+          --_space-max-200: round(calc(var(--type-max-base) * 2), 0.0625rem);
+          --space-200: calc(var(--_space-min-200) + var(--_progress) * (var(--_space-max-200) - var(--_space-min-200)));
+
+          --_space-min-300: round(calc(var(--type-min-base) * 3), 0.0625rem);
+          --_space-max-300: round(calc(var(--type-max-base) * 3), 0.0625rem);
+          --space-300: calc(var(--_space-min-300) + var(--_progress) * (var(--_space-max-300) - var(--_space-min-300)));
+
+          --_space-min-400: round(calc(var(--type-min-base) * 4), 0.0625rem);
+          --_space-max-400: round(calc(var(--type-max-base) * 4), 0.0625rem);
+          --space-400: calc(var(--_space-min-400) + var(--_progress) * (var(--_space-max-400) - var(--_space-min-400)));
+
+          --_space-min-500: round(calc(var(--type-min-base) * 5), 0.0625rem);
+          --_space-max-500: round(calc(var(--type-max-base) * 5), 0.0625rem);
+          --space-500: calc(var(--_space-min-500) + var(--_progress) * (var(--_space-max-500) - var(--_space-min-500)));
+
+          /* One-up pairs: lower step's minimum → upper step's maximum. */
+          --space-10-30: calc(var(--_space-min-10) + var(--_progress) * (var(--_space-max-30) - var(--_space-min-10)));
+          --space-30-50: calc(var(--_space-min-30) + var(--_progress) * (var(--_space-max-50) - var(--_space-min-30)));
+          --space-50-60: calc(var(--_space-min-50) + var(--_progress) * (var(--_space-max-60) - var(--_space-min-50)));
+          --space-60-70: calc(var(--_space-min-60) + var(--_progress) * (var(--_space-max-70) - var(--_space-min-60)));
+          --space-70-80: calc(var(--_space-min-70) + var(--_progress) * (var(--_space-max-80) - var(--_space-min-70)));
+          --space-80-100: calc(var(--_space-min-80) + var(--_progress) * (var(--_space-max-100) - var(--_space-min-80)));
+          --space-100-125: calc(var(--_space-min-100) + var(--_progress) * (var(--_space-max-125) - var(--_space-min-100)));
+          --space-125-150: calc(var(--_space-min-125) + var(--_progress) * (var(--_space-max-150) - var(--_space-min-125)));
+          --space-150-200: calc(var(--_space-min-150) + var(--_progress) * (var(--_space-max-200) - var(--_space-min-150)));
+          --space-200-300: calc(var(--_space-min-200) + var(--_progress) * (var(--_space-max-300) - var(--_space-min-200)));
+          --space-300-400: calc(var(--_space-min-300) + var(--_progress) * (var(--_space-max-400) - var(--_space-min-300)));
+          --space-400-500: calc(var(--_space-min-400) + var(--_progress) * (var(--_space-max-500) - var(--_space-min-400)));
+        }
+      }
+
+      /* ---- Static space (space-static.css) ---- */
+      /* Design Language — Static spacing. ADOPTED by Andii 2026-10-20.
+         The fluid scale (space.css) frozen: same unified percentage names, but
+         computed against a FIXED 20px base instead of the fluid 18→20px base.
+         20px is the fluid scale's desktop anchor, so from step 50 up these values
+         equal the fluid scale at desktop widths exactly. The two smallest steps
+         take the exact percentages (2px/6px) rather than inheriting the fluid
+         scale's Utopia rounding artefacts (3px top-out; constant 5px).
+         Values are expressed in rem (Andii, 2026-10-20) — px equivalents noted
+         per line; in rem they match the fluid scale's desktop rem figures.
+         No pairs: a pair is a fluid transition between steps; frozen, it is just
+         another static value, and the ladder already covers the useful stops.
+
+         USAGE (ratified 2026-10-20): fluid for layout-level spacing — page
+         rhythm, section gaps, grid gutters, anything that should breathe with
+         the viewport. Static for component-internal spacing — button/input
+         padding, icon gaps, card interiors — where a component must measure the
+         same wherever it is dropped, including contexts with no fluid root
+         (e.g. exported Thoughts articles). */
+
+      :root {
+        --space-static-10: 0.125rem;   /* 2px */
+        --space-static-30: 0.375rem;   /* 6px */
+        --space-static-50: 0.625rem;   /* 10px */
+        --space-static-60: 0.75rem;    /* 12px */
+        --space-static-70: 0.875rem;   /* 14px */
+        --space-static-80: 1rem;       /* 16px */
+        --space-static-100: 1.25rem;   /* 20px */
+        --space-static-125: 1.5625rem; /* 25px */
+        --space-static-150: 1.875rem;  /* 30px */
+        --space-static-200: 2.5rem;    /* 40px */
+        --space-static-300: 3.75rem;   /* 60px */
+        --space-static-400: 5rem;      /* 80px */
+        --space-static-500: 6.25rem;   /* 100px */
+      }
+
+      /* ---- Grid (grid.css) ---- */
+      :root {
+        --grid-max-width: 92.50rem;
+        --grid-gutter: var(--space-100-200, clamp(1.125rem, 0.6927rem + 1.9538vw, 2.5rem));
+        --grid-columns: 12;
+      }
+      .u-container {
+        max-width: var(--grid-max-width);
+        padding-inline: var(--grid-gutter);
+        margin-inline: auto;
+      }
+      .u-grid {
+        display: grid;
+        gap: var(--grid-gutter);
+      }
+
+      /* ---- Elevation (elevation.css) ---- */
+      :root {
+        --shadow-color: var(--midnight-1000);
+
+        --elevation-low:
+          0 0 0 0 color-mix(in oklch, var(--shadow-color) 10%, transparent),
+          1px 1px 2px 0 color-mix(in oklch, var(--shadow-color) 10%, transparent),
+          2px 2px 3px 0 color-mix(in oklch, var(--shadow-color) 9%, transparent),
+          5px 5px 5px 0 color-mix(in oklch, var(--shadow-color) 5%, transparent),
+          9px 9px 5px 0 color-mix(in oklch, var(--shadow-color) 1%, transparent),
+          15px 15px 6px 0 transparent;
+
+        --elevation-medium:
+          0 0 0 0 color-mix(in oklch, var(--shadow-color) 10%, transparent),
+          1px 1px 3px 0 color-mix(in oklch, var(--shadow-color) 10%, transparent),
+          4px 4px 5px 0 color-mix(in oklch, var(--shadow-color) 9%, transparent),
+          8px 8px 7px 0 color-mix(in oklch, var(--shadow-color) 5%, transparent),
+          14px 14px 8px 0 color-mix(in oklch, var(--shadow-color) 1%, transparent),
+          22px 22px 9px 0 transparent;
+
+        --elevation-high:
+          0 0 0 0 color-mix(in oklch, var(--shadow-color) 10%, transparent),
+          1px 1px 4px 0 color-mix(in oklch, var(--shadow-color) 10%, transparent),
+          5px 5px 8px 0 color-mix(in oklch, var(--shadow-color) 9%, transparent),
+          12px 12px 10px 0 color-mix(in oklch, var(--shadow-color) 5%, transparent),
+          21px 21px 12px 0 color-mix(in oklch, var(--shadow-color) 1%, transparent),
+          33px 33px 13px 0 transparent;
+
+        --elevation-very-high:
+          0 0 0 0 color-mix(in oklch, var(--shadow-color) 10%, transparent),
+          2px 2px 7px 0 color-mix(in oklch, var(--shadow-color) 10%, transparent),
+          9px 9px 13px 0 color-mix(in oklch, var(--shadow-color) 9%, transparent),
+          20px 21px 17px 0 color-mix(in oklch, var(--shadow-color) 5%, transparent),
+          36px 37px 21px 0 color-mix(in oklch, var(--shadow-color) 1%, transparent),
+          56px 57px 22px 0 transparent;
+      }
+
+      /* ---- Radius (radius.css) ---- */
+      /* Design Language — Radius, with concentric nesting.
+         Scale: Andii's 2023 Foundations values (0/2/4/8/12/20/24/round), renamed
+         2026-10-20 to the unified percentage convention with 8px as base 100 and
+         expressed in rem per Andii's units rule (code defers to rem/em; px only
+         where px is the ideal unit — here, the --radius-full sentinel).
+         Mechanism DECIDED 2026-10-20 (Andii): corners must be concentric when
+         nested, regardless of distance.
+
+         THE RULE: concentric arcs share a centre, so
+             outer radius = inner radius + gap
+         Equivalently, a nested element's radius = the governing radius − the
+         total inset between it and the element that owns the radius. Because the
+         system's gaps are fluid spacing tokens, the calc rides the token: the
+         corners stay concentric at every viewport width, not just one.
+
+         HOW TO APPLY:
+         - The outermost element takes a radius token directly and scopes it:
+               .card { --radius: var(--radius-300); border-radius: var(--radius); }
+         - A nested element declares its inset (its distance from that element's
+           border edge — usually the parent's padding, a spacing token) and uses
+           the utility:
+               .card > .media { --inset: var(--space-50); }  +  class="u-concentric"
+         - Deeper levels sum their insets, or an intermediate container re-scopes
+           --radius with its own calc (e.g. --radius: calc(var(--radius-300)
+           - var(--space-50))) and nesting restarts from there. Components apply
+           the calc once in their own CSS; nobody hand-picks inner radius values.
+         - max(0, …) floors the result: an inset larger than the radius yields
+           square corners, never a negative radius. */
+
+      :root {
+        --radius-0: 0;
+        --radius-25: 0.125rem;  /* 2px */
+        --radius-50: 0.25rem;   /* 4px */
+        --radius-100: 0.5rem;   /* 8px — base 100 */
+        --radius-150: 0.75rem;  /* 12px */
+        --radius-250: 1.25rem;  /* 20px */
+        --radius-300: 1.5rem;   /* 24px */
+        --radius-full: 9999px;  /* sentinel: px is the ideal unit here (not a measurement) */
+      }
+
+      /* Concentric nested corner: radius = governing radius − inset.
+         --radius is inherited from the scoping ancestor; --inset is set by the
+         element itself (default 0). */
+      .u-concentric {
+        border-radius: max(0rem, calc(var(--radius, 0rem) - var(--inset, 0rem)));
+      }
+
+      /* ---- Motion (motion.css) ---- */
+      /* Verbatim from motion.css: polysemic timing tokens — they describe
+         how things move, never why. Delays reuse the duration scale;
+         distance references the spacing tokens; keyframes live in the
+         components. Reduced motion collapses the durations at token level. */
+      :root {
+        /* Durations — 100 = 200ms base */
+        --duration-0: 0ms;
+        --duration-25: 50ms;
+        --duration-50: 100ms;
+        --duration-75: 150ms;
+        --duration-100: 200ms;
+        --duration-150: 300ms;
+        --duration-200: 400ms;
+        --duration-300: 600ms;
+        --duration-400: 800ms;
+
+        /* Easings */
+        --ease-in: cubic-bezier(0.4, 0, 1, 1);          /* things leaving */
+        --ease-out: cubic-bezier(0, 0, 0.2, 1);        /* things arriving */
+        --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);    /* things changing state */
+        --ease-emphasized: cubic-bezier(0.2, 0, 0, 1); /* large / hero movement */
+
+        /* Default interval between staggered items */
+        --stagger: 50ms;
+
+        /* Effects — unitless factors; the timing still comes from the
+           duration/easing tokens above.
+           --parallax: fraction of the scroll travel applied to a layer
+             (layers further from the viewer use smaller fractions).
+           --scale-enlarge: emphasis scale — an element growing in place.
+           --scale-zoom: in-frame magnification — content scaling inside a
+             clipped frame, focal point set by the component. */
+        --parallax: 0.3;
+        --scale-enlarge: 1.06;
+        --scale-zoom: 1.5;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        :root {
+          --duration-25: 0ms;
+          --duration-50: 0ms;
+          --duration-75: 0ms;
+          --duration-100: 0ms;
+          --duration-150: 0ms;
+          --duration-200: 0ms;
+          --duration-300: 0ms;
+          --duration-400: 0ms;
+          --stagger: 0ms;
+        }
+      }
+
+      /* ---- Opacity (opacity.css) ---- */
+      /* Verbatim from opacity.css: opacities are GLOBAL — one Layer 1
+         scale, defined once. Schemes stay at eight slots and never
+         override these values. The number is the percentage of full
+         opacity (100 = fully opaque). */
+      :root {
+        --opacity-0: 0;
+        --opacity-5: 0.05;
+        --opacity-10: 0.1;
+        --opacity-15: 0.15;
+        --opacity-20: 0.2;
+        --opacity-30: 0.3;
+        --opacity-40: 0.4;
+        --opacity-50: 0.5;
+        --opacity-65: 0.65;
+        --opacity-80: 0.8;
+        --opacity-100: 1;
+      }
+
+      /* ============================================================
+         SCHEME SLOT CONTRACT (ratified — section 3)
+         Light: surface-bg=F-25, surface-bg-1=F-50, text-fg-1=F-1000,
+                text-fg-2=F-700, surface-border=F-200, action-bg-1=F-700,
+                action-fg-1=F-25, action-border=F-700 (mirrors action-bg-1;
+                exception: Haze light action-bg-1=F-800, action-border=F-800)
+         Dark:  surface-bg=F-1000, surface-bg-1=F-900, text-fg-1=F-25,
+                text-fg-2=F-300, surface-border=F-800, action-bg-1=F-200,
+                action-fg-1=F-1000, action-border=F-200 (mirrors action-bg-1)
+         ============================================================ */
+      [data-scheme] {
+        background: var(--surface-bg);
+        color: var(--text-fg-1);
+      }
+      [data-scheme="midnight-light"] { --surface-bg: var(--midnight-25); --surface-bg-1: var(--midnight-50); --text-fg-1: var(--midnight-1000); --text-fg-2: var(--midnight-700); --surface-border: var(--midnight-200); --action-bg-1: var(--midnight-700); --action-border: var(--midnight-700); --action-fg-1: var(--midnight-25); }
+      [data-scheme="midnight-dark"] { --surface-bg: var(--midnight-1000); --surface-bg-1: var(--midnight-900); --text-fg-1: var(--midnight-25); --text-fg-2: var(--midnight-300); --surface-border: var(--midnight-800); --action-bg-1: var(--midnight-200); --action-border: var(--midnight-200); --action-fg-1: var(--midnight-1000); }
+      [data-scheme="haze-light"] { --surface-bg: var(--haze-25); --surface-bg-1: var(--haze-50); --text-fg-1: var(--haze-1000); --text-fg-2: var(--haze-700); --surface-border: var(--haze-200); --action-bg-1: var(--haze-800); --action-border: var(--haze-800); --action-fg-1: var(--haze-25); }
+      [data-scheme="haze-dark"] { --surface-bg: var(--haze-1000); --surface-bg-1: var(--haze-900); --text-fg-1: var(--haze-25); --text-fg-2: var(--haze-300); --surface-border: var(--haze-800); --action-bg-1: var(--haze-200); --action-border: var(--haze-200); --action-fg-1: var(--haze-1000); }
+      [data-scheme="purple-rain-light"] { --surface-bg: var(--purple-rain-25); --surface-bg-1: var(--purple-rain-50); --text-fg-1: var(--purple-rain-1000); --text-fg-2: var(--purple-rain-700); --surface-border: var(--purple-rain-200); --action-bg-1: var(--purple-rain-700); --action-border: var(--purple-rain-700); --action-fg-1: var(--purple-rain-25); }
+      [data-scheme="purple-rain-dark"] { --surface-bg: var(--purple-rain-1000); --surface-bg-1: var(--purple-rain-900); --text-fg-1: var(--purple-rain-25); --text-fg-2: var(--purple-rain-300); --surface-border: var(--purple-rain-800); --action-bg-1: var(--purple-rain-200); --action-border: var(--purple-rain-200); --action-fg-1: var(--purple-rain-1000); }
+      [data-scheme="fern-light"] { --surface-bg: var(--fern-25); --surface-bg-1: var(--fern-50); --text-fg-1: var(--fern-1000); --text-fg-2: var(--fern-700); --surface-border: var(--fern-200); --action-bg-1: var(--fern-700); --action-border: var(--fern-700); --action-fg-1: var(--fern-25); }
+      [data-scheme="fern-dark"] { --surface-bg: var(--fern-1000); --surface-bg-1: var(--fern-900); --text-fg-1: var(--fern-25); --text-fg-2: var(--fern-300); --surface-border: var(--fern-800); --action-bg-1: var(--fern-200); --action-border: var(--fern-200); --action-fg-1: var(--fern-1000); }
+      [data-scheme="cerise-light"] { --surface-bg: var(--cerise-25); --surface-bg-1: var(--cerise-50); --text-fg-1: var(--cerise-1000); --text-fg-2: var(--cerise-700); --surface-border: var(--cerise-200); --action-bg-1: var(--cerise-700); --action-border: var(--cerise-700); --action-fg-1: var(--cerise-25); }
+      [data-scheme="cerise-dark"] { --surface-bg: var(--cerise-1000); --surface-bg-1: var(--cerise-900); --text-fg-1: var(--cerise-25); --text-fg-2: var(--cerise-300); --surface-border: var(--cerise-800); --action-bg-1: var(--cerise-200); --action-border: var(--cerise-200); --action-fg-1: var(--cerise-1000); }
+      [data-scheme="marigold-light"] { --surface-bg: var(--marigold-25); --surface-bg-1: var(--marigold-50); --text-fg-1: var(--marigold-1000); --text-fg-2: var(--marigold-700); --surface-border: var(--marigold-200); --action-bg-1: var(--marigold-700); --action-border: var(--marigold-700); --action-fg-1: var(--marigold-25); }
+      [data-scheme="marigold-dark"] { --surface-bg: var(--marigold-1000); --surface-bg-1: var(--marigold-900); --text-fg-1: var(--marigold-25); --text-fg-2: var(--marigold-300); --surface-border: var(--marigold-800); --action-bg-1: var(--marigold-200); --action-border: var(--marigold-200); --action-fg-1: var(--marigold-1000); }
+      [data-scheme="cobalt-light"] { --surface-bg: var(--cobalt-25); --surface-bg-1: var(--cobalt-50); --text-fg-1: var(--cobalt-1000); --text-fg-2: var(--cobalt-700); --surface-border: var(--cobalt-200); --action-bg-1: var(--cobalt-700); --action-border: var(--cobalt-700); --action-fg-1: var(--cobalt-25); }
+      [data-scheme="cobalt-dark"] { --surface-bg: var(--cobalt-1000); --surface-bg-1: var(--cobalt-900); --text-fg-1: var(--cobalt-25); --text-fg-2: var(--cobalt-300); --surface-border: var(--cobalt-800); --action-bg-1: var(--cobalt-200); --action-border: var(--cobalt-200); --action-fg-1: var(--cobalt-1000); }
+
+      /* ============================================================
+         PAGE SCOPE — the page itself is a Haze scope, filled by the
+         same slot contract as any [data-scheme] panel: the values
+         below are the haze-light recipe, and the dark blocks swap in
+         the haze-dark recipe (same steps, same roles). The nav's
+         mode toggle sets data-mode on <html> — light / dark /
+         system; "system" hands the choice to prefers-color-scheme
+         via the media block. Page chrome reads the slots, plus the
+         few page-only steps the eight-slot contract doesn't cover
+         (--page-fill, --page-line, --page-dim) and the Midnight
+         brand steps (--brand-*) — never a family colour directly.
+         Specimens that ARE a family colour (the ramps, the spacing
+         bars, the opacity chip's two halves) keep reading the ramp:
+         that colour is their content, not their chrome.
+         ============================================================ */
+      :root {
+        --surface-bg: var(--haze-25);
+        --surface-bg-1: var(--haze-50);
+        --text-fg-1: var(--haze-1000);
+        --text-fg-2: var(--haze-700);
+        --surface-border: var(--haze-200);
+        --action-bg-1: var(--haze-800);
+        --action-border: var(--haze-800);
+        --action-fg-1: var(--haze-25);
+        --page-fill: var(--haze-100);
+        --page-line: var(--haze-300);
+        --page-dim: var(--haze-300);
+        --brand-ink: var(--midnight-1000);
+        --brand-line: var(--midnight-900);
+        --brand-faint: var(--haze-200);
+        color-scheme: light;
+      }
+      html[data-mode="system"] { color-scheme: light dark; }
+      html[data-mode="dark"] {
+        --surface-bg: var(--haze-1000);
+        --surface-bg-1: var(--haze-900);
+        --text-fg-1: var(--haze-25);
+        --text-fg-2: var(--haze-300);
+        --surface-border: var(--haze-800);
+        --action-bg-1: var(--haze-200);
+        --action-border: var(--haze-200);
+        --action-fg-1: var(--haze-1000);
+        --page-fill: var(--haze-800);
+        --page-line: var(--haze-700);
+        --page-dim: var(--haze-500);
+        --brand-ink: var(--midnight-200);
+        --brand-line: var(--midnight-300);
+        --brand-faint: var(--haze-800);
+        color-scheme: dark;
+      }
+      @media (prefers-color-scheme: dark) {
+        html[data-mode="system"] {
+          --surface-bg: var(--haze-1000);
+          --surface-bg-1: var(--haze-900);
+          --text-fg-1: var(--haze-25);
+          --text-fg-2: var(--haze-300);
+          --surface-border: var(--haze-800);
+          --action-bg-1: var(--haze-200);
+          --action-border: var(--haze-200);
+          --action-fg-1: var(--haze-1000);
+          --page-fill: var(--haze-800);
+          --page-line: var(--haze-700);
+          --page-dim: var(--haze-500);
+          --brand-ink: var(--midnight-200);
+          --brand-line: var(--midnight-300);
+          --brand-faint: var(--haze-800);
+          color-scheme: dark;
+        }
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      /* Guard against stray horizontal overflow inside the frame the page
+         is given: overflow-x: clip (not hidden) creates no scroll
+         container, so position: fixed elements (the docked pill bar)
+         keep anchoring to the viewport. The document itself is a normal
+         block root — it fills its frame's width by default; the frame's
+         size is the host's, not the page's. */
+      html, body { overflow-x: clip; }
+      body {
+        margin: 0;
+        background: var(--surface-bg);
+        color: var(--text-fg-1);
+        font-family: var(--font-main);
+        font-optical-sizing: auto;
+        font-style: normal;
+        font-variation-settings: "wdth" 100;
+        font-size: var(--step-100);
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+      }
+      h1, h2, h3, .display {
+        font-family: var(--font-alt);
+        font-optical-sizing: auto;
+        font-weight: 600;
+        font-style: normal;
+        font-variation-settings: "SOFT" 0, "WONK" 1;
+        line-height: 1.08;
+        letter-spacing: -0.01em;
+        margin: 0;
+      }
+      p { margin: 0; }
+      code, .mono {
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 0.86em;
+      }
+      :focus-visible {
+        outline: 3px solid var(--text-fg-2);
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+      section { padding-block: var(--space-300-400); scroll-margin-top: calc(5vh + 4rem + var(--space-100)); }
+      section + section { border-top: 1px solid var(--surface-border); }
+      /* No width cap on .section-head itself: sections span the full
+         .u-container content box, so the lede's max-width: 60% below
+         resolves against the container — not against a capped parent. */
+      .section-head { margin-bottom: var(--space-200); }
+      .section-head h2 { font-size: var(--step-180); margin-bottom: var(--space-60); }
+      .section-head p { color: var(--text-fg-2); font-size: var(--step-80); max-width: 60%; text-wrap: pretty; }
+      .kicker {
+        font-size: var(--step-70);
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-fg-2);
+        margin-bottom: var(--space-60);
+      }
+
+      /* Header + top row */
+      .site-head { padding-top: var(--space-200-300); padding-bottom: var(--space-150); }
+      /* The wordmark is the one Midnight brand moment on the page; every
+         other default is sourced from Haze, the page-level workhorse. */
+      .site-head h1 { font-size: var(--step-300); font-weight: 700; color: var(--brand-ink); }
+      .site-head .subtitle {
+        margin-top: var(--space-60);
+        font-size: var(--step-120);
+        color: var(--text-fg-2);
+        max-width: 60%;
+        text-wrap: pretty;
+      }
+      /* Top row — a static row above the header: brand logo left, page
+         links right. Not sticky, no background, no border. The current
+         page's link is ink with a Midnight underline that grows left to
+         right on load, timed by the motion tokens (--duration-100 /
+         --ease-out). The keyframes animate FROM scaleX(0) only, so the
+         resting state is scaleX(1): under reduced motion (animations
+         off, durations collapsed) the underline rests complete. */
+      .top-row { position: relative; padding-block: var(--space-150); }
+      .top-row .u-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: var(--space-60) var(--space-100);
+      }
+      .brand-logo { display: block; height: 1.333rem; width: auto; }
+      .page-links { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-60) var(--space-100); }
+      .page-links a {
+        position: relative;
+        color: var(--page-dim);
+        text-decoration: none;
+        font-size: var(--step-100);
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .page-links a[aria-current="page"] { color: var(--text-fg-1); }
+      .page-links a[aria-current="page"]::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: calc(100% + var(--space-30));
+        width: 100%;
+        height: 0.222rem;
+        background: var(--brand-line);
+        transform-origin: left center;
+        animation: page-link-underline var(--duration-100, 200ms) var(--ease-out, cubic-bezier(0, 0, 0.2, 1));
+      }
+      @keyframes page-link-underline {
+        from { transform: scaleX(0); }
+      }
+
+      /* Navigation cluster — the page links and the colour-mode
+         switch sit side by side, separated by the nearest spacing
+         token to the designed gap, --space-200. The switch is NOT a
+         navigation item: it lives outside the <nav> element, in this
+         cluster wrapper, so the two groups read — and are announced —
+         as different kinds of thing. */
+      .nav-cluster {
+        display: flex;
+        align-items: center;
+        gap: var(--space-200);
+      }
+
+      /* Colour-mode switch — a codified component (.mode-switch),
+         no longer the .seg group borrowed from the Schemes section.
+         Collapsed, it shows only the current selection (System by
+         default) as a single pill carrying the pressed treatment.
+         Activating it slides the three options out below it in a
+         panel; choosing one sets data-mode on <html> (the page-scope
+         block above does the rest), updates the pill, and closes the
+         panel. Inside the panel only the selected option carries
+         the filled pill; deselected options sit bare (a transparent
+         border keeps their box identical to the selected pill's, so
+         selecting never shifts the panel) and take the pill-bar
+         pattern — the pill shape (--radius-full) returns as the
+         hover highlight in --page-fill. Icons are stroke glyphs in
+         currentColor, so they take each button's slot colours in
+         both modes. Interactive states follow the system's standard
+         mapping: the button's own ink as a state layer at
+         --opacity-10 on hover and --opacity-15 on active, laid on
+         with an inset shadow (the .toggle recipe), and the solid
+         --action-border ring on focus-visible — transitions on
+         --duration-50 / --ease-in-out, per the state recipes. */
+      .mode-switch { position: relative; flex: none; }
+      .mode-switch-trigger,
+      .mode-switch-option {
+        --mode-state-ink: var(--text-fg-1);
+        appearance: none;
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-30);
+        font: inherit;
+        font-size: var(--step-80);
+        font-weight: 500;
+        line-height: var(--leading-compact);
+        padding: 5px 12px;
+        border: 1px solid transparent;
+        border-radius: var(--radius-full);
+        background: transparent;
+        color: var(--text-fg-1);
+        cursor: pointer;
+        transition:
+          box-shadow var(--duration-50) var(--ease-in-out),
+          background-color var(--duration-50) var(--ease-in-out),
+          border-color var(--duration-50) var(--ease-in-out),
+          color var(--duration-50) var(--ease-in-out);
+      }
+      .mode-switch-trigger {
+        --mode-state-ink: var(--surface-bg);
+        min-width: 7.25rem;
+        justify-content: space-between;
+        background: var(--text-fg-1);
+        border-color: var(--text-fg-1);
+        color: var(--surface-bg);
+      }
+      .mode-switch-trigger:hover,
+      .mode-switch-option[aria-pressed="true"]:hover {
+        box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--mode-state-ink) calc(var(--opacity-10) * 100%), transparent);
+      }
+      /* Deselected options sit bare in the panel — no pill container —
+         and take the pill-bar pattern instead: the pill shape returns
+         as the hover highlight (--page-fill, as on .dock-scroll a). */
+      .mode-switch-option:not([aria-pressed="true"]):hover {
+        background: var(--page-fill);
+      }
+      .mode-switch-trigger:active,
+      .mode-switch-option:active {
+        box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--mode-state-ink) calc(var(--opacity-15) * 100%), transparent);
+      }
+      .mode-switch-trigger:focus-visible,
+      .mode-switch-option:focus-visible {
+        outline: 3px solid var(--action-border);
+        outline-offset: 2px;
+      }
+      .mode-switch svg { width: 0.9rem; height: 0.9rem; flex: none; }
+      /* The trigger carries all three glyphs; the one matching the
+         current data-mode shows, the rest stay display:none. */
+      .mode-switch-current { display: inline-flex; flex: none; }
+      .mode-switch-current svg { display: none; }
+      html[data-mode="light"] .mode-switch-current svg[data-mode-icon="light"],
+      html[data-mode="system"] .mode-switch-current svg[data-mode-icon="system"],
+      html[data-mode="dark"] .mode-switch-current svg[data-mode-icon="dark"] { display: block; }
+      .mode-switch .mode-switch-chevron {
+        width: 0.75rem;
+        height: 0.75rem;
+        transition: transform var(--duration-100) var(--ease-out);
+      }
+      .mode-switch[data-open="true"] .mode-switch-chevron { transform: rotate(180deg); }
+      /* The options panel — slides out below the pill (a short
+         downward travel on the motion tokens) and overlays the page,
+         so opening it never shifts the top row's layout. Hidden with
+         visibility as well as opacity, which also keeps the options
+         out of the tab order while closed. */
+      .mode-switch-options {
+        position: absolute;
+        top: calc(100% + var(--space-30));
+        right: 0;
+        z-index: 60;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-30);
+        width: max-content;
+        min-width: 100%;
+        padding: var(--space-30);
+        border: 1px solid var(--surface-border);
+        border-radius: var(--radius-250);
+        background: var(--surface-bg);
+        box-shadow: var(--elevation-medium);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(calc(var(--space-30) * -1));
+        transition:
+          opacity var(--duration-100) var(--ease-out),
+          transform var(--duration-100) var(--ease-out),
+          visibility 0s linear var(--duration-100);
+      }
+      .mode-switch[data-open="true"] .mode-switch-options {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+        transition:
+          opacity var(--duration-100) var(--ease-out),
+          transform var(--duration-100) var(--ease-out),
+          visibility 0s;
+      }
+      .mode-switch-option { justify-content: flex-start; width: 100%; white-space: nowrap; }
+      .mode-switch-option[aria-pressed="true"] {
+        --mode-state-ink: var(--surface-bg);
+        background: var(--text-fg-1);
+        border-color: var(--text-fg-1);
+        color: var(--surface-bg);
+      }
+      /* Compact single row — tablet and phone widths (≤64rem): the
+         top row never wraps. Logo left; the links and the switch
+         share the one row on the right inside the cluster (its
+         --space-200 separation holds at every width). The switch
+         goes icon-only — its text labels are clipped away visually
+         but stay in the accessibility tree, so the trigger and each
+         option keep their accessible names — and the links take
+         smaller spacing-token gaps and one step down the type scale.
+         Above 64rem none of this applies: the desktop row shows the
+         labels, per the design. */
+      @media (max-width: 64rem) {
+        .top-row .u-container { flex-wrap: nowrap; gap: var(--space-60); }
+        .page-links { flex-wrap: nowrap; gap: var(--space-60); }
+        .page-links a { font-size: var(--step-80); }
+        .mode-switch-trigger { min-width: 0; }
+        .mode-switch-trigger,
+        .mode-switch-option { padding: 5px 10px; }
+        .mode-switch-text {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          margin: -1px;
+          padding: 0;
+          overflow: hidden;
+          clip-path: inset(50%);
+          white-space: nowrap;
+          border: 0;
+        }
+      }
+
+      /* Phone widths (≤40rem): the row tightens one more step so it
+         still fits at 390px — the links drop to --step-70, their gaps
+         to --space-30, the switch's padding slims, and the logo slot
+         turns flexible: the wordmark scales down (width 100% with
+         height auto keeps its aspect) to absorb whatever width the
+         links and switch don't take, so the single row holds with
+         no page-level overflow. The cluster's --space-200 separation
+         is part of what the flexing wordmark slot absorbs. */
+      @media (max-width: 40rem) {
+        .top-row .u-container { gap: var(--space-30); }
+        .top-row .u-container > a { flex: 0 1 6.667rem; min-width: 0; }
+        .brand-logo { width: 100%; height: auto; }
+        .nav-cluster { flex: none; }
+        .page-links { flex: none; gap: var(--space-30); }
+        .page-links a { font-size: var(--step-70); }
+        .mode-switch-trigger,
+        .mode-switch-option { padding: 5px 7px; }
+      }
+
+      /* Nav tiers below compact — two more layouts under the ≤64rem
+         compact row, per the Figma nav designs:
+         · Intermediate (≤48rem): the top row wraps to two rows. The
+           logo takes the first row; the links and the mode switch
+           share the second, links left and the switch right (the
+           cluster's --space-200 separation becomes the minimum gap
+           between them). Everything keeps its labels at this tier —
+           the compact tier's clipped switch text is restored —
+           because the second row has the room the single row lacked.
+         · Extra compact (≤30rem): the row defers to a hamburger.
+           Logo left, menu button right; the button's glyph swaps to
+           a × while the menu is open. The menu panel drops below the
+           row carrying the page links stacked and right-aligned in
+           the row's Foundations / Components / Strategy / Status
+           order, the current page marked by a vertical bar at its
+           right (the row's growing underline, turned upright), then
+           the mode switch at the bottom as three inline pills — no
+           menu within a menu — in the switch's canonical Light /
+           System / Dark order. (Bottom placement is Andii's ruling;
+           it supersedes the Figma annotation's top placement.) The
+           menu closes from the button, on Escape, or by
+           tapping/clicking anywhere outside it. */
+      .nav-burger {
+        --mode-state-ink: var(--text-fg-1);
+        appearance: none;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        width: 2.25rem;
+        height: 2.25rem;
+        padding: 0;
+        border: 1px solid transparent;
+        border-radius: var(--radius-full);
+        background: transparent;
+        color: var(--text-fg-1);
+        cursor: pointer;
+        transition:
+          box-shadow var(--duration-50) var(--ease-in-out),
+          background-color var(--duration-50) var(--ease-in-out);
+      }
+      .nav-burger:hover {
+        box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--mode-state-ink) calc(var(--opacity-10) * 100%), transparent);
+      }
+      .nav-burger:active {
+        box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--mode-state-ink) calc(var(--opacity-15) * 100%), transparent);
+      }
+      .nav-burger:focus-visible {
+        outline: 3px solid var(--action-border);
+        outline-offset: 2px;
+      }
+      .nav-burger svg { width: 1.25rem; height: 1.25rem; flex: none; }
+      .nav-burger .nav-burger-close { display: none; }
+      .nav-burger.is-open .nav-burger-close { display: block; }
+      .nav-burger.is-open .nav-burger-open { display: none; }
+      .nav-menu { display: none; }
+
+      @media (max-width: 48rem) {
+        .top-row .u-container { flex-wrap: wrap; }
+        .top-row .u-container > a { flex: 0 0 auto; }
+        .brand-logo { width: auto; height: 1.333rem; }
+        .nav-cluster { flex: 1 1 100%; justify-content: space-between; }
+        .page-links a { font-size: var(--step-80); }
+        .mode-switch-trigger { min-width: 7.25rem; }
+        .mode-switch-trigger,
+        .mode-switch-option { padding: 5px 12px; }
+        .mode-switch-text {
+          position: static;
+          width: auto;
+          height: auto;
+          margin: 0;
+          overflow: visible;
+          clip-path: none;
+          white-space: nowrap;
+        }
+      }
+
+      @media (max-width: 30rem) {
+        .top-row .u-container { flex-wrap: nowrap; }
+        .nav-cluster { display: none; }
+        .nav-burger { display: inline-flex; flex: none; }
+        .nav-menu {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          z-index: 60;
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-100);
+          padding: var(--space-100) var(--grid-gutter) var(--space-150);
+          border-bottom: 1px solid var(--surface-border);
+          background: var(--surface-bg);
+          box-shadow: var(--elevation-medium);
+          opacity: 0;
+          visibility: hidden;
+          pointer-events: none;
+          transform: translateY(calc(var(--space-30) * -1));
+          transition:
+            opacity var(--duration-100) var(--ease-out),
+            transform var(--duration-100) var(--ease-out),
+            visibility 0s linear var(--duration-100);
+        }
+        .nav-menu.is-open {
+          opacity: 1;
+          visibility: visible;
+          pointer-events: auto;
+          transform: translateY(0);
+          transition:
+            opacity var(--duration-100) var(--ease-out),
+            transform var(--duration-100) var(--ease-out),
+            visibility 0s;
+        }
+        /* The menu's mode switch — the .mode-switch state recipes as
+           three inline pills in a segmented container. The selected
+           pill carries the filled treatment; deselected pills sit
+           bare and take the pill shape back as the hover highlight,
+           exactly as in the switch's own panel. */
+        .menu-mode {
+          display: flex;
+          gap: var(--space-30);
+          padding: var(--space-30);
+          border: 1px solid var(--surface-border);
+          border-radius: var(--radius-full);
+        }
+        .menu-mode-option {
+          --mode-state-ink: var(--text-fg-1);
+          appearance: none;
+          flex: 1;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: var(--space-30);
+          font: inherit;
+          font-size: var(--step-80);
+          font-weight: 500;
+          line-height: var(--leading-compact);
+          padding: 5px 10px;
+          border: 1px solid transparent;
+          border-radius: var(--radius-full);
+          background: transparent;
+          color: var(--text-fg-1);
+          cursor: pointer;
+          transition:
+            box-shadow var(--duration-50) var(--ease-in-out),
+            background-color var(--duration-50) var(--ease-in-out),
+            border-color var(--duration-50) var(--ease-in-out),
+            color var(--duration-50) var(--ease-in-out);
+        }
+        .menu-mode-option svg { width: 0.9rem; height: 0.9rem; flex: none; }
+        .menu-mode-option[aria-pressed="true"] {
+          --mode-state-ink: var(--surface-bg);
+          background: var(--text-fg-1);
+          border-color: var(--text-fg-1);
+          color: var(--surface-bg);
+        }
+        .menu-mode-option[aria-pressed="true"]:hover {
+          box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--mode-state-ink) calc(var(--opacity-10) * 100%), transparent);
+        }
+        .menu-mode-option:not([aria-pressed="true"]):hover {
+          background: var(--page-fill);
+        }
+        .menu-mode-option:active {
+          box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--mode-state-ink) calc(var(--opacity-15) * 100%), transparent);
+        }
+        .menu-mode-option:focus-visible {
+          outline: 3px solid var(--action-border);
+          outline-offset: 2px;
+        }
+        .menu-links {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          gap: var(--space-60);
+        }
+        .menu-links a {
+          position: relative;
+          padding-right: var(--space-100);
+          color: var(--page-dim);
+          text-decoration: none;
+          font-size: var(--step-100);
+          font-weight: 700;
+          white-space: nowrap;
+        }
+        .menu-links a[aria-current="page"] { color: var(--text-fg-1); }
+        .menu-links a[aria-current="page"]::after {
+          content: "";
+          position: absolute;
+          right: 0;
+          top: 0;
+          width: 0.222rem;
+          height: 100%;
+          background: var(--brand-line);
+        }
+      }
+
+      /* Ledes go full width on phone widths (60% rule lives on
+         .site-head .subtitle and .section-head p above). */
+      @media (max-width: 40rem) {
+        .site-head .subtitle, .section-head p { max-width: 100%; }
+      }
+
+      /* Toggle (switch) — built only from scheme slots + the global opacity
+         and motion tokens, so it re-skins with the card it sits in. */
+      .cluster-toggle { margin-bottom: var(--space-100); }
+      .toggle {
+        appearance: none;
+        font: inherit;
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-static-60);
+        background: none;
+        border: none;
+        border-radius: var(--radius-full);
+        padding: 0;
+        cursor: pointer;
+        color: var(--text-fg-1);
+      }
+      .toggle-track {
+        position: relative;
+        flex: none;
+        width: 2.75rem;
+        height: 1.5rem;
+        border-radius: var(--radius-full);
+        /* OFF: outlined like the Secondary Action — transparent fill,
+           --action-border outline (same 1px the Secondary button uses). */
+        background: transparent;
+        border: 1px solid var(--action-border);
+        transition:
+          background-color var(--duration-100) var(--ease-out),
+          border-color var(--duration-100) var(--ease-out),
+          box-shadow var(--duration-100) var(--ease-out);
+      }
+      .toggle[aria-checked="true"] .toggle-track {
+        background: var(--action-bg-1);
+        /* Border stays 1px in both states (transparent when ON) so the
+           track geometry never shifts when toggling. */
+        border-color: transparent;
+      }
+      .toggle:hover .toggle-track {
+        box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--text-fg-1) calc(var(--opacity-10) * 100%), transparent);
+      }
+      .toggle:active .toggle-track {
+        box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--text-fg-1) calc(var(--opacity-15) * 100%), transparent);
+      }
+      .toggle-knob {
+        position: absolute;
+        top: 50%;
+        /* 0.125rem inside the track's padding box: the track's 1px border
+           sits outside that box, so the knob's inset from the track's outer
+           edge is 1px + 2px = 3px — matching the 3px vertical inset. With
+           the 1.25rem ON travel, the right inset is also 3px
+           (44 − 3 − 20 − 18), so both states are symmetric. */
+        left: 0.125rem;
+        width: 1.125rem;
+        height: 1.125rem;
+        border-radius: var(--radius-full);
+        /* OFF knob: solid --action-border, matching the track outline.
+           Knob has no border in either state (box-sizing: border-box keeps
+           it 1.125rem square, so removing the border changes nothing). */
+        background: var(--action-border);
+        border: none;
+        transform: translate(0, -50%);
+        transition:
+          transform var(--duration-100) var(--ease-out),
+          background-color var(--duration-100) var(--ease-out);
+      }
+      .toggle[aria-checked="true"] .toggle-knob {
+        background: var(--action-fg-1);
+        transform: translate(1.25rem, -50%);
+      }
+      .toggle:focus-visible {
+        outline: 3px solid var(--action-border);
+        outline-offset: 2px;
+      }
+
+      .states-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-125);
+      }
+      @media (max-width: 860px) { .states-grid { grid-template-columns: 1fr; } }
+      .states-row-label {
+        font-size: var(--step-70);
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-fg-2);
+        margin: var(--space-100) 0 var(--space-50);
+      }
+      .states-row-label:first-of-type { margin-top: 0; }
+      .state-btn {
+        appearance: none;
+        position: relative;
+        overflow: hidden;
+        font: inherit;
+        font-size: var(--step-80);
+        font-weight: 600;
+        padding: 8px 18px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      .state-btn .state-btn-label { position: relative; z-index: 1; }
+      .state-btn::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity var(--duration-50) var(--ease-in-out);
+      }
+      .state-btn-primary { background: var(--action-bg-1); color: var(--action-fg-1); border: 1px solid var(--action-bg-1); }
+      .state-btn-primary::after { background: var(--action-fg-1); }
+      .state-btn-secondary { background: transparent; color: var(--text-fg-1); border: 1px solid var(--action-border); }
+      .state-btn-secondary::after { background: var(--action-border); }
+      .state-btn:hover::after { opacity: var(--opacity-10); }
+      .state-btn:active::after { opacity: var(--opacity-15); }
+      .state-btn:focus-visible {
+        outline: 3px solid var(--action-border);
+        outline-offset: 2px;
+      }
+      .state-btn:disabled {
+        opacity: var(--opacity-40);
+        cursor: not-allowed;
+      }
+      .states-note { font-size: var(--step-70); color: var(--text-fg-2); margin-top: var(--space-100); }
+
+      footer.page-foot {
+        padding-block: var(--space-150) var(--space-300);
+        font-size: var(--step-70);
+        color: var(--text-fg-2);
+      }
+
+      /* Copied toast */
+      .toast {
+        position: fixed;
+        left: 50%;
+        bottom: 24px;
+        transform: translateX(-50%) translateY(16px);
+        background: var(--text-fg-1);
+        color: var(--surface-bg);
+        font-size: var(--step-80);
+        font-weight: 500;
+        padding: 9px 18px;
+        border-radius: 9999px;
+        box-shadow: var(--elevation-high);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 160ms ease, transform 160ms ease;
+        z-index: 100;
+        max-width: calc(100vw - 32px);
+        overflow-wrap: anywhere;
+        text-align: center;
+      }
+      .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+      .probe { position: absolute; visibility: hidden; pointer-events: none; height: 0; overflow: hidden; }
+
+      /* ---------- Element inspector (debug tool) ----------
+         Fixed overlay UI, so it never shifts page layout. Styled from the
+         page defaults (Haze) with a Midnight brand outline on the toggle —
+         the one deliberate brand accent, matching the wordmark. */
+      #inspector-root { position: fixed; inset: 0; z-index: 90; pointer-events: none; }
+      #inspect-toggle {
+        pointer-events: auto;
+        position: absolute;
+        right: 16px;
+        bottom: 16px;
+        appearance: none;
+        font: inherit;
+        font-size: var(--step-80);
+        font-weight: 600;
+        padding: 8px 18px;
+        border-radius: 9999px;
+        border: 2px solid var(--midnight-700);
+        background: var(--surface-bg);
+        color: var(--text-fg-1);
+        box-shadow: var(--elevation-medium);
+        cursor: pointer;
+      }
+      #inspect-toggle[aria-pressed="true"] { background: var(--midnight-700); color: var(--surface-bg); }
+      #insp-hover-box, #insp-sel-box {
+        position: fixed;
+        display: none;
+        pointer-events: none;
+      }
+      #insp-hover-box { border: 1.5px dashed var(--midnight-500); }
+      #insp-sel-box { border: 2px solid var(--midnight-700); }
+      #insp-hover-tag {
+        position: absolute;
+        top: -1.6rem;
+        left: -1.5px;
+        background: var(--brand-ink);
+        color: var(--surface-bg);
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 11px;
+        line-height: 1.4;
+        padding: 2px 7px;
+        border-radius: 4px;
+        white-space: nowrap;
+        max-width: 80vw;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        pointer-events: none;
+      }
+      #insp-panel {
+        pointer-events: auto;
+        position: absolute;
+        right: 16px;
+        bottom: 64px;
+        width: min(380px, calc(100vw - 32px));
+        max-height: min(72vh, calc(100vh - 96px));
+        display: flex;
+        flex-direction: column;
+        background: var(--surface-bg);
+        color: var(--text-fg-1);
+        border: 1px solid var(--page-line);
+        border-radius: 12px;
+        box-shadow: var(--elevation-high);
+        font-size: var(--step-80);
+      }
+      #insp-panel[hidden] { display: none; }
+      .insp-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-60);
+        padding: 9px 14px;
+        border-bottom: 1px solid var(--surface-border);
+        font-weight: 600;
+      }
+      .insp-close {
+        appearance: none;
+        font: inherit;
+        font-size: 1.1em;
+        line-height: 1;
+        width: 28px;
+        height: 28px;
+        border-radius: 9999px;
+        border: 1px solid var(--page-line);
+        background: var(--surface-bg-1);
+        color: var(--text-fg-1);
+        cursor: pointer;
+      }
+      .insp-body { overflow-y: auto; padding: 10px 14px; }
+      .insp-sec-title {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-fg-2);
+        margin: 12px 0 3px;
+      }
+      .insp-sec-title:first-child { margin-top: 0; }
+      .insp-row {
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 12px;
+        line-height: 1.55;
+        overflow-wrap: anywhere;
+      }
+      .insp-row.insp-selector { font-weight: 600; font-size: 12.5px; }
+      .insp-actions {
+        display: flex;
+        align-items: center;
+        gap: var(--space-60);
+        padding: 10px 14px;
+        border-top: 1px solid var(--surface-border);
+      }
+      #insp-copy {
+        appearance: none;
+        font: inherit;
+        font-size: var(--step-80);
+        font-weight: 600;
+        padding: 7px 16px;
+        border-radius: 9999px;
+        border: 1px solid var(--text-fg-1);
+        background: var(--text-fg-1);
+        color: var(--surface-bg);
+        cursor: pointer;
+      }
+      .insp-hint { font-size: var(--step-70); color: var(--text-fg-2); }
+      #insp-fallback {
+        margin: 0 14px 12px;
+        width: calc(100% - 28px);
+        min-height: 130px;
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 11.5px;
+        line-height: 1.5;
+        color: var(--text-fg-1);
+        background: var(--surface-bg-1);
+        border: 1px solid var(--page-line);
+        border-radius: 8px;
+        padding: 8px;
+        resize: vertical;
+      }
+      #insp-fallback[hidden] { display: none; }
+      body.inspecting *:not(#inspector-root):not(#inspector-root *) { cursor: crosshair !important; }
+      /* The concentric demo's arc-centre markers are click-through
+         decoration in normal use (pointer-events: none on .cd-dot), which
+         also made them impossible to select with the inspector — clicks
+         landed on the layer beneath. While inspecting, they take clicks
+         like any other element; with inspect off, nothing changes. */
+      body.inspecting .cd-dot { pointer-events: auto; }
+      @media (max-width: 640px) {
+        #inspect-toggle { right: 12px; bottom: 12px; }
+        #insp-panel {
+          left: 8px;
+          right: 8px;
+          bottom: 60px;
+          width: auto;
+          max-height: 56vh;
+        }
+      }
+
+
+      /* ---------- Components page ---------- */
+      .page-intro { max-width: 46rem; padding-block: var(--space-200) var(--space-100); }
+      .page-intro h2 { font-size: var(--step-250); font-weight: 700; margin-bottom: var(--space-100); }
+      .page-intro p { font-size: var(--step-120); color: var(--text-fg-2); text-wrap: pretty; }
+      .contract-line { font-size: var(--step-80); color: var(--text-fg-2); margin-top: var(--space-80); }
+      .comp-sub { font-size: var(--step-120); margin: var(--space-200) 0 var(--space-80); }
+      .comp-note { font-size: var(--step-80); color: var(--text-fg-2); max-width: 46rem; text-wrap: pretty; }
+      .comp-note + .comp-note { margin-top: var(--space-60); }
+
+      /* The stage — a live scheme scope the reader can re-scope.
+         The bar (page scope) carries the scope controls; the body
+         carries data-scheme, so the slot contract fills it. */
+      .stage {
+        border: 1px solid var(--surface-border);
+        border-radius: var(--radius-250);
+        margin-bottom: var(--space-200);
+      }
+      .stage-bar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--space-60) var(--space-100);
+        padding: var(--space-80) var(--space-125);
+        background: var(--surface-bg-1);
+        border-bottom: 1px solid var(--surface-border);
+        border-radius: var(--radius-250) var(--radius-250) 0 0;
+      }
+      .stage-bar-label {
+        font-size: var(--step-70);
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-fg-2);
+      }
+      .scope-chips { display: flex; flex-wrap: wrap; gap: var(--space-30); }
+      .scope-chip {
+        appearance: none;
+        font: inherit;
+        font-size: var(--step-70);
+        font-weight: 600;
+        line-height: var(--leading-compact);
+        padding: 4px 12px;
+        border-radius: var(--radius-full);
+        border: 1px solid var(--surface-border);
+        background: transparent;
+        color: var(--text-fg-2);
+        cursor: pointer;
+        transition:
+          background-color var(--duration-50) var(--ease-in-out),
+          border-color var(--duration-50) var(--ease-in-out),
+          color var(--duration-50) var(--ease-in-out);
+      }
+      .scope-chip:hover { color: var(--text-fg-1); }
+      .scope-chip[aria-pressed="true"] {
+        background: var(--text-fg-1);
+        border-color: var(--text-fg-1);
+        color: var(--surface-bg);
+      }
+      .scope-chip:focus-visible {
+        outline: 3px solid var(--action-border);
+        outline-offset: 2px;
+      }
+      .scope-name {
+        margin-left: auto;
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: var(--step-70);
+        color: var(--text-fg-2);
+      }
+      .stage-body {
+        padding: var(--space-150) var(--space-125);
+        border-radius: 0 0 var(--radius-250) var(--radius-250);
+      }
+      /* Room for the demo mode switch's open panel inside the stage. */
+      .stage-body-ms { min-height: 13rem; }
+      .readout { font-size: var(--step-80); color: var(--text-fg-2); margin-top: var(--space-125); }
+      .readout strong { color: var(--text-fg-1); font-weight: 600; }
+
+      /* Demo content inside the stages */
+      .demo-list { display: grid; gap: var(--space-100); }
+      .demo-item { display: flex; align-items: center; gap: var(--space-100); flex-wrap: wrap; }
+      .demo-state {
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: var(--step-70);
+        color: var(--text-fg-2);
+        min-width: 2.6rem;
+      }
+      .demo-actions { display: flex; flex-wrap: wrap; gap: var(--space-60); }
+      .demo-actions + .demo-actions { margin-top: var(--space-100); }
+
+      /* Toggle — the disabled row of the contract, which the
+         specimen's scheme-card prototype doesn't exercise: the whole
+         control drops to --opacity-40, the state layer is suppressed,
+         and a disabled <button> fires no events. The knob keeps its
+         position — disabled freezes the state, it doesn't clear it. */
+      .toggle:disabled { cursor: not-allowed; }
+      .toggle:disabled .toggle-track,
+      .toggle:disabled .toggle-label { opacity: var(--opacity-40); }
+      .toggle:disabled:hover .toggle-track,
+      .toggle:disabled:active .toggle-track { box-shadow: none; }
+
+      /* In a stage the component shrink-wraps its trigger (in the
+         top row the nav cluster's flex does this), so the open
+         panel sizes to the pill, as designed — not to the stage. */
+      .stage-body .mode-switch { display: inline-block; vertical-align: top; }
+      /* Mode switch inside a scheme scope: the deselected row's
+         hover highlight takes the scope's raised surface step —
+         --page-fill is a page-scope token and would stay Haze-light
+         inside a dark stage. The demo instance's trigger glyph is
+         driven by its own selection, not the page's data-mode. */
+      [data-scheme] .mode-switch-option:not([aria-pressed="true"]):hover { background: var(--surface-bg-1); }
+      .demo-mode-current svg { display: none; }
+      .demo-mode-current svg.is-current { display: block; }
+
+      /* Truth tables — the component contracts. Don't-care cells
+         are an em dash; on phone widths each row restacks into a
+         card of label/value pairs (data-label), so the table never
+         scrolls sideways. */
+      .truth {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: var(--step-80);
+        margin-bottom: var(--space-100);
+      }
+      .truth th, .truth td {
+        text-align: left;
+        vertical-align: top;
+        padding: var(--space-60) var(--space-80);
+        border: 1px solid var(--surface-border);
+      }
+      .truth thead th { background: var(--surface-bg-1); font-weight: 600; white-space: nowrap; }
+      .truth td.dc { color: var(--text-fg-2); }
+      @media (max-width: 40rem) {
+        .truth thead {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          margin: -1px;
+          overflow: hidden;
+          clip-path: inset(50%);
+        }
+        .truth, .truth tbody, .truth tr, .truth td { display: block; }
+        .truth tr {
+          border: 1px solid var(--surface-border);
+          border-radius: var(--radius-100);
+          padding: var(--space-50) var(--space-80);
+          margin-bottom: var(--space-60);
+        }
+        .truth td {
+          display: block;
+          border: 0;
+          padding: 3px 0;
+          text-align: left;
+        }
+        .truth td + td { margin-top: var(--space-30); }
+        .truth td::before {
+          content: attr(data-label);
+          display: block;
+          font-weight: 600;
+          color: var(--text-fg-2);
+          margin-bottom: 1px;
+        }
+        .stage-body { padding: var(--space-125) var(--space-100); }
+        .scope-name { margin-left: 0; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after { transition: none !important; animation: none !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-row">
+      <div class="u-container">
+        <a href="./"><svg class="brand-logo" viewBox="0 0 160 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Andii Hei"><g clip-path="url(#clip0_12_27)"><g style="fill: var(--brand-ink)"><path d="M10.2128 3.8147e-06H15.0482L25.261 24.0035H19.7794L17.6014 18.6574H7.52756L5.3426 24.0104H-7.62939e-06L10.2128 3.8147e-06ZM15.729 14.0269L12.561 6.2944L9.39643 14.0235L15.729 14.0269Z"/><path d="M28.9362 0.170212H33.7681L44.9362 14.8432V0.170212H50.112V24.0104H45.6657L34.1224 8.85801V24.0104H28.9362V0.170212Z"/><path d="M55.8298 0.170212H65.1185C72.6079 0.170212 77.7838 5.31134 77.7838 12.0191V12.0851C77.7872 18.7998 72.6114 24.0104 65.1185 24.0104H55.8298V0.170212ZM61.0716 4.90491V19.2722H65.1185C69.4086 19.2722 72.3022 16.3786 72.3022 12.1581V12.0886C72.3022 7.868 69.4086 4.90491 65.1185 4.90491H61.0716Z"/><path d="M82.6887 0.170212H87.9305V24.0104H82.6887V0.170212Z"/><path d="M94.1277 0.170212H99.3695V24.0104H94.1277V0.170212Z"/></g><g style="fill: var(--brand-faint)"><path d="M159.726 24.0104H154.484V14.4368H144.813V24.0104H139.571V0.170212H144.813V9.60139H154.484V0.170212H159.726V24.0104Z"/><path d="M133.853 24.0104H115.706V19.3382H128.646V14.3326H117.412V9.67086H128.646V4.83543H115.88V0.170212H133.853V24.0104Z"/><path d="M110.809 24.0104H105.563V0.170212H110.809V24.0104Z"/></g></g><defs><clipPath id="clip0_12_27"><rect width="159.729" height="24"/></clipPath></defs></svg></a>
+        <div class="nav-cluster">
+          <nav class="page-links" aria-label="Pages">
+            <a href="./">Foundations</a>
+            <a href="components.html" aria-current="page">Components</a>
+            <a href="strategy.html">Strategy</a>
+            <a href="status.html">Status</a>
+          </nav>
+          <div class="mode-switch" data-mode-switch data-open="false">
+            <button type="button" class="mode-switch-trigger" data-mode-trigger aria-haspopup="true" aria-expanded="false" aria-controls="mode-options" aria-label="Colour mode: System">
+              <span class="mode-switch-current" aria-hidden="true"><svg data-mode-icon="light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M6.34 17.66l-1.41 1.41"/><path d="M19.07 4.93l-1.41 1.41"/></svg><svg data-mode-icon="system" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18V3z" fill="currentColor" stroke="none"/></svg><svg data-mode-icon="dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+              <span class="mode-switch-text" data-mode-current-label>System</span>
+              <svg class="mode-switch-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="mode-switch-options" id="mode-options" role="group" aria-label="Colour mode options">
+              <button type="button" class="mode-switch-option" data-mode-option="light" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M6.34 17.66l-1.41 1.41"/><path d="M19.07 4.93l-1.41 1.41"/></svg><span class="mode-switch-text">Light</span></button>
+              <button type="button" class="mode-switch-option" data-mode-option="system" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18V3z" fill="currentColor" stroke="none"/></svg><span class="mode-switch-text">System</span></button>
+              <button type="button" class="mode-switch-option" data-mode-option="dark" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><span class="mode-switch-text">Dark</span></button>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="nav-burger" data-nav-burger aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
+          <svg class="nav-burger-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16"/><path d="M7 12h13"/><path d="M10 18h10"/></svg>
+          <svg class="nav-burger-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <div class="nav-menu" id="nav-menu" data-nav-menu>
+        <nav class="menu-links" aria-label="Pages">
+          <a href="./">Foundations</a>
+          <a href="components.html" aria-current="page">Components</a>
+          <a href="strategy.html">Strategy</a>
+          <a href="status.html">Status</a>
+        </nav>
+        <div class="menu-mode" role="group" aria-label="Colour mode">
+          <button type="button" class="menu-mode-option" data-menu-mode-option="light" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M6.34 17.66l-1.41 1.41"/><path d="M19.07 4.93l-1.41 1.41"/></svg><span>Light</span></button>
+          <button type="button" class="menu-mode-option" data-menu-mode-option="system" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18V3z" fill="currentColor" stroke="none"/></svg><span>System</span></button>
+          <button type="button" class="menu-mode-option" data-menu-mode-option="dark" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><span>Dark</span></button>
+        </div>
+      </div>
+    </div>
+
+    <header class="site-head">
+      <div class="u-container">
+        <h1>Design Language</h1>
+        <p class="subtitle">Foundations — Andii&rsquo;s personal design system, captured so far. Every value on this page is rendered live from the real tokens: resize the window and the fluid scales breathe.</p>
+      </div>
+    </header>
+
+    <main class="u-container">
+      <div class="page-intro">
+        <p class="kicker">Design System Specimen — Components</p>
+        <h2>Components</h2>
+        <p>The first real components, built as a test of the token architecture. Each one consumes the eight scheme slots and the global scales — never a colour family directly — so a single implementation re-skins under any scheme. Each is shown live in a stage you can re-scope across all seven families and both modes, and each ships with the contract it is built and tested against: a truth table (inputs &rarr; rendered output, don&rsquo;t-cares compressed) and, where behaviour runs over time, its transitions. The first set: the mode switch, the toggle switch, and the action buttons.</p>
+      </div>
+
+      <!-- ============ Component 01 — Mode switch ============ -->
+      <section id="mode-switch">
+        <div class="section-head">
+          <p class="kicker">Component 01</p>
+          <h2>Mode switch</h2>
+          <p>Chooses the colour mode — Light, System, or Dark. Collapsed, it is a single pill carrying the current selection; activated, it opens a menu panel below it. Inside the panel only the selected row keeps the filled pill; deselected rows sit bare and take a pill-shaped highlight on hover — the pill bar&rsquo;s pattern. The instance in the top row drives this page. The one in the stage drives only its stage, so the component can be exercised against every family.</p>
+          <p class="contract-line">Implementation: <code>.mode-switch</code> — consumes <code>--text-fg-1</code>, <code>--surface-bg</code>, <code>--surface-border</code>, <code>--action-border</code>, <code>--page-fill</code>, plus the opacity and motion scales. Selecting sets <code>data-mode</code>; System resolves in CSS.</p>
+        </div>
+
+        <div class="stage" data-stage>
+          <div class="stage-bar">
+            <span class="stage-bar-label">Stage scope</span>
+            <div class="scope-chips" role="group" aria-label="Stage family">
+              <button type="button" class="scope-chip" data-fam-chip="midnight" aria-pressed="false">Midnight</button>
+              <button type="button" class="scope-chip" data-fam-chip="haze" aria-pressed="true">Haze</button>
+              <button type="button" class="scope-chip" data-fam-chip="purple-rain" aria-pressed="false">Purple Rain</button>
+              <button type="button" class="scope-chip" data-fam-chip="fern" aria-pressed="false">Fern</button>
+              <button type="button" class="scope-chip" data-fam-chip="cerise" aria-pressed="false">Cerise</button>
+              <button type="button" class="scope-chip" data-fam-chip="marigold" aria-pressed="false">Marigold</button>
+              <button type="button" class="scope-chip" data-fam-chip="cobalt" aria-pressed="false">Cobalt</button>
+            </div>
+            <span class="scope-name" data-scope-name>haze-light</span>
+          </div>
+          <div class="stage-body stage-body-ms" data-stage-body data-scheme="haze-light">
+            <div class="mode-switch" data-demo-mode-switch data-open="false">
+              <button type="button" class="mode-switch-trigger" data-demo-mode-trigger aria-haspopup="true" aria-expanded="false" aria-controls="demo-mode-options" aria-label="Demo colour mode: System">
+                <span class="mode-switch-current demo-mode-current" aria-hidden="true"><svg data-demo-icon="light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M6.34 17.66l-1.41 1.41"/><path d="M19.07 4.93l-1.41 1.41"/></svg><svg data-demo-icon="system" class="is-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18V3z" fill="currentColor" stroke="none"/></svg><svg data-demo-icon="dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+                <span class="mode-switch-text" data-demo-mode-label>System</span>
+                <svg class="mode-switch-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+              </button>
+              <div class="mode-switch-options" id="demo-mode-options" role="group" aria-label="Demo colour mode options">
+                <button type="button" class="mode-switch-option" data-demo-mode-option="light" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M6.34 17.66l-1.41 1.41"/><path d="M19.07 4.93l-1.41 1.41"/></svg><span class="mode-switch-text">Light</span></button>
+                <button type="button" class="mode-switch-option" data-demo-mode-option="system" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18V3z" fill="currentColor" stroke="none"/></svg><span class="mode-switch-text">System</span></button>
+                <button type="button" class="mode-switch-option" data-demo-mode-option="dark" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><span class="mode-switch-text">Dark</span></button>
+              </div>
+            </div>
+            <p class="readout" data-demo-mode-readout>Selection: <strong>System</strong>.</p>
+          </div>
+        </div>
+
+        <h3 class="comp-sub">Truth table</h3>
+        <table class="truth">
+          <thead>
+            <tr><th scope="col">Selection</th><th scope="col">Panel</th><th scope="col">Pointer / focus</th><th scope="col">Rendered output</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Selection">Any</td>
+              <td data-label="Panel">Closed</td>
+              <td data-label="Pointer / focus" class="dc">—</td>
+              <td data-label="Rendered output">Trigger pill shows the current selection — glyph and label on the filled <code>--text-fg-1</code> pill, chevron pointing down. The panel is hidden and out of the tab order.</td>
+            </tr>
+            <tr>
+              <td data-label="Selection">Any</td>
+              <td data-label="Panel">Open</td>
+              <td data-label="Pointer / focus" class="dc">—</td>
+              <td data-label="Rendered output">Panel slides out below the trigger (<code>--duration-100</code> / <code>--ease-out</code>, <code>--space-30</code> of travel); chevron rotated 180&deg;. The selected row keeps the filled pill; deselected rows sit bare.</td>
+            </tr>
+            <tr>
+              <td data-label="Selection" class="dc">—</td>
+              <td data-label="Panel">Open</td>
+              <td data-label="Pointer / focus">Hover, deselected row</td>
+              <td data-label="Rendered output">Pill-shaped highlight: <code>--page-fill</code> in page scope; inside a scheme scope, the scope&rsquo;s <code>--surface-bg-1</code>.</td>
+            </tr>
+            <tr>
+              <td data-label="Selection" class="dc">—</td>
+              <td data-label="Panel">Either</td>
+              <td data-label="Pointer / focus">Hover, trigger or selected row</td>
+              <td data-label="Rendered output">State layer: the button&rsquo;s own ink at <code>--opacity-10</code>, laid in as an inset shadow; <code>--opacity-15</code> while active.</td>
+            </tr>
+            <tr>
+              <td data-label="Selection" class="dc">—</td>
+              <td data-label="Panel">Either</td>
+              <td data-label="Pointer / focus">Focus-visible</td>
+              <td data-label="Rendered output">Solid ring: 3px <code>--action-border</code> at a 2px offset. Focus is never the opacity layer.</td>
+            </tr>
+            <tr>
+              <td data-label="Selection">Changes</td>
+              <td data-label="Panel">Open &rarr; closed</td>
+              <td data-label="Pointer / focus">Option activated</td>
+              <td data-label="Rendered output"><code>data-mode</code> updated; the trigger&rsquo;s glyph and label swap to the new selection; focus returns to the trigger.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 class="comp-sub">Transitions</h3>
+        <table class="truth">
+          <thead>
+            <tr><th scope="col">From</th><th scope="col">Event</th><th scope="col">To</th><th scope="col">Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="From">Closed</td>
+              <td data-label="Event">Trigger click, Enter, or Space</td>
+              <td data-label="To">Open</td>
+              <td data-label="Notes">Focus stays on the trigger; the options follow it in tab order.</td>
+            </tr>
+            <tr>
+              <td data-label="From">Closed</td>
+              <td data-label="Event">&darr; or &uarr; on the trigger</td>
+              <td data-label="To">Open</td>
+              <td data-label="Notes">Focus moves to the selected option; arrows, Home, and End move between options.</td>
+            </tr>
+            <tr>
+              <td data-label="From">Open</td>
+              <td data-label="Event">Option activated</td>
+              <td data-label="To">Closed</td>
+              <td data-label="Notes">The mode is applied first, then the panel closes; focus returns to the trigger.</td>
+            </tr>
+            <tr>
+              <td data-label="From">Open</td>
+              <td data-label="Event">Esc, click outside, or focus leaves</td>
+              <td data-label="To">Closed</td>
+              <td data-label="Notes">Mode unchanged.</td>
+            </tr>
+            <tr>
+              <td data-label="From">Any</td>
+              <td data-label="Event">OS colour scheme flips</td>
+              <td data-label="To">Any</td>
+              <td data-label="Notes">Only System resolves differently — pure CSS via <code>prefers-color-scheme</code>; no script runs.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="comp-note">System is the default selection. At &le;64rem the component goes icon-only: labels are visually clipped but stay in the accessibility tree, so the control&rsquo;s name never changes. Under reduced motion the slide and the chevron rotation collapse with the global motion contract — the panel simply appears.</p>
+      </section>
+
+      <!-- ============ Component 02 — Toggle switch ============ -->
+      <section id="toggle-switch">
+        <div class="section-head">
+          <p class="kicker">Component 02</p>
+          <h2>Toggle switch</h2>
+          <p>A binary control (<code>role="switch"</code>) built only from scheme slots plus the global opacity and motion scales. ON takes the Primary action&rsquo;s fill; OFF is outlined like the Secondary action — transparent fill, <code>--action-border</code> outline and knob — so switch and buttons read as one family. The track&rsquo;s border is 1px in both states (transparent when ON), so toggling never shifts layout.</p>
+          <p class="contract-line">Implementation: <code>.toggle</code> — consumes <code>--action-bg-1</code>, <code>--action-fg-1</code>, <code>--action-border</code>, plus the opacity and motion scales.</p>
+        </div>
+
+        <div class="stage" data-stage>
+          <div class="stage-bar">
+            <span class="stage-bar-label">Stage scope</span>
+            <div class="scope-chips" role="group" aria-label="Stage family">
+              <button type="button" class="scope-chip" data-fam-chip="midnight" aria-pressed="false">Midnight</button>
+              <button type="button" class="scope-chip" data-fam-chip="haze" aria-pressed="true">Haze</button>
+              <button type="button" class="scope-chip" data-fam-chip="purple-rain" aria-pressed="false">Purple Rain</button>
+              <button type="button" class="scope-chip" data-fam-chip="fern" aria-pressed="false">Fern</button>
+              <button type="button" class="scope-chip" data-fam-chip="cerise" aria-pressed="false">Cerise</button>
+              <button type="button" class="scope-chip" data-fam-chip="marigold" aria-pressed="false">Marigold</button>
+              <button type="button" class="scope-chip" data-fam-chip="cobalt" aria-pressed="false">Cobalt</button>
+            </div>
+            <div class="scope-chips" role="group" aria-label="Stage mode">
+              <button type="button" class="scope-chip" data-mode-chip="light" aria-pressed="true">Light</button>
+              <button type="button" class="scope-chip" data-mode-chip="dark" aria-pressed="false">Dark</button>
+            </div>
+            <span class="scope-name" data-scope-name>haze-light</span>
+          </div>
+          <div class="stage-body" data-stage-body data-scheme="haze-light">
+            <div class="demo-list">
+              <div class="demo-item">
+                <button type="button" class="toggle" role="switch" aria-checked="true" data-toggle>
+                  <span class="toggle-track"><span class="toggle-knob"></span></span>
+                  <span class="toggle-label">Notifications</span>
+                </button>
+                <span class="demo-state" data-toggle-state>On</span>
+              </div>
+              <div class="demo-item">
+                <button type="button" class="toggle" role="switch" aria-checked="false" data-toggle>
+                  <span class="toggle-track"><span class="toggle-knob"></span></span>
+                  <span class="toggle-label">Weekly digest</span>
+                </button>
+                <span class="demo-state" data-toggle-state>Off</span>
+              </div>
+              <div class="demo-item">
+                <button type="button" class="toggle" role="switch" aria-checked="true" disabled>
+                  <span class="toggle-track"><span class="toggle-knob"></span></span>
+                  <span class="toggle-label">Two-factor authentication</span>
+                </button>
+                <span class="demo-state">On · disabled</span>
+              </div>
+              <div class="demo-item">
+                <button type="button" class="toggle" role="switch" aria-checked="false" disabled>
+                  <span class="toggle-track"><span class="toggle-knob"></span></span>
+                  <span class="toggle-label">Public profile</span>
+                </button>
+                <span class="demo-state">Off · disabled</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="comp-sub">Truth table</h3>
+        <table class="truth">
+          <thead>
+            <tr><th scope="col">Checked</th><th scope="col">Disabled</th><th scope="col">Pointer</th><th scope="col">Focus</th><th scope="col">Rendered output</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Checked" class="dc">—</td>
+              <td data-label="Disabled">Yes</td>
+              <td data-label="Pointer" class="dc">—</td>
+              <td data-label="Focus" class="dc">—</td>
+              <td data-label="Rendered output">Whole control at <code>--opacity-40</code>; no state layer; no events. The knob keeps its position — disabled freezes the state, it doesn&rsquo;t clear it.</td>
+            </tr>
+            <tr>
+              <td data-label="Checked">Yes</td>
+              <td data-label="Disabled">No</td>
+              <td data-label="Pointer">Rest</td>
+              <td data-label="Focus">No</td>
+              <td data-label="Rendered output">Track filled <code>--action-bg-1</code>, border transparent; knob <code>--action-fg-1</code>, right inset 3px.</td>
+            </tr>
+            <tr>
+              <td data-label="Checked">No</td>
+              <td data-label="Disabled">No</td>
+              <td data-label="Pointer">Rest</td>
+              <td data-label="Focus">No</td>
+              <td data-label="Rendered output">Track transparent with a 1px <code>--action-border</code> outline; knob <code>--action-border</code>, left inset 3px.</td>
+            </tr>
+            <tr>
+              <td data-label="Checked" class="dc">—</td>
+              <td data-label="Disabled">No</td>
+              <td data-label="Pointer">Hover</td>
+              <td data-label="Focus">No</td>
+              <td data-label="Rendered output">Inset state layer over the track: the scope&rsquo;s ink at <code>--opacity-10</code>.</td>
+            </tr>
+            <tr>
+              <td data-label="Checked" class="dc">—</td>
+              <td data-label="Disabled">No</td>
+              <td data-label="Pointer">Active</td>
+              <td data-label="Focus">No</td>
+              <td data-label="Rendered output">Inset state layer at <code>--opacity-15</code>.</td>
+            </tr>
+            <tr>
+              <td data-label="Checked" class="dc">—</td>
+              <td data-label="Disabled">No</td>
+              <td data-label="Pointer" class="dc">—</td>
+              <td data-label="Focus">Focus-visible</td>
+              <td data-label="Rendered output">3px solid <code>--action-border</code> ring on the whole control, 2px offset.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="comp-note">Geometry: track 2.75rem &times; 1.5rem; knob 1.125rem, borderless, sitting 3px from the track&rsquo;s outer edge in both states — the knob rests 0.125rem inside the track&rsquo;s padding box and the 1px border makes up the rest, so the 1.25rem ON travel lands it symmetric. Activation (click, Space, or Enter) flips <code>aria-checked</code> and the knob travels over <code>--duration-100</code> / <code>--ease-out</code>; under reduced motion it snaps.</p>
+        <p class="comp-note">Invariant: <code>--action-border</code> = <code>--action-bg-1</code> in all 14 schemes, so the OFF outline always matches the ON fill. The disabled row is the one the specimen&rsquo;s scheme-card prototype never exercised — it is codified here first.</p>
+      </section>
+
+      <!-- ============ Component 03 — Action buttons ============ -->
+      <section id="action-buttons">
+        <div class="section-head">
+          <p class="kicker">Component 03</p>
+          <h2>Action buttons</h2>
+          <p>The Primary / Secondary pair. Primary takes the scheme&rsquo;s action fill; Secondary is its outline twin — transparent fill, <code>--text-fg-1</code> label, 1px <code>--action-border</code>. States are not new colours: hover and active lay the button&rsquo;s own ink over itself at the global <code>--opacity-10</code> / <code>--opacity-15</code>, focus is a solid ring, and disabled drops the whole button to <code>--opacity-40</code>. One recipe covers both variants and both modes, with no per-scheme tuning.</p>
+          <p class="contract-line">Implementation: <code>.state-btn</code> with <code>.state-btn-primary</code> / <code>.state-btn-secondary</code> — consumes <code>--action-bg-1</code>, <code>--action-fg-1</code>, <code>--action-border</code>, plus the global opacity scale.</p>
+        </div>
+
+        <div class="stage" data-stage>
+          <div class="stage-bar">
+            <span class="stage-bar-label">Stage scope</span>
+            <div class="scope-chips" role="group" aria-label="Stage family">
+              <button type="button" class="scope-chip" data-fam-chip="midnight" aria-pressed="false">Midnight</button>
+              <button type="button" class="scope-chip" data-fam-chip="haze" aria-pressed="true">Haze</button>
+              <button type="button" class="scope-chip" data-fam-chip="purple-rain" aria-pressed="false">Purple Rain</button>
+              <button type="button" class="scope-chip" data-fam-chip="fern" aria-pressed="false">Fern</button>
+              <button type="button" class="scope-chip" data-fam-chip="cerise" aria-pressed="false">Cerise</button>
+              <button type="button" class="scope-chip" data-fam-chip="marigold" aria-pressed="false">Marigold</button>
+              <button type="button" class="scope-chip" data-fam-chip="cobalt" aria-pressed="false">Cobalt</button>
+            </div>
+            <div class="scope-chips" role="group" aria-label="Stage mode">
+              <button type="button" class="scope-chip" data-mode-chip="light" aria-pressed="true">Light</button>
+              <button type="button" class="scope-chip" data-mode-chip="dark" aria-pressed="false">Dark</button>
+            </div>
+            <span class="scope-name" data-scope-name>haze-light</span>
+          </div>
+          <div class="stage-body" data-stage-body data-scheme="haze-light">
+            <div class="demo-actions">
+              <button type="button" class="state-btn state-btn-primary" data-action-name="Primary action"><span class="state-btn-label">Primary action</span></button>
+              <button type="button" class="state-btn state-btn-secondary" data-action-name="Secondary action"><span class="state-btn-label">Secondary action</span></button>
+            </div>
+            <div class="demo-actions">
+              <button type="button" class="state-btn state-btn-primary" disabled><span class="state-btn-label">Primary action</span></button>
+              <button type="button" class="state-btn state-btn-secondary" disabled><span class="state-btn-label">Secondary action</span></button>
+            </div>
+            <p class="readout">Last activated: <strong data-action-readout>—</strong></p>
+          </div>
+        </div>
+
+        <h3 class="comp-sub">Truth table</h3>
+        <table class="truth">
+          <thead>
+            <tr><th scope="col">Variant</th><th scope="col">Disabled</th><th scope="col">Pointer</th><th scope="col">Focus</th><th scope="col">Rendered output</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Variant">Primary</td>
+              <td data-label="Disabled">No</td>
+              <td data-label="Pointer">Rest</td>
+              <td data-label="Focus">No</td>
+              <td data-label="Rendered output"><code>--action-bg-1</code> fill, <code>--action-fg-1</code> label; the border is <code>--action-bg-1</code> too, so the edge never fringes.</td>
+            </tr>
+            <tr>
+              <td data-label="Variant">Secondary</td>
+              <td data-label="Disabled">No</td>
+              <td data-label="Pointer">Rest</td>
+              <td data-label="Focus">No</td>
+              <td data-label="Rendered output">Transparent fill, <code>--text-fg-1</code> label, 1px <code>--action-border</code> border.</td>
+            </tr>
+            <tr>
+              <td data-label="Variant">Either</td>
+              <td data-label="Disabled">No</td>
+              <td data-label="Pointer">Hover</td>
+              <td data-label="Focus" class="dc">—</td>
+              <td data-label="Rendered output">Own-ink layer at <code>--opacity-10</code> over the whole button — an overlay, so fill and label tint together.</td>
+            </tr>
+            <tr>
+              <td data-label="Variant">Either</td>
+              <td data-label="Disabled">No</td>
+              <td data-label="Pointer">Active</td>
+              <td data-label="Focus" class="dc">—</td>
+              <td data-label="Rendered output">Own-ink layer at <code>--opacity-15</code>.</td>
+            </tr>
+            <tr>
+              <td data-label="Variant">Either</td>
+              <td data-label="Disabled">No</td>
+              <td data-label="Pointer" class="dc">—</td>
+              <td data-label="Focus">Focus-visible</td>
+              <td data-label="Rendered output">3px solid <code>--action-border</code> ring, 2px offset.</td>
+            </tr>
+            <tr>
+              <td data-label="Variant">Either</td>
+              <td data-label="Disabled">Yes</td>
+              <td data-label="Pointer" class="dc">—</td>
+              <td data-label="Focus" class="dc">—</td>
+              <td data-label="Rendered output">Whole button at <code>--opacity-40</code>, not-allowed cursor; no events, no state layer, no ring.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="comp-note">Invariant: <code>--action-border</code> mirrors <code>--action-bg-1</code> in all 14 schemes — Haze light&rsquo;s F-800 exception included — so Secondary&rsquo;s outline is always Primary&rsquo;s fill colour, and the pair can never drift apart. The stage buttons are live: activate one and the readout records it; the disabled pair is inert, exactly as the last row specifies.</p>
+      </section>
+
+      <footer class="page-foot">
+        <p>Design Language components — the first set: mode switch, toggle switch, action buttons. Each implementation reads only the eight scheme slots, and each truth-table row doubles as a test case for the component bench.</p>
+      </footer>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- Element inspector (debug tool) — overlay UI; inert when off -->
+    <div id="inspector-root">
+      <div id="insp-sel-box" aria-hidden="true"></div>
+      <div id="insp-hover-box" aria-hidden="true"><span id="insp-hover-tag"></span></div>
+      <div id="insp-panel" hidden role="dialog" aria-label="Element inspector">
+        <div class="insp-head">
+          <span>Element inspector</span>
+          <button type="button" class="insp-close" id="insp-close" aria-label="Close inspector panel">&times;</button>
+        </div>
+        <div class="insp-body" id="insp-body"></div>
+        <textarea id="insp-fallback" hidden readonly aria-label="Inspector report — select the text and copy it"></textarea>
+        <div class="insp-actions">
+          <button type="button" id="insp-copy">Copy report</button>
+          <span class="insp-hint">Esc exits inspect mode</span>
+        </div>
+      </div>
+      <button type="button" id="inspect-toggle" aria-pressed="false">Inspect</button>
+    </div>
+
+    <script>
+          (function () {
+            "use strict";
+            var rootStyle = getComputedStyle(document.documentElement);
+            function fmtPx(v) {
+              return (Math.round(v * 10) / 10).toString().replace(/\.0$/, "") + "px";
+            }
+    
+            /* ---------- Toast ---------- */
+            var toast = document.getElementById("toast");
+            var toastTimer = null;
+            function showToast(msg) {
+              toast.textContent = msg;
+              toast.classList.add("show");
+              clearTimeout(toastTimer);
+              toastTimer = setTimeout(function () { toast.classList.remove("show"); }, 2200);
+            }
+    
+            /* ---------- 12. Element inspector ---------- */
+            /* Debug tool: reference elements by selector + data instead of
+               screenshots. Off by default — when off, no listeners are attached
+               and the page behaves exactly as before. While on, clicks are
+               captured at the document and swallowed, so inspecting never
+               triggers the element's own behaviour. */
+            var SLOT_NAMES = ["--surface-bg", "--surface-bg-1", "--surface-border", "--text-fg-1", "--text-fg-2", "--action-bg-1", "--action-fg-1", "--action-border"];
+            var PALETTE_FAMILIES = ["midnight", "haze", "purple-rain", "fern", "cerise", "marigold", "cobalt"];
+            var PALETTE_STEPS = [1000, 950, 900, 800, 700, 500, 300, 200, 100, 50, 25];
+            function normVal(v) { return (v || "").replace(/\s+/g, " ").trim(); }
+            /* Map every resolved palette value back to its token name, so a
+               resolved slot can be annotated with the step it came from
+               (e.g. oklch(…) → --cerise-200). First writer wins on collisions
+               (Haze and Midnight share some endpoint values). */
+            var valueToToken = {};
+            PALETTE_FAMILIES.forEach(function (f) {
+              PALETTE_STEPS.forEach(function (s) {
+                var v = normVal(rootStyle.getPropertyValue("--" + f + "-" + s));
+                if (v && !valueToToken[v]) valueToToken[v] = "--" + f + "-" + s;
+              });
+            });
+            function tokenForValue(value, family) {
+              var v = normVal(value);
+              if (!v) return "";
+              if (family) {
+                for (var i = 0; i < PALETTE_STEPS.length; i++) {
+                  if (normVal(rootStyle.getPropertyValue("--" + family + "-" + PALETTE_STEPS[i])) === v) {
+                    return "--" + family + "-" + PALETTE_STEPS[i];
+                  }
+                }
+              }
+              return valueToToken[v] || "";
+            }
+    
+            /* ---- Applied-token annotation ----
+               For each reported property, find the declaration that actually
+               wins the cascade for this element — matched rules only, ordered
+               by !important, inline, specificity, then source order, with
+               @media groups counted only when their condition holds — and
+               show it as written: var(--token) for a token, the full
+               expression for a derived value (calc, color-mix, …) so its base
+               tokens stay visible, or the word "literal" for a plain value.
+               Nothing is guessed from the computed value. Inherited
+               properties with no declaration of their own walk up to the
+               ancestor whose declaration supplies the value, marked as
+               inherited. */
+            var INHERITED_PROPS = { "color": 1, "font-family": 1, "font-size": 1, "font-weight": 1, "font-style": 1, "letter-spacing": 1, "line-height": 1, "text-transform": 1, "visibility": 1 };
+    
+            function selectorSpecificity(sel) {
+              var a = 0, b = 0, c = 0;
+              var s = sel.replace(/\[[^\]]*\]/g, function () { b++; return " "; });
+              s = s.replace(/#[\w-]+/g, function () { a++; return " "; });
+              s = s.replace(/::[\w-]+/g, function () { c++; return " "; });
+              s = s.replace(/\.[\w-]+/g, function () { b++; return " "; });
+              s = s.replace(/:[\w-]+(\([^()]*\))?/g, function () { b++; return " "; });
+              s.split(/[\s>+~]+/).forEach(function (tok) { if (/^[a-zA-Z][\w-]*$/.test(tok)) c++; });
+              return [a, b, c];
+            }
+    
+            function eachStyleRule(fn) {
+              var order = 0;
+              function walk(rules) {
+                if (!rules) return;
+                for (var i = 0; i < rules.length; i++) {
+                  var rule = rules[i];
+                  try {
+                    if (rule.selectorText !== undefined && rule.style) {
+                      fn(rule, order++);
+                    } else if (rule.cssRules) {
+                      var applies = true;
+                      if (rule.media) applies = window.matchMedia(rule.media.mediaText).matches;
+                      else if (rule.conditionText !== undefined && window.CSS && CSS.supports) applies = CSS.supports(rule.conditionText);
+                      if (applies) walk(rule.cssRules);
+                    }
+                  } catch (err) { /* unsupported or cross-origin rule — skip it */ }
+                }
+              }
+              for (var s = 0; s < document.styleSheets.length; s++) {
+                try { walk(document.styleSheets[s].cssRules); } catch (err) { /* cross-origin sheet — skip it */ }
+              }
+            }
+    
+            var matchedCache = null;
+            function matchedRules(el) {
+              if (matchedCache && matchedCache.el === el) return matchedCache.rules;
+              var rules = [];
+              eachStyleRule(function (rule, order) {
+                var spec = null;
+                rule.selectorText.split(",").forEach(function (part) {
+                  var p = part.trim();
+                  if (!p) return;
+                  var ok = false;
+                  try { ok = el.matches(p); } catch (err) { ok = false; }
+                  if (!ok) return;
+                  var sp = selectorSpecificity(p);
+                  if (!spec || sp[0] > spec[0] || (sp[0] === spec[0] && (sp[1] > spec[1] || (sp[1] === spec[1] && sp[2] > spec[2])))) spec = sp;
+                });
+                if (spec) rules.push({ style: rule.style, spec: spec, order: order });
+              });
+              matchedCache = { el: el, rules: rules };
+              return rules;
+            }
+    
+            function winningDecl(el, propNames) {
+              var best = null;
+              function consider(value, important, inline, spec, order) {
+                if (!value) return;
+                var key = [important ? 1 : 0, inline ? 1 : 0, spec[0], spec[1], spec[2], order];
+                if (best) {
+                  var wins = false, decided = false;
+                  for (var i = 0; i < key.length; i++) {
+                    if (key[i] !== best.key[i]) { wins = key[i] > best.key[i]; decided = true; break; }
+                  }
+                  if (!decided || !wins) return;
+                }
+                best = { value: value, key: key };
+              }
+              matchedRules(el).forEach(function (r) {
+                propNames.forEach(function (prop) {
+                  consider(r.style.getPropertyValue(prop), r.style.getPropertyPriority(prop) === "important", false, r.spec, r.order);
+                });
+              });
+              propNames.forEach(function (prop) {
+                consider(el.style.getPropertyValue(prop), el.style.getPropertyPriority(prop) === "important", true, [0, 0, 0], 1e9);
+              });
+              return best;
+            }
+    
+            function appliedAnnotation(el, propNames) {
+              var node = el, inherited = false, decl = null;
+              while (node && node.nodeType === 1) {
+                decl = winningDecl(node, propNames);
+                if (decl) break;
+                if (!INHERITED_PROPS[propNames[0]]) return "";
+                node = node.parentElement;
+                inherited = true;
+              }
+              if (!decl) return "";
+              var v = normVal(decl.value);
+              var suffix = inherited ? " (inherited)" : "";
+              if (/^(inherit|initial|unset|revert|revert-layer)$/.test(v)) return " ← " + v + suffix;
+              if (/var\(|calc\(|color-mix\(|clamp\(|min\(|max\(/.test(v)) {
+                if (v.length > 110) v = v.slice(0, 110) + "…";
+                return " ← " + v + suffix;
+              }
+              return " ← literal" + suffix;
+            }
+    
+            function segmentFor(el) {
+              var seg = el.tagName.toLowerCase();
+              if (el.id) seg += "#" + el.id;
+              var classes = (el.getAttribute("class") || "").trim().split(/\s+/).filter(Boolean);
+              classes.slice(0, 3).forEach(function (c) { seg += "." + c; });
+              if (el.hasAttribute("data-scheme")) seg += '[data-scheme="' + el.getAttribute("data-scheme") + '"]';
+              return seg;
+            }
+            function selectorPath(el) {
+              var parts = [];
+              var node = el;
+              while (node && node !== document.body && node !== document.documentElement) {
+                var seg = segmentFor(node);
+                var parent = node.parentElement;
+                if (parent && !node.id) {
+                  var sameTag = Array.prototype.filter.call(parent.children, function (ch) { return ch.tagName === node.tagName; });
+                  var sameDesc = sameTag.filter(function (ch) { return segmentFor(ch) === seg; });
+                  if (sameDesc.length > 1) seg += ":nth-of-type(" + (sameTag.indexOf(node) + 1) + ")";
+                }
+                parts.unshift(seg);
+                if (node.id) break;
+                node = node.parentElement;
+              }
+              return parts.join(" > ");
+            }
+    
+            function scopeOf(el) {
+              var scoped = el.closest ? el.closest("[data-scheme]") : null;
+              if (!scoped) return { el: null, value: null, family: null, mode: null, text: "page default (Haze)" };
+              var v = scoped.getAttribute("data-scheme");
+              var mode = /-dark$/.test(v) ? "dark" : (/-light$/.test(v) ? "light" : "");
+              var family = mode ? v.slice(0, v.length - mode.length - 1) : v;
+              return {
+                el: scoped, value: v, family: family, mode: mode,
+                text: v + " (family: " + family + (mode ? ", mode: " + mode : "") + ")",
+                elementSeg: segmentFor(scoped)
+              };
+            }
+    
+            function implicitRole(el) {
+              var tag = el.tagName.toLowerCase();
+              if (tag === "button") return "button";
+              if (tag === "a" && el.hasAttribute("href")) return "link";
+              if (tag === "input") return "textbox";
+              if (tag === "select") return "combobox";
+              if (tag === "textarea") return "textbox";
+              if (/^h[1-6]$/.test(tag)) return "heading";
+              if (tag === "img") return "img";
+              if (tag === "nav") return "navigation";
+              if (tag === "main") return "main";
+              return "";
+            }
+    
+            function borderSummary(cs) {
+              var sides = ["Top", "Right", "Bottom", "Left"];
+              var widths = sides.map(function (s) { return cs["border" + s + "Width"]; });
+              if (widths.every(function (w) { return w === "0px"; })) return "none";
+              var vals = sides.map(function (s) {
+                return cs["border" + s + "Width"] + " " + cs["border" + s + "Style"] + " " + cs["border" + s + "Color"];
+              });
+              if (vals.every(function (v) { return v === vals[0]; })) return vals[0];
+              var out = [];
+              sides.forEach(function (s, i) { if (widths[i] !== "0px") out.push(s.toLowerCase() + ": " + vals[i]); });
+              return out.join(" · ");
+            }
+    
+            function buildReport(el) {
+              var cs = getComputedStyle(el);
+              var rect = el.getBoundingClientRect();
+              var scope = scopeOf(el);
+              var role = el.getAttribute("role") || implicitRole(el);
+              var text = (el.innerText || el.textContent || "").replace(/\s+/g, " ").trim();
+              if (text.length > 90) text = text.slice(0, 90) + "…";
+    
+              var sections = [];
+              sections.push({ title: "Selector", lines: [selectorPath(el)], selector: true });
+    
+              var elLines = ["<" + el.tagName.toLowerCase() + ">" + (role ? " · role: " + role : "")];
+              if (text) elLines.push('text: "' + text + '"');
+              sections.push({ title: "Element", lines: elLines });
+    
+              var scopeLines = [scope.text];
+              if (scope.el && scope.el !== el) scopeLines.push("scoped by: " + scope.elementSeg);
+              sections.push({ title: "Scope", lines: scopeLines });
+    
+              var geoLines = ["size: " + fmtPx(rect.width) + " × " + fmtPx(rect.height)];
+              if (cs.padding !== "0px") geoLines.push("padding: " + cs.padding);
+              if (cs.margin !== "0px") geoLines.push("margin: " + cs.margin);
+              if ((cs.rowGap && cs.rowGap !== "normal" && cs.rowGap !== "0px") || (cs.columnGap && cs.columnGap !== "normal" && cs.columnGap !== "0px")) {
+                geoLines.push("gap: " + cs.rowGap + " / " + cs.columnGap);
+              }
+              sections.push({ title: "Geometry", lines: geoLines });
+    
+              var fontFamily = (cs.fontFamily || "").split(",")[0].trim();
+              var borderAnn = appliedAnnotation(el, ["border", "border-top"]);
+              if (!borderAnn) borderAnn = appliedAnnotation(el, ["border-color", "border-top-color", "border-width", "border-top-width", "border-style", "border-top-style"]);
+              sections.push({ title: "Computed styles", lines: [
+                "background-color: " + cs.backgroundColor + appliedAnnotation(el, ["background-color", "background"]),
+                "color: " + cs.color + appliedAnnotation(el, ["color"]),
+                "border: " + borderSummary(cs) + borderAnn,
+                "border-radius: " + cs.borderRadius + appliedAnnotation(el, ["border-radius"]),
+                "font-family: " + fontFamily + appliedAnnotation(el, ["font-family"]),
+                "font-size: " + cs.fontSize + appliedAnnotation(el, ["font-size"]),
+                "font-weight: " + cs.fontWeight + appliedAnnotation(el, ["font-weight"]),
+                "opacity: " + cs.opacity + appliedAnnotation(el, ["opacity"])
+              ]});
+    
+              var slotLines = [];
+              if (scope.el) {
+                var scopeCs = getComputedStyle(scope.el);
+                SLOT_NAMES.forEach(function (name) {
+                  var v = normVal(scopeCs.getPropertyValue(name));
+                  var tok = tokenForValue(v, scope.family);
+                  slotLines.push(name + ": " + (v || "(unset)") + (tok ? "  (= " + tok + ")" : ""));
+                });
+                sections.push({ title: "Scheme slots — " + scope.value, lines: slotLines });
+              } else {
+                sections.push({ title: "Scheme slots", lines: ["not defined — no [data-scheme] scope; the page default (Haze) defines no scheme slots"] });
+              }
+              return sections;
+            }
+    
+            function reportText(sections) {
+              return "Element inspector report\n\n" + sections.map(function (sec) {
+                return sec.title.toUpperCase() + "\n" + sec.lines.map(function (l) { return "  " + l; }).join("\n");
+              }).join("\n\n");
+            }
+    
+            var inspRoot = document.getElementById("inspector-root");
+            var inspToggle = document.getElementById("inspect-toggle");
+            var inspPanel = document.getElementById("insp-panel");
+            var inspBody = document.getElementById("insp-body");
+            var inspHoverBox = document.getElementById("insp-hover-box");
+            var inspHoverTag = document.getElementById("insp-hover-tag");
+            var inspSelBox = document.getElementById("insp-sel-box");
+            var inspFallback = document.getElementById("insp-fallback");
+            var inspecting = false;
+            var hoverEl = null;
+            var selectedEl = null;
+            var lastReport = "";
+    
+            function inInspector(node) {
+              return !!(node && node.closest && node.closest("#inspector-root"));
+            }
+            function placeBox(box, el) {
+              var r = el.getBoundingClientRect();
+              box.style.display = "block";
+              box.style.left = r.left + "px";
+              box.style.top = r.top + "px";
+              box.style.width = r.width + "px";
+              box.style.height = r.height + "px";
+            }
+            function refreshBoxes() {
+              if (!inspecting) return;
+              if (hoverEl && document.contains(hoverEl)) placeBox(inspHoverBox, hoverEl);
+              if (selectedEl && document.contains(selectedEl)) placeBox(inspSelBox, selectedEl);
+            }
+    
+            function selectElement(el) {
+              selectedEl = el;
+              var sections = buildReport(el);
+              lastReport = reportText(sections);
+              inspFallback.hidden = true;
+              inspBody.innerHTML = "";
+              sections.forEach(function (sec) {
+                var t = document.createElement("div");
+                t.className = "insp-sec-title";
+                t.textContent = sec.title;
+                inspBody.appendChild(t);
+                sec.lines.forEach(function (line) {
+                  var d = document.createElement("div");
+                  d.className = "insp-row" + (sec.selector ? " insp-selector" : "");
+                  d.textContent = line;
+                  inspBody.appendChild(d);
+                });
+              });
+              inspPanel.hidden = false;
+              placeBox(inspSelBox, el);
+            }
+    
+            function onInspPointerMove(e) {
+              if (!(e.target instanceof Element) || inInspector(e.target)) {
+                hoverEl = null;
+                inspHoverBox.style.display = "none";
+                return;
+              }
+              hoverEl = e.target;
+              placeBox(inspHoverBox, hoverEl);
+              var r = hoverEl.getBoundingClientRect();
+              var classes = (hoverEl.getAttribute("class") || "").trim().split(/\s+/).filter(Boolean);
+              inspHoverTag.textContent = hoverEl.tagName.toLowerCase() +
+                (classes.length ? "." + classes.slice(0, 2).join(".") : "") +
+                " · " + fmtPx(r.width) + " × " + fmtPx(r.height);
+            }
+            function onInspClick(e) {
+              if (inInspector(e.target)) return;
+              e.preventDefault();
+              e.stopPropagation();
+              if (e.target instanceof Element) selectElement(e.target);
+            }
+            function onInspKeydown(e) {
+              if (e.key === "Escape") setInspecting(false);
+            }
+    
+            function setInspecting(on) {
+              if (on === inspecting) return;
+              inspecting = on;
+              inspToggle.setAttribute("aria-pressed", on ? "true" : "false");
+              document.body.classList.toggle("inspecting", on);
+              if (on) {
+                document.addEventListener("pointermove", onInspPointerMove, true);
+                document.addEventListener("click", onInspClick, true);
+                document.addEventListener("keydown", onInspKeydown, true);
+                window.addEventListener("scroll", refreshBoxes, true);
+                window.addEventListener("resize", refreshBoxes);
+              } else {
+                document.removeEventListener("pointermove", onInspPointerMove, true);
+                document.removeEventListener("click", onInspClick, true);
+                document.removeEventListener("keydown", onInspKeydown, true);
+                window.removeEventListener("scroll", refreshBoxes, true);
+                window.removeEventListener("resize", refreshBoxes);
+                hoverEl = null;
+                selectedEl = null;
+                lastReport = "";
+                inspHoverBox.style.display = "none";
+                inspSelBox.style.display = "none";
+                inspPanel.hidden = true;
+              }
+            }
+            inspToggle.addEventListener("click", function () { setInspecting(!inspecting); });
+            document.getElementById("insp-close").addEventListener("click", function () {
+              inspPanel.hidden = true;
+              selectedEl = null;
+              lastReport = "";
+              inspSelBox.style.display = "none";
+            });
+            document.getElementById("insp-copy").addEventListener("click", function () {
+              if (!lastReport) return;
+              function showFallback() {
+                inspFallback.value = lastReport;
+                inspFallback.hidden = false;
+                inspFallback.focus();
+                inspFallback.select();
+                showToast("Clipboard unavailable — the report is in the panel; select it and copy");
+              }
+              if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(lastReport).then(function () {
+                  inspFallback.hidden = true;
+                  showToast("Inspector report copied");
+                }, showFallback);
+              } else {
+                showFallback();
+              }
+            });
+          })();
+        </script>
+<script>
+          (function () {
+            "use strict";
+    
+            /* ---------- Colour-mode switch (top row) ----------
+               The .mode-switch component: a trigger pill showing the
+               current selection (System by default) and an options panel
+               that slides out below it. Choosing an option sets data-mode
+               on <html>; the page-scope CSS does everything else —
+               "system" resolves through prefers-color-scheme in CSS, so
+               OS changes apply live with no JS involvement. The choice is
+               held for this page view only. */
+            var modeSwitch = document.querySelector("[data-mode-switch]");
+            var modeButtons = Array.prototype.slice.call(document.querySelectorAll("[data-mode-option]"));
+            var menuModeButtons = Array.prototype.slice.call(document.querySelectorAll("[data-menu-mode-option]"));
+            if (modeSwitch && modeButtons.length) {
+              var modeTrigger = modeSwitch.querySelector("[data-mode-trigger]");
+              var modeCurrentLabel = modeSwitch.querySelector("[data-mode-current-label]");
+              var modeNames = { light: "Light", system: "System", dark: "Dark" };
+              var setOpen = function (open) {
+                modeSwitch.setAttribute("data-open", open ? "true" : "false");
+                modeTrigger.setAttribute("aria-expanded", open ? "true" : "false");
+              };
+              var isOpen = function () { return modeSwitch.getAttribute("data-open") === "true"; };
+              var setMode = function (mode) {
+                document.documentElement.setAttribute("data-mode", mode);
+                modeButtons.forEach(function (b) {
+                  b.setAttribute("aria-pressed", b.getAttribute("data-mode-option") === mode ? "true" : "false");
+                });
+                menuModeButtons.forEach(function (b) {
+                  b.setAttribute("aria-pressed", b.getAttribute("data-menu-mode-option") === mode ? "true" : "false");
+                });
+                modeCurrentLabel.textContent = modeNames[mode] || modeNames.system;
+                modeTrigger.setAttribute("aria-label", "Colour mode: " + (modeNames[mode] || modeNames.system));
+              };
+              var focusOption = function (mode) {
+                var target = modeButtons.filter(function (b) {
+                  return b.getAttribute("data-mode-option") === mode;
+                })[0] || modeButtons[0];
+                if (target) target.focus();
+              };
+              modeTrigger.addEventListener("click", function () { setOpen(!isOpen()); });
+              modeButtons.forEach(function (b, index) {
+                b.addEventListener("click", function () {
+                  setMode(b.getAttribute("data-mode-option"));
+                  setOpen(false);
+                  modeTrigger.focus();
+                });
+                b.addEventListener("keydown", function (event) {
+                  var next = null;
+                  if (event.key === "ArrowDown") next = modeButtons[(index + 1) % modeButtons.length];
+                  else if (event.key === "ArrowUp") next = modeButtons[(index - 1 + modeButtons.length) % modeButtons.length];
+                  else if (event.key === "Home") next = modeButtons[0];
+                  else if (event.key === "End") next = modeButtons[modeButtons.length - 1];
+                  if (next) { event.preventDefault(); next.focus(); }
+                });
+              });
+              modeSwitch.addEventListener("keydown", function (event) {
+                if (event.key === "Escape" && isOpen()) {
+                  event.preventDefault();
+                  setOpen(false);
+                  modeTrigger.focus();
+                }
+              });
+              modeTrigger.addEventListener("keydown", function (event) {
+                if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+                  event.preventDefault();
+                  setOpen(true);
+                  focusOption(document.documentElement.getAttribute("data-mode") || "system");
+                }
+              });
+              document.addEventListener("click", function (event) {
+                if (isOpen() && !modeSwitch.contains(event.target)) setOpen(false);
+              });
+              document.addEventListener("focusin", function (event) {
+                if (isOpen() && !modeSwitch.contains(event.target)) setOpen(false);
+              });
+              /* ---------- Extra-compact nav menu ----------
+                 At the extra-compact tier the top row defers to the
+                 hamburger button. Its panel carries the page links
+                 above the mode switch, which sits at the bottom as
+                 three inline pills — the same setMode, so the two
+                 switches can never disagree. The menu closes from the button (its glyph
+                 swaps to a \u00d7 while open), on Escape, or on any
+                 tap/click outside the panel. Choosing a mode keeps
+                 the menu open so the change is visible in place. */
+              var navBurger = document.querySelector("[data-nav-burger]");
+              var navMenu = document.querySelector("[data-nav-menu]");
+              if (navBurger && navMenu) {
+                var setMenuOpen = function (open) {
+                  navMenu.classList.toggle("is-open", open);
+                  navBurger.classList.toggle("is-open", open);
+                  navBurger.setAttribute("aria-expanded", open ? "true" : "false");
+                  navBurger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+                };
+                var menuIsOpen = function () { return navMenu.classList.contains("is-open"); };
+                navBurger.addEventListener("click", function () { setMenuOpen(!menuIsOpen()); });
+                menuModeButtons.forEach(function (b) {
+                  b.addEventListener("click", function () {
+                    setMode(b.getAttribute("data-menu-mode-option"));
+                  });
+                });
+                document.addEventListener("click", function (event) {
+                  if (menuIsOpen() && !navMenu.contains(event.target) && !navBurger.contains(event.target)) setMenuOpen(false);
+                });
+                document.addEventListener("keydown", function (event) {
+                  if (event.key === "Escape" && menuIsOpen()) {
+                    setMenuOpen(false);
+                    navBurger.focus();
+                  }
+                });
+              }
+              setMode(document.documentElement.getAttribute("data-mode") || "system");
+              setOpen(false);
+            }
+          })();
+        </script>
+    <script>
+      (function () {
+        "use strict";
+
+        function slice(list) { return Array.prototype.slice.call(list); }
+
+        /* ---------- Stage scoping ----------
+           Every stage body carries a data-scheme scope. The family
+           chips re-derive the family half; stages whose component
+           under test isn't itself the mode control also carry
+           Light/Dark chips for the mode half. The mode-switch stage
+           exposes its mode half to the demo switch below instead. */
+        slice(document.querySelectorAll("[data-stage]")).forEach(function (stage) {
+          var body = stage.querySelector("[data-stage-body]");
+          var name = stage.querySelector("[data-scope-name]");
+          function current() {
+            var s = body.getAttribute("data-scheme") || "haze-light";
+            var mode = s.slice(-5) === "-dark" ? "dark" : "light";
+            return { fam: s.slice(0, s.length - mode.length - 1), mode: mode };
+          }
+          function apply(fam, mode) {
+            body.setAttribute("data-scheme", fam + "-" + mode);
+            if (name) name.textContent = fam + "-" + mode;
+          }
+          stage._applyMode = function (mode) { apply(current().fam, mode); };
+          slice(stage.querySelectorAll("[data-fam-chip]")).forEach(function (chip) {
+            chip.addEventListener("click", function () {
+              slice(stage.querySelectorAll("[data-fam-chip]")).forEach(function (c) {
+                c.setAttribute("aria-pressed", c === chip ? "true" : "false");
+              });
+              apply(chip.getAttribute("data-fam-chip"), current().mode);
+            });
+          });
+          slice(stage.querySelectorAll("[data-mode-chip]")).forEach(function (chip) {
+            chip.addEventListener("click", function () {
+              slice(stage.querySelectorAll("[data-mode-chip]")).forEach(function (c) {
+                c.setAttribute("aria-pressed", c === chip ? "true" : "false");
+              });
+              apply(current().fam, chip.getAttribute("data-mode-chip"));
+            });
+          });
+        });
+
+        /* ---------- Demo mode switch ----------
+           The same component as the top row's, scoped to its stage:
+           its selection drives the stage's scheme mode instead of
+           the page's data-mode. System resolves against the OS
+           preference, live — the stage re-scopes if the OS flips
+           while System is selected. Open/close, arrow keys, Esc,
+           and outside-click mirror the page instance's behaviour. */
+        var demoSwitch = document.querySelector("[data-demo-mode-switch]");
+        if (demoSwitch) {
+          var demoStage = demoSwitch.closest("[data-stage]");
+          var demoTrigger = demoSwitch.querySelector("[data-demo-mode-trigger]");
+          var demoLabel = demoSwitch.querySelector("[data-demo-mode-label]");
+          var demoReadout = document.querySelector("[data-demo-mode-readout]");
+          var demoOptions = slice(demoSwitch.querySelectorAll("[data-demo-mode-option]"));
+          var demoGlyphs = slice(demoSwitch.querySelectorAll("[data-demo-icon]"));
+          var demoNames = { light: "Light", system: "System", dark: "Dark" };
+          var selection = "system";
+          var osDark = window.matchMedia("(prefers-color-scheme: dark)");
+          var resolved = function () {
+            return selection === "system" ? (osDark.matches ? "dark" : "light") : selection;
+          };
+          var setOpen = function (open) {
+            demoSwitch.setAttribute("data-open", open ? "true" : "false");
+            demoTrigger.setAttribute("aria-expanded", open ? "true" : "false");
+          };
+          var isOpen = function () { return demoSwitch.getAttribute("data-open") === "true"; };
+          var render = function () {
+            demoOptions.forEach(function (b) {
+              b.setAttribute("aria-pressed", b.getAttribute("data-demo-mode-option") === selection ? "true" : "false");
+            });
+            demoGlyphs.forEach(function (g) {
+              if (g.getAttribute("data-demo-icon") === selection) g.classList.add("is-current");
+              else g.classList.remove("is-current");
+            });
+            demoLabel.textContent = demoNames[selection];
+            demoTrigger.setAttribute("aria-label", "Demo colour mode: " + demoNames[selection]);
+            if (demoStage && demoStage._applyMode) demoStage._applyMode(resolved());
+            if (demoReadout) {
+              demoReadout.innerHTML = selection === "system"
+                ? "Selection: <strong>System</strong> — resolved " + demoNames[resolved()] + " from the OS preference; the stage follows live if the OS flips."
+                : "Selection: <strong>" + demoNames[selection] + "</strong> — the stage is scoped " + demoNames[resolved()] + " regardless of the OS.";
+            }
+          };
+          demoTrigger.addEventListener("click", function () { setOpen(!isOpen()); });
+          demoOptions.forEach(function (b, index) {
+            b.addEventListener("click", function () {
+              selection = b.getAttribute("data-demo-mode-option");
+              render();
+              setOpen(false);
+              demoTrigger.focus();
+            });
+            b.addEventListener("keydown", function (event) {
+              var next = null;
+              if (event.key === "ArrowDown") next = demoOptions[(index + 1) % demoOptions.length];
+              else if (event.key === "ArrowUp") next = demoOptions[(index - 1 + demoOptions.length) % demoOptions.length];
+              else if (event.key === "Home") next = demoOptions[0];
+              else if (event.key === "End") next = demoOptions[demoOptions.length - 1];
+              if (next) { event.preventDefault(); next.focus(); }
+            });
+          });
+          demoSwitch.addEventListener("keydown", function (event) {
+            if (event.key === "Escape" && isOpen()) {
+              event.preventDefault();
+              setOpen(false);
+              demoTrigger.focus();
+            }
+          });
+          demoTrigger.addEventListener("keydown", function (event) {
+            if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+              event.preventDefault();
+              setOpen(true);
+              var target = demoOptions.filter(function (b) {
+                return b.getAttribute("data-demo-mode-option") === selection;
+              })[0] || demoOptions[0];
+              if (target) target.focus();
+            }
+          });
+          document.addEventListener("click", function (event) {
+            if (isOpen() && !demoSwitch.contains(event.target)) setOpen(false);
+          });
+          document.addEventListener("focusin", function (event) {
+            if (isOpen() && !demoSwitch.contains(event.target)) setOpen(false);
+          });
+          if (osDark.addEventListener) {
+            osDark.addEventListener("change", function () { if (selection === "system") render(); });
+          }
+          render();
+          setOpen(false);
+        }
+
+        /* ---------- Demo toggles ----------
+           A disabled <button> fires no click, so the disabled pair
+           is inert without any guard here — as the contract says. */
+        slice(document.querySelectorAll("[data-toggle]")).forEach(function (t) {
+          t.addEventListener("click", function () {
+            var on = t.getAttribute("aria-checked") === "true";
+            t.setAttribute("aria-checked", on ? "false" : "true");
+            var item = t.closest(".demo-item");
+            var state = item ? item.querySelector("[data-toggle-state]") : null;
+            if (state) state.textContent = on ? "Off" : "On";
+          });
+        });
+
+        /* ---------- Demo action buttons ---------- */
+        var actionReadout = document.querySelector("[data-action-readout]");
+        slice(document.querySelectorAll("[data-action-name]")).forEach(function (b) {
+          b.addEventListener("click", function () {
+            if (actionReadout) actionReadout.textContent = b.getAttribute("data-action-name");
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>
