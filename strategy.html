@@ -19,20 +19,25 @@
 
       /* ---- Colour (colors.css) ---- */
       :root {
-        /* Midnight */
+        /* Midnight — ramp replaced 2026-10-22 (Andii): lightness and hue
+           unchanged from the previous ramp; chroma re-curved. Midnight is
+           now the default neutral as well as the brand family. */
         --midnight-1000: oklch(16.11% 0.0639 276.48);
-        --midnight-950: oklch(17.5% 0.066 285.88);
-        --midnight-900: oklch(22.5% 0.088 285.88);
-        --midnight-800: oklch(31.5% 0.125 285.88);
-        --midnight-700: oklch(43% 0.171 285.88);
-        --midnight-500: oklch(57% 0.17 285.88);
-        --midnight-300: oklch(70.5% 0.11 285.88);
-        --midnight-200: oklch(82.5% 0.059 285.88);
-        --midnight-100: oklch(91% 0.026 285.88);
-        --midnight-50: oklch(96% 0.01 285.88);
+        --midnight-950: oklch(17.5% 0.084 285.88);
+        --midnight-900: oklch(22.5% 0.096 285.88);
+        --midnight-800: oklch(31.5% 0.102 285.88);
+        --midnight-700: oklch(43% 0.1 285.88);
+        --midnight-500: oklch(57% 0.094 285.88);
+        --midnight-300: oklch(70.5% 0.082 285.88);
+        --midnight-200: oklch(82.5% 0.066 285.88);
+        --midnight-100: oklch(91% 0.045 285.88);
+        --midnight-50: oklch(96% 0.02 285.88);
         --midnight-25: oklch(98% 0.004 285.88);
 
-        /* Haze (formerly Neutral) */
+        /* Haze (formerly Neutral) — DEPRECATED 2026-10-22 (Andii): Midnight
+           is the default neutral now. Removed from the page; definitions
+           retained in code until Andii confirms they are no longer
+           necessary. */
         --haze-1000: oklch(16.11% 0.0639 276.48);
         --haze-950: oklch(17.5% 0.054 285.88);
         --haze-900: oklch(22.5% 0.046 285.88);
@@ -397,10 +402,13 @@
       }
 
       /* ============================================================
-         PAGE SCOPE — the page itself is a Haze scope, filled by the
-         same slot contract as any scheme panel: the values below are
-         the haze-light recipe, and the dark blocks swap in the
-         haze-dark recipe (same steps, same roles). The nav's Mode
+         PAGE SCOPE — the page itself is a Midnight scope, filled by
+         the same slot contract as any scheme panel: the values below
+         are the midnight-light recipe, and the dark blocks swap in
+         the midnight-dark recipe (same steps, same roles). Midnight
+         is the default neutral (Haze deprecated 2026-10-22; its
+         definitions stay in the token block above, unused by the
+         page, until Andii confirms removal). The nav's Mode
          Switch sets data-mode on <html> — light / dark / system;
          "system" hands the choice to prefers-color-scheme via the
          media block. Page chrome reads the slots, plus the few
@@ -413,20 +421,20 @@
          scale, global opacity scale).
          ============================================================ */
       :root {
-        --surface-bg: var(--haze-25);
-        --surface-bg-1: var(--haze-50);
-        --text-fg-1: var(--haze-1000);
-        --text-fg-2: var(--haze-700);
-        --surface-border: var(--haze-200);
-        --action-bg-1: var(--haze-800);
-        --action-border: var(--haze-800);
-        --action-fg-1: var(--haze-25);
-        --page-fill: var(--haze-100);
-        --page-line: var(--haze-300);
-        --page-dim: var(--haze-300);
+        --surface-bg: var(--midnight-25);
+        --surface-bg-1: var(--midnight-50);
+        --text-fg-1: var(--midnight-1000);
+        --text-fg-2: var(--midnight-700);
+        --surface-border: var(--midnight-200);
+        --action-bg-1: var(--midnight-700);
+        --action-border: var(--midnight-700);
+        --action-fg-1: var(--midnight-25);
+        --page-fill: var(--midnight-100);
+        --page-line: var(--midnight-300);
+        --page-dim: var(--midnight-300);
         --brand-ink: var(--midnight-1000);
         --brand-line: var(--midnight-900);
-        --brand-faint: var(--haze-200);
+        --brand-faint: var(--midnight-200);
         --radius-250: 1.25rem;
         --radius-full: 9999px;
         --leading-compact: 1.25;
@@ -436,38 +444,38 @@
       }
       html[data-mode="system"] { color-scheme: light dark; }
       html[data-mode="dark"] {
-        --surface-bg: var(--haze-1000);
-        --surface-bg-1: var(--haze-900);
-        --text-fg-1: var(--haze-25);
-        --text-fg-2: var(--haze-300);
-        --surface-border: var(--haze-800);
-        --action-bg-1: var(--haze-200);
-        --action-border: var(--haze-200);
-        --action-fg-1: var(--haze-1000);
-        --page-fill: var(--haze-800);
-        --page-line: var(--haze-700);
-        --page-dim: var(--haze-500);
+        --surface-bg: var(--midnight-1000);
+        --surface-bg-1: var(--midnight-900);
+        --text-fg-1: var(--midnight-25);
+        --text-fg-2: var(--midnight-300);
+        --surface-border: var(--midnight-800);
+        --action-bg-1: var(--midnight-200);
+        --action-border: var(--midnight-200);
+        --action-fg-1: var(--midnight-1000);
+        --page-fill: var(--midnight-800);
+        --page-line: var(--midnight-700);
+        --page-dim: var(--midnight-500);
         --brand-ink: var(--midnight-200);
         --brand-line: var(--midnight-300);
-        --brand-faint: var(--haze-800);
+        --brand-faint: var(--midnight-700);
         color-scheme: dark;
       }
       @media (prefers-color-scheme: dark) {
         html[data-mode="system"] {
-          --surface-bg: var(--haze-1000);
-          --surface-bg-1: var(--haze-900);
-          --text-fg-1: var(--haze-25);
-          --text-fg-2: var(--haze-300);
-          --surface-border: var(--haze-800);
-          --action-bg-1: var(--haze-200);
-          --action-border: var(--haze-200);
-          --action-fg-1: var(--haze-1000);
-          --page-fill: var(--haze-800);
-          --page-line: var(--haze-700);
-          --page-dim: var(--haze-500);
+          --surface-bg: var(--midnight-1000);
+          --surface-bg-1: var(--midnight-900);
+          --text-fg-1: var(--midnight-25);
+          --text-fg-2: var(--midnight-300);
+          --surface-border: var(--midnight-800);
+          --action-bg-1: var(--midnight-200);
+          --action-border: var(--midnight-200);
+          --action-fg-1: var(--midnight-1000);
+          --page-fill: var(--midnight-800);
+          --page-line: var(--midnight-700);
+          --page-dim: var(--midnight-500);
           --brand-ink: var(--midnight-200);
           --brand-line: var(--midnight-300);
-          --brand-faint: var(--haze-800);
+          --brand-faint: var(--midnight-700);
           color-scheme: dark;
         }
       }
@@ -534,8 +542,9 @@
 
       /* Header + top row */
       .site-head { padding-top: var(--space-200-300); padding-bottom: var(--space-150); }
-      /* The wordmark is the one Midnight brand moment on the page; every
-         other default is sourced from Haze, the page-level workhorse. */
+      /* The wordmark is the page's most concentrated Midnight moment;
+         the page defaults are Midnight too — brand family and default
+         neutral in one. */
       .site-head h1 { font-size: var(--step-300); font-weight: 700; color: var(--brand-ink); }
       .site-head .subtitle {
         margin-top: var(--space-60);
@@ -898,15 +907,19 @@
         }
       }
 
-      /* Ledes go full width on phone widths (60% rule lives on
-         .site-head .subtitle and .section-head p above). */
+      /* Phone widths (≤40rem): ledes go full width (60% rule lives on
+         .site-head .subtitle and .section-head p above), and the top
+         row's gaps tighten to the single --space-60 step. */
       @media (max-width: 40rem) {
         .site-head .subtitle, .section-head p { max-width: 100%; }
+        .top-row .u-container { gap: var(--space-60); }
+        .page-links { gap: var(--space-60); }
       }
 
       /* ---------- Strategy page ----------
-         Page default throughout: Haze. Midnight appears only as the brand
-         wordmark in the shared header, as on the specimen itself. */
+         Page default throughout: Midnight, the new neutral. The
+         wordmark in the shared header is the same family at brand
+         weight. */
       .strategy-wrap { max-width: 46rem; padding-block: var(--space-200) var(--space-300); }
       .strategy-title { font-size: var(--step-250); font-weight: 700; margin-bottom: var(--space-100); }
       .draft-marker {
@@ -999,7 +1012,7 @@
 
       /* ---------- Element inspector (debug tool) ----------
          Fixed overlay UI, so it never shifts page layout. Styled from the
-         page defaults (Haze) with a Midnight brand outline on the toggle —
+         page defaults (Midnight) with a Midnight brand outline on the toggle —
          the one deliberate brand accent, matching the wordmark. */
       #inspector-root { position: fixed; inset: 0; z-index: 90; pointer-events: none; }
       #inspect-toggle {
@@ -1215,7 +1228,7 @@
           <li>
             <div>
               <h3>Tokens become data, not just CSS.</h3>
-              <p>The design-language CSS files stay the human layer, but a build script generates a machine-readable token file (W3C Design Tokens JSON) from them — never hand-maintained, so they can&rsquo;t drift. The tokens live in the design system&rsquo;s own repository and ship as a versioned package; projects consume the package by pinning a version and upgrade by deliberate bump. CI checks run in that repo and validate every brand pack against the contract: every scheme defines all 8 slots, across all 14 schemes in the pack; naming follows the grammar; the units rule is enforced (no stray px outside the sanctioned exceptions); no raw colour values outside colors.css; and contrast holds for every brand. This automates the diff checks that have been run by hand so far.</p>
+              <p>The design-language CSS files stay the human layer, but a build script generates a machine-readable token file (W3C Design Tokens JSON) from them — never hand-maintained, so they can&rsquo;t drift. The tokens live in the design system&rsquo;s own repository and ship as a versioned package; projects consume the package by pinning a version and upgrade by deliberate bump. CI checks run in that repo and validate every brand pack against the contract: every scheme defines all 8 slots, across all 12 schemes in the pack; naming follows the grammar; the units rule is enforced (no stray px outside the sanctioned exceptions); no raw colour values outside colors.css; and contrast holds for every brand. This automates the diff checks that have been run by hand so far.</p>
             </div>
           </li>
           <li>
@@ -1227,7 +1240,7 @@
           <li>
             <div>
               <h3>Rules become a context pack.</h3>
-              <p>One canonical brief an agent loads before touching anything — encoding the judgments, not just the values: polysemy (no purpose semantics), the scope rule (Haze default, Midnight brand, nothing colourised unscoped), global-only opacity, the motion + reduced-motion contract, the units rule, and the Figma read-only rule. Plus an llms.txt-style index over the token files, registry, and specimen, so any agent can find the right layer fast.</p>
+              <p>One canonical brief an agent loads before touching anything — encoding the judgments, not just the values: polysemy (no purpose semantics), the scope rule (Midnight default and brand, nothing colourised unscoped), global-only opacity, the motion + reduced-motion contract, the units rule, and the Figma read-only rule. Plus an llms.txt-style index over the token files, registry, and specimen, so any agent can find the right layer fast.</p>
             </div>
           </li>
           <li>
@@ -1475,7 +1488,7 @@
 
         function scopeOf(el) {
           var scoped = el.closest ? el.closest("[data-scheme]") : null;
-          if (!scoped) return { el: null, value: null, family: null, mode: null, text: "page default (Haze)" };
+          if (!scoped) return { el: null, value: null, family: null, mode: null, text: "page default (Midnight)" };
           var v = scoped.getAttribute("data-scheme");
           var mode = /-dark$/.test(v) ? "dark" : (/-light$/.test(v) ? "light" : "");
           var family = mode ? v.slice(0, v.length - mode.length - 1) : v;
@@ -1564,7 +1577,7 @@
             });
             sections.push({ title: "Scheme slots — " + scope.value, lines: slotLines });
           } else {
-            sections.push({ title: "Scheme slots", lines: ["not defined — no [data-scheme] scope; the page default (Haze) defines no scheme slots"] });
+            sections.push({ title: "Scheme slots", lines: ["not defined — no [data-scheme] scope; the page default (Midnight) defines no scheme slots"] });
           }
           return sections;
         }

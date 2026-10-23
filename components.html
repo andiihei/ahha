@@ -23,18 +23,18 @@
       :root {
         /* Midnight */
         --midnight-1000: oklch(16.11% 0.0639 276.48);
-        --midnight-950: oklch(17.5% 0.066 285.88);
-        --midnight-900: oklch(22.5% 0.088 285.88);
-        --midnight-800: oklch(31.5% 0.125 285.88);
-        --midnight-700: oklch(43% 0.171 285.88);
-        --midnight-500: oklch(57% 0.17 285.88);
-        --midnight-300: oklch(70.5% 0.11 285.88);
-        --midnight-200: oklch(82.5% 0.059 285.88);
-        --midnight-100: oklch(91% 0.026 285.88);
-        --midnight-50: oklch(96% 0.01 285.88);
+        --midnight-950: oklch(17.5% 0.084 285.88);
+        --midnight-900: oklch(22.5% 0.096 285.88);
+        --midnight-800: oklch(31.5% 0.102 285.88);
+        --midnight-700: oklch(43% 0.1 285.88);
+        --midnight-500: oklch(57% 0.094 285.88);
+        --midnight-300: oklch(70.5% 0.082 285.88);
+        --midnight-200: oklch(82.5% 0.066 285.88);
+        --midnight-100: oklch(91% 0.045 285.88);
+        --midnight-50: oklch(96% 0.02 285.88);
         --midnight-25: oklch(98% 0.004 285.88);
 
-        /* Haze (formerly Neutral) */
+        /* Haze (formerly Neutral) — DEPRECATED 2026-10-22 (Andii): Midnight is the default neutral now. Removed from the specimen pages; definitions retained in code until Andii confirms they are no longer necessary. */
         --haze-1000: oklch(16.11% 0.0639 276.48);
         --haze-950: oklch(17.5% 0.054 285.88);
         --haze-900: oklch(22.5% 0.046 285.88);
@@ -727,6 +727,7 @@
       }
       [data-scheme="midnight-light"] { --surface-bg: var(--midnight-25); --surface-bg-1: var(--midnight-50); --text-fg-1: var(--midnight-1000); --text-fg-2: var(--midnight-700); --surface-border: var(--midnight-200); --action-bg-1: var(--midnight-700); --action-border: var(--midnight-700); --action-fg-1: var(--midnight-25); }
       [data-scheme="midnight-dark"] { --surface-bg: var(--midnight-1000); --surface-bg-1: var(--midnight-900); --text-fg-1: var(--midnight-25); --text-fg-2: var(--midnight-300); --surface-border: var(--midnight-800); --action-bg-1: var(--midnight-200); --action-border: var(--midnight-200); --action-fg-1: var(--midnight-1000); }
+      /* Haze schemes — DEPRECATED 2026-10-22 (Andii): no longer rendered; retained in code until he confirms they are no longer necessary. */
       [data-scheme="haze-light"] { --surface-bg: var(--haze-25); --surface-bg-1: var(--haze-50); --text-fg-1: var(--haze-1000); --text-fg-2: var(--haze-700); --surface-border: var(--haze-200); --action-bg-1: var(--haze-800); --action-border: var(--haze-800); --action-fg-1: var(--haze-25); }
       [data-scheme="haze-dark"] { --surface-bg: var(--haze-1000); --surface-bg-1: var(--haze-900); --text-fg-1: var(--haze-25); --text-fg-2: var(--haze-300); --surface-border: var(--haze-800); --action-bg-1: var(--haze-200); --action-border: var(--haze-200); --action-fg-1: var(--haze-1000); }
       [data-scheme="purple-rain-light"] { --surface-bg: var(--purple-rain-25); --surface-bg-1: var(--purple-rain-50); --text-fg-1: var(--purple-rain-1000); --text-fg-2: var(--purple-rain-700); --surface-border: var(--purple-rain-200); --action-bg-1: var(--purple-rain-700); --action-border: var(--purple-rain-700); --action-fg-1: var(--purple-rain-25); }
@@ -741,10 +742,10 @@
       [data-scheme="cobalt-dark"] { --surface-bg: var(--cobalt-1000); --surface-bg-1: var(--cobalt-900); --text-fg-1: var(--cobalt-25); --text-fg-2: var(--cobalt-300); --surface-border: var(--cobalt-800); --action-bg-1: var(--cobalt-200); --action-border: var(--cobalt-200); --action-fg-1: var(--cobalt-1000); }
 
       /* ============================================================
-         PAGE SCOPE — the page itself is a Haze scope, filled by the
-         same slot contract as any [data-scheme] panel: the values
-         below are the haze-light recipe, and the dark blocks swap in
-         the haze-dark recipe (same steps, same roles). The nav's
+         PAGE SCOPE — the page itself is a Midnight scope, filled by
+         the same slot contract as any [data-scheme] panel: the values
+         below are the midnight-light recipe, and the dark blocks swap
+         in the midnight-dark recipe (same steps, same roles). The nav's
          mode toggle sets data-mode on <html> — light / dark /
          system; "system" hands the choice to prefers-color-scheme
          via the media block. Page chrome reads the slots, plus the
@@ -756,56 +757,56 @@
          that colour is their content, not their chrome.
          ============================================================ */
       :root {
-        --surface-bg: var(--haze-25);
-        --surface-bg-1: var(--haze-50);
-        --text-fg-1: var(--haze-1000);
-        --text-fg-2: var(--haze-700);
-        --surface-border: var(--haze-200);
-        --action-bg-1: var(--haze-800);
-        --action-border: var(--haze-800);
-        --action-fg-1: var(--haze-25);
-        --page-fill: var(--haze-100);
-        --page-line: var(--haze-300);
-        --page-dim: var(--haze-300);
+        --surface-bg: var(--midnight-25);
+        --surface-bg-1: var(--midnight-50);
+        --text-fg-1: var(--midnight-1000);
+        --text-fg-2: var(--midnight-700);
+        --surface-border: var(--midnight-200);
+        --action-bg-1: var(--midnight-700);
+        --action-border: var(--midnight-700);
+        --action-fg-1: var(--midnight-25);
+        --page-fill: var(--midnight-100);
+        --page-line: var(--midnight-300);
+        --page-dim: var(--midnight-300);
         --brand-ink: var(--midnight-1000);
         --brand-line: var(--midnight-900);
-        --brand-faint: var(--haze-200);
+        --brand-faint: var(--midnight-200);
         color-scheme: light;
       }
       html[data-mode="system"] { color-scheme: light dark; }
       html[data-mode="dark"] {
-        --surface-bg: var(--haze-1000);
-        --surface-bg-1: var(--haze-900);
-        --text-fg-1: var(--haze-25);
-        --text-fg-2: var(--haze-300);
-        --surface-border: var(--haze-800);
-        --action-bg-1: var(--haze-200);
-        --action-border: var(--haze-200);
-        --action-fg-1: var(--haze-1000);
-        --page-fill: var(--haze-800);
-        --page-line: var(--haze-700);
-        --page-dim: var(--haze-500);
+        --surface-bg: var(--midnight-1000);
+        --surface-bg-1: var(--midnight-900);
+        --text-fg-1: var(--midnight-25);
+        --text-fg-2: var(--midnight-300);
+        --surface-border: var(--midnight-800);
+        --action-bg-1: var(--midnight-200);
+        --action-border: var(--midnight-200);
+        --action-fg-1: var(--midnight-1000);
+        --page-fill: var(--midnight-800);
+        --page-line: var(--midnight-700);
+        --page-dim: var(--midnight-500);
         --brand-ink: var(--midnight-200);
         --brand-line: var(--midnight-300);
-        --brand-faint: var(--haze-800);
+        --brand-faint: var(--midnight-700);
         color-scheme: dark;
       }
       @media (prefers-color-scheme: dark) {
         html[data-mode="system"] {
-          --surface-bg: var(--haze-1000);
-          --surface-bg-1: var(--haze-900);
-          --text-fg-1: var(--haze-25);
-          --text-fg-2: var(--haze-300);
-          --surface-border: var(--haze-800);
-          --action-bg-1: var(--haze-200);
-          --action-border: var(--haze-200);
-          --action-fg-1: var(--haze-1000);
-          --page-fill: var(--haze-800);
-          --page-line: var(--haze-700);
-          --page-dim: var(--haze-500);
+          --surface-bg: var(--midnight-1000);
+          --surface-bg-1: var(--midnight-900);
+          --text-fg-1: var(--midnight-25);
+          --text-fg-2: var(--midnight-300);
+          --surface-border: var(--midnight-800);
+          --action-bg-1: var(--midnight-200);
+          --action-border: var(--midnight-200);
+          --action-fg-1: var(--midnight-1000);
+          --page-fill: var(--midnight-800);
+          --page-line: var(--midnight-700);
+          --page-dim: var(--midnight-500);
           --brand-ink: var(--midnight-200);
           --brand-line: var(--midnight-300);
-          --brand-faint: var(--haze-800);
+          --brand-faint: var(--midnight-700);
           color-scheme: dark;
         }
       }
@@ -871,7 +872,8 @@
       /* Header + top row */
       .site-head { padding-top: var(--space-200-300); padding-bottom: var(--space-150); }
       /* The wordmark is the one Midnight brand moment on the page; every
-         other default is sourced from Haze, the page-level workhorse. */
+         other default is sourced from Midnight too, the page-level
+         workhorse and default neutral. */
       .site-head h1 { font-size: var(--step-300); font-weight: 700; color: var(--brand-ink); }
       .site-head .subtitle {
         margin-top: var(--space-60);
@@ -1103,18 +1105,18 @@
 
       /* Phone widths (≤40rem): the row tightens one more step so it
          still fits at 390px — the links drop to --step-70, their gaps
-         to --space-30, the Mode Switch's padding slims, and the logo slot
+         to --space-60, the Mode Switch's padding slims, and the logo slot
          turns flexible: the wordmark scales down (width 100% with
          height auto keeps its aspect) to absorb whatever width the
          links and Mode Switch don't take, so the single row holds with
          no page-level overflow. The cluster's --space-200 separation
          is part of what the flexing wordmark slot absorbs. */
       @media (max-width: 40rem) {
-        .top-row .u-container { gap: var(--space-30); }
+        .top-row .u-container { gap: var(--space-60); }
         .top-row .u-container > a { flex: 0 1 6.667rem; min-width: 0; }
         .brand-logo { width: 100%; height: auto; }
         .nav-cluster { flex: none; }
-        .page-links { flex: none; gap: var(--space-30); }
+        .page-links { flex: none; gap: var(--space-60); }
         .page-links a { font-size: var(--step-70); }
         .selector-btn-trigger,
         .selector-btn-option { padding: 5px 7px; }
@@ -1479,7 +1481,7 @@
 
       /* ---------- Element inspector (debug tool) ----------
          Fixed overlay UI, so it never shifts page layout. Styled from the
-         page defaults (Haze) with a Midnight brand outline on the toggle —
+         page defaults (Midnight) with a Midnight brand outline on the toggle —
          the one deliberate brand accent, matching the wordmark. */
       #inspector-root { position: fixed; inset: 0; z-index: 90; pointer-events: none; }
       #inspect-toggle {
@@ -1740,7 +1742,7 @@
       .stage-body .selector-btn { display: inline-block; vertical-align: top; }
       /* Selector Button inside a scheme scope: the deselected option's
          hover highlight takes the scope's raised surface step —
-         --page-fill is a page-scope token and would stay Haze-light
+         --page-fill is a page-scope token and would stay page-light
          inside a dark stage. The demo instance's trigger glyph is
          driven by its own selection, not the page's data-mode. */
       [data-scheme] .selector-btn-option:not([aria-pressed="true"]):hover { background: var(--surface-bg-1); }
@@ -1861,7 +1863,7 @@
       <div class="page-intro">
         <p class="kicker">Design System Specimen — Components</p>
         <h2>Components</h2>
-        <p>The first real components, built as a test of the token architecture. Each one consumes the eight scheme slots and the global scales — never a colour family directly — so a single implementation re-skins under any scheme. Each is shown live in a stage you can re-scope across all seven families and both modes, and each ships with the contract it is built and tested against: a truth table (inputs &rarr; rendered output, don&rsquo;t-cares compressed) and, where behaviour runs over time, its transitions. The first set: the selector button, the toggle switch, and the action buttons.</p>
+        <p>The first real components, built as a test of the token architecture. Each one consumes the eight scheme slots and the global scales — never a colour family directly — so a single implementation re-skins under any scheme. Each is shown live in a stage you can re-scope across all six families and both modes, and each ships with the contract it is built and tested against: a truth table (inputs &rarr; rendered output, don&rsquo;t-cares compressed) and, where behaviour runs over time, its transitions. The first set: the selector button, the toggle switch, and the action buttons.</p>
       </div>
 
       <!-- ============ Component 01 — Selector Button ============ -->
@@ -1878,8 +1880,7 @@
           <div class="stage-bar">
             <span class="stage-bar-label">Stage scope</span>
             <div class="scope-chips" role="group" aria-label="Stage family">
-              <button type="button" class="scope-chip" data-fam-chip="midnight" aria-pressed="false">Midnight</button>
-              <button type="button" class="scope-chip" data-fam-chip="haze" aria-pressed="true">Haze</button>
+              <button type="button" class="scope-chip" data-fam-chip="midnight" aria-pressed="true">Midnight</button>
               <button type="button" class="scope-chip" data-fam-chip="purple-rain" aria-pressed="false">Purple Rain</button>
               <button type="button" class="scope-chip" data-fam-chip="fern" aria-pressed="false">Fern</button>
               <button type="button" class="scope-chip" data-fam-chip="cerise" aria-pressed="false">Cerise</button>
@@ -1890,9 +1891,9 @@
               <button type="button" class="scope-chip" data-mode-chip="light" aria-pressed="true">Light</button>
               <button type="button" class="scope-chip" data-mode-chip="dark" aria-pressed="false">Dark</button>
             </div>
-            <span class="scope-name" data-scope-name>haze-light</span>
+            <span class="scope-name" data-scope-name>midnight-light</span>
           </div>
-          <div class="stage-body stage-body-sel" data-stage-body data-scheme="haze-light">
+          <div class="stage-body stage-body-sel" data-stage-body data-scheme="midnight-light">
             <div class="selector-btn" data-demo-selector data-open="false">
               <button type="button" class="selector-btn-trigger" data-demo-selector-trigger aria-haspopup="true" aria-expanded="false" aria-controls="demo-selector-options" aria-label="Demo selector: Alpha">
                 <span class="selector-btn-current demo-selector-current" aria-hidden="true"><svg data-demo-glyph="alpha" class="is-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8"/></svg><svg data-demo-glyph="beta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.5 20 19.5H4z"/></svg><svg data-demo-glyph="gamma" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="5" width="14" height="14"/></svg></span>
@@ -2002,8 +2003,7 @@
           <div class="stage-bar">
             <span class="stage-bar-label">Stage scope</span>
             <div class="scope-chips" role="group" aria-label="Stage family">
-              <button type="button" class="scope-chip" data-fam-chip="midnight" aria-pressed="false">Midnight</button>
-              <button type="button" class="scope-chip" data-fam-chip="haze" aria-pressed="true">Haze</button>
+              <button type="button" class="scope-chip" data-fam-chip="midnight" aria-pressed="true">Midnight</button>
               <button type="button" class="scope-chip" data-fam-chip="purple-rain" aria-pressed="false">Purple Rain</button>
               <button type="button" class="scope-chip" data-fam-chip="fern" aria-pressed="false">Fern</button>
               <button type="button" class="scope-chip" data-fam-chip="cerise" aria-pressed="false">Cerise</button>
@@ -2014,9 +2014,9 @@
               <button type="button" class="scope-chip" data-mode-chip="light" aria-pressed="true">Light</button>
               <button type="button" class="scope-chip" data-mode-chip="dark" aria-pressed="false">Dark</button>
             </div>
-            <span class="scope-name" data-scope-name>haze-light</span>
+            <span class="scope-name" data-scope-name>midnight-light</span>
           </div>
-          <div class="stage-body" data-stage-body data-scheme="haze-light">
+          <div class="stage-body" data-stage-body data-scheme="midnight-light">
             <div class="demo-list">
               <div class="demo-item">
                 <button type="button" class="toggle" role="switch" aria-checked="true" data-toggle>
@@ -2101,7 +2101,7 @@
           </tbody>
         </table>
         <p class="comp-note">Geometry: track 2.75rem &times; 1.5rem; knob 1.125rem, borderless, sitting 3px from the track&rsquo;s outer edge in both states — the knob rests 0.125rem inside the track&rsquo;s padding box and the 1px border makes up the rest, so the 1.25rem ON travel lands it symmetric. Activation (click, Space, or Enter) flips <code>aria-checked</code> and the knob travels over <code>--duration-100</code> / <code>--ease-out</code>; under reduced motion it snaps.</p>
-        <p class="comp-note">Invariant: <code>--action-border</code> = <code>--action-bg-1</code> in all 14 schemes, so the OFF outline always matches the ON fill. The disabled row is the one the specimen&rsquo;s scheme-card prototype never exercised — it is codified here first.</p>
+        <p class="comp-note">Invariant: <code>--action-border</code> = <code>--action-bg-1</code> in all 12 schemes, so the OFF outline always matches the ON fill. The disabled row is the one the specimen&rsquo;s scheme-card prototype never exercised — it is codified here first.</p>
       </section>
 
       <!-- ============ Component 03 — Action buttons ============ -->
@@ -2117,8 +2117,7 @@
           <div class="stage-bar">
             <span class="stage-bar-label">Stage scope</span>
             <div class="scope-chips" role="group" aria-label="Stage family">
-              <button type="button" class="scope-chip" data-fam-chip="midnight" aria-pressed="false">Midnight</button>
-              <button type="button" class="scope-chip" data-fam-chip="haze" aria-pressed="true">Haze</button>
+              <button type="button" class="scope-chip" data-fam-chip="midnight" aria-pressed="true">Midnight</button>
               <button type="button" class="scope-chip" data-fam-chip="purple-rain" aria-pressed="false">Purple Rain</button>
               <button type="button" class="scope-chip" data-fam-chip="fern" aria-pressed="false">Fern</button>
               <button type="button" class="scope-chip" data-fam-chip="cerise" aria-pressed="false">Cerise</button>
@@ -2129,9 +2128,9 @@
               <button type="button" class="scope-chip" data-mode-chip="light" aria-pressed="true">Light</button>
               <button type="button" class="scope-chip" data-mode-chip="dark" aria-pressed="false">Dark</button>
             </div>
-            <span class="scope-name" data-scope-name>haze-light</span>
+            <span class="scope-name" data-scope-name>midnight-light</span>
           </div>
-          <div class="stage-body" data-stage-body data-scheme="haze-light">
+          <div class="stage-body" data-stage-body data-scheme="midnight-light">
             <div class="demo-actions">
               <button type="button" class="state-btn state-btn-primary" data-action-name="Primary action"><span class="state-btn-label">Primary action</span></button>
               <button type="button" class="state-btn state-btn-secondary" data-action-name="Secondary action"><span class="state-btn-label">Secondary action</span></button>
@@ -2194,7 +2193,7 @@
             </tr>
           </tbody>
         </table>
-        <p class="comp-note">Invariant: <code>--action-border</code> mirrors <code>--action-bg-1</code> in all 14 schemes — Haze light&rsquo;s F-800 exception included — so Secondary&rsquo;s outline is always Primary&rsquo;s fill colour, and the pair can never drift apart. The stage buttons are live: activate one and the readout records it; the disabled pair is inert, exactly as the last row specifies.</p>
+        <p class="comp-note">Invariant: <code>--action-border</code> mirrors <code>--action-bg-1</code> in all 12 schemes, so Secondary&rsquo;s outline is always Primary&rsquo;s fill colour, and the pair can never drift apart. The stage buttons are live: activate one and the readout records it; the disabled pair is inert, exactly as the last row specifies.</p>
       </section>
 
       <footer class="page-foot">
@@ -2248,13 +2247,13 @@
                captured at the document and swallowed, so inspecting never
                triggers the element's own behaviour. */
             var SLOT_NAMES = ["--surface-bg", "--surface-bg-1", "--surface-border", "--text-fg-1", "--text-fg-2", "--action-bg-1", "--action-fg-1", "--action-border"];
-            var PALETTE_FAMILIES = ["midnight", "haze", "purple-rain", "fern", "cerise", "marigold", "cobalt"];
+            var PALETTE_FAMILIES = ["midnight", "purple-rain", "fern", "cerise", "marigold", "cobalt"];
             var PALETTE_STEPS = [1000, 950, 900, 800, 700, 500, 300, 200, 100, 50, 25];
             function normVal(v) { return (v || "").replace(/\s+/g, " ").trim(); }
             /* Map every resolved palette value back to its token name, so a
                resolved slot can be annotated with the step it came from
                (e.g. oklch(…) → --cerise-200). First writer wins on collisions
-               (Haze and Midnight share some endpoint values). */
+               (families can share endpoint values). */
             var valueToToken = {};
             PALETTE_FAMILIES.forEach(function (f) {
               PALETTE_STEPS.forEach(function (s) {
@@ -2417,7 +2416,7 @@
     
             function scopeOf(el) {
               var scoped = el.closest ? el.closest("[data-scheme]") : null;
-              if (!scoped) return { el: null, value: null, family: null, mode: null, text: "page default (Haze)" };
+              if (!scoped) return { el: null, value: null, family: null, mode: null, text: "page default (Midnight)" };
               var v = scoped.getAttribute("data-scheme");
               var mode = /-dark$/.test(v) ? "dark" : (/-light$/.test(v) ? "light" : "");
               var family = mode ? v.slice(0, v.length - mode.length - 1) : v;
@@ -2506,7 +2505,7 @@
                 });
                 sections.push({ title: "Scheme slots — " + scope.value, lines: slotLines });
               } else {
-                sections.push({ title: "Scheme slots", lines: ["not defined — no [data-scheme] scope; the page default (Haze) defines no scheme slots"] });
+                sections.push({ title: "Scheme slots", lines: ["not defined — no [data-scheme] scope; the page default (Midnight) defines no scheme slots"] });
               }
               return sections;
             }
@@ -2781,7 +2780,7 @@
           var body = stage.querySelector("[data-stage-body]");
           var name = stage.querySelector("[data-scope-name]");
           function current() {
-            var s = body.getAttribute("data-scheme") || "haze-light";
+            var s = body.getAttribute("data-scheme") || "midnight-light";
             var mode = s.slice(-5) === "-dark" ? "dark" : "light";
             return { fam: s.slice(0, s.length - mode.length - 1), mode: mode };
           }

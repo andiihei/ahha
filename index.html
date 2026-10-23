@@ -21,18 +21,18 @@
       :root {
         /* Midnight */
         --midnight-1000: oklch(16.11% 0.0639 276.48);
-        --midnight-950: oklch(17.5% 0.066 285.88);
-        --midnight-900: oklch(22.5% 0.088 285.88);
-        --midnight-800: oklch(31.5% 0.125 285.88);
-        --midnight-700: oklch(43% 0.171 285.88);
-        --midnight-500: oklch(57% 0.17 285.88);
-        --midnight-300: oklch(70.5% 0.11 285.88);
-        --midnight-200: oklch(82.5% 0.059 285.88);
-        --midnight-100: oklch(91% 0.026 285.88);
-        --midnight-50: oklch(96% 0.01 285.88);
+        --midnight-950: oklch(17.5% 0.084 285.88);
+        --midnight-900: oklch(22.5% 0.096 285.88);
+        --midnight-800: oklch(31.5% 0.102 285.88);
+        --midnight-700: oklch(43% 0.1 285.88);
+        --midnight-500: oklch(57% 0.094 285.88);
+        --midnight-300: oklch(70.5% 0.082 285.88);
+        --midnight-200: oklch(82.5% 0.066 285.88);
+        --midnight-100: oklch(91% 0.045 285.88);
+        --midnight-50: oklch(96% 0.02 285.88);
         --midnight-25: oklch(98% 0.004 285.88);
 
-        /* Haze (formerly Neutral) */
+        /* Haze (formerly Neutral) — DEPRECATED 2026-10-22 (Andii): Midnight is the default neutral now. Removed from the specimen pages; definitions retained in code until Andii confirms they are no longer necessary. */
         --haze-1000: oklch(16.11% 0.0639 276.48);
         --haze-950: oklch(17.5% 0.054 285.88);
         --haze-900: oklch(22.5% 0.046 285.88);
@@ -739,10 +739,10 @@
       [data-scheme="cobalt-dark"] { --surface-bg: var(--cobalt-1000); --surface-bg-1: var(--cobalt-900); --text-fg-1: var(--cobalt-25); --text-fg-2: var(--cobalt-300); --surface-border: var(--cobalt-800); --action-bg-1: var(--cobalt-200); --action-border: var(--cobalt-200); --action-fg-1: var(--cobalt-1000); }
 
       /* ============================================================
-         PAGE SCOPE — the page itself is a Haze scope, filled by the
+         PAGE SCOPE — the page itself is a Midnight scope, filled by the
          same slot contract as any [data-scheme] panel: the values
-         below are the haze-light recipe, and the dark blocks swap in
-         the haze-dark recipe (same steps, same roles). The nav's
+         below are the midnight-light recipe, and the dark blocks swap in
+         the midnight-dark recipe (same steps, same roles). The nav's
          mode toggle sets data-mode on <html> — light / dark /
          system; "system" hands the choice to prefers-color-scheme
          via the media block. Page chrome reads the slots, plus the
@@ -754,56 +754,56 @@
          that colour is their content, not their chrome.
          ============================================================ */
       :root {
-        --surface-bg: var(--haze-25);
-        --surface-bg-1: var(--haze-50);
-        --text-fg-1: var(--haze-1000);
-        --text-fg-2: var(--haze-700);
-        --surface-border: var(--haze-200);
-        --action-bg-1: var(--haze-800);
-        --action-border: var(--haze-800);
-        --action-fg-1: var(--haze-25);
-        --page-fill: var(--haze-100);
-        --page-line: var(--haze-300);
-        --page-dim: var(--haze-300);
+        --surface-bg: var(--midnight-25);
+        --surface-bg-1: var(--midnight-50);
+        --text-fg-1: var(--midnight-1000);
+        --text-fg-2: var(--midnight-700);
+        --surface-border: var(--midnight-200);
+        --action-bg-1: var(--midnight-700);
+        --action-border: var(--midnight-700);
+        --action-fg-1: var(--midnight-25);
+        --page-fill: var(--midnight-100);
+        --page-line: var(--midnight-300);
+        --page-dim: var(--midnight-300);
         --brand-ink: var(--midnight-1000);
         --brand-line: var(--midnight-900);
-        --brand-faint: var(--haze-200);
+        --brand-faint: var(--midnight-200);
         color-scheme: light;
       }
       html[data-mode="system"] { color-scheme: light dark; }
       html[data-mode="dark"] {
-        --surface-bg: var(--haze-1000);
-        --surface-bg-1: var(--haze-900);
-        --text-fg-1: var(--haze-25);
-        --text-fg-2: var(--haze-300);
-        --surface-border: var(--haze-800);
-        --action-bg-1: var(--haze-200);
-        --action-border: var(--haze-200);
-        --action-fg-1: var(--haze-1000);
-        --page-fill: var(--haze-800);
-        --page-line: var(--haze-700);
-        --page-dim: var(--haze-500);
+        --surface-bg: var(--midnight-1000);
+        --surface-bg-1: var(--midnight-900);
+        --text-fg-1: var(--midnight-25);
+        --text-fg-2: var(--midnight-300);
+        --surface-border: var(--midnight-800);
+        --action-bg-1: var(--midnight-200);
+        --action-border: var(--midnight-200);
+        --action-fg-1: var(--midnight-1000);
+        --page-fill: var(--midnight-800);
+        --page-line: var(--midnight-700);
+        --page-dim: var(--midnight-500);
         --brand-ink: var(--midnight-200);
         --brand-line: var(--midnight-300);
-        --brand-faint: var(--haze-800);
+        --brand-faint: var(--midnight-700);
         color-scheme: dark;
       }
       @media (prefers-color-scheme: dark) {
         html[data-mode="system"] {
-          --surface-bg: var(--haze-1000);
-          --surface-bg-1: var(--haze-900);
-          --text-fg-1: var(--haze-25);
-          --text-fg-2: var(--haze-300);
-          --surface-border: var(--haze-800);
-          --action-bg-1: var(--haze-200);
-          --action-border: var(--haze-200);
-          --action-fg-1: var(--haze-1000);
-          --page-fill: var(--haze-800);
-          --page-line: var(--haze-700);
-          --page-dim: var(--haze-500);
+          --surface-bg: var(--midnight-1000);
+          --surface-bg-1: var(--midnight-900);
+          --text-fg-1: var(--midnight-25);
+          --text-fg-2: var(--midnight-300);
+          --surface-border: var(--midnight-800);
+          --action-bg-1: var(--midnight-200);
+          --action-border: var(--midnight-200);
+          --action-fg-1: var(--midnight-1000);
+          --page-fill: var(--midnight-800);
+          --page-line: var(--midnight-700);
+          --page-dim: var(--midnight-500);
           --brand-ink: var(--midnight-200);
           --brand-line: var(--midnight-300);
-          --brand-faint: var(--haze-800);
+          --brand-faint: var(--midnight-700);
           color-scheme: dark;
         }
       }
@@ -872,7 +872,7 @@
       /* Header + top row */
       .site-head { padding-top: var(--space-200-300); padding-bottom: var(--space-150); }
       /* The wordmark is the one Midnight brand moment on the page; every
-         other default is sourced from Haze, the page-level workhorse. */
+         other default is sourced from Midnight, the page-level neutral. */
       .site-head h1 { font-size: var(--step-300); font-weight: 700; color: var(--brand-ink); }
       .site-head .subtitle {
         margin-top: var(--space-60);
@@ -1111,11 +1111,11 @@
          no page-level overflow. The cluster's --space-200 separation
          is part of what the flexing wordmark slot absorbs. */
       @media (max-width: 40rem) {
-        .top-row .u-container { gap: var(--space-30); }
+        .top-row .u-container { gap: var(--space-60); }
         .top-row .u-container > a { flex: 0 1 6.667rem; min-width: 0; }
         .brand-logo { width: 100%; height: auto; }
         .nav-cluster { flex: none; }
-        .page-links { flex: none; gap: var(--space-30); }
+        .page-links { flex: none; gap: var(--space-60); }
         .page-links a { font-size: var(--step-70); }
         .selector-btn-trigger,
         .selector-btn-option { padding: 5px 7px; }
@@ -1418,8 +1418,8 @@
       .swatch:hover { transform: translateY(-2px); }
       .swatch .step-num { font-weight: 700; font-size: var(--step-80); }
       .swatch .step-val { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 10.5px; line-height: 1.35; overflow-wrap: anywhere; opacity: 0.92; }
-      .swatch.on-dark { color: var(--haze-25); }
-      .swatch.on-light { color: var(--haze-1000); }
+      .swatch.on-dark { color: var(--midnight-25); }
+      .swatch.on-light { color: var(--midnight-1000); }
       @media (max-width: 900px) {
         .ramp { grid-template-columns: repeat(4, 1fr); }
         .swatch { min-height: 76px; }
@@ -1787,7 +1787,7 @@
         pointer-events: none;
       }
       .grid-overlay[hidden] { display: none; }
-      .grid-overlay i { background: color-mix(in oklch, var(--haze-500) 22%, transparent); border-inline: 1px dashed var(--text-fg-2); }
+      .grid-overlay i { background: color-mix(in oklch, var(--midnight-500) 22%, transparent); border-inline: 1px dashed var(--text-fg-2); }
       .grid-tools { display: flex; flex-wrap: wrap; gap: var(--space-125); align-items: center; margin-bottom: var(--space-125); font-size: var(--step-80); }
       .toggle-btn {
         appearance: none;
@@ -1838,7 +1838,7 @@
       .radius-box {
         width: 84px;
         height: 84px;
-        background: var(--haze-700);
+        background: var(--midnight-700);
         margin-bottom: var(--space-50);
       }
       .radius-item .rname { font-family: "IBM Plex Mono", ui-monospace, monospace; font-weight: 600; font-size: var(--step-70); display: block; }
@@ -1881,63 +1881,118 @@
         align-items: flex-end;
         padding: var(--space-80);
       }
-      .cd-layer-label {
+      /* Legend below the stage (the in-stage layer labels had no room):
+         one row per layer, keyed by a swatch carrying that layer's own
+         fill/border treatment as it renders on the stage — the stage is
+         scoped midnight-light, so the swatches read the same Midnight
+         steps its slots resolve to. The readout text is live, written by
+         the demo script in the same numbers the labels used to carry.
+         Each row also carries that layer's own controls: a Concentric
+         switch, and a radius select that is enabled only while the
+         switch is off, so every element can be tested on its own. */
+      .concentric-legend {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-60);
+        margin-top: var(--space-100);
+      }
+      .cd-legend-entry {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--space-50) var(--space-100);
         font-family: "IBM Plex Mono", ui-monospace, monospace;
         font-size: var(--step-70);
         font-weight: 600;
+        color: var(--text-fg-1);
+      }
+      .cd-legend-readout { min-width: 10.5rem; }
+      /* The switch follows the system's toggle treatment: ON track is
+         --action-bg-1 with an --action-fg-1 knob; OFF track is outlined
+         like a secondary action (transparent fill, --action-border
+         outline, knob in --action-border); the knob is borderless in
+         both states, 18×18 with 20px of travel, and the track keeps its
+         1px border. Durations ride the motion tokens, so the
+         reduced-motion contract collapses the slide to instant. */
+      .cd-switch {
+        appearance: none;
+        font: inherit;
+        color: inherit;
+        background: none;
+        border: 0;
+        padding: 0;
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-50);
+        cursor: pointer;
+      }
+      .cd-switch-track {
         position: relative;
-        z-index: 2;
+        flex: none;
+        width: 2.625rem;
+        height: 1.375rem;
+        border: 1px solid var(--action-border);
+        border-radius: var(--radius-full);
+        background: transparent;
+        transition: background-color var(--duration-100) var(--ease-out);
       }
-      .cd-layer-1 > .cd-layer-label {
+      .cd-switch-knob {
         position: absolute;
-        right: 8px;
-        top: 8px;
-        color: var(--text-fg-2);
-        background: var(--surface-bg);
-        padding: 1px 7px;
-        border-radius: 9999px;
-        box-shadow: inset 0 0 0 1px var(--surface-border);
-      }
-      .cd-layer-2 > .cd-layer-label {
-        position: absolute;
-        right: 8px;
-        bottom: 8px;
-        color: var(--text-fg-2);
-        background: var(--surface-bg);
-        padding: 1px 7px;
-        border-radius: 9999px;
-        box-shadow: inset 0 0 0 1px var(--surface-border);
-      }
-      .cd-dot {
-        position: absolute;
+        top: 50%;
+        left: 0.125rem;
+        width: 1.125rem;
+        height: 1.125rem;
+        margin-top: -0.5625rem;
         border-radius: 50%;
-        transform: translate(-50%, -50%);
-        pointer-events: none;
-        z-index: 3;
+        background: var(--action-border);
+        transition: left var(--duration-100) var(--ease-out), background-color var(--duration-100) var(--ease-out);
       }
-      .cd-dot-1 { width: 15px; height: 15px; border: 2px solid var(--haze-700); background: transparent; }
-      .cd-dot-2 { width: 10px; height: 10px; border: 2px solid var(--haze-700); background: color-mix(in oklch, var(--haze-700) 25%, transparent); }
-      .cd-dot-3 { width: 6px; height: 6px; background: var(--haze-700); border: 1px solid var(--haze-1000); }
-      /* Marker placement is pure CSS, and each marker is a child of its own
-         layer: its left/top is the very expression that produces that
-         layer's top-left border-radius, so the marker's centre IS the
-         layer's arc centre by construction — in every engine, at every
-         viewport width, with no JS measurement in the path. (The previous
-         build placed the markers from JS using radii read back out of
-         getComputedStyle; engines serialise a var()/max()/calc() radius
-         inconsistently, and a low readback floored the nested radii to 0,
-         dropping markers 2 and 3 onto their layers' corner points while
-         the corners themselves rendered correctly.) The panel's radius is
-         var(--radius); Fixed mode gives the nested layers var(--radius-300)
-         (set inline by the demo script, mirrored here); Concentric mode's
-         rule below repeats the .u-concentric expression verbatim, reading
-         the same --inset the script sets on that layer. A floored radius
-         (0) puts the marker on the corner — a square corner's position. */
-      .cd-layer-1 > .cd-dot { left: var(--radius); top: var(--radius); }
-      .cd-layer-2 > .cd-dot, .cd-layer-3 > .cd-dot { left: var(--radius-300); top: var(--radius-300); }
-      .cd-layer.u-concentric > .cd-dot {
-        left: max(0rem, calc(var(--radius) - var(--inset, 0rem)));
-        top: max(0rem, calc(var(--radius) - var(--inset, 0rem)));
+      .cd-switch[aria-checked="true"] .cd-switch-track {
+        background: var(--action-bg-1);
+        border-color: var(--action-bg-1);
+      }
+      .cd-switch[aria-checked="true"] .cd-switch-knob {
+        left: 1.375rem;
+        background: var(--action-fg-1);
+      }
+      .cd-switch:focus-visible {
+        outline: 2px solid var(--action-border);
+        outline-offset: 2px;
+        border-radius: var(--radius-50);
+      }
+      .cd-radius-select {
+        font: inherit;
+        color: var(--text-fg-1);
+        background: var(--surface-bg-1);
+        border: 1px solid var(--surface-border);
+        border-radius: var(--radius-100);
+        padding: var(--space-30) var(--space-50);
+        cursor: pointer;
+      }
+      .cd-radius-select:focus-visible {
+        outline: 2px solid var(--action-border);
+        outline-offset: 2px;
+      }
+      .cd-radius-select:disabled {
+        opacity: var(--opacity-40);
+        cursor: not-allowed;
+      }
+      .cd-swatch {
+        width: 1.25rem;
+        height: 1.25rem;
+        border-radius: var(--radius-100);
+        flex: none;
+      }
+      .cd-swatch-1 {
+        background: var(--midnight-50);
+        box-shadow: inset 0 0 0 1.5px var(--midnight-200);
+      }
+      .cd-swatch-2 {
+        background: color-mix(in oklch, var(--midnight-50) 45%, var(--midnight-200));
+        box-shadow: inset 0 0 0 1.5px var(--midnight-200);
+      }
+      .cd-swatch-3 {
+        background: var(--midnight-700);
       }
       .concentric-status {
         font-size: var(--step-80);
@@ -2194,14 +2249,14 @@
         border-radius: 10px;
         overflow: hidden;
         border: 1px solid var(--surface-border);
-        background: linear-gradient(90deg, var(--haze-25) 0 50%, var(--haze-1000) 50% 100%);
+        background: linear-gradient(90deg, var(--midnight-25) 0 50%, var(--midnight-1000) 50% 100%);
         transition: transform var(--duration-50) var(--ease-out);
       }
       .opacity-swatch:hover .opacity-chip { transform: translateY(-2px); }
       .opacity-layer {
         position: absolute;
         inset: 0;
-        background: var(--haze-1000);
+        background: var(--midnight-1000);
       }
       .opacity-name {
         font-family: "IBM Plex Mono", ui-monospace, monospace;
@@ -2313,7 +2368,7 @@
 
       /* ---------- Element inspector (debug tool) ----------
          Fixed overlay UI, so it never shifts page layout. Styled from the
-         page defaults (Haze) with a Midnight brand outline on the toggle —
+         page defaults (Midnight) with a Midnight brand outline on the toggle —
          the one deliberate brand accent, matching the wordmark. */
       #inspector-root { position: fixed; inset: 0; z-index: 90; pointer-events: none; }
       #inspect-toggle {
@@ -2450,12 +2505,6 @@
       }
       #insp-fallback[hidden] { display: none; }
       body.inspecting *:not(#inspector-root):not(#inspector-root *) { cursor: crosshair !important; }
-      /* The concentric demo's arc-centre markers are click-through
-         decoration in normal use (pointer-events: none on .cd-dot), which
-         also made them impossible to select with the inspector — clicks
-         landed on the layer beneath. While inspecting, they take clicks
-         like any other element; with inspect off, nothing changes. */
-      body.inspecting .cd-dot { pointer-events: auto; }
       @media (max-width: 640px) {
         #inspect-toggle { right: 12px; bottom: 12px; }
         #insp-panel {
@@ -2545,7 +2594,7 @@
         <div class="section-head">
           <p class="kicker">Layer 1 — Primitives</p>
           <h2>Colour</h2>
-          <p>Seven families &times; eleven steps, generated on an ease-in-out curve, APCA-conforming, in OKLCH. Steps 400 and 600 are intentionally omitted. Click any swatch to copy its CSS variable.</p>
+          <p>Six families &times; eleven steps, generated on an ease-in-out curve, APCA-conforming, in OKLCH. Steps 400 and 600 are intentionally omitted. Click any swatch to copy its CSS variable.</p>
         </div>
         <div id="ramps"></div>
       </section>
@@ -2571,7 +2620,7 @@
             <dt>action-fg-1</dt><dd>Light: F-25</dd><dd>Dark: F-1000</dd>
             <dt>action-border</dt><dd>Light: F-700</dd><dd>Dark: F-200</dd>
           </dl>
-          <p style="margin-top: var(--space-60);"><code>--action-border</code> is the border of the secondary (outline) action — the button with a transparent background and its label in <code>--text-fg-1</code>. It mirrors the <code>action-bg-1</code> step in every scheme, so the secondary outline always tracks the primary action&rsquo;s colour. Slot names follow Donnie D&rsquo;Amato&rsquo;s <em>[purpose]-[property]-[priority]</em> construction from <em>Mise en Mode</em>, in a shortened form: <strong>1</strong> always means primary, <strong>2</strong> always means secondary, and <strong>3</strong> is reserved for auxiliary if it is ever needed. The dark derivation leans on the 300-on-1000 pairing (&asymp;6.6&ndash;8.3:1 across families) for secondary text, while actions on dark use the brighter F-200. The only exception: <strong>Haze light</strong> sets <code>action-bg-1</code> to F-800 rather than F-700 — and <code>action-border</code> mirrors it at F-800; every other light family uses F-700 for both. On dark, all families use F-200 for both <code>action-bg-1</code> and <code>action-border</code>.</p>
+          <p style="margin-top: var(--space-60);"><code>--action-border</code> is the border of the secondary (outline) action — the button with a transparent background and its label in <code>--text-fg-1</code>. It mirrors the <code>action-bg-1</code> step in every scheme, so the secondary outline always tracks the primary action&rsquo;s colour. Slot names follow Donnie D&rsquo;Amato&rsquo;s <em>[purpose]-[property]-[priority]</em> construction from <em>Mise en Mode</em>, in a shortened form: <strong>1</strong> always means primary, <strong>2</strong> always means secondary, and <strong>3</strong> is reserved for auxiliary if it is ever needed. The dark derivation leans on the 300-on-1000 pairing (&asymp;6.6&ndash;8.3:1 across families) for secondary text, while actions on dark use the brighter F-200. Every light family uses F-700 for both <code>action-bg-1</code> and <code>action-border</code>. On dark, all families use F-200 for both <code>action-bg-1</code> and <code>action-border</code>.</p>
         </div>
 
         <div class="scheme-controls">
@@ -2588,8 +2637,8 @@
           </div>
         </div>
 
-        <div class="scheme-panel hero-panel" id="hero-panel" data-scheme="haze-light">
-          <p class="scheme-panel-label" id="hero-label">Haze — Light</p>
+        <div class="scheme-panel hero-panel" id="hero-panel" data-scheme="midnight-light">
+          <p class="scheme-panel-label" id="hero-label">Midnight — Light</p>
           <div id="hero-cluster"></div>
         </div>
 
@@ -2736,7 +2785,7 @@
         <p class="radius-rule"><strong>The concentric rule:</strong> corners are concentric when their arcs share a centre, so <code>outer radius = inner radius + gap</code>. Equivalently, a nested element&rsquo;s radius is <code>governing radius &minus; total inset</code> — applied by the <code>.u-concentric</code> utility as <code>border-radius: max(0rem, calc(var(--radius) - var(--inset)))</code>. Because the inset is usually a fluid spacing token, the calc rides the token and the corners stay concentric at every viewport width; an inset larger than the radius floors at 0 — square corners, never a negative radius.</p>
 
         <h3 class="display" style="font-size: var(--step-140); margin-bottom: var(--space-60);">Concentric demo</h3>
-        <p style="font-size: var(--step-80); color: var(--text-fg-2); max-width: 46rem; margin-bottom: var(--space-125);">Three nested layers — panel, card, chip — governed by one radius, <code>--radius-300</code> (1.5rem · 24px). The markers show the top-left corner-arc centre of each layer: in Concentric mode the centres land on the same point at any gap while every radius stays above zero (a layer whose inset exceeds the radius floors to a square corner, which has no arc centre — its marker sits at its corner); in Fixed mode each layer keeps 1.5rem (24px) and the centres drift apart.</p>
+        <p style="font-size: var(--step-80); color: var(--text-fg-2); max-width: 46rem; margin-bottom: var(--space-125);">Three nested layers — panel, card, chip — under one governing radius, <code>--radius-300</code> (1.5rem · 24px). Each layer is set on its own in the legend below the stage: with its Concentric switch on, a layer&rsquo;s radius is its parent&rsquo;s actual radius minus the gap — the panel, outermost, takes the governing radius itself; with the switch off, the layer takes the fixed radius picked in its select, whatever its parent does, and its children still derive from that actual radius. The readout computes each layer&rsquo;s top-left corner-arc centre from its actual radius and its cumulative inset: a concentric layer shares its parent&rsquo;s centre, a layer whose inset exceeds its parent&rsquo;s radius floors to a square corner (which has no arc centre — its computed centre sits at its corner), and a fixed layer sets its own centre.</p>
 
         <div class="concentric-controls">
           <div class="control-group">
@@ -2747,27 +2796,58 @@
               <button type="button" data-gap-token="--space-200" data-gap-name="--space-200 · fluid 36–40px" aria-pressed="false">--space-200</button>
             </div>
           </div>
-          <div class="control-group">
-            <span id="cd-mode-label">Mode</span>
-            <div class="seg" role="group" aria-labelledby="cd-mode-label">
-              <button type="button" id="cd-mode-fixed" aria-pressed="false">Fixed</button>
-              <button type="button" id="cd-mode-concentric" aria-pressed="true">Concentric</button>
+        </div>
+
+        <div class="concentric-stage" data-scheme="midnight-light">
+          <div class="cd-layer cd-layer-1" id="cd-layer-1">
+            <div class="cd-layer cd-layer-2" id="cd-layer-2">
+              <div class="cd-layer cd-layer-3" id="cd-layer-3">
+              </div>
             </div>
           </div>
         </div>
-
-        <div class="concentric-stage" data-scheme="haze-light">
-          <div class="cd-layer cd-layer-1" id="cd-layer-1">
-            <span class="cd-layer-label" id="cd-label-1">Panel</span>
-            <div class="cd-layer cd-layer-2" id="cd-layer-2">
-              <span class="cd-layer-label" id="cd-label-2">Card</span>
-              <div class="cd-layer cd-layer-3" id="cd-layer-3">
-                <span class="cd-layer-label" id="cd-label-3">Chip</span>
-                <span class="cd-dot cd-dot-3" id="cd-dot-3" aria-hidden="true"></span>
-              </div>
-              <span class="cd-dot cd-dot-2" id="cd-dot-2" aria-hidden="true"></span>
-            </div>
-            <span class="cd-dot cd-dot-1" id="cd-dot-1" aria-hidden="true"></span>
+        <div class="concentric-legend" role="group" aria-label="Concentric demo legend and per-layer controls">
+          <div class="cd-legend-entry">
+            <span class="cd-swatch cd-swatch-1" aria-hidden="true"></span>
+            <span class="cd-legend-readout" id="cd-legend-1">Panel</span>
+            <button type="button" class="cd-switch" id="cd-switch-1" role="switch" aria-checked="true" aria-label="Panel — concentric"><span class="cd-switch-track" aria-hidden="true"><span class="cd-switch-knob"></span></span><span>Concentric</span></button>
+            <select class="cd-radius-select" id="cd-radius-1" aria-label="Panel — fixed radius" disabled>
+              <option value="--radius-0">--radius-0 · 0 · 0px</option>
+              <option value="--radius-25">--radius-25 · 0.125rem · 2px</option>
+              <option value="--radius-50">--radius-50 · 0.25rem · 4px</option>
+              <option value="--radius-100">--radius-100 · 0.5rem · 8px</option>
+              <option value="--radius-150">--radius-150 · 0.75rem · 12px</option>
+              <option value="--radius-250">--radius-250 · 1.25rem · 20px</option>
+              <option value="--radius-300" selected>--radius-300 · 1.5rem · 24px</option>
+            </select>
+          </div>
+          <div class="cd-legend-entry">
+            <span class="cd-swatch cd-swatch-2" aria-hidden="true"></span>
+            <span class="cd-legend-readout" id="cd-legend-2">Card</span>
+            <button type="button" class="cd-switch" id="cd-switch-2" role="switch" aria-checked="true" aria-label="Card — concentric"><span class="cd-switch-track" aria-hidden="true"><span class="cd-switch-knob"></span></span><span>Concentric</span></button>
+            <select class="cd-radius-select" id="cd-radius-2" aria-label="Card — fixed radius" disabled>
+              <option value="--radius-0">--radius-0 · 0 · 0px</option>
+              <option value="--radius-25">--radius-25 · 0.125rem · 2px</option>
+              <option value="--radius-50">--radius-50 · 0.25rem · 4px</option>
+              <option value="--radius-100">--radius-100 · 0.5rem · 8px</option>
+              <option value="--radius-150">--radius-150 · 0.75rem · 12px</option>
+              <option value="--radius-250">--radius-250 · 1.25rem · 20px</option>
+              <option value="--radius-300" selected>--radius-300 · 1.5rem · 24px</option>
+            </select>
+          </div>
+          <div class="cd-legend-entry">
+            <span class="cd-swatch cd-swatch-3" aria-hidden="true"></span>
+            <span class="cd-legend-readout" id="cd-legend-3">Chip</span>
+            <button type="button" class="cd-switch" id="cd-switch-3" role="switch" aria-checked="true" aria-label="Chip — concentric"><span class="cd-switch-track" aria-hidden="true"><span class="cd-switch-knob"></span></span><span>Concentric</span></button>
+            <select class="cd-radius-select" id="cd-radius-3" aria-label="Chip — fixed radius" disabled>
+              <option value="--radius-0">--radius-0 · 0 · 0px</option>
+              <option value="--radius-25">--radius-25 · 0.125rem · 2px</option>
+              <option value="--radius-50">--radius-50 · 0.25rem · 4px</option>
+              <option value="--radius-100">--radius-100 · 0.5rem · 8px</option>
+              <option value="--radius-150">--radius-150 · 0.75rem · 12px</option>
+              <option value="--radius-250">--radius-250 · 1.25rem · 20px</option>
+              <option value="--radius-300" selected>--radius-300 · 1.5rem · 24px</option>
+            </select>
           </div>
         </div>
         <p class="concentric-status" id="cd-status" role="status"></p>
@@ -2857,7 +2937,7 @@
         <div class="section-head">
           <p class="kicker">Layer 1 — Primitives</p>
           <h2>Opacity</h2>
-          <p>One global scale, defined once — opacities are <strong>not</strong> scoped per scheme. The colour schemes stay at eight slots and never override these values; interactive states are built by consuming steps from this scale directly. Naming follows the unified percentage convention: the number is the percentage of full opacity. Each swatch is the same ink — <code>--haze-1000</code> — laid at that step over a split light/dark backdrop, so what you see is the translucency itself. Click any swatch to copy its CSS variable.</p>
+          <p>One global scale, defined once — opacities are <strong>not</strong> scoped per scheme. The colour schemes stay at eight slots and never override these values; interactive states are built by consuming steps from this scale directly. Naming follows the unified percentage convention: the number is the percentage of full opacity. Each swatch is the same ink — <code>--midnight-1000</code> — laid at that step over a split light/dark backdrop, so what you see is the translucency itself. Click any swatch to copy its CSS variable.</p>
         </div>
 
         <div class="opacity-ramp" id="opacity-scale"></div>
@@ -2871,8 +2951,8 @@
 
         <h3 class="display" style="font-size: var(--step-140); margin: var(--space-200) 0 var(--space-100);">States, live</h3>
         <div class="states-grid">
-          <div class="scheme-panel" data-scheme="haze-light">
-            <p class="scheme-panel-label">Haze — Light</p>
+          <div class="scheme-panel" data-scheme="midnight-light">
+            <p class="scheme-panel-label">Midnight — Light</p>
             <p class="states-row-label">Enabled</p>
             <div class="cluster-actions" style="margin-bottom: 0;">
               <button type="button" class="state-btn state-btn-primary"><span class="state-btn-label">Primary action</span></button>
@@ -2885,8 +2965,8 @@
             </div>
             <p class="states-note">Hover or press the enabled actions to lay the ink layer over — 10% on hover, 15% pressed. Tab to one for the solid <code>--action-border</code> focus ring. The disabled pair sits at <code>--opacity-40</code> and does not respond. State changes transition on <code>--duration-50</code> with <code>--ease-in-out</code>.</p>
           </div>
-          <div class="scheme-panel" data-scheme="haze-dark">
-            <p class="scheme-panel-label">Haze — Dark</p>
+          <div class="scheme-panel" data-scheme="midnight-dark">
+            <p class="scheme-panel-label">Midnight — Dark</p>
             <p class="states-row-label">Enabled</p>
             <div class="cluster-actions" style="margin-bottom: 0;">
               <button type="button" class="state-btn state-btn-primary"><span class="state-btn-label">Primary action</span></button>
@@ -2965,8 +3045,7 @@
         }
 
         var FAMILIES = [
-          { id: "midnight", name: "Midnight", note: "The anchor family — elevation shadows reference its 1000." },
-          { id: "haze", name: "Haze", note: "Low-chroma sibling of Midnight; the neutral workhorse. Shares Midnight's endpoints." },
+          { id: "midnight", name: "Midnight", note: "The anchor family and the default neutral — elevation shadows reference its 1000." },
           { id: "purple-rain", name: "Purple Rain", note: "Fixed hue 310.12° throughout." },
           { id: "fern", name: "Fern", note: "Torsion ramp — teal 199.8° at the dark end walking to green 158° at the light end." },
           { id: "cerise", name: "Cerise", note: "Highest chroma in the set — 0.202 at step 500." },
@@ -3107,7 +3186,7 @@
         var heroPanel = document.getElementById("hero-panel");
         var heroLabel = document.getElementById("hero-label");
         document.getElementById("hero-cluster").appendChild(makeCluster());
-        var heroFamily = "haze";
+        var heroFamily = "midnight";
         var heroMode = "light";
         function applyHero() {
           heroPanel.setAttribute("data-scheme", heroFamily + "-" + heroMode);
@@ -3292,16 +3371,23 @@
         });
 
         /* ---------- 8b. Concentric demo ---------- */
-        var cdMode = "concentric";
+        /* Concentricity is per layer: each layer has a Concentric
+           switch (on by default) and a fixed-radius select, enabled
+           only while its switch is off. A concentric layer derives
+           from its parent's ACTUAL radius minus the gap — the panel,
+           outermost, takes the governing radius itself — so a fixed
+           layer re-bases the derivation for everything inside it,
+           which is what makes the concept testable per element. */
         var cdGapToken = "--space-100";
         var cdGapName = "--space-100 · fluid 18–20px";
-        var cdL1 = document.getElementById("cd-layer-1");
-        var cdL2 = document.getElementById("cd-layer-2");
-        var cdL3 = document.getElementById("cd-layer-3");
-        var cdDots = [document.getElementById("cd-dot-1"), document.getElementById("cd-dot-2"), document.getElementById("cd-dot-3")];
-        var cdLabels = [document.getElementById("cd-label-1"), document.getElementById("cd-label-2"), document.getElementById("cd-label-3")];
+        var cdLayers = [document.getElementById("cd-layer-1"), document.getElementById("cd-layer-2"), document.getElementById("cd-layer-3")];
+        var cdLabels = [document.getElementById("cd-legend-1"), document.getElementById("cd-legend-2"), document.getElementById("cd-legend-3")];
         var cdNames = ["Panel", "Card", "Chip"];
         var cdStatus = document.getElementById("cd-status");
+        var cdConcentric = [true, true, true];
+        var cdSwitches = [document.getElementById("cd-switch-1"), document.getElementById("cd-switch-2"), document.getElementById("cd-switch-3")];
+        var cdSelects = [document.getElementById("cd-radius-1"), document.getElementById("cd-radius-2"), document.getElementById("cd-radius-3")];
+        var CD_RADIUS_REM = { "--radius-0": 0, "--radius-25": 0.125, "--radius-50": 0.25, "--radius-100": 0.5, "--radius-150": 0.75, "--radius-250": 1.25, "--radius-300": 1.5 };
         function fmtRem(px) {
           var rootPx = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
           var v = Math.round((px / rootPx) * 10000) / 10000;
@@ -3309,84 +3395,85 @@
         }
         function fmtR(px) { return fmtRem(px) + " · " + fmtPx(px); }
         function updateConcentric() {
-          /* This function applies state only: the gap as padding, and the
-             mode as classes / --inset / inline radius. It does NOT place
-             the markers — each marker is a child of its own layer and is
-             positioned in CSS by the same expression that produces that
-             layer's border-radius (see the .cd-dot placement rules), so
-             its centre is the layer's arc centre by construction, in any
-             engine, and the fluid tokens keep it there across resizes.
-             (The previous build placed the markers from JS using a radius
-             read back out of getComputedStyle; engines serialise a
-             var()/max()/calc() radius inconsistently, and a low readback
-             floored the nested radii — markers 2 and 3 landed on their
-             layers' corner points while the corners rendered correctly.)
-             The radii and centres reported below are therefore MEASURED
-             from the rendered rects — marker centre minus layer corner —
-             never read back from a computed border-radius. */
-          cdL1.style.padding = "var(" + cdGapToken + ")";
-          cdL2.style.padding = "var(" + cdGapToken + ")";
-          var gap = parseFloat(getComputedStyle(cdL1).paddingTop) || 0;
+          /* This function applies state — the gap as padding on layers
+             1–2, then each layer's radius by its own setting — and
+             computes the readout from the governing values. Concentric
+             layers ride the real mechanism: the .u-concentric utility
+             reads the inherited --radius, and a FIXED layer re-scopes
+             --radius to its own token (the documented re-scoping move),
+             so a concentric child's --inset is only ever its distance
+             from the nearest ancestor that set --radius — one gap per
+             concentric step in between. Actual radii: a concentric
+             layer takes its parent's actual radius − gap, floored at 0
+             (the panel takes the governing radius); a fixed layer takes
+             its select's token. A layer's arc centre is its corner —
+             inset one gap per level — offset by its radius. The gap is
+             measured from the rendered padding, so the fluid tokens flow
+             through; nothing is read back from a computed border-radius,
+             which engines serialise inconsistently for var()/max()/calc()
+             values. Sub-half-pixel radii snap to 0 so the floored
+             wording triggers on the real thing, not on rounding. */
+          cdLayers[0].style.padding = "var(" + cdGapToken + ")";
+          cdLayers[1].style.padding = "var(" + cdGapToken + ")";
+          var gap = parseFloat(getComputedStyle(cdLayers[0]).paddingTop) || 0;
           var rootPx = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
-          if (cdMode === "concentric") {
-            cdL2.style.setProperty("--inset", (gap / rootPx) + "rem");
-            cdL3.style.setProperty("--inset", ((2 * gap) / rootPx) + "rem");
-            cdL2.classList.add("u-concentric");
-            cdL3.classList.add("u-concentric");
-            cdL2.style.removeProperty("border-radius");
-            cdL3.style.removeProperty("border-radius");
-          } else {
-            cdL2.classList.remove("u-concentric");
-            cdL3.classList.remove("u-concentric");
-            cdL2.style.borderRadius = "var(--radius-300)";
-            cdL3.style.borderRadius = "var(--radius-300)";
-          }
-          /* Measured geometry, in layer 1's coordinate space: a layer's
-             radius is the distance from its own top-left corner to its
-             marker's rendered centre; a centre is that marker centre
-             relative to layer 1's corner. A floored layer (radius 0) has
-             no arc centre — its marker sits on its corner, as the demo
-             copy states. Sub-half-pixel measurements snap to 0 so the
-             floored wording triggers on the real thing, not on rounding. */
-          var cdLayers = [cdL1, cdL2, cdL3];
-          var cdBase = cdL1.getBoundingClientRect();
-          var centres = [];
+          var cdR = 1.5 * rootPx;
           var radii = [];
-          cdLayers.forEach(function (layer, i) {
-            var lr = layer.getBoundingClientRect();
-            var dr = cdDots[i].getBoundingClientRect();
-            var cx = dr.left + dr.width / 2;
-            var cy = dr.top + dr.height / 2;
-            centres.push({ x: cx - cdBase.left, y: cy - cdBase.top });
-            var r = ((cx - lr.left) + (cy - lr.top)) / 2;
-            radii.push(r < 0.5 ? 0 : r);
+          var parentR = cdR;
+          cdNames.forEach(function (n, i) {
+            var r = cdConcentric[i] ? (i === 0 ? cdR : parentR - gap) : CD_RADIUS_REM[cdSelects[i].value] * rootPx;
+            r = r < 0.5 ? 0 : r;
+            radii.push(r);
+            parentR = r;
           });
+          if (cdConcentric[0]) cdLayers[0].style.removeProperty("--radius");
+          else cdLayers[0].style.setProperty("--radius", "var(" + cdSelects[0].value + ")");
+          var scopeIdx = 0;
+          [1, 2].forEach(function (i) {
+            var el = cdLayers[i];
+            if (cdConcentric[i]) {
+              el.classList.add("u-concentric");
+              el.style.removeProperty("border-radius");
+              el.style.removeProperty("--radius");
+              el.style.setProperty("--inset", (((i - scopeIdx) * gap) / rootPx) + "rem");
+            } else {
+              el.classList.remove("u-concentric");
+              el.style.removeProperty("--inset");
+              el.style.borderRadius = "var(" + cdSelects[i].value + ")";
+              el.style.setProperty("--radius", "var(" + cdSelects[i].value + ")");
+              scopeIdx = i;
+            }
+          });
+          var centres = radii.map(function (r, i) { return { x: i * gap + r, y: i * gap + r }; });
           cdLabels.forEach(function (lab, i) {
-            lab.textContent = cdNames[i] + " · r " + fmtR(radii[i]);
+            lab.textContent = cdNames[i] + " — " + fmtR(radii[i]);
           });
           cdStatus.innerHTML = "";
           var strong = document.createElement("strong");
-          strong.textContent = (cdMode === "concentric" ? "Concentric" : "Fixed") + " mode";
+          strong.textContent = cdNames.map(function (n, i) {
+            return n + (cdConcentric[i] ? " concentric" : " fixed " + cdSelects[i].value);
+          }).join(" · ");
           cdStatus.appendChild(strong);
           var detail = document.createElement("span");
           detail.className = "mono";
           var msg = " — gap " + cdGapName + " (now " + fmtPx(gap) + ") · radii: panel " + fmtR(radii[0]) + ", card " + fmtR(radii[1]) + ", chip " + fmtR(radii[2]);
-          if (cdMode === "concentric") {
-            var floored = [];
-            radii.forEach(function (r, i) { if (r === 0) floored.push(i); });
-            if (floored.length === 0) {
-              msg += " · all three arc centres coincide at " + fmtPx(centres[0].x) + ", " + fmtPx(centres[0].y);
-            } else {
-              var live = [];
-              radii.forEach(function (r, i) { if (r > 0) live.push(cdNames[i].toLowerCase()); });
-              if (live.length === 1) msg += " · arc centre of " + live[0] + " sits at " + fmtPx(centres[0].x) + ", " + fmtPx(centres[0].y);
-              else if (live.length) msg += " · arc centres of " + live.join(" and ") + " coincide at " + fmtPx(centres[0].x) + ", " + fmtPx(centres[0].y);
-              floored.forEach(function (i) {
-                msg += " · " + cdNames[i].toLowerCase() + " is floored to square (r 0) — a square corner has no arc centre, so its marker sits at its corner (" + fmtPx(centres[i].x) + ", " + fmtPx(centres[i].y) + ")";
-              });
-            }
+          var live = [], floored = [];
+          radii.forEach(function (r, i) { (r > 0 ? live : floored).push(i); });
+          if (live.length === 0) {
+            msg += " · all three layers are floored to square (r 0) — square corners have no arc centre; their corners sit at " + floored.map(function (i) { return fmtPx(i * gap) + ", " + fmtPx(i * gap); }).join(" / ");
           } else {
-            msg += " · arc centres at " + fmtPx(centres[0].x) + " / " + fmtPx(centres[1].x) + " / " + fmtPx(centres[2].x);
+            var c0 = centres[live[0]].x;
+            var same = live.every(function (i) { return Math.abs(centres[i].x - c0) < 0.01; });
+            if (same) {
+              if (live.length === 1) msg += " · arc centre of " + cdNames[live[0]].toLowerCase() + " sits at " + fmtPx(c0) + ", " + fmtPx(c0);
+              else if (live.length === 3) msg += " · all three arc centres coincide at " + fmtPx(c0) + ", " + fmtPx(c0);
+              else msg += " · arc centres of " + live.map(function (i) { return cdNames[i].toLowerCase(); }).join(" and ") + " coincide at " + fmtPx(c0) + ", " + fmtPx(c0);
+            } else {
+              msg += " · arc centres at " + live.map(function (i) { return fmtPx(centres[i].x); }).join(" / ");
+            }
+            floored.forEach(function (i) {
+              msg += " · " + cdNames[i].toLowerCase() + " is floored to square (r 0) — a square corner has no arc centre, so its corner is the point (" + fmtPx(centres[i].x) + ", " + fmtPx(centres[i].y) + ")";
+            });
           }
           detail.textContent = msg;
           cdStatus.appendChild(detail);
@@ -3401,24 +3488,22 @@
             updateConcentric();
           });
         });
-        var cdModeFixed = document.getElementById("cd-mode-fixed");
-        var cdModeConcentric = document.getElementById("cd-mode-concentric");
-        function setCdMode(mode) {
-          cdMode = mode;
-          cdModeFixed.setAttribute("aria-pressed", mode === "fixed" ? "true" : "false");
-          cdModeConcentric.setAttribute("aria-pressed", mode === "concentric" ? "true" : "false");
-          updateConcentric();
-        }
-        cdModeFixed.addEventListener("click", function () { setCdMode("fixed"); });
-        cdModeConcentric.addEventListener("click", function () { setCdMode("concentric"); });
+        cdSwitches.forEach(function (sw, i) {
+          sw.addEventListener("click", function () {
+            cdConcentric[i] = !cdConcentric[i];
+            sw.setAttribute("aria-checked", cdConcentric[i] ? "true" : "false");
+            cdSelects[i].disabled = cdConcentric[i];
+            updateConcentric();
+          });
+        });
+        cdSelects.forEach(function (sel) {
+          sel.addEventListener("change", function () { updateConcentric(); });
+        });
         updateConcentric();
-        /* The markers ride the fluid tokens in CSS and need no recalc, but
-           the readout numbers (gap px, radii, centres) are measured from
-           layout, so refresh them when the layout moves: a viewport resize
-           changes the fluid gap, and font load can settle the root size
-           the rem readouts are computed from. (The previous build had no
-           resize recalc at all, so its JS-placed markers also went stale
-           whenever the preview frame settled at a different width.) */
+        /* The readout numbers (gap px, radii, centres) derive from the
+           measured gap and the root size, so refresh them when the layout
+           moves: a viewport resize changes the fluid gap, and font load
+           can settle the root size the rem readouts are computed from. */
         var cdUpdateQueued = false;
         function queueCdUpdate() {
           if (cdUpdateQueued) return;
@@ -3640,13 +3725,13 @@
            captured at the document and swallowed, so inspecting never
            triggers the element's own behaviour. */
         var SLOT_NAMES = ["--surface-bg", "--surface-bg-1", "--surface-border", "--text-fg-1", "--text-fg-2", "--action-bg-1", "--action-fg-1", "--action-border"];
-        var PALETTE_FAMILIES = ["midnight", "haze", "purple-rain", "fern", "cerise", "marigold", "cobalt"];
+        var PALETTE_FAMILIES = ["midnight", "purple-rain", "fern", "cerise", "marigold", "cobalt"];
         var PALETTE_STEPS = [1000, 950, 900, 800, 700, 500, 300, 200, 100, 50, 25];
         function normVal(v) { return (v || "").replace(/\s+/g, " ").trim(); }
         /* Map every resolved palette value back to its token name, so a
            resolved slot can be annotated with the step it came from
            (e.g. oklch(…) → --cerise-200). First writer wins on collisions
-           (Haze and Midnight share some endpoint values). */
+           (some families share endpoint values). */
         var valueToToken = {};
         PALETTE_FAMILIES.forEach(function (f) {
           PALETTE_STEPS.forEach(function (s) {
@@ -3819,7 +3904,7 @@
           var scoped = el.closest ? el.closest("[data-scheme]") : null;
           if (!scoped) {
             var pm = pageMode();
-            return { el: null, value: null, family: "haze", mode: pm.resolved, text: "page scope (Haze — " + pm.resolved + ", via " + pm.setting + ")" };
+            return { el: null, value: null, family: "midnight", mode: pm.resolved, text: "page scope (Midnight — " + pm.resolved + ", via " + pm.setting + ")" };
           }
           var v = scoped.getAttribute("data-scheme");
           var mode = /-dark$/.test(v) ? "dark" : (/-light$/.test(v) ? "light" : "");
@@ -3914,11 +3999,11 @@
             var pageSlotLines = [];
             SLOT_NAMES.forEach(function (name) {
               var v = normVal(rootCs.getPropertyValue(name));
-              var tok = tokenForValue(v, "haze");
+              var tok = tokenForValue(v, "midnight");
               pageSlotLines.push(name + ": " + (v || "(unset)") + (tok ? "  (= " + tok + ")" : ""));
             });
             pageSlotLines.push("colour mode: " + pm2.setting + " → " + pm2.resolved);
-            sections.push({ title: "Scheme slots — page scope (Haze " + pm2.resolved + ")", lines: pageSlotLines });
+            sections.push({ title: "Scheme slots — page scope (Midnight " + pm2.resolved + ")", lines: pageSlotLines });
           }
           return sections;
         }
