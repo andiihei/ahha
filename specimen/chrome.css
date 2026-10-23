@@ -1,0 +1,672 @@
+/* ============================================================
+   PAGE SCOPE — the page itself is a Midnight scope, filled by the
+   same slot contract as any [data-scheme] panel: the values
+   below are the midnight-light recipe, and the dark blocks swap in
+   the midnight-dark recipe (same steps, same roles). The nav's
+   mode toggle sets data-mode on <html> — light / dark /
+   system; "system" hands the choice to prefers-color-scheme
+   via the media block. Page chrome reads the slots, plus the
+   few page-only steps the eight-slot contract doesn't cover
+   (--page-fill, --page-line, --page-dim) and the Midnight
+   brand steps (--brand-*) — never a family colour directly.
+   Specimens that ARE a family colour (the ramps, the spacing
+   bars, the opacity chip's two halves) keep reading the ramp:
+   that colour is their content, not their chrome.
+   ============================================================ */
+:root {
+  --page-fill: var(--neutral-100);
+  --page-line: var(--neutral-300);
+  --page-dim: var(--neutral-300);
+  --brand-ink: var(--neutral-1000);
+  --brand-line: var(--neutral-900);
+  --brand-faint: var(--neutral-200);
+}
+
+html[data-mode="system"] {
+  color-scheme: light dark;
+}
+
+html[data-mode="invert"] {
+  --page-fill: var(--neutral-800);
+  --page-line: var(--neutral-700);
+  --page-dim: var(--neutral-500);
+  --brand-ink: var(--neutral-200);
+  --brand-line: var(--neutral-300);
+  --brand-faint: var(--neutral-700);
+}
+
+@media (prefers-color-scheme: dark) {
+  html[data-mode="system"] {
+    --page-fill: var(--neutral-800);
+    --page-line: var(--neutral-700);
+    --page-dim: var(--neutral-500);
+    --brand-ink: var(--neutral-200);
+    --brand-line: var(--neutral-300);
+    --brand-faint: var(--neutral-700);
+  }
+}
+
+/* ============================================================
+   PAGE CHROME — built from the system itself
+   ============================================================ */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Guard against stray horizontal overflow inside the frame the page
+   is given: overflow-x: clip (not hidden) creates no scroll
+   container, so position: fixed elements (the docked pill bar)
+   keep anchoring to the viewport. The document itself is a normal
+   block root — it fills its frame's width by default; the frame's
+   size is the host's, not the page's. */
+html,
+body {
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  background: var(--surface-bg);
+  color: var(--text-fg-1);
+  font-family: var(--font-main);
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+  font-size: var(--step-100);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+.display {
+  font-family: var(--font-alt);
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+code,
+.mono {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.86em;
+}
+
+:focus-visible {
+  outline: 3px solid var(--text-fg-2);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+section {
+  padding-block: var(--space-300-400);
+  scroll-margin-top: calc(5vh + 4rem + var(--space-100));
+}
+
+section+section {
+  border-top: 1px solid var(--surface-border);
+}
+
+/* No width cap on .section-head itself: sections span the full
+   .u-container content box, so the lede's max-width: 60% below
+   resolves against the container — not against a capped parent. */
+.section-head {
+  margin-bottom: var(--space-200);
+}
+
+.section-head h2 {
+  font-size: var(--step-180);
+  margin-bottom: var(--space-60);
+}
+
+.section-head p {
+  color: var(--text-fg-2);
+  font-size: var(--step-80);
+  max-width: 60%;
+  text-wrap: pretty;
+}
+
+.kicker {
+  font-size: var(--step-70);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-fg-2);
+  margin-bottom: var(--space-60);
+}
+
+/* Header + top row */
+.site-head {
+  padding-top: var(--space-200-300);
+  padding-bottom: var(--space-150);
+}
+
+/* The wordmark is the one Midnight brand moment on the page; every
+   other default is sourced from Midnight, the page-level neutral. */
+.site-head h1 {
+  font-size: var(--step-300);
+  font-weight: 700;
+  color: var(--brand-ink);
+}
+
+.site-head .subtitle {
+  margin-top: var(--space-60);
+  font-size: var(--step-120);
+  color: var(--text-fg-2);
+  max-width: 60%;
+  text-wrap: pretty;
+}
+
+/* Top row — a static row above the header: brand logo left, page
+   links right. Not sticky, no background, no border. The current
+   page's link is ink with a Midnight underline that grows left to
+   right on load, timed by the motion tokens (--duration-100 /
+   --ease-out). The keyframes animate FROM scaleX(0) only, so the
+   resting state is scaleX(1): under reduced motion (animations
+   off, durations collapsed) the underline rests complete. */
+.top-row {
+  position: relative;
+  padding-block: var(--space-150);
+}
+
+.top-row .u-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-60) var(--space-100);
+}
+
+.brand-logo {
+  display: block;
+  height: 1.333rem;
+  width: auto;
+}
+
+.page-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-60) var(--space-100);
+}
+
+.page-links a {
+  position: relative;
+  color: var(--page-dim);
+  text-decoration: none;
+  font-size: var(--step-100);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.page-links a[aria-current="page"] {
+  color: var(--text-fg-1);
+}
+
+.page-links a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: calc(100% + var(--space-10));
+  width: 100%;
+  height: 0.222rem;
+  background: var(--brand-line);
+  transform-origin: left center;
+  animation: page-link-underline var(--duration-100, 200ms) var(--ease-out, cubic-bezier(0, 0, 0.2, 1));
+}
+
+@keyframes page-link-underline {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+/* Navigation cluster — the page links and the Mode Switch
+   (the Selector Button application) sit side by side,
+   separated by the nearest spacing token to the designed gap,
+   --space-200. The Mode Switch is NOT a navigation item: it
+   lives outside the <nav> element, in this cluster wrapper,
+   so the two groups read — and are announced — as different
+   kinds of thing. */
+.nav-cluster {
+  display: flex;
+  align-items: center;
+  gap: var(--space-200);
+}
+
+
+/* Compact single row — tablet and phone widths (≤64rem): the
+   top row never wraps. Logo left; the links and the Mode Switch
+   share the one row on the right inside the cluster (its
+   --space-200 separation holds at every width). The Mode Switch
+   goes icon-only — its text labels are clipped away visually
+   but stay in the accessibility tree, so the trigger and each
+   option keep their accessible names — and the links take
+   smaller spacing-token gaps and one step down the type scale.
+   Above 64rem none of this applies: the desktop row shows the
+   labels, per the design. */
+@media (max-width: 64rem) {
+  .top-row .u-container {
+    flex-wrap: nowrap;
+    gap: var(--space-60);
+  }
+
+  .page-links {
+    flex-wrap: nowrap;
+    gap: var(--space-80);
+  }
+
+  .page-links a {
+    font-size: var(--step-80);
+  }
+
+  .selector-btn-trigger {
+    min-width: 0;
+  }
+
+  .selector-btn-trigger,
+  .selector-btn-option {
+    padding: 5px 10px;
+  }
+
+  .selector-btn-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
+/* Phone widths (≤40rem): the row tightens one more step so it
+   still fits at 390px — the links drop to --step-70, their gaps
+   to --space-60, the Mode Switch's padding slims, and the logo slot
+   turns flexible: the wordmark scales down (width 100% with
+   height auto keeps its aspect) to absorb whatever width the
+   links and Mode Switch don't take, so the single row holds with
+   no page-level overflow. The cluster's --space-200 separation
+   is part of what the flexing wordmark slot absorbs. */
+@media (max-width: 40rem) {
+  .top-row .u-container {
+    gap: var(--space-60);
+  }
+
+  .top-row .u-container>a {
+    flex: 0 1 6.667rem;
+    min-width: 0;
+  }
+
+  .brand-logo {
+    width: 100%;
+    height: auto;
+  }
+
+  .nav-cluster {
+    flex: none;
+  }
+
+  .page-links {
+    flex: none;
+    gap: var(--space-60);
+  }
+
+  .page-links a {
+    font-size: var(--step-70);
+  }
+
+  .selector-btn-trigger,
+  .selector-btn-option {
+    padding: 5px 7px;
+  }
+}
+
+/* Nav tiers below compact — two more layouts under the ≤64rem
+   compact row, per the Figma nav designs:
+   · Intermediate (≤48rem): the top row wraps to two rows. The
+     logo takes the first row; the links and the Mode Switch
+     share the second, links left and the Mode Switch right (the
+     cluster's --space-200 separation becomes the minimum gap
+     between them). Everything keeps its labels at this tier —
+     the compact tier's clipped Mode Switch text is restored —
+     because the second row has the room the single row lacked.
+   · Extra compact (≤30rem): the row defers to a hamburger.
+     Logo left, menu button right; the button's glyph swaps to
+     a × while the menu is open. The menu panel drops below the
+     row carrying the page links stacked and right-aligned in
+     the row's Foundations / Components / Strategy / Status
+     order, the current page marked by a vertical bar at its
+     right (the row's growing underline, turned upright), and
+     the Mode Switch at the bottom of the panel as three inline
+     pills — no menu within a menu — in the Mode Switch's canonical
+     Light / System / Dark order. (Andii placed the pills at
+     the bottom, superseding the Figma annotation's top
+     placement.) The menu closes from the button, on Escape, or
+     by tapping/clicking anywhere outside it. */
+.nav-burger {
+  --state-ink: var(--text-fg-1);
+  appearance: none;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-fg-1);
+  cursor: pointer;
+  transition:
+    box-shadow var(--duration-50) var(--ease-in-out),
+    background-color var(--duration-50) var(--ease-in-out);
+}
+
+.nav-burger:hover {
+  box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--state-ink) calc(var(--opacity-10) * 100%), transparent);
+}
+
+.nav-burger:active {
+  box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--state-ink) calc(var(--opacity-15) * 100%), transparent);
+}
+
+.nav-burger:focus-visible {
+  outline: 3px solid var(--action-border);
+  outline-offset: 2px;
+}
+
+.nav-burger svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: none;
+}
+
+.nav-burger .nav-burger-close {
+  display: none;
+}
+
+.nav-burger.is-open .nav-burger-close {
+  display: block;
+}
+
+.nav-burger.is-open .nav-burger-open {
+  display: none;
+}
+
+.nav-menu {
+  display: none;
+}
+
+@media (max-width: 48rem) {
+  .top-row .u-container {
+    flex-wrap: wrap;
+  }
+
+  .top-row .u-container>a {
+    flex: 0 0 auto;
+  }
+
+  .brand-logo {
+    width: auto;
+    height: 1.333rem;
+  }
+
+  .nav-cluster {
+    flex: 1 1 100%;
+    justify-content: space-between;
+  }
+
+  .page-links a {
+    font-size: var(--step-80);
+  }
+
+  .selector-btn-trigger {
+    min-width: 7.25rem;
+  }
+
+  .selector-btn-trigger,
+  .selector-btn-option {
+    padding: 5px 12px;
+  }
+
+  .selector-btn-text {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip-path: none;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 30rem) {
+  .top-row .u-container {
+    flex-wrap: nowrap;
+  }
+
+  .nav-cluster {
+    display: none;
+  }
+
+  .nav-burger {
+    display: inline-flex;
+    flex: none;
+  }
+
+  .nav-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-100);
+    padding: var(--space-100) var(--grid-gutter) var(--space-150);
+    border-bottom: 1px solid var(--surface-border);
+    background: var(--surface-bg);
+    box-shadow: var(--elevation-medium);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(calc(var(--space-30) * -1));
+    transition:
+      opacity var(--duration-100) var(--ease-out),
+      transform var(--duration-100) var(--ease-out),
+      visibility 0s linear var(--duration-100);
+  }
+
+  .nav-menu.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+    transition:
+      opacity var(--duration-100) var(--ease-out),
+      transform var(--duration-100) var(--ease-out),
+      visibility 0s;
+  }
+
+  /* The menu's Mode Switch — the .selector-btn state recipes as
+     three inline pills in a segmented container. The selected
+     pill carries the filled treatment; deselected pills sit
+     bare and take the pill shape back as the hover highlight,
+     exactly as in the component's own panel. */
+  .menu-mode {
+    display: flex;
+    gap: var(--space-30);
+    padding: var(--space-30);
+    border: 1px solid var(--surface-border);
+    border-radius: var(--radius-full);
+  }
+
+  .menu-mode-option {
+    --state-ink: var(--text-fg-1);
+    appearance: none;
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-30);
+    font: inherit;
+    font-size: var(--step-80);
+    font-weight: 500;
+    line-height: var(--leading-compact);
+    padding: 5px 10px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-full);
+    background: transparent;
+    color: var(--text-fg-1);
+    cursor: pointer;
+    transition:
+      box-shadow var(--duration-50) var(--ease-in-out),
+      background-color var(--duration-50) var(--ease-in-out),
+      border-color var(--duration-50) var(--ease-in-out),
+      color var(--duration-50) var(--ease-in-out);
+  }
+
+  .menu-mode-option svg {
+    width: 0.9rem;
+    height: 0.9rem;
+    flex: none;
+  }
+
+  .menu-mode-option[aria-pressed="true"] {
+    --state-ink: var(--surface-bg);
+    background: var(--text-fg-1);
+    border-color: var(--text-fg-1);
+    color: var(--surface-bg);
+  }
+
+  .menu-mode-option[aria-pressed="true"]:hover {
+    box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--state-ink) calc(var(--opacity-10) * 100%), transparent);
+  }
+
+  .menu-mode-option:not([aria-pressed="true"]):hover {
+    background: var(--page-fill);
+  }
+
+  .menu-mode-option:active {
+    box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--state-ink) calc(var(--opacity-15) * 100%), transparent);
+  }
+
+  .menu-mode-option:focus-visible {
+    outline: 3px solid var(--action-border);
+    outline-offset: 2px;
+  }
+
+  .menu-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--space-60);
+  }
+
+  .menu-links a {
+    position: relative;
+    padding-right: var(--space-100);
+    color: var(--page-dim);
+    text-decoration: none;
+    font-size: var(--step-100);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .menu-links a[aria-current="page"] {
+    color: var(--text-fg-1);
+  }
+
+  .menu-links a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 0.222rem;
+    height: 100%;
+    background: var(--brand-line);
+  }
+}
+
+/* Ledes go full width on phone widths (60% rule lives on
+   .site-head .subtitle and .section-head p above). */
+@media (max-width: 40rem) {
+
+  .site-head .subtitle,
+  .section-head p {
+    max-width: 100%;
+  }
+}
+
+/* Toggle (switch) — built only from scheme slots + the global opacity
+
+footer.page-foot {
+  padding-block: var(--space-150) var(--space-300);
+  font-size: var(--step-70);
+  color: var(--text-fg-2);
+}
+
+/* Copied toast */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%) translateY(16px);
+  background: var(--text-fg-1);
+  color: var(--surface-bg);
+  font-size: var(--step-80);
+  font-weight: 500;
+  padding: 9px 18px;
+  border-radius: 9999px;
+  box-shadow: var(--elevation-high);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 160ms ease;
+  z-index: 100;
+  max-width: calc(100vw - 32px);
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.probe {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+  height: 0;
+  overflow: hidden;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}

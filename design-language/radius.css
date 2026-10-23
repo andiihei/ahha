@@ -1,0 +1,47 @@
+/* ---- Radius (radius.css) ---- */
+/* Design Language — Radius, with concentric nesting.
+   Scale: Andii's 2023 Foundations values (0/2/4/8/12/20/24/round), renamed
+   2026-10-20 to the unified percentage convention with 8px as base 100 and
+   expressed in rem per Andii's units rule (code defers to rem/em; px only
+   where px is the ideal unit — here, the --radius-full sentinel).
+   Mechanism DECIDED 2026-10-20 (Andii): corners must be concentric when
+   nested, regardless of distance.
+
+   THE RULE: concentric arcs share a centre, so
+       outer radius = inner radius + gap
+   Equivalently, a nested element's radius = the governing radius − the
+   total inset between it and the element that owns the radius. Because the
+   system's gaps are fluid spacing tokens, the calc rides the token: the
+   corners stay concentric at every viewport width, not just one.
+
+   HOW TO APPLY:
+   - The outermost element takes a radius token directly and scopes it:
+         .card { --radius: var(--radius-300); border-radius: var(--radius); }
+   - A nested element declares its inset (its distance from that element's
+     border edge — usually the parent's padding, a spacing token) and uses
+     the utility:
+         .card > .media { --inset: var(--space-50); }  +  class="u-concentric"
+   - Deeper levels sum their insets, or an intermediate container re-scopes
+     --radius with its own calc (e.g. --radius: calc(var(--radius-300)
+     - var(--space-50))) and nesting restarts from there. Components apply
+     the calc once in their own CSS; nobody hand-picks inner radius values.
+   - max(0, …) floors the result: an inset larger than the radius yields
+     square corners, never a negative radius. */
+
+:root {
+  --radius-0: 0;
+  --radius-25: 0.125rem;  /* 2px */
+  --radius-50: 0.25rem;   /* 4px */
+  --radius-100: 0.5rem;   /* 8px — base 100 */
+  --radius-150: 0.75rem;  /* 12px */
+  --radius-250: 1.25rem;  /* 20px */
+  --radius-300: 1.5rem;   /* 24px */
+  --radius-full: 9999px;  /* sentinel: px is the ideal unit here (not a measurement) */
+}
+
+/* Concentric nested corner: radius = governing radius − inset.
+   --radius is inherited from the scoping ancestor; --inset is set by the
+   element itself (default 0). */
+.u-concentric {
+  border-radius: max(0rem, calc(var(--radius, 0rem) - var(--inset, 0rem)));
+}

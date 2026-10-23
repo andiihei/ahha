@@ -1,0 +1,78 @@
+/* ---------- Status page ----------
+   Page default throughout: Midnight, as on the other pages. The
+   items are grouped by system area; each one is tracked as an
+   issue in andiihei/ahha, and its row links to that issue.
+   State pills follow the page's state language: Captured is a
+   filled chip, Still open an outlined one. */
+.status-wrap { padding-block: var(--space-200) var(--space-300); }
+.status-title { font-size: var(--step-250); font-weight: 700; margin-bottom: var(--space-200); }
+
+/* Summary band: counts, milestone progress, tracker links */
+.status-summary {
+  background: var(--surface-bg-1);
+  border: 1px solid var(--surface-border);
+  border-radius: 16px;
+  padding: var(--space-125) var(--space-150);
+  display: grid;
+  gap: var(--space-100);
+}
+.status-stats { display: flex; flex-wrap: wrap; gap: var(--space-80) var(--space-200); }
+.stat { display: flex; align-items: baseline; gap: var(--space-50); }
+.stat-num { font-family: var(--font-alt); font-size: var(--step-160); font-weight: 700; line-height: 1; }
+.stat-label { font-size: var(--step-80); color: var(--text-fg-2); }
+.ms-line { font-size: var(--step-80); margin-bottom: var(--space-50); }
+.ms-line a { color: var(--text-fg-1); font-weight: 600; }
+.ms-bar { height: 0.5rem; background: var(--page-fill); border-radius: 9999px; overflow: hidden; }
+.ms-fill { height: 100%; background: var(--brand-line); }
+.status-meta { font-size: var(--step-80); color: var(--text-fg-2); }
+.status-meta a { color: var(--text-fg-1); }
+
+/* Area groups + item rows */
+.area-group { padding-block: var(--space-150); }
+.area-group + .area-group { border-top: 1px solid var(--surface-border); }
+.area-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-50) var(--space-100);
+  margin-bottom: var(--space-60);
+}
+.area-head h3 { font-size: var(--step-140); }
+.area-count { font-size: var(--step-70); color: var(--text-fg-2); }
+.item-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: var(--space-100);
+  padding-block: var(--space-80);
+}
+.item-row + .item-row { border-top: 1px solid var(--page-fill); }
+.item-title {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-50) var(--space-60);
+  font-size: var(--step-100);
+}
+.item-desc { font-size: var(--step-80); margin-top: var(--space-30); max-width: 80ch; }
+.pill {
+  font-size: var(--step-60);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1;
+  padding: 0.3rem 0.625rem;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+.pill-captured { background: var(--page-fill); border: 1px solid var(--surface-border); color: var(--text-fg-1); }
+.pill-open { background: transparent; border: 1px solid var(--text-fg-2); color: var(--text-fg-2); }
+.issue-link {
+  font-family: var(--font-mono);
+  font-size: var(--step-80);
+  color: var(--text-fg-2);
+  text-decoration: none;
+  white-space: nowrap;
+  padding-top: 0.2rem;
+}
+.issue-link:hover { color: var(--text-fg-1); text-decoration: underline; }

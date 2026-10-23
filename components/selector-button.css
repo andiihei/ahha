@@ -1,0 +1,186 @@
+/* Selector Button — a codified component (.selector-btn),
+   no longer the .seg group borrowed from the Schemes section.
+   A generic single-select control: it holds a set of options
+   and one selection, and reports selection changes — it knows
+   nothing of what the options mean. Collapsed, it shows only
+   the current selection as a single pill carrying the pressed
+   treatment. Activating it slides the options out below it in
+   a panel; choosing one reports the new selection, updates the
+   pill, and closes the panel. The instance in this page's top
+   row is the Mode Switch application: the shell supplies the
+   Light / System / Dark options and wires the reported
+   selection to data-mode on <html> (the page-scope block above
+   does the rest). Inside the panel only the selected option carries
+   the filled pill; deselected options sit bare (a transparent
+   border keeps their box identical to the selected pill's, so
+   selecting never shifts the panel) and take the pill-bar
+   pattern — the pill shape (--radius-full) returns as the
+   hover highlight in --page-fill. Icons are stroke glyphs in
+   currentColor, so they take each button's slot colours in
+   both modes. Interactive states follow the system's standard
+   mapping: the button's own ink as a state layer at
+   --opacity-10 on hover and --opacity-15 on active, laid on
+   with an inset shadow (the .toggle recipe), and the solid
+   --action-border ring on focus-visible — transitions on
+   --duration-50 / --ease-in-out, per the state recipes. */
+.selector-btn {
+  position: relative;
+  display: inline-block;
+  flex: none;
+}
+
+.selector-btn-trigger,
+.selector-btn-option {
+  --state-ink: var(--text-fg-1);
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-30);
+  font: inherit;
+  font-size: var(--step-80);
+  font-weight: 500;
+  line-height: var(--leading-compact);
+  padding: 5px 12px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-fg-1);
+  cursor: pointer;
+  box-sizing: border-box;
+  transition:
+    box-shadow var(--duration-50) var(--ease-in-out),
+    background-color var(--duration-50) var(--ease-in-out),
+    border-color var(--duration-50) var(--ease-in-out),
+    color var(--duration-50) var(--ease-in-out);
+}
+
+.selector-btn-trigger {
+  --state-ink: var(--action-fg-1);
+  width: 100%;
+  min-width: var(--selector-min-width, 7.5rem);
+  justify-content: flex-start;
+  background: var(--action-bg-1);
+  border-color: var(--action-bg-1);
+  color: var(--action-fg-1);
+}
+
+.selector-btn-trigger .selector-btn-text {
+  flex: 1;
+  text-align: left;
+}
+
+.selector-btn-trigger:hover,
+.selector-btn-option[aria-pressed="true"]:hover {
+  box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--state-ink) calc(var(--opacity-10) * 100%), transparent);
+}
+
+/* Deselected options sit bare in the panel — no pill container —
+   and take the pill-bar pattern instead: the pill shape returns
+   as the hover highlight (--page-fill, as on .dock-scroll a). */
+.selector-btn-option:not([aria-pressed="true"]):hover {
+  background: var(--page-fill);
+}
+
+.selector-btn-trigger:active,
+.selector-btn-option:active {
+  box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--state-ink) calc(var(--opacity-15) * 100%), transparent);
+}
+
+.selector-btn-trigger:focus-visible,
+.selector-btn-option:focus-visible {
+  outline: 3px solid var(--action-border);
+  outline-offset: 2px;
+}
+
+.selector-btn svg {
+  width: 0.9em;
+  height: 0.9em;
+  flex: none;
+}
+
+/* The trigger carries the current option's glyph */
+.selector-btn-current {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.selector-btn-current svg {
+  display: inline-block;
+}
+
+.selector-btn .selector-btn-chevron {
+  width: 1em;
+  height: 1em;
+  margin-left: auto;
+  transition: transform var(--duration-100) var(--ease-out);
+}
+
+.selector-btn[data-open="true"] .selector-btn-chevron {
+  transform: rotate(180deg);
+}
+
+/* The options panel — slides out below the pill (a short
+   downward travel on the motion tokens) and overlays the page,
+   so opening it never shifts the top row's layout. Hidden with
+   visibility as well as opacity, which also keeps the options
+   out of the tab order while closed. */
+.selector-btn-options {
+  position: absolute;
+  top: calc(100% + var(--space-30));
+  left: 0;
+  right: 0;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-30);
+  padding: var(--space-30);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-250);
+  background: var(--surface-bg);
+  box-shadow: var(--elevation-medium);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(calc(var(--space-30) * -1));
+  transition:
+    opacity var(--duration-100) var(--ease-out),
+    transform var(--duration-100) var(--ease-out),
+    visibility 0s linear var(--duration-100);
+}
+
+.selector-btn[data-open="true"] .selector-btn-options {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition:
+    opacity var(--duration-100) var(--ease-out),
+    transform var(--duration-100) var(--ease-out),
+    visibility 0s;
+}
+
+.selector-btn-option {
+  justify-content: flex-start;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.selector-btn-option[aria-pressed="true"] {
+  --state-ink: var(--action-fg-1);
+  background: var(--action-bg-1);
+  border-color: var(--action-bg-1);
+  color: var(--action-fg-1);
+}
+
+/* Selector Button inside a scheme scope: the deselected option's
+   hover highlight takes the scope's raised surface step —
+   --page-fill is a page-scope token and would stay page-light
+   inside a dark stage. The demo instance's trigger glyph is
+   driven by its own selection, not the page's data-mode. */
+[data-style] .selector-btn-option:not([aria-pressed="true"]):hover {
+  background: var(--surface-bg-1);
+}

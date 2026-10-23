@@ -1,0 +1,1527 @@
+/* Pill section-nav — Specimen only. In-flow under the header lede;
+   once the page scrolls past its in-flow position it docks,
+   fixed at top: 5vh (JS toggles .is-docked and leaves a
+   same-height placeholder in flow, so content never jumps). */
+.section-dock {
+  margin-top: var(--space-100);
+  border: 1px solid var(--action-border);
+  border-radius: var(--radius-full);
+  padding: var(--space-10);
+  background: var(--surface-bg);
+}
+
+.section-dock.is-docked {
+  position: fixed;
+  top: 5vh;
+  bottom: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(min(100vw, var(--grid-max-width)) - (2 * var(--grid-gutter)));
+  margin-top: 0;
+  z-index: 40;
+}
+
+.dock-placeholder {
+  display: none;
+}
+
+.dock-scroll {
+  position: relative;
+  display: flex;
+  gap: var(--space-10);
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-radius: var(--radius-full);
+}
+
+.dock-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Gradient mask — JS adds the class for whichever edge(s) still
+   hide content: right before scrolling, both mid-scroll, left at
+   the end; no class (no mask) when the bar doesn't overflow. */
+.dock-scroll.mask-r {
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - var(--space-200)), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - var(--space-200)), transparent);
+}
+
+.dock-scroll.mask-l {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--space-200));
+  mask-image: linear-gradient(to right, transparent, #000 var(--space-200));
+}
+
+.dock-scroll.mask-b {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--space-200), #000 calc(100% - var(--space-200)), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 var(--space-200), #000 calc(100% - var(--space-200)), transparent);
+}
+
+.dock-scroll a {
+  color: var(--text-fg-1);
+  text-decoration: none;
+  font-size: var(--step-80);
+  font-weight: 500;
+  padding: var(--space-50) var(--space-80);
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+.dock-scroll a:hover {
+  background: var(--page-fill);
+}
+
+.dock-scroll a[aria-current="true"] {
+  background: var(--action-bg-1);
+  color: var(--action-fg-1);
+}
+
+.dock-scroll a[aria-current="true"]:hover {
+  background: var(--action-bg-1);
+}
+
+/* Colour ramps */
+.family {
+  margin-bottom: var(--space-200);
+}
+
+.family-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-80);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-60);
+}
+
+.family-head h3 {
+  font-size: var(--step-140);
+}
+
+.family-head .family-note {
+  font-size: var(--step-80);
+  color: var(--text-fg-2);
+}
+
+.ramp {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--surface-border);
+}
+
+.swatch {
+  appearance: none;
+  border: 0;
+  margin: 0;
+  padding: var(--space-60) 6px;
+  min-height: 92px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-10);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 120ms ease;
+}
+
+.swatch:hover {
+  transform: translateY(-2px);
+}
+
+.swatch .step-num {
+  font-weight: 700;
+  font-size: var(--step-80);
+}
+
+.swatch .step-val {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10.5px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  opacity: 0.92;
+}
+
+.swatch.on-dark {
+  color: var(--neutral-25);
+}
+
+.swatch.on-light {
+  color: var(--neutral-1000);
+}
+
+@media (max-width: 900px) {
+  .ramp {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .swatch {
+    min-height: 76px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ramp {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Schemes */
+.scheme-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-125);
+  align-items: end;
+  margin-bottom: var(--space-125);
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-50);
+}
+
+.control-group>span {
+  font-size: var(--step-70);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-fg-2);
+}
+
+.seg {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.seg button {
+  appearance: none;
+  font: inherit;
+  font-size: var(--step-80);
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  border: 1px solid var(--page-line);
+  background: var(--surface-bg-1);
+  color: var(--text-fg-1);
+  cursor: pointer;
+}
+
+.seg button[aria-pressed="true"] {
+  background: var(--text-fg-1);
+  border-color: var(--text-fg-1);
+  color: var(--surface-bg);
+}
+
+.scheme-panel {
+  border-radius: 16px;
+  padding: var(--space-125);
+  border: 1px solid var(--surface-border);
+}
+
+.scheme-panel-label {
+  font-size: var(--step-80);
+  font-weight: 600;
+  margin-bottom: var(--space-100);
+}
+
+.hero-panel {
+  padding: var(--space-150);
+  margin-bottom: var(--space-200);
+}
+
+.scheme-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-125);
+}
+
+@media (max-width: 860px) {
+  .scheme-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Component cluster (lives inside any [data-scheme]) */
+.scheme-card {
+  background: var(--surface-bg-1);
+  border: 1px solid var(--surface-border);
+  border-radius: 12px;
+  box-shadow: var(--elevation-medium);
+  padding: var(--space-125);
+}
+
+.scheme-card h4 {
+  font-family: var(--font-alt);
+  font-size: var(--step-140);
+  font-weight: 600;
+  margin: 0 0 var(--space-60);
+  line-height: 1.15;
+}
+
+.scheme-card .body-text {
+  font-size: var(--step-80);
+  margin-bottom: var(--space-60);
+}
+
+.scheme-card .caption {
+  font-size: var(--step-70);
+  color: var(--text-fg-2);
+  margin-bottom: var(--space-100);
+}
+
+.cluster-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-60);
+  margin-bottom: var(--space-100);
+}
+
+.btn {
+  appearance: none;
+  font: inherit;
+  font-size: var(--step-80);
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--action-bg-1);
+  color: var(--action-fg-1);
+  border: 1px solid var(--action-bg-1);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-fg-1);
+  border: 1px solid var(--action-border);
+}
+
+.field label {
+  display: block;
+  font-size: var(--step-80);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.field input {
+  width: 100%;
+  font: inherit;
+  font-size: var(--step-80);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--surface-border);
+  background: var(--surface-bg);
+  color: var(--text-fg-1);
+}
+
+.field input::placeholder {
+  color: var(--text-fg-2);
+}
+
+.field .help {
+  font-size: var(--step-70);
+  color: var(--text-fg-2);
+  margin-top: 4px;
+}
+
+.cluster-toggle {
+  margin-bottom: var(--space-100);
+}
+
+.slot-note {
+  background: var(--surface-bg-1);
+  border: 1px solid var(--surface-border);
+  border-radius: 12px;
+  padding: var(--space-125);
+  font-size: var(--step-80);
+  margin-bottom: var(--space-200);
+}
+
+.slot-note h3 {
+  font-size: var(--step-120);
+  margin-bottom: var(--space-60);
+}
+
+.slot-note dl {
+  display: grid;
+  grid-template-columns: max-content 1fr 1fr;
+  gap: 4px var(--space-100);
+  margin: var(--space-60) 0 0;
+}
+
+.slot-note dt {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.92em;
+}
+
+.slot-note dd {
+  margin: 0;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.92em;
+  color: var(--text-fg-2);
+}
+
+@media (max-width: 640px) {
+  .slot-note dl {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .slot-note dd {
+    margin-bottom: 6px;
+  }
+}
+
+/* Fluid type */
+.type-row {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: var(--space-125);
+  align-items: baseline;
+  padding-block: var(--space-60);
+  border-bottom: 1px solid var(--page-fill);
+}
+
+.type-meta {
+  font-size: var(--step-70);
+  color: var(--text-fg-2);
+}
+
+.type-meta .tok {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  color: var(--text-fg-1);
+  font-weight: 500;
+  display: block;
+}
+
+.type-line {
+  line-height: 1.12;
+  overflow-wrap: break-word;
+  min-width: 0;
+}
+
+.type-line.serif {
+  font-family: var(--font-alt);
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .type-row {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
+
+table.roles {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: var(--space-200);
+  font-size: var(--step-80);
+}
+
+table.roles caption {
+  text-align: left;
+  font-family: var(--font-alt);
+  font-size: var(--step-120);
+  font-weight: 600;
+  padding-bottom: var(--space-60);
+}
+
+table.roles th,
+table.roles td {
+  text-align: left;
+  padding: 8px 12px 8px 0;
+  border-bottom: 1px solid var(--surface-border);
+  vertical-align: top;
+}
+
+table.roles th {
+  font-weight: 600;
+}
+
+.proposed-tag {
+  display: inline-block;
+  font-size: var(--step-70);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--surface-bg-1);
+  color: var(--text-fg-2);
+  box-shadow: inset 0 0 0 1px var(--page-line);
+  border-radius: 9999px;
+  padding: 2px 10px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.ratified-tag {
+  display: inline-block;
+  font-size: var(--step-70);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--page-fill);
+  color: var(--text-fg-1);
+  border-radius: 9999px;
+  padding: 2px 10px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.type-utilities {
+  margin-top: var(--space-200);
+}
+
+.type-utilities h3 {
+  font-size: var(--step-140);
+  margin-bottom: var(--space-60);
+}
+
+.type-utilities>p {
+  font-size: var(--step-80);
+  color: var(--text-fg-2);
+  max-width: 46rem;
+  margin-bottom: var(--space-125);
+}
+
+.role-specimens {
+  display: flex;
+  flex-direction: column;
+}
+
+.role-spec {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: var(--space-125);
+  align-items: baseline;
+  padding-block: var(--space-60);
+  border-bottom: 1px solid var(--page-fill);
+  min-width: 0;
+}
+
+.role-spec-label {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: var(--step-70);
+  color: var(--text-fg-2);
+}
+
+.role-spec-sample {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.modifier-demo {
+  margin-top: var(--space-200);
+}
+
+.modifier-demo h4 {
+  font-size: var(--step-120);
+  margin-bottom: var(--space-60);
+}
+
+.modifier-demo>p {
+  font-size: var(--step-80);
+  color: var(--text-fg-2);
+  max-width: 46rem;
+  margin-bottom: var(--space-125);
+}
+
+@media (max-width: 640px) {
+  .role-spec {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
+
+.flow-demo {
+  background: var(--surface-bg-1);
+  border: 1px solid var(--surface-border);
+  border-radius: 12px;
+  padding: var(--space-125);
+  margin-top: var(--space-125);
+  max-width: 46rem;
+}
+
+.flow-demo ul {
+  margin: 0;
+  padding-left: 1.2em;
+}
+
+.flow-demo-label {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: var(--step-70);
+  color: var(--text-fg-2);
+  margin-bottom: var(--space-100);
+}
+
+/* Spacing */
+.space-row {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: var(--space-125);
+  align-items: center;
+  padding-block: 5px;
+}
+
+.space-label {
+  font-size: var(--step-70);
+  color: var(--text-fg-2);
+}
+
+.space-label .tok {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  color: var(--text-fg-1);
+  display: block;
+}
+
+.space-bar-track {
+  min-width: 0;
+}
+
+/* Spacing bars share one treatment — pale F-100 fill with a 1px F-700
+   edge on the left and right ends only (no top/bottom border) and
+   square corners — but each set is scoped to its own colour family:
+   the fluid set (steps and one-up pairs) to Midnight, the static
+   ladder to Cerise.
+   box-sizing: border-box keeps the borders inside the width, so the
+   bar's total rendered width still equals the spacing token's value
+   exactly. The 1px stays in px — hairline rendering geometry. */
+.space-bar {
+  height: 16px;
+  background: var(--neutral-100);
+  border-left: 1px solid var(--neutral-700);
+  border-right: 1px solid var(--neutral-700);
+  border-radius: 0;
+  min-width: 2px;
+  box-sizing: border-box;
+}
+
+.space-bar.static {
+  background: var(--red-100);
+  border-left-color: var(--red-700);
+  border-right-color: var(--red-700);
+}
+
+.static-note {
+  font-size: var(--step-80);
+  color: var(--text-fg-2);
+  max-width: 46rem;
+  margin-bottom: var(--space-100);
+}
+
+.static-note strong {
+  color: var(--text-fg-1);
+}
+
+@media (max-width: 640px) {
+  .space-row {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
+
+.note-box {
+  background: var(--surface-bg-1);
+  border: 1px solid var(--surface-border);
+  border-radius: 12px;
+  padding: var(--space-100) var(--space-125);
+  font-size: var(--step-80);
+  margin-top: var(--space-125);
+}
+
+/* Grid demo */
+.grid-stage {
+  position: relative;
+}
+
+/* The one line grid.css as supplied is missing — see note in section. */
+.demo-grid {
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+}
+
+.grid-cell {
+  min-width: 0;
+  overflow: hidden;
+  min-height: 84px;
+  border-radius: 8px;
+  display: flex;
+  align-items: flex-start;
+  padding: 8px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: var(--step-70);
+  font-weight: 600;
+}
+
+.grid-cell:nth-child(odd) {
+  background: var(--page-fill);
+  color: var(--text-fg-1);
+}
+
+.grid-cell:nth-child(even) {
+  background: var(--surface-bg-1);
+  color: var(--text-fg-1);
+}
+
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  gap: var(--grid-gutter);
+  pointer-events: none;
+}
+
+.grid-overlay[hidden] {
+  display: none;
+}
+
+.grid-overlay i {
+  background: color-mix(in oklch, var(--neutral-500) 22%, transparent);
+  border-inline: 1px dashed var(--text-fg-2);
+}
+
+.grid-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-125);
+  align-items: center;
+  margin-bottom: var(--space-125);
+  font-size: var(--step-80);
+}
+
+.toggle-btn {
+  appearance: none;
+  font: inherit;
+  font-size: var(--step-80);
+  font-weight: 600;
+  padding: 7px 16px;
+  border-radius: 9999px;
+  border: 1px solid var(--text-fg-1);
+  background: transparent;
+  color: var(--text-fg-1);
+  cursor: pointer;
+}
+
+.toggle-btn[aria-pressed="true"] {
+  background: var(--text-fg-1);
+  color: var(--surface-bg);
+}
+
+/* Elevation */
+.elev-stage {
+  background: var(--surface-bg-1);
+  border: 1px solid var(--surface-border);
+  border-radius: 16px;
+  padding: var(--space-200);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-150);
+}
+
+@media (max-width: 900px) {
+  .elev-stage {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .elev-stage {
+    grid-template-columns: 1fr;
+  }
+}
+
+.elev-card {
+  background: var(--surface-bg);
+  border-radius: 12px;
+  padding: var(--space-125);
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-100);
+}
+
+.elev-card .lvl {
+  font-family: var(--font-alt);
+  font-size: var(--step-120);
+  font-weight: 600;
+}
+
+.elev-card .tok {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: var(--step-70);
+  color: var(--text-fg-2);
+}
+
+.elev-low {
+  box-shadow: var(--elevation-low);
+}
+
+.elev-medium {
+  box-shadow: var(--elevation-medium);
+}
+
+.elev-high {
+  box-shadow: var(--elevation-high);
+}
+
+.elev-very-high {
+  box-shadow: var(--elevation-very-high);
+}
+
+/* Radius */
+.radius-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-125);
+  margin-bottom: var(--space-200);
+}
+
+.radius-item {
+  text-align: center;
+}
+
+.radius-box {
+  width: 84px;
+  height: 84px;
+  background: var(--neutral-700);
+  margin-bottom: var(--space-50);
+}
+
+.radius-item .rname {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-weight: 600;
+  font-size: var(--step-70);
+  display: block;
+}
+
+.radius-item .rval {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: var(--step-70);
+  color: var(--text-fg-2);
+}
+
+.radius-rule {
+  font-size: var(--step-80);
+  color: var(--text-fg-2);
+  max-width: 46rem;
+  margin-bottom: var(--space-200);
+}
+
+.radius-rule code {
+  color: var(--text-fg-1);
+}
+
+.concentric-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-125);
+  align-items: end;
+  margin-bottom: var(--space-125);
+}
+
+.concentric-stage {
+  border-radius: var(--radius-300);
+  padding: var(--space-125);
+  border: 1px solid var(--surface-border);
+}
+
+.cd-layer {
+  position: relative;
+}
+
+.cd-layer-1 {
+  --radius: var(--radius-300);
+  border-radius: var(--radius);
+  background: var(--surface-bg-1);
+  box-shadow: inset 0 0 0 1.5px var(--surface-border);
+}
+
+.cd-layer-2 {
+  background: color-mix(in oklch, var(--surface-bg-1) 45%, var(--surface-border));
+  box-shadow: inset 0 0 0 1.5px var(--surface-border);
+}
+
+.cd-layer-3 {
+  background: var(--action-bg-1);
+  color: var(--action-fg-1);
+  min-height: 96px;
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-80);
+}
+
+/* Legend below the stage (the in-stage layer labels had no room):
+   one row per layer, keyed by a swatch carrying that layer's own
+   fill/border treatment as it renders on the stage — the stage is
+   scoped midnight-light, so the swatches read the same Midnight
+   steps its slots resolve to. The readout text is live, written by
+   the demo script in the same numbers the labels used to carry.
+   Each row also carries that layer's own controls: a Concentric
+   switch, and a radius select that is enabled only while the
+   switch is off, so every element can be tested on its own. */
+.concentric-legend {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-60);
+  margin-top: var(--space-100);
+}
+
+.cd-legend-entry {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-50) var(--space-100);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: var(--step-70);
+  font-weight: 600;
+  color: var(--text-fg-1);
+}
+
+.cd-legend-readout {
+  min-width: 10.5rem;
+}
+
+/* The switch follows the system's toggle treatment: ON track is
+   --action-bg-1 with an --action-fg-1 knob; OFF track is outlined
+   like a secondary action (transparent fill, --action-border
+   outline, knob in --action-border); the knob is borderless in
+   both states, 18×18 with 20px of travel, and the track keeps its
+   1px border. Durations ride the motion tokens, so the
+   reduced-motion contract collapses the slide to instant. */
+.cd-switch {
+  appearance: none;
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-50);
+  cursor: pointer;
+}
+
+.cd-switch-track {
+  position: relative;
+  flex: none;
+  width: 2.625rem;
+  height: 1.375rem;
+  border: 1px solid var(--action-border);
+  border-radius: var(--radius-full);
+  background: transparent;
+  transition: background-color var(--duration-100) var(--ease-out);
+}
+
+.cd-switch-knob {
+  position: absolute;
+  top: 50%;
+  left: 0.125rem;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-top: -0.5625rem;
+  border-radius: 50%;
+  background: var(--action-border);
+  transition: left var(--duration-100) var(--ease-out), background-color var(--duration-100) var(--ease-out);
+}
+
+.cd-switch[aria-checked="true"] .cd-switch-track {
+  background: var(--action-bg-1);
+  border-color: var(--action-bg-1);
+}
+
+.cd-switch[aria-checked="true"] .cd-switch-knob {
+  left: 1.375rem;
+  background: var(--action-fg-1);
+}
+
+.cd-switch:focus-visible {
+  outline: 2px solid var(--action-border);
+  outline-offset: 2px;
+  border-radius: var(--radius-50);
+}
+
+.cd-radius-select {
+  font: inherit;
+  color: var(--text-fg-1);
+  background: var(--surface-bg-1);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-100);
+  padding: var(--space-30) var(--space-50);
+  cursor: pointer;
+}
+
+.cd-radius-select:focus-visible {
+  outline: 2px solid var(--action-border);
+  outline-offset: 2px;
+}
+
+.cd-radius-select:disabled {
+  opacity: var(--opacity-40);
+  cursor: not-allowed;
+}
+
+.cd-swatch {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: var(--radius-100);
+  flex: none;
+}
+
+.cd-swatch-1 {
+  background: var(--neutral-50);
+  box-shadow: inset 0 0 0 1.5px var(--neutral-200);
+}
+
+.cd-swatch-2 {
+  background: color-mix(in oklch, var(--neutral-50) 45%, var(--neutral-200));
+  box-shadow: inset 0 0 0 1.5px var(--neutral-200);
+}
+
+.cd-swatch-3 {
+  background: var(--neutral-700);
+}
+
+.concentric-status {
+  font-size: var(--step-80);
+  color: var(--text-fg-2);
+  margin-top: var(--space-100);
+  max-width: 46rem;
+}
+
+.concentric-status .mono {
+  color: var(--text-fg-1);
+}
+
+/* Motion — compact: tokens as chips / tight cells / a single line,
+   the four rules as one tight list, the explorer as the only demo. */
+.motion-subhead {
+  font-size: var(--step-120);
+  margin: 0 0 var(--space-60);
+}
+
+.motion-token-group {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  gap: var(--space-50) var(--space-100);
+  align-items: start;
+  margin-bottom: var(--space-100);
+}
+
+.motion-token-group>h3 {
+  font-size: var(--step-100);
+  line-height: 1.55;
+}
+
+.motion-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-50);
+}
+
+.motion-chip {
+  appearance: none;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-50);
+  border: 1px solid var(--surface-border);
+  background: var(--surface-bg-1);
+  border-radius: var(--radius-100);
+  padding: 0.1875rem var(--space-60);
+  font-size: var(--step-70);
+  white-space: nowrap;
+  cursor: pointer;
+  text-align: left;
+}
+
+/* The token chips double as the explorer's radio controls — the
+   selected chip takes the page's selected-control treatment:
+   ink fill, light text. */
+.motion-chip[aria-checked="true"] {
+  background: var(--text-fg-1);
+  border-color: var(--text-fg-1);
+}
+
+.motion-chip[aria-checked="true"] .tok {
+  color: var(--surface-bg);
+}
+
+.motion-chip[aria-checked="true"] .val,
+.motion-chip[aria-checked="true"] .tag {
+  color: color-mix(in oklch, var(--surface-bg) 72%, var(--text-fg-1));
+}
+
+.motion-chip .tok {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  color: var(--text-fg-1);
+  font-weight: 600;
+}
+
+.motion-chip .val {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  color: var(--text-fg-2);
+}
+
+.motion-chip .tag {
+  color: var(--text-fg-2);
+  font-weight: 600;
+}
+
+.motion-easing-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-50);
+}
+
+.motion-easing-cell {
+  appearance: none;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  border: 1px solid var(--surface-border);
+  background: var(--surface-bg-1);
+  border-radius: var(--radius-100);
+  padding: var(--space-50) var(--space-60);
+  min-width: 0;
+}
+
+.motion-easing-cell[aria-checked="true"] {
+  background: var(--text-fg-1);
+  border-color: var(--text-fg-1);
+}
+
+.motion-easing-cell[aria-checked="true"] .tok {
+  color: var(--surface-bg);
+}
+
+.motion-easing-cell[aria-checked="true"] .val,
+.motion-easing-cell[aria-checked="true"] .note {
+  color: color-mix(in oklch, var(--surface-bg) 72%, var(--text-fg-1));
+}
+
+.motion-easing-cell .tok {
+  display: block;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: var(--step-80);
+  color: var(--text-fg-1);
+  font-weight: 600;
+}
+
+.motion-easing-cell .val {
+  display: block;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: var(--step-70);
+  color: var(--text-fg-2);
+  overflow-wrap: anywhere;
+}
+
+.motion-easing-cell .note {
+  display: block;
+  font-size: var(--step-70);
+  color: var(--text-fg-2);
+  margin-top: 0.125rem;
+}
+
+.motion-stagger-line {
+  font-size: var(--step-80);
+  color: var(--text-fg-2);
+}
+
+.motion-stagger-line .tok {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  color: var(--text-fg-1);
+  font-weight: 600;
+}
+
+.motion-stagger-line .val {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  color: var(--text-fg-1);
+}
+
+@media (max-width: 900px) {
+  .motion-easing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .motion-token-group {
+    grid-template-columns: 1fr;
+    gap: 0.125rem;
+    margin-bottom: var(--space-80);
+  }
+}
+
+@media (max-width: 480px) {
+  .motion-easing-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.motion-rules {
+  list-style: none;
+  margin: 0 0 var(--space-125);
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-60) var(--space-150);
+  font-size: var(--step-80);
+  color: var(--text-fg-2);
+}
+
+.motion-rules strong {
+  color: var(--text-fg-1);
+}
+
+@media (max-width: 760px) {
+  .motion-rules {
+    grid-template-columns: 1fr;
+  }
+}
+
+.motion-stage {
+  background: var(--surface-bg-1);
+  border: 1px solid var(--surface-border);
+  border-radius: 16px;
+  padding: var(--space-100) var(--space-125);
+  margin-bottom: var(--space-100);
+}
+
+.motion-demo-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-100);
+  margin-bottom: var(--space-60);
+}
+
+.motion-demo-head h4 {
+  font-size: var(--step-120);
+}
+
+.motion-demo-note {
+  font-size: var(--step-80);
+  color: var(--text-fg-2);
+  max-width: 46rem;
+  margin-bottom: var(--space-100);
+}
+
+.motion-lane-row {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: var(--space-125);
+  align-items: center;
+  padding-block: 4px;
+}
+
+.motion-lane-label {
+  font-size: var(--step-70);
+  color: var(--text-fg-2);
+}
+
+.motion-lane-label .tok {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  color: var(--text-fg-1);
+  display: block;
+}
+
+.motion-track {
+  position: relative;
+  height: 22px;
+  background: var(--page-fill);
+  border-radius: 9999px;
+}
+
+@media (max-width: 640px) {
+  .motion-lane-row {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
+
+/* Motion explorer — its controls are the token displays above it */
+.ex-dot {
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  margin-top: -8px;
+  border-radius: 50%;
+  background: var(--text-fg-2);
+  opacity: 0;
+}
+
+.ex-readout {
+  font-size: var(--step-80);
+  color: var(--text-fg-2);
+  margin-top: var(--space-60);
+}
+
+.ex-readout .mono {
+  color: var(--text-fg-1);
+}
+
+/* Motion effects — one tight row of three demo cards. The factors
+   are unitless tokens; timing still comes from durations/easings. */
+.fx-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-100);
+  margin-bottom: var(--space-60);
+}
+
+@media (max-width: 760px) {
+  .fx-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.fx-card {
+  background: var(--surface-bg-1);
+  border: 1px solid var(--surface-border);
+  border-radius: 16px;
+  padding: var(--space-100) var(--space-125);
+  min-width: 0;
+}
+
+.fx-card h4 {
+  font-size: var(--step-100);
+  margin-bottom: var(--space-30);
+}
+
+.fx-token {
+  font-size: var(--step-80);
+  margin-bottom: var(--space-80);
+}
+
+.fx-token .tok {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  color: var(--text-fg-1);
+  font-weight: 600;
+}
+
+.fx-token .val {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  color: var(--text-fg-2);
+}
+
+.fx-desc {
+  font-size: var(--step-80);
+  color: var(--text-fg-2);
+  margin-top: var(--space-80);
+}
+
+.fx-stage {
+  position: relative;
+  height: 7.5rem;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--page-fill);
+}
+
+.fx-layer {
+  position: absolute;
+  will-change: transform;
+}
+
+.fx-layer-far {
+  width: 6.5rem;
+  height: 6.5rem;
+  border-radius: 50%;
+  left: 8%;
+  top: 0.5rem;
+  background: var(--neutral-100);
+}
+
+.fx-layer-mid {
+  width: 3.75rem;
+  height: 3.75rem;
+  border-radius: 12px;
+  right: 16%;
+  top: 1.75rem;
+  background: var(--neutral-300);
+}
+
+.fx-layer-near {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  left: 42%;
+  top: 3.9rem;
+  background: var(--neutral-700);
+}
+
+.fx-enlarge-stage,
+.fx-zoom-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fx-chip {
+  appearance: none;
+  font: inherit;
+  cursor: pointer;
+  background: var(--surface-bg);
+  border: 1px solid var(--surface-border);
+  border-radius: 9999px;
+  padding: var(--space-60) var(--space-125);
+  font-size: var(--step-80);
+  font-weight: 600;
+  color: var(--text-fg-1);
+  transition: transform var(--duration-200) var(--ease-emphasized);
+}
+
+.fx-chip:hover,
+.fx-chip:focus-visible {
+  transform: scale(var(--scale-enlarge));
+}
+
+.fx-zoom-frame {
+  appearance: none;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.fx-zoom-inner {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 35%, var(--neutral-300) 0 12%, transparent 13%),
+    radial-gradient(circle at 72% 62%, var(--neutral-700) 0 9%, transparent 10%),
+    radial-gradient(circle at 55% 25%, var(--neutral-100) 0 18%, transparent 19%),
+    repeating-linear-gradient(45deg, var(--page-fill) 0 14px, var(--surface-bg-1) 14px 28px);
+  transform-origin: center;
+  transition: transform var(--duration-300) var(--ease-out);
+}
+
+.fx-zoom-frame:hover .fx-zoom-inner,
+.fx-zoom-frame:focus-visible .fx-zoom-inner {
+  transform: scale(var(--scale-zoom));
+}
+
+
+/* Opacity */
+.opacity-ramp {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  gap: var(--space-50);
+  margin-bottom: var(--space-200);
+}
+
+.opacity-swatch {
+  appearance: none;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background: none;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-30);
+}
+
+.opacity-chip {
+  position: relative;
+  display: block;
+  height: 4.5rem;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--surface-border);
+  background: linear-gradient(90deg, var(--neutral-25) 0 50%, var(--neutral-1000) 50% 100%);
+  transition: transform var(--duration-50) var(--ease-out);
+}
+
+.opacity-swatch:hover .opacity-chip {
+  transform: translateY(-2px);
+}
+
+.opacity-layer {
+  position: absolute;
+  inset: 0;
+  background: var(--neutral-1000);
+}
+
+.opacity-name {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10.5px;
+  color: var(--text-fg-1);
+  overflow-wrap: anywhere;
+}
+
+.opacity-val {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10.5px;
+  color: var(--text-fg-2);
+}
+
+@media (max-width: 900px) {
+  .opacity-ramp {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .opacity-ramp {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.opacity-rules p {
+  font-size: var(--step-80);
+  color: var(--text-fg-2);
+  max-width: 46rem;
+  margin-bottom: var(--space-60);
+}
+
+.opacity-rules p strong {
+  color: var(--text-fg-1);
+}
+
+/* Interactive states demo — the opacity recipes, implemented for real */
+.states-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-125);
+}
+
+@media (max-width: 860px) {
+  .states-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.states-row-label {
+  font-size: var(--step-70);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-fg-2);
+  margin: var(--space-100) 0 var(--space-50);
+}
+
+.states-row-label:first-of-type {
+  margin-top: 0;
+}
+
+.states-note {
+  font-size: var(--step-70);
+  color: var(--text-fg-2);
+  margin-top: var(--space-100);
+}

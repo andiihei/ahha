@@ -1,0 +1,15 @@
+/* ---- Grid (grid.css) ---- */
+:root {
+  --grid-max-width: 92.50rem;
+  --grid-gutter: var(--space-100-200, clamp(1.125rem, 0.6927rem + 1.9538vw, 2.5rem));
+  --grid-columns: 12;
+}
+.u-container {
+  max-width: var(--grid-max-width);
+  padding-inline: var(--grid-gutter);
+  margin-inline: auto;
+}
+.u-grid {
+  display: grid;
+  gap: var(--grid-gutter);
+}

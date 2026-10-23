@@ -1,0 +1,176 @@
+/* ---- Fluid space (space.css) ---- */
+/* Design Language — Fluid spacing.
+   Configuration as supplied by Andii 2026-10-20 (Utopia space scale on the
+   same config as the type scale: 360px/18px → 1240px/20px).
+   Note: --space-100 is identical to --step-100 by design (spacing anchors
+   to the base font size).
+   @link https://utopia.fyi/space/calculator?c=360,18,1.125,1240,20,1.2,8,3,&s=0.8|0.7|0.6|0.5|0.25|0.125,1.25|1.5|2|3|4|5,&g=s,l,xl,12
+
+   REFACTORED 2026-10-22 (Andii's direction), following the type.css
+   refactor of the same day: no per-step clamp() magic numbers. This file
+   consumes the shared configuration and --_progress defined in type.css
+   (the two files are one set — type.css loads first) and derives every
+   step from its multiplier of the base size:
+
+     step endpoints = round(multiplier × base, 0.0625rem)
+     step value     = min + --_progress × (max − min)
+
+   The 0.0625rem rounding interval (1px at the 16px reference root)
+   reproduces Utopia's whole-pixel endpoint rounding exactly — including
+   --space-30, whose endpoints coincide (0.25 × 18px rounds to 5px;
+   0.25 × 20px is 5px), making it constant. Multipliers: 10→0.125,
+   30→0.25, 50→0.5, 60→0.6, 70→0.7, 80→0.8, 100→1, 125→1.25, 150→1.5,
+   200→2, 300→3, 400→4, 500→5.
+
+   One-up pairs need no numbers of their own: a pair interpolates from
+   the lower step's minimum to the upper step's maximum, referencing the
+   derived endpoints directly. (The grid gutter's --space-100-200 is not
+   defined in this file — grid.css keeps its own clamp() fallback, out of
+   scope here.)
+
+   NAMES unchanged (unified percentage convention, 100 = base):
+   10/30/50/60/70/80/100/125/150/200/300/400/500, pairs <low>-<high>.
+   Rendered VALUES preserved: every step and pair endpoint is identical
+   to the previous Utopia clamp() output (verified numerically);
+   mid-range deviation is the same ≤0.0013px rounding residue as type.
+
+   Fallback: the original clamp() definitions stand below and apply
+   wherever the shared-progress block in type.css is inactive or round()
+   is unsupported. */
+
+:root {
+  --space-10: clamp(0.125rem, 0.0994rem + 0.1136vw, 0.1875rem);
+  --space-30: clamp(0.3125rem, 0.3125rem + 0vw, 0.3125rem);
+  --space-50: clamp(0.5625rem, 0.5369rem + 0.1136vw, 0.625rem);
+  --space-60: clamp(0.6875rem, 0.6619rem + 0.1136vw, 0.75rem);
+  --space-70: clamp(0.8125rem, 0.7869rem + 0.1136vw, 0.875rem);
+  --space-80: clamp(0.875rem, 0.8239rem + 0.2273vw, 1rem);
+  --space-100: clamp(1.125rem, 1.0739rem + 0.2273vw, 1.25rem);
+  --space-125: clamp(1.4375rem, 1.3864rem + 0.2273vw, 1.5625rem);
+  --space-150: clamp(1.6875rem, 1.6108rem + 0.3409vw, 1.875rem);
+  --space-200: clamp(2.25rem, 2.1477rem + 0.4545vw, 2.5rem);
+  --space-300: clamp(3.375rem, 3.2216rem + 0.6818vw, 3.75rem);
+  --space-400: clamp(4.5rem, 4.2955rem + 0.9091vw, 5rem);
+  --space-500: clamp(5.625rem, 5.3693rem + 1.1364vw, 6.25rem);
+
+  /* One-up pairs */
+  --space-10-30: clamp(0.125rem, 0.0483rem + 0.3409vw, 0.3125rem);
+  --space-30-50: clamp(0.3125rem, 0.1847rem + 0.5682vw, 0.625rem);
+  --space-50-60: clamp(0.5625rem, 0.4858rem + 0.3409vw, 0.75rem);
+  --space-60-70: clamp(0.6875rem, 0.6108rem + 0.3409vw, 0.875rem);
+  --space-70-80: clamp(0.8125rem, 0.7358rem + 0.3409vw, 1rem);
+  --space-80-100: clamp(0.875rem, 0.7216rem + 0.6818vw, 1.25rem);
+  --space-100-125: clamp(1.125rem, 0.946rem + 0.7955vw, 1.5625rem);
+  --space-125-150: clamp(1.4375rem, 1.2585rem + 0.7955vw, 1.875rem);
+  --space-150-200: clamp(1.6875rem, 1.3551rem + 1.4773vw, 2.5rem);
+  --space-200-300: clamp(2.25rem, 1.6364rem + 2.7273vw, 3.75rem);
+  --space-300-400: clamp(3.375rem, 2.7102rem + 2.9545vw, 5rem);
+  --space-400-500: clamp(4.5rem, 3.7841rem + 3.1818vw, 6.25rem);
+}
+
+@supports (width: round(1.5px, 1px)) and ((opacity: progress(1px, 0px, 1px)) or (width: calc(1px * tan(atan2(1px, 1px))))) {
+  :root {
+    /* Step endpoints: round(multiplier × base, 0.0625rem). */
+    --_space-min-10: round(calc(var(--type-min-base) * 0.125), 0.0625rem);
+    --_space-max-10: round(calc(var(--type-max-base) * 0.125), 0.0625rem);
+    --space-10: calc(var(--_space-min-10) + var(--_progress) * (var(--_space-max-10) - var(--_space-min-10)));
+
+    --_space-min-30: round(calc(var(--type-min-base) * 0.25), 0.0625rem);
+    --_space-max-30: round(calc(var(--type-max-base) * 0.25), 0.0625rem);
+    --space-30: calc(var(--_space-min-30) + var(--_progress) * (var(--_space-max-30) - var(--_space-min-30)));
+
+    --_space-min-50: round(calc(var(--type-min-base) * 0.5), 0.0625rem);
+    --_space-max-50: round(calc(var(--type-max-base) * 0.5), 0.0625rem);
+    --space-50: calc(var(--_space-min-50) + var(--_progress) * (var(--_space-max-50) - var(--_space-min-50)));
+
+    --_space-min-60: round(calc(var(--type-min-base) * 0.6), 0.0625rem);
+    --_space-max-60: round(calc(var(--type-max-base) * 0.6), 0.0625rem);
+    --space-60: calc(var(--_space-min-60) + var(--_progress) * (var(--_space-max-60) - var(--_space-min-60)));
+
+    --_space-min-70: round(calc(var(--type-min-base) * 0.7), 0.0625rem);
+    --_space-max-70: round(calc(var(--type-max-base) * 0.7), 0.0625rem);
+    --space-70: calc(var(--_space-min-70) + var(--_progress) * (var(--_space-max-70) - var(--_space-min-70)));
+
+    --_space-min-80: round(calc(var(--type-min-base) * 0.8), 0.0625rem);
+    --_space-max-80: round(calc(var(--type-max-base) * 0.8), 0.0625rem);
+    --space-80: calc(var(--_space-min-80) + var(--_progress) * (var(--_space-max-80) - var(--_space-min-80)));
+
+    --_space-min-100: round(calc(var(--type-min-base) * 1), 0.0625rem);
+    --_space-max-100: round(calc(var(--type-max-base) * 1), 0.0625rem);
+    --space-100: calc(var(--_space-min-100) + var(--_progress) * (var(--_space-max-100) - var(--_space-min-100)));
+
+    --_space-min-125: round(calc(var(--type-min-base) * 1.25), 0.0625rem);
+    --_space-max-125: round(calc(var(--type-max-base) * 1.25), 0.0625rem);
+    --space-125: calc(var(--_space-min-125) + var(--_progress) * (var(--_space-max-125) - var(--_space-min-125)));
+
+    --_space-min-150: round(calc(var(--type-min-base) * 1.5), 0.0625rem);
+    --_space-max-150: round(calc(var(--type-max-base) * 1.5), 0.0625rem);
+    --space-150: calc(var(--_space-min-150) + var(--_progress) * (var(--_space-max-150) - var(--_space-min-150)));
+
+    --_space-min-200: round(calc(var(--type-min-base) * 2), 0.0625rem);
+    --_space-max-200: round(calc(var(--type-max-base) * 2), 0.0625rem);
+    --space-200: calc(var(--_space-min-200) + var(--_progress) * (var(--_space-max-200) - var(--_space-min-200)));
+
+    --_space-min-300: round(calc(var(--type-min-base) * 3), 0.0625rem);
+    --_space-max-300: round(calc(var(--type-max-base) * 3), 0.0625rem);
+    --space-300: calc(var(--_space-min-300) + var(--_progress) * (var(--_space-max-300) - var(--_space-min-300)));
+
+    --_space-min-400: round(calc(var(--type-min-base) * 4), 0.0625rem);
+    --_space-max-400: round(calc(var(--type-max-base) * 4), 0.0625rem);
+    --space-400: calc(var(--_space-min-400) + var(--_progress) * (var(--_space-max-400) - var(--_space-min-400)));
+
+    --_space-min-500: round(calc(var(--type-min-base) * 5), 0.0625rem);
+    --_space-max-500: round(calc(var(--type-max-base) * 5), 0.0625rem);
+    --space-500: calc(var(--_space-min-500) + var(--_progress) * (var(--_space-max-500) - var(--_space-min-500)));
+
+    /* One-up pairs: lower step's minimum → upper step's maximum. */
+    --space-10-30: calc(var(--_space-min-10) + var(--_progress) * (var(--_space-max-30) - var(--_space-min-10)));
+    --space-30-50: calc(var(--_space-min-30) + var(--_progress) * (var(--_space-max-50) - var(--_space-min-30)));
+    --space-50-60: calc(var(--_space-min-50) + var(--_progress) * (var(--_space-max-60) - var(--_space-min-50)));
+    --space-60-70: calc(var(--_space-min-60) + var(--_progress) * (var(--_space-max-70) - var(--_space-min-60)));
+    --space-70-80: calc(var(--_space-min-70) + var(--_progress) * (var(--_space-max-80) - var(--_space-min-70)));
+    --space-80-100: calc(var(--_space-min-80) + var(--_progress) * (var(--_space-max-100) - var(--_space-min-80)));
+    --space-100-125: calc(var(--_space-min-100) + var(--_progress) * (var(--_space-max-125) - var(--_space-min-100)));
+    --space-125-150: calc(var(--_space-min-125) + var(--_progress) * (var(--_space-max-150) - var(--_space-min-125)));
+    --space-150-200: calc(var(--_space-min-150) + var(--_progress) * (var(--_space-max-200) - var(--_space-min-150)));
+    --space-200-300: calc(var(--_space-min-200) + var(--_progress) * (var(--_space-max-300) - var(--_space-min-200)));
+    --space-300-400: calc(var(--_space-min-300) + var(--_progress) * (var(--_space-max-400) - var(--_space-min-300)));
+    --space-400-500: calc(var(--_space-min-400) + var(--_progress) * (var(--_space-max-500) - var(--_space-min-400)));
+  }
+}
+
+/* ---- Static space (space-static.css) ---- */
+/* Design Language — Static spacing. ADOPTED by Andii 2026-10-20.
+   The fluid scale (space.css) frozen: same unified percentage names, but
+   computed against a FIXED 20px base instead of the fluid 18→20px base.
+   20px is the fluid scale's desktop anchor, so from step 50 up these values
+   equal the fluid scale at desktop widths exactly. The two smallest steps
+   take the exact percentages (2px/6px) rather than inheriting the fluid
+   scale's Utopia rounding artefacts (3px top-out; constant 5px).
+   Values are expressed in rem (Andii, 2026-10-20) — px equivalents noted
+   per line; in rem they match the fluid scale's desktop rem figures.
+   No pairs: a pair is a fluid transition between steps; frozen, it is just
+   another static value, and the ladder already covers the useful stops.
+
+   USAGE (ratified 2026-10-20): fluid for layout-level spacing — page
+   rhythm, section gaps, grid gutters, anything that should breathe with
+   the viewport. Static for component-internal spacing — button/input
+   padding, icon gaps, card interiors — where a component must measure the
+   same wherever it is dropped, including contexts with no fluid root
+   (e.g. exported Thoughts articles). */
+
+:root {
+  --space-static-10: 0.125rem;   /* 2px */
+  --space-static-30: 0.375rem;   /* 6px */
+  --space-static-50: 0.625rem;   /* 10px */
+  --space-static-60: 0.75rem;    /* 12px */
+  --space-static-70: 0.875rem;   /* 14px */
+  --space-static-80: 1rem;       /* 16px */
+  --space-static-100: 1.25rem;   /* 20px */
+  --space-static-125: 1.5625rem; /* 25px */
+  --space-static-150: 1.875rem;  /* 30px */
+  --space-static-200: 2.5rem;    /* 40px */
+  --space-static-300: 3.75rem;   /* 60px */
+  --space-static-400: 5rem;      /* 80px */
+  --space-static-500: 6.25rem;   /* 100px */
+}

@@ -1,0 +1,84 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* 
+   * Generic Clean Dark Code Theme for the HTML Panel Content.
+   * Note: We strictly avoid styling tab headers (#tabbutton-*) or navigation items.
+   */
+
+  /* Target ONLY the panel body content (the pre/code area), leaving tab headers untouched */
+  [id*="panel-tab-content"][id*="html"],
+  div[id="storybook/html/panel"] {
+    background-color: #1a1b20 !important;
+  }
+
+  [id*="panel-tab-content"][id*="html"] pre,
+  [id*="panel-tab-content"][id*="html"] code,
+  div[id="storybook/html/panel"] pre,
+  div[id="storybook/html/panel"] code {
+    font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace !important;
+    font-size: 0.8125rem !important; /* 13px */
+    line-height: 1.6 !important;
+    letter-spacing: normal !important;
+    white-space: pre-wrap !important;
+    word-break: normal !important;
+  }
+
+  /* Clean subtle line numbers */
+  [id*="panel-tab-content"][id*="html"] .linenumber,
+  div[id="storybook/html/panel"] .linenumber {
+    color: #636874 !important;
+    user-select: none;
+    padding-right: 1.25rem !important;
+  }
+
+  /* Standard readable dark syntax highlighting (VS Code Dark / One Dark inspired) */
+  [id*="panel-tab-content"][id*="html"] .tag,
+  div[id="storybook/html/panel"] .tag,
+  [id*="panel-tab-content"][id*="html"] .punctuation,
+  div[id="storybook/html/panel"] .punctuation {
+    color: #abb2bf !important;
+  }
+
+  /* Tag names (e.g., ads-button) */
+  [id*="panel-tab-content"][id*="html"] .tag .name,
+  [id*="panel-tab-content"][id*="html"] .tag-name,
+  div[id="storybook/html/panel"] .name {
+    color: #e06c75 !important; /* soft red/coral */
+    font-weight: 500;
+  }
+
+  /* Attributes (e.g., variant, disabled) */
+  [id*="panel-tab-content"][id*="html"] .attr-name,
+  [id*="panel-tab-content"][id*="html"] .attribute,
+  div[id="storybook/html/panel"] .attribute {
+    color: #d19a66 !important; /* warm amber/orange */
+  }
+
+  /* Attribute values and strings */
+  [id*="panel-tab-content"][id*="html"] .attr-value,
+  [id*="panel-tab-content"][id*="html"] .string,
+  div[id="storybook/html/panel"] .string {
+    color: #98c379 !important; /* soft green */
+  }
+
+  /* Comments */
+  [id*="panel-tab-content"][id*="html"] .comment,
+  div[id="storybook/html/panel"] .comment {
+    color: #5c6370 !important;
+    font-style: italic;
+  }
+
+  /* Copy button inside the panel */
+  [id*="panel-tab-content"][id*="html"] button,
+  div[id="storybook/html/panel"] button {
+    font-family: 'IBM Plex Mono', monospace !important;
+    font-size: 0.75rem !important;
+    border-radius: 4px !important;
+    background: #282c34 !important;
+    color: #abb2bf !important;
+    border: 1px solid #3e4451 !important;
+  }
+</style>

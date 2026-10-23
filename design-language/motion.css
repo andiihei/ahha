@@ -1,0 +1,51 @@
+/* ---- Motion (motion.css) ---- */
+/* Verbatim from motion.css: polysemic timing tokens — they describe
+   how things move, never why. Delays reuse the duration scale;
+   distance references the spacing tokens; keyframes live in the
+   components. Reduced motion collapses the durations at token level. */
+:root {
+  /* Durations — 100 = 200ms base */
+  --duration-0: 0ms;
+  --duration-25: 50ms;
+  --duration-50: 100ms;
+  --duration-75: 150ms;
+  --duration-100: 200ms;
+  --duration-150: 300ms;
+  --duration-200: 400ms;
+  --duration-300: 600ms;
+  --duration-400: 800ms;
+
+  /* Easings */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);          /* things leaving */
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);        /* things arriving */
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);    /* things changing state */
+  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1); /* large / hero movement */
+
+  /* Default interval between staggered items */
+  --stagger: 50ms;
+
+  /* Effects — unitless factors; the timing still comes from the
+     duration/easing tokens above.
+     --parallax: fraction of the scroll travel applied to a layer
+       (layers further from the viewer use smaller fractions).
+     --scale-enlarge: emphasis scale — an element growing in place.
+     --scale-zoom: in-frame magnification — content scaling inside a
+       clipped frame, focal point set by the component. */
+  --parallax: 0.3;
+  --scale-enlarge: 1.06;
+  --scale-zoom: 1.5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-25: 0ms;
+    --duration-50: 0ms;
+    --duration-75: 0ms;
+    --duration-100: 0ms;
+    --duration-150: 0ms;
+    --duration-200: 0ms;
+    --duration-300: 0ms;
+    --duration-400: 0ms;
+    --stagger: 0ms;
+  }
+}

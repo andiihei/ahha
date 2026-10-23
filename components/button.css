@@ -1,0 +1,34 @@
+.state-btn {
+  appearance: none;
+  position: relative;
+  overflow: hidden;
+  font: inherit;
+  font-size: var(--step-80);
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.state-btn .state-btn-label { position: relative; z-index: 1; }
+.state-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-50) var(--ease-in-out);
+}
+.state-btn-primary { background: var(--action-bg-1); color: var(--action-fg-1); border: 1px solid var(--action-bg-1); }
+.state-btn-primary::after { background: var(--action-fg-1); }
+.state-btn-secondary { background: transparent; color: var(--text-fg-1); border: 1px solid var(--action-border); }
+.state-btn-secondary::after { background: var(--action-border); }
+.state-btn:hover::after { opacity: var(--opacity-10); }
+.state-btn:active::after { opacity: var(--opacity-15); }
+.state-btn:focus-visible {
+  outline: 3px solid var(--action-border);
+  outline-offset: 2px;
+}
+.state-btn:disabled {
+  opacity: var(--opacity-40);
+  cursor: not-allowed;
+}

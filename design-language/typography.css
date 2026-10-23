@@ -1,0 +1,248 @@
+/* ---- Font families (fonts.css) ---- */
+/* Design Language — Font families (brand pack).
+   Convention DECIDED by Andii 2026-10-22: three family tokens —
+   --font-main, --font-alt, --font-mono — so a brand pack can swap
+   typefaces without touching role classes or components.
+   This brand's assignments:
+     --font-main = "IBM Plex Sans" (interface/body)
+     --font-alt  = "Fraunces" (display/headings + lead paragraphs)
+     --font-mono = "IBM Plex Mono" (code/data)
+   Per-brand note (Andii, 2026-10-22): leading and tracking values do not
+   transfer consistently across typefaces, so the --leading-* and
+   --tracking-* scales are brand-pack values too. They are currently
+   declared in typography.css and ship with the brand pack when the
+   package is assembled. The fluid type configuration in type.css
+   (--type-min/max-base, --type-min/max-ratio) is likewise per-brand.
+   Loading: see fonts.md. IBM Plex Mono is assigned here but is NOT yet
+   in the Google Fonts embed or the self-hosting spec — nothing renders
+   in it yet; add it when a component first uses --font-mono. */
+
+:root {
+  --font-main: "IBM Plex Sans", sans-serif;
+  --font-alt: "Fraunces", serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+
+/* ---- Fluid type (type.css) ---- */
+/* Design Language — Fluid typography.
+   Configuration as supplied by Andii 2026-10-20 (Utopia): 360px → 18px base
+   @ 1.125 scale; 1240px → 20px base @ 1.2 scale.
+   @link https://utopia.fyi/type/calculator?c=360,18,1.125,1240,20,1.2,8,3,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12
+
+   REFACTORED 2026-10-22 (Andii's direction) from per-step clamp() magic
+   numbers to the shared-progress model (Kevin Powell, "No more clamp()
+   magic numbers"; Master.dev, "Fluid Typography with progress()"; MDN
+   progress() reference): one --_progress value — how far the viewport sits
+   between 360px and 1240px, 0 → 1 — drives every step. Each step is
+   derived from the configuration by formula: its size at 360px is
+   --type-min-base × --type-min-ratio^step, at 1240px --type-max-base ×
+   --type-max-ratio^step, interpolated by --_progress. Changing the
+   configuration (base sizes, ratios, viewport range) re-derives the whole
+   scale; nothing can fall out of sync.
+
+   Variable NAMES unchanged (unified percentage convention, 100 = base):
+   60/70/80/100/120/140/160/180/200/250/300/350 = Utopia steps -3..8.
+   Rendered VALUES preserved: endpoints identical to the previous Utopia
+   clamp() output at all 12 steps; mid-range deviation ≤ 0.0013px (the old
+   clamps' rounded slope/intercept). Steps 60/70 keep their negative slope
+   (min size > max size) — the interpolation handles it directly.
+
+   Fallback architecture: the original clamp() definitions stand below and
+   apply wherever neither progress() nor the tan(atan2()) route is
+   supported. Inside the @supports block, --_progress is computed with
+   tan(atan2()) (works in every current browser); where progress() itself
+   is supported it replaces that computation. */
+
+:root {
+  --step-60: clamp(0.7234rem, 0.8174rem + -0.1214vw, 0.7901rem);
+  --step-70: clamp(0.8681rem, 0.8974rem + -0.0379vw, 0.8889rem);
+  --step-80: clamp(1rem, 0.983rem + 0.0758vw, 1.0417rem);
+  --step-100: clamp(1.125rem, 1.0739rem + 0.2273vw, 1.25rem);
+  --step-120: clamp(1.2656rem, 1.1697rem + 0.4261vw, 1.5rem);
+  --step-140: clamp(1.4238rem, 1.2699rem + 0.6839vw, 1.8rem);
+  --step-160: clamp(1.6018rem, 1.3735rem + 1.0149vw, 2.16rem);
+  --step-180: clamp(1.802rem, 1.4789rem + 1.4363vw, 2.592rem);
+  --step-200: clamp(2.0273rem, 1.5842rem + 1.9693vw, 3.1104rem);
+  --step-250: clamp(2.2807rem, 1.6868rem + 2.6396vw, 3.7325rem);
+  --step-300: clamp(2.5658rem, 1.7831rem + 3.4785vw, 4.479rem);
+  --step-350: clamp(2.8865rem, 1.8686rem + 4.5241vw, 5.3748rem);
+}
+
+/* Registered so atan2() receives a resolved <length> (CSS-Tricks recipe). */
+@property --_100vw {
+  syntax: "<length>";
+  initial-value: 0px;
+  inherits: false;
+}
+
+@supports (opacity: progress(1px, 0px, 1px)) or (width: calc(1px * tan(atan2(1px, 1px)))) {
+  :root {
+    /* The configuration — the only numbers a future change touches. */
+    --type-min-viewport: 360px;
+    --type-max-viewport: 1240px;
+    --type-min-base: 1.125rem; /* 18px at 360px */
+    --type-max-base: 1.25rem; /* 20px at 1240px */
+    --type-min-ratio: 1.125;
+    --type-max-ratio: 1.2;
+
+    /* Shared progress, 0 at 360px → 1 at 1240px, clamped outside.
+       Default route: tan(atan2()) strips the unit from the viewport
+       width so the ratio can be computed by hand. The bounds below are
+       the unitless forms of --type-min/max-viewport. */
+    --_100vw: 100vw;
+    --_viewport-int: calc(10000 * tan(atan2(var(--_100vw), 10000px)));
+    --_progress: calc((clamp(360, var(--_viewport-int), 1240) - 360) / (1240 - 360));
+
+    /* Steps: min + progress × (max − min), endpoints derived by pow(). */
+    --_min-60: calc(var(--type-min-base) * pow(var(--type-min-ratio), -3));
+    --_max-60: calc(var(--type-max-base) * pow(var(--type-max-ratio), -3));
+    --step-60: calc(var(--_min-60) + var(--_progress) * (var(--_max-60) - var(--_min-60)));
+
+    --_min-70: calc(var(--type-min-base) * pow(var(--type-min-ratio), -2));
+    --_max-70: calc(var(--type-max-base) * pow(var(--type-max-ratio), -2));
+    --step-70: calc(var(--_min-70) + var(--_progress) * (var(--_max-70) - var(--_min-70)));
+
+    --_min-80: calc(var(--type-min-base) * pow(var(--type-min-ratio), -1));
+    --_max-80: calc(var(--type-max-base) * pow(var(--type-max-ratio), -1));
+    --step-80: calc(var(--_min-80) + var(--_progress) * (var(--_max-80) - var(--_min-80)));
+
+    --_min-100: var(--type-min-base);
+    --_max-100: var(--type-max-base);
+    --step-100: calc(var(--_min-100) + var(--_progress) * (var(--_max-100) - var(--_min-100)));
+
+    --_min-120: calc(var(--type-min-base) * pow(var(--type-min-ratio), 1));
+    --_max-120: calc(var(--type-max-base) * pow(var(--type-max-ratio), 1));
+    --step-120: calc(var(--_min-120) + var(--_progress) * (var(--_max-120) - var(--_min-120)));
+
+    --_min-140: calc(var(--type-min-base) * pow(var(--type-min-ratio), 2));
+    --_max-140: calc(var(--type-max-base) * pow(var(--type-max-ratio), 2));
+    --step-140: calc(var(--_min-140) + var(--_progress) * (var(--_max-140) - var(--_min-140)));
+
+    --_min-160: calc(var(--type-min-base) * pow(var(--type-min-ratio), 3));
+    --_max-160: calc(var(--type-max-base) * pow(var(--type-max-ratio), 3));
+    --step-160: calc(var(--_min-160) + var(--_progress) * (var(--_max-160) - var(--_min-160)));
+
+    --_min-180: calc(var(--type-min-base) * pow(var(--type-min-ratio), 4));
+    --_max-180: calc(var(--type-max-base) * pow(var(--type-max-ratio), 4));
+    --step-180: calc(var(--_min-180) + var(--_progress) * (var(--_max-180) - var(--_min-180)));
+
+    --_min-200: calc(var(--type-min-base) * pow(var(--type-min-ratio), 5));
+    --_max-200: calc(var(--type-max-base) * pow(var(--type-max-ratio), 5));
+    --step-200: calc(var(--_min-200) + var(--_progress) * (var(--_max-200) - var(--_min-200)));
+
+    --_min-250: calc(var(--type-min-base) * pow(var(--type-min-ratio), 6));
+    --_max-250: calc(var(--type-max-base) * pow(var(--type-max-ratio), 6));
+    --step-250: calc(var(--_min-250) + var(--_progress) * (var(--_max-250) - var(--_min-250)));
+
+    --_min-300: calc(var(--type-min-base) * pow(var(--type-min-ratio), 7));
+    --_max-300: calc(var(--type-max-base) * pow(var(--type-max-ratio), 7));
+    --step-300: calc(var(--_min-300) + var(--_progress) * (var(--_max-300) - var(--_min-300)));
+
+    --_min-350: calc(var(--type-min-base) * pow(var(--type-min-ratio), 8));
+    --_max-350: calc(var(--type-max-base) * pow(var(--type-max-ratio), 8));
+    --step-350: calc(var(--_min-350) + var(--_progress) * (var(--_max-350) - var(--_min-350)));
+  }
+
+  /* Where progress() itself is supported, it computes the shared value. */
+  @supports (opacity: progress(1px, 0px, 1px)) {
+    :root {
+      --_progress: progress(100vw, var(--type-min-viewport), var(--type-max-viewport));
+    }
+  }
+}
+
+/* ---- Typography utilities (typography.css) ---- */
+/* Design Language — Typography utilities. RATIFIED by Andii 2026-10-20,
+   including his size mapping (px-anchored): 75→--step-60, 90→--step-70,
+   100→--step-80, 110→--step-100, 150→--step-120, 200→--step-160,
+   300→--step-250, 400→--step-350 (step names = the unified % convention).
+   Sources: role recipes extracted read-only from Andii's Figma Text Components
+   (Foundations S1.1, Typography page); sizes map each role's %-of-root onto the
+   fluid scale in type.css (load type.css first). Leading/tracking values are
+   Andii's documented scales. Paragraph/list spacing are Andii's rules, stated
+   2026-10-20: paragraph spacing = the prevailing font size (1em);
+   list spacing = 50% of the prevailing font size (0.5em). */
+
+:root {
+  /* Line heights — Andii's names: None / Compact / Relaxed
+     (the Paragraph component calls Compact "Normal" and Relaxed "Comfy"). */
+  --leading-none: 1;
+  --leading-compact: 1.25;
+  --leading-relaxed: 1.5;
+
+  /* Letter spacing — Tight / None / Loose / Extra Loose. */
+  --tracking-tight: -0.03em;
+  --tracking-none: 0em;
+  --tracking-loose: 0.05em;
+  --tracking-extra-loose: 0.1em;
+}
+
+/* Family bases — variation/feature settings as set in Andii's Figma components.
+   Family stacks come from the brand tokens in fonts.css (load fonts.css
+   first): --font-main = IBM Plex Sans, --font-alt = Fraunces,
+   --font-mono = IBM Plex Mono (Andii, 2026-10-22). */
+.u-fraunces {
+  font-family: var(--font-alt);
+  font-optical-sizing: auto;
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+}
+.u-plex {
+  font-family: var(--font-main);
+  font-optical-sizing: auto;
+  font-variation-settings: "wdth" 100;
+  font-feature-settings: "lnum" 1, "pnum" 1;
+}
+
+/* Family utilities — plain family application from the brand tokens. */
+.u-font-main { font-family: var(--font-main); }
+.u-font-alt  { font-family: var(--font-alt); }
+.u-font-mono { font-family: var(--font-mono); }
+
+/* Headings — Fraunces, Tight tracking. Heading 400/300 default to leading None
+   (the components' lineHeight toggle switches them to Compact). */
+.u-heading-400 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: "SOFT" 0, "WONK" 1; font-size: var(--step-350); font-weight: 700; line-height: var(--leading-none); letter-spacing: var(--tracking-tight); text-transform: capitalize; }
+.u-heading-300 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: "SOFT" 0, "WONK" 1; font-size: var(--step-250); font-weight: 700; line-height: var(--leading-none); letter-spacing: var(--tracking-tight); text-transform: capitalize; }
+.u-heading-200 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: "SOFT" 0, "WONK" 1; font-size: var(--step-160); font-weight: 400; line-height: var(--leading-compact); letter-spacing: var(--tracking-tight); }
+.u-heading-150 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: "SOFT" 0, "WONK" 1; font-size: var(--step-120); font-weight: 600; line-height: var(--leading-compact); letter-spacing: var(--tracking-tight); }
+
+/* Paragraphs. P200/P150 are Fraunces (lead text); P110/P100 are Plex.
+   P100's Comfy variant = .u-paragraph-100 with .u-leading-relaxed applied. */
+.u-paragraph-200  { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: "SOFT" 0, "WONK" 1; font-size: var(--step-160); font-weight: 700; line-height: var(--leading-compact); }
+.u-paragraph-150    { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: "SOFT" 0, "WONK" 1; font-size: var(--step-120); font-weight: 400; line-height: var(--leading-compact); }
+.u-paragraph-110 { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: "wdth" 100; font-feature-settings: "lnum" 1, "pnum" 1; font-size: var(--step-100); font-weight: 400; line-height: var(--leading-relaxed); }
+.u-paragraph-100    { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: "wdth" 100; font-feature-settings: "lnum" 1, "pnum" 1; font-size: var(--step-80); font-weight: 400; line-height: var(--leading-compact); }
+
+/* Actions — Plex Bold. Uppercase was a component toggle in Figma (default on);
+   here it is the atomic .text-caps modifier, appended when needed. */
+.u-action-110      { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: "wdth" 100; font-feature-settings: "lnum" 1, "pnum" 1; font-size: var(--step-100); font-weight: 700; line-height: var(--leading-compact); }
+.u-action-100      { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: "wdth" 100; font-feature-settings: "lnum" 1, "pnum" 1; font-size: var(--step-80); font-weight: 700; line-height: var(--leading-compact); }
+.u-action-75       { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: "wdth" 100; font-feature-settings: "lnum" 1, "pnum" 1; font-size: var(--step-60); font-weight: 700; line-height: var(--leading-compact); }
+
+/* Detail (formerly Labels & Data / LD) — Plex SemiBold, Compact leading. */
+.u-detail-100     { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: "wdth" 100; font-feature-settings: "lnum" 1, "pnum" 1; font-size: var(--step-80); font-weight: 600; line-height: var(--leading-compact); }
+.u-detail-90      { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: "wdth" 100; font-feature-settings: "lnum" 1, "pnum" 1; font-size: var(--step-70); font-weight: 600; line-height: var(--leading-compact); }
+.u-detail-75      { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: "wdth" 100; font-feature-settings: "lnum" 1, "pnum" 1; font-size: var(--step-60); font-weight: 600; line-height: var(--leading-compact); }
+
+/* Atomic modifiers — appended to any role class (Andii, 2026-10-20: variant
+   classes like -bold/-caps are unnecessary duplication). These rules come
+   AFTER the role classes so they win at equal specificity.
+   .text-caps also carries Loose tracking: in the Figma components, caps
+   always pairs with +5% letter spacing. */
+.text-regular  { font-weight: 400; }
+.text-medium   { font-weight: 500; }
+.text-semibold { font-weight: 600; }
+.text-bold     { font-weight: 700; }
+.text-caps     { text-transform: uppercase; letter-spacing: var(--tracking-loose); }
+
+/* Leading overrides (the components' lineHeight toggles, as utilities). */
+.u-leading-none    { line-height: var(--leading-none); }
+.u-leading-compact { line-height: var(--leading-compact); }
+.u-leading-relaxed { line-height: var(--leading-relaxed); }
+
+/* Vertical rhythm — Andii's rules (2026-10-20). em-based, so the gap always
+   equals the prevailing font size of the text it separates. Apply .u-flow to
+   a prose container. */
+.u-flow > p + p,
+.u-flow > p + ul, .u-flow > p + ol,
+.u-flow > ul + p, .u-flow > ol + p { margin-block-start: 1em; }
+.u-flow li + li { margin-block-start: 0.5em; }

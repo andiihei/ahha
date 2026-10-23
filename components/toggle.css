@@ -1,0 +1,83 @@
+/* Toggle (switch) — built only from scheme slots + the global opacity
+   and motion tokens, so it re-skins with the card it sits in. */
+.toggle {
+  appearance: none;
+  font: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-static-60);
+  background: none;
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 0;
+  cursor: pointer;
+  color: var(--text-fg-1);
+}
+.toggle-track {
+  position: relative;
+  flex: none;
+  width: 2.75rem;
+  height: 1.5rem;
+  border-radius: var(--radius-full);
+  /* OFF: outlined like the Secondary Action — transparent fill,
+     --action-border outline (same 1px the Secondary button uses). */
+  background: transparent;
+  border: 1px solid var(--action-border);
+  transition:
+    background-color var(--duration-100) var(--ease-out),
+    border-color var(--duration-100) var(--ease-out),
+    box-shadow var(--duration-100) var(--ease-out);
+}
+.toggle[aria-checked="true"] .toggle-track {
+  background: var(--action-bg-1);
+  /* Border stays 1px in both states (transparent when ON) so the
+     track geometry never shifts when toggling. */
+  border-color: transparent;
+}
+.toggle:hover .toggle-track {
+  box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--text-fg-1) calc(var(--opacity-10) * 100%), transparent);
+}
+.toggle:active .toggle-track {
+  box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--text-fg-1) calc(var(--opacity-15) * 100%), transparent);
+}
+.toggle-knob {
+  position: absolute;
+  top: 50%;
+  /* 0.125rem inside the track's padding box: the track's 1px border
+     sits outside that box, so the knob's inset from the track's outer
+     edge is 1px + 2px = 3px — matching the 3px vertical inset. With
+     the 1.25rem ON travel, the right inset is also 3px
+     (44 − 3 − 20 − 18), so both states are symmetric. */
+  left: 0.125rem;
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: var(--radius-full);
+  /* OFF knob: solid --action-border, matching the track outline.
+     Knob has no border in either state (box-sizing: border-box keeps
+     it 1.125rem square, so removing the border changes nothing). */
+  background: var(--action-border);
+  border: none;
+  transform: translate(0, -50%);
+  transition:
+    transform var(--duration-100) var(--ease-out),
+    background-color var(--duration-100) var(--ease-out);
+}
+.toggle[aria-checked="true"] .toggle-knob {
+  background: var(--action-fg-1);
+  transform: translate(1.25rem, -50%);
+}
+.toggle:focus-visible {
+  outline: 3px solid var(--action-border);
+  outline-offset: 2px;
+}
+
+/* Toggle — the disabled row of the contract, which the
+   specimen's scheme-card prototype doesn't exercise: the whole
+   control drops to --opacity-40, the state layer is suppressed,
+   and a disabled <button> fires no events. The knob keeps its
+   position — disabled freezes the state, it doesn't clear it. */
+.toggle:disabled { cursor: not-allowed; }
+.toggle:disabled .toggle-track,
+.toggle:disabled .toggle-label { opacity: var(--opacity-40); }
+.toggle:disabled:hover .toggle-track,
+.toggle:disabled:active .toggle-track { box-shadow: none; }

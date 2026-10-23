@@ -1,0 +1,275 @@
+/* ---- Colour (colors.css) ---- */
+/* Layer 1 — Generic colour ramps (OKLCH, 11 steps: 1000..25, steps 400 & 600 omitted).
+   Generic family names allow any project or brand pack to swap palettes without
+   changing token names or component references:
+     neutral (formerly Midnight)
+     purple  (formerly Purple Rain)
+     green   (formerly Fern)
+     red     (formerly Cerise)
+     yellow  (formerly Marigold)
+     blue    (formerly Cobalt) */
+:root {
+  /* Neutral (Midnight) */
+  --neutral-1000: oklch(16.11% 0.0639 276.48);
+  --neutral-950: oklch(17.5% 0.086 285.88);
+  --neutral-900: oklch(22.5% 0.096 285.88);
+  --neutral-800: oklch(31.5% 0.096 285.88);
+  --neutral-700: oklch(43% 0.088 285.88);
+  --neutral-500: oklch(57% 0.074 285.88);
+  --neutral-300: oklch(70.5% 0.058 285.88);
+  --neutral-200: oklch(82.5% 0.04 285.88);
+  --neutral-100: oklch(91% 0.024 285.88);
+  --neutral-50: oklch(96% 0.012 285.88);
+  --neutral-25: oklch(98% 0.004 285.88);
+
+  /* Haze — DEPRECATED 2026-10-22 (Andii): retained dormant in code until Andii confirms removal. */
+  --haze-1000: oklch(16.11% 0.0639 276.48);
+  --haze-950: oklch(17.5% 0.054 285.88);
+  --haze-900: oklch(22.5% 0.046 285.88);
+  --haze-800: oklch(31.5% 0.04 285.88);
+  --haze-700: oklch(43% 0.034 285.88);
+  --haze-500: oklch(57% 0.03 285.88);
+  --haze-300: oklch(70.5% 0.026 285.88);
+  --haze-200: oklch(82.5% 0.022 285.88);
+  --haze-100: oklch(91% 0.018 285.88);
+  --haze-50: oklch(96% 0.012 285.88);
+  --haze-25: oklch(98% 0.004 285.88);
+
+  /* Purple (Purple Rain) */
+  --purple-1000: oklch(16% 0.058 310.12);
+  --purple-950: oklch(18.5% 0.093 310.12);
+  --purple-900: oklch(25% 0.126 310.12);
+  --purple-800: oklch(34.5% 0.15 310.12);
+  --purple-700: oklch(45.5% 0.164 310.12);
+  --purple-500: oklch(57.5% 0.166 310.12);
+  --purple-300: oklch(69.5% 0.16 310.12);
+  --purple-200: oklch(81% 0.128 310.12);
+  --purple-100: oklch(90% 0.065 310.12);
+  --purple-50: oklch(96% 0.025 310.12);
+  --purple-25: oklch(98% 0.006 310.12);
+
+  /* Green (Fern) — hue torsions teal (199.8°) → green (158°) */
+  --green-1000: oklch(16% 0.026 199.8);
+  --green-950: oklch(16.5% 0.028 196.2);
+  --green-900: oklch(21.5% 0.036 192);
+  --green-800: oklch(30% 0.052 187.7);
+  --green-700: oklch(41% 0.072 183.3);
+  --green-500: oklch(53.5% 0.098 178.9);
+  --green-300: oklch(66.5% 0.125 174.5);
+  --green-200: oklch(78% 0.136 170.1);
+  --green-100: oklch(88% 0.12 165.8);
+  --green-50: oklch(95% 0.075 161.6);
+  --green-25: oklch(98% 0.016 158.01);
+
+  /* Red (Cerise) */
+  --red-1000: oklch(16% 0.06 4.7);
+  --red-950: oklch(17.5% 0.07 4.7);
+  --red-900: oklch(22.4% 0.09 4.7);
+  --red-800: oklch(31.5% 0.126 4.7);
+  --red-700: oklch(43% 0.172 4.7);
+  --red-500: oklch(56.5% 0.202 4.7);
+  --red-300: oklch(69.5% 0.188 4.7);
+  --red-200: oklch(81.5% 0.109 4.7);
+  --red-100: oklch(90.6% 0.051 4.7);
+  --red-50: oklch(96.1% 0.02 4.7);
+  --red-25: oklch(98% 0.008 4.7);
+
+  /* Yellow (Marigold) — deliberate hue torsion 60.7° → 100.4° */
+  --yellow-1000: oklch(16% 0.036 60.7);
+  --yellow-950: oklch(21% 0.039 64.1);
+  --yellow-900: oklch(27% 0.049 68.1);
+  --yellow-800: oklch(35% 0.067 72.2);
+  --yellow-700: oklch(44.5% 0.09 76.4);
+  --yellow-500: oklch(56.6% 0.117 80.6);
+  --yellow-300: oklch(73.7% 0.151 84.7);
+  --yellow-200: oklch(81.3% 0.166 88.9);
+  --yellow-100: oklch(90.5% 0.136 93);
+  --yellow-50: oklch(96% 0.071 97);
+  --yellow-25: oklch(98% 0.045 100.4);
+
+  /* Blue (Cobalt) */
+  --blue-1000: oklch(16% 0.05 260.5);
+  --blue-950: oklch(18% 0.073 260.5);
+  --blue-900: oklch(24.5% 0.094 260.5);
+  --blue-800: oklch(34.5% 0.132 260.5);
+  --blue-700: oklch(47.5% 0.156 260.5);
+  --blue-500: oklch(61% 0.142 260.5);
+  --blue-300: oklch(73.5% 0.134 260.5);
+  --blue-200: oklch(81.4% 0.093 260.5);
+  --blue-100: oklch(90.7% 0.045 260.5);
+  --blue-50: oklch(95.5% 0.019 260.5);
+  --blue-25: oklch(98% 0.006 260.5);
+}
+
+/* ============================================================
+   LAYER 2 — ORTHOGONAL [data-style] × [data-mode] ARCHITECTURE
+   [data-style] selects the colour family ramp (neutral, purple,
+   green, red, yellow, blue) into --color-1000..--color-25.
+   [data-mode] selects the polarity mapping (default, invert, system):
+     default: surface-bg=F-25, surface-bg-1=F-50, text-fg-1=F-1000,
+              text-fg-2=F-700, surface-border=F-200, action-bg-1=F-700,
+              action-fg-1=F-25, action-border=F-700
+     invert:  surface-bg=F-1000, surface-bg-1=F-900, text-fg-1=F-25,
+              text-fg-2=F-300, surface-border=F-800, action-bg-1=F-200,
+              action-fg-1=F-1000, action-border=F-200
+   ============================================================ */
+
+/* 1. Style family pointers (defaulting to neutral at :root) */
+:root,
+[data-style="neutral"] {
+  --color-1000: var(--neutral-1000);
+  --color-950: var(--neutral-950);
+  --color-900: var(--neutral-900);
+  --color-800: var(--neutral-800);
+  --color-700: var(--neutral-700);
+  --color-500: var(--neutral-500);
+  --color-300: var(--neutral-300);
+  --color-200: var(--neutral-200);
+  --color-100: var(--neutral-100);
+  --color-50: var(--neutral-50);
+  --color-25: var(--neutral-25);
+}
+
+/* Haze style — DEPRECATED 2026-10-22 (Andii): retained dormant in code until Andii confirms removal. */
+[data-style="haze"] {
+  --color-1000: var(--haze-1000);
+  --color-950: var(--haze-950);
+  --color-900: var(--haze-900);
+  --color-800: var(--haze-800);
+  --color-700: var(--haze-700);
+  --color-500: var(--haze-500);
+  --color-300: var(--haze-300);
+  --color-200: var(--haze-200);
+  --color-100: var(--haze-100);
+  --color-50: var(--haze-50);
+  --color-25: var(--haze-25);
+}
+
+[data-style="purple"] {
+  --color-1000: var(--purple-1000);
+  --color-950: var(--purple-950);
+  --color-900: var(--purple-900);
+  --color-800: var(--purple-800);
+  --color-700: var(--purple-700);
+  --color-500: var(--purple-500);
+  --color-300: var(--purple-300);
+  --color-200: var(--purple-200);
+  --color-100: var(--purple-100);
+  --color-50: var(--purple-50);
+  --color-25: var(--purple-25);
+}
+
+[data-style="green"] {
+  --color-1000: var(--green-1000);
+  --color-950: var(--green-950);
+  --color-900: var(--green-900);
+  --color-800: var(--green-800);
+  --color-700: var(--green-700);
+  --color-500: var(--green-500);
+  --color-300: var(--green-300);
+  --color-200: var(--green-200);
+  --color-100: var(--green-100);
+  --color-50: var(--green-50);
+  --color-25: var(--green-25);
+}
+
+[data-style="red"] {
+  --color-1000: var(--red-1000);
+  --color-950: var(--red-950);
+  --color-900: var(--red-900);
+  --color-800: var(--red-800);
+  --color-700: var(--red-700);
+  --color-500: var(--red-500);
+  --color-300: var(--red-300);
+  --color-200: var(--red-200);
+  --color-100: var(--red-100);
+  --color-50: var(--red-50);
+  --color-25: var(--red-25);
+}
+
+[data-style="yellow"] {
+  --color-1000: var(--yellow-1000);
+  --color-950: var(--yellow-950);
+  --color-900: var(--yellow-900);
+  --color-800: var(--yellow-800);
+  --color-700: var(--yellow-700);
+  --color-500: var(--yellow-500);
+  --color-300: var(--yellow-300);
+  --color-200: var(--yellow-200);
+  --color-100: var(--yellow-100);
+  --color-50: var(--yellow-50);
+  --color-25: var(--yellow-25);
+}
+
+[data-style="blue"] {
+  --color-1000: var(--blue-1000);
+  --color-950: var(--blue-950);
+  --color-900: var(--blue-900);
+  --color-800: var(--blue-800);
+  --color-700: var(--blue-700);
+  --color-500: var(--blue-500);
+  --color-300: var(--blue-300);
+  --color-200: var(--blue-200);
+  --color-100: var(--blue-100);
+  --color-50: var(--blue-50);
+  --color-25: var(--blue-25);
+}
+
+/* 2. Mode slot resolution (default vs invert, plus system preference) */
+:root,
+[data-style],
+[data-mode="default"],
+[data-mode="system"] {
+  --surface-bg: var(--color-25);
+  --surface-bg-1: var(--color-50);
+  --text-fg-1: var(--color-1000);
+  --text-fg-2: var(--color-700);
+  --surface-border: var(--color-200);
+  --action-bg-1: var(--color-800);
+  --action-border: var(--color-700);
+  --action-fg-1: var(--color-25);
+  color-scheme: light;
+}
+
+/* Dormant Haze exception on default mode */
+[data-style="haze"],
+[data-style="haze"][data-mode="default"],
+[data-mode="default"] [data-style="haze"]:not([data-mode]) {
+  --action-bg-1: var(--haze-800);
+  --action-border: var(--haze-800);
+}
+
+[data-mode="invert"],
+[data-mode="invert"] [data-style]:not([data-mode]) {
+  --surface-bg: var(--color-1000);
+  --surface-bg-1: var(--color-900);
+  --text-fg-1: var(--color-25);
+  --text-fg-2: var(--color-300);
+  --surface-border: var(--color-800);
+  --action-bg-1: var(--color-100);
+  --action-border: var(--color-200);
+  --action-fg-1: var(--color-1000);
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  [data-mode="system"],
+  [data-mode="system"] [data-style]:not([data-mode]) {
+    --surface-bg: var(--color-1000);
+    --surface-bg-1: var(--color-900);
+    --text-fg-1: var(--color-25);
+    --text-fg-2: var(--color-300);
+    --surface-border: var(--color-800);
+    --action-bg-1: var(--color-100);
+    --action-border: var(--color-200);
+    --action-fg-1: var(--color-1000);
+    color-scheme: dark;
+  }
+}
+
+[data-style],
+[data-mode] {
+  background: var(--surface-bg);
+  color: var(--text-fg-1);
+}

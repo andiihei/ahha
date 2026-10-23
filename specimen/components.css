@@ -1,0 +1,264 @@
+/* ---------- Components page ---------- */
+.page-intro { max-width: 46rem; padding-block: var(--space-200) var(--space-100); }
+.page-intro h2 { font-size: var(--step-250); font-weight: 700; margin-bottom: var(--space-100); }
+.page-intro p { font-size: var(--step-120); color: var(--text-fg-2); text-wrap: pretty; }
+.contract-line { font-size: var(--step-80); color: var(--text-fg-2); margin-top: var(--space-80); }
+.comp-sub { font-size: var(--step-120); margin: var(--space-200) 0 var(--space-80); }
+.comp-note { font-size: var(--step-80); color: var(--text-fg-2); max-width: 46rem; text-wrap: pretty; }
+.comp-note + .comp-note { margin-top: var(--space-60); }
+
+/* The stage — a live scheme scope the reader can re-scope.
+   The bar (page scope) carries the scope controls; the body
+   carries data-scheme, so the slot contract fills it. */
+.stage {
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-250);
+  margin-bottom: var(--space-200);
+}
+.stage-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-60) var(--space-100);
+  padding: var(--space-80) var(--space-125);
+  background: var(--surface-bg-1);
+  border-bottom: 1px solid var(--surface-border);
+  border-radius: var(--radius-250) var(--radius-250) 0 0;
+}
+.stage-bar-label {
+  font-size: var(--step-70);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-fg-2);
+}
+.scope-chips { display: flex; flex-wrap: wrap; gap: var(--space-30); }
+.scope-chip {
+  appearance: none;
+  font: inherit;
+  font-size: var(--step-70);
+  font-weight: 600;
+  line-height: var(--leading-compact);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--surface-border);
+  background: transparent;
+  color: var(--text-fg-2);
+  cursor: pointer;
+  transition:
+    background-color var(--duration-50) var(--ease-in-out),
+    border-color var(--duration-50) var(--ease-in-out),
+    color var(--duration-50) var(--ease-in-out);
+}
+.scope-chip:hover { color: var(--text-fg-1); }
+.scope-chip[aria-pressed="true"] {
+  background: var(--text-fg-1);
+  border-color: var(--text-fg-1);
+  color: var(--surface-bg);
+}
+.scope-chip:focus-visible {
+  outline: 3px solid var(--action-border);
+  outline-offset: 2px;
+}
+.scope-name {
+  margin-left: auto;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: var(--step-70);
+  color: var(--text-fg-2);
+}
+.stage-body {
+  padding: var(--space-150) var(--space-125);
+  border-radius: 0 0 var(--radius-250) var(--radius-250);
+}
+/* Room for the demo Selector Button's open panel inside the stage. */
+.stage-body-sel { min-height: 13rem; }
+.readout { font-size: var(--step-80); color: var(--text-fg-2); margin-top: var(--space-125); }
+.readout strong { color: var(--text-fg-1); font-weight: 600; }
+
+/* Demo content inside the stages */
+.demo-list { display: grid; gap: var(--space-100); }
+.demo-item { display: flex; align-items: center; gap: var(--space-100); flex-wrap: wrap; }
+.demo-state {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: var(--step-70);
+  color: var(--text-fg-2);
+  min-width: 2.6rem;
+}
+.demo-actions { display: flex; flex-wrap: wrap; gap: var(--space-60); }
+.demo-actions + .demo-actions { margin-top: var(--space-100); }
+
+
+/* In a stage the component shrink-wraps its trigger (in the
+   top row the nav cluster's flex does this), so the open
+   panel sizes to the pill, as designed — not to the stage. */
+.stage-body .selector-btn { display: inline-block; vertical-align: top; }
+.demo-selector-current svg { display: none; }
+.demo-selector-current svg.is-current { display: block; }
+
+/* Truth tables — the component contracts. Don't-care cells
+   are an em dash; on phone widths each row restacks into a
+   card of label/value pairs (data-label), so the table never
+   scrolls sideways. */
+.truth {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--step-80);
+  margin-bottom: var(--space-100);
+}
+.truth th, .truth td {
+  text-align: left;
+  vertical-align: top;
+  padding: var(--space-60) var(--space-80);
+  border: 1px solid var(--surface-border);
+}
+.truth thead th { background: var(--surface-bg-1); font-weight: 600; white-space: nowrap; }
+.truth td.dc { color: var(--text-fg-2); }
+@media (max-width: 40rem) {
+  .truth thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .truth, .truth tbody, .truth tr, .truth td { display: block; }
+  .truth tr {
+    border: 1px solid var(--surface-border);
+    border-radius: var(--radius-100);
+    padding: var(--space-50) var(--space-80);
+    margin-bottom: var(--space-60);
+  }
+  .truth td {
+    display: block;
+    border: 0;
+    padding: 3px 0;
+    text-align: left;
+  }
+  .truth td + td { margin-top: var(--space-30); }
+  .truth td::before {
+    content: attr(data-label);
+    display: block;
+    font-weight: 600;
+    color: var(--text-fg-2);
+    margin-bottom: 1px;
+  }
+  .stage-body { padding: var(--space-125) var(--space-100); }
+  .scope-name { margin-left: 0; }
+}
+
+/* ---------- Component Inventory & Catalog Dashboard ---------- */
+.inventory-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: var(--space-80);
+  margin-block: var(--space-125) var(--space-200);
+}
+.inv-stat-card {
+  background: var(--surface-bg-1);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-100);
+  padding: var(--space-80) var(--space-100);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-20);
+}
+.inv-stat-num {
+  font-family: var(--font-alt, "Fraunces", serif);
+  font-size: var(--step-200);
+  font-weight: 700;
+  line-height: 1;
+}
+.inv-stat-label {
+  font-size: var(--step-70);
+  font-weight: 600;
+  color: var(--text-fg-2);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.inv-table-wrap {
+  overflow-x: auto;
+  margin-bottom: var(--space-250);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-150);
+}
+.inv-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--step-80);
+  text-align: left;
+}
+.inv-table th, .inv-table td {
+  padding: var(--space-60) var(--space-80);
+  border-bottom: 1px solid var(--surface-border);
+  vertical-align: middle;
+}
+.inv-table thead th {
+  background: var(--surface-bg-1);
+  font-weight: 600;
+  font-size: var(--step-70);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-fg-2);
+}
+.inv-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.inv-table tbody tr:hover {
+  background: color-mix(in oklch, var(--surface-bg-1) 50%, transparent);
+}
+.inv-tag {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: var(--step-70);
+  color: var(--text-fg-1);
+}
+
+.inv-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--step-70);
+  font-weight: 600;
+  line-height: 1;
+  padding: 4px 8px;
+  border-radius: var(--radius-full);
+}
+.inv-pill-ready {
+  background: var(--green-100);
+  color: var(--green-950);
+  border: 1px solid var(--green-300);
+}
+.inv-pill-progress {
+  background: var(--yellow-100);
+  color: var(--yellow-950);
+  border: 1px solid var(--yellow-300);
+}
+.inv-pill-planned {
+  background: var(--surface-bg-1);
+  color: var(--text-fg-2);
+  border: 1px solid var(--surface-border);
+}
+
+.storybook-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-80);
+  padding: var(--space-100) var(--space-125);
+  background: var(--surface-bg-1);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-150);
+  margin-bottom: var(--space-200);
+}
+.storybook-banner-text h4 {
+  font-size: var(--step-100);
+  font-weight: 600;
+  margin: 0 0 4px;
+}
+.storybook-banner-text p {
+  font-size: var(--step-80);
+  color: var(--text-fg-2);
+  margin: 0;
+}
