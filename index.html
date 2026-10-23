@@ -922,26 +922,32 @@
         from { transform: scaleX(0); }
       }
 
-      /* Navigation cluster — the page links and the colour-mode
-         switch sit side by side, separated by the nearest spacing
-         token to the designed gap, --space-200. The switch is NOT a
-         navigation item: it lives outside the <nav> element, in this
-         cluster wrapper, so the two groups read — and are announced —
-         as different kinds of thing. */
+      /* Navigation cluster — the page links and the Mode Switch
+         (the Selector Button application) sit side by side,
+         separated by the nearest spacing token to the designed gap,
+         --space-200. The Mode Switch is NOT a navigation item: it
+         lives outside the <nav> element, in this cluster wrapper,
+         so the two groups read — and are announced — as different
+         kinds of thing. */
       .nav-cluster {
         display: flex;
         align-items: center;
         gap: var(--space-200);
       }
 
-      /* Colour-mode switch — a codified component (.mode-switch),
+      /* Selector Button — a codified component (.selector-btn),
          no longer the .seg group borrowed from the Schemes section.
-         Collapsed, it shows only the current selection (System by
-         default) as a single pill carrying the pressed treatment.
-         Activating it slides the three options out below it in a
-         panel; choosing one sets data-mode on <html> (the page-scope
-         block above does the rest), updates the pill, and closes the
-         panel. Inside the panel only the selected option carries
+         A generic single-select control: it holds a set of options
+         and one selection, and reports selection changes — it knows
+         nothing of what the options mean. Collapsed, it shows only
+         the current selection as a single pill carrying the pressed
+         treatment. Activating it slides the options out below it in
+         a panel; choosing one reports the new selection, updates the
+         pill, and closes the panel. The instance in this page's top
+         row is the Mode Switch application: the shell supplies the
+         Light / System / Dark options and wires the reported
+         selection to data-mode on <html> (the page-scope block above
+         does the rest). Inside the panel only the selected option carries
          the filled pill; deselected options sit bare (a transparent
          border keeps their box identical to the selected pill's, so
          selecting never shifts the panel) and take the pill-bar
@@ -954,10 +960,10 @@
          with an inset shadow (the .toggle recipe), and the solid
          --action-border ring on focus-visible — transitions on
          --duration-50 / --ease-in-out, per the state recipes. */
-      .mode-switch { position: relative; flex: none; }
-      .mode-switch-trigger,
-      .mode-switch-option {
-        --mode-state-ink: var(--text-fg-1);
+      .selector-btn { position: relative; flex: none; }
+      .selector-btn-trigger,
+      .selector-btn-option {
+        --state-ink: var(--text-fg-1);
         appearance: none;
         display: inline-flex;
         align-items: center;
@@ -978,53 +984,54 @@
           border-color var(--duration-50) var(--ease-in-out),
           color var(--duration-50) var(--ease-in-out);
       }
-      .mode-switch-trigger {
-        --mode-state-ink: var(--surface-bg);
+      .selector-btn-trigger {
+        --state-ink: var(--surface-bg);
         min-width: 7.25rem;
         justify-content: space-between;
         background: var(--text-fg-1);
         border-color: var(--text-fg-1);
         color: var(--surface-bg);
       }
-      .mode-switch-trigger:hover,
-      .mode-switch-option[aria-pressed="true"]:hover {
-        box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--mode-state-ink) calc(var(--opacity-10) * 100%), transparent);
+      .selector-btn-trigger:hover,
+      .selector-btn-option[aria-pressed="true"]:hover {
+        box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--state-ink) calc(var(--opacity-10) * 100%), transparent);
       }
       /* Deselected options sit bare in the panel — no pill container —
          and take the pill-bar pattern instead: the pill shape returns
          as the hover highlight (--page-fill, as on .dock-scroll a). */
-      .mode-switch-option:not([aria-pressed="true"]):hover {
+      .selector-btn-option:not([aria-pressed="true"]):hover {
         background: var(--page-fill);
       }
-      .mode-switch-trigger:active,
-      .mode-switch-option:active {
-        box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--mode-state-ink) calc(var(--opacity-15) * 100%), transparent);
+      .selector-btn-trigger:active,
+      .selector-btn-option:active {
+        box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--state-ink) calc(var(--opacity-15) * 100%), transparent);
       }
-      .mode-switch-trigger:focus-visible,
-      .mode-switch-option:focus-visible {
+      .selector-btn-trigger:focus-visible,
+      .selector-btn-option:focus-visible {
         outline: 3px solid var(--action-border);
         outline-offset: 2px;
       }
-      .mode-switch svg { width: 0.9rem; height: 0.9rem; flex: none; }
-      /* The trigger carries all three glyphs; the one matching the
-         current data-mode shows, the rest stay display:none. */
-      .mode-switch-current { display: inline-flex; flex: none; }
-      .mode-switch-current svg { display: none; }
-      html[data-mode="light"] .mode-switch-current svg[data-mode-icon="light"],
-      html[data-mode="system"] .mode-switch-current svg[data-mode-icon="system"],
-      html[data-mode="dark"] .mode-switch-current svg[data-mode-icon="dark"] { display: block; }
-      .mode-switch .mode-switch-chevron {
+      .selector-btn svg { width: 0.9rem; height: 0.9rem; flex: none; }
+      /* The trigger carries every option's glyph; the one matching
+         the current selection shows, the rest stay display:none.
+         (This application keys the choice to the page's data-mode.) */
+      .selector-btn-current { display: inline-flex; flex: none; }
+      .selector-btn-current svg { display: none; }
+      html[data-mode="light"] .selector-btn-current svg[data-option-icon="light"],
+      html[data-mode="system"] .selector-btn-current svg[data-option-icon="system"],
+      html[data-mode="dark"] .selector-btn-current svg[data-option-icon="dark"] { display: block; }
+      .selector-btn .selector-btn-chevron {
         width: 0.75rem;
         height: 0.75rem;
         transition: transform var(--duration-100) var(--ease-out);
       }
-      .mode-switch[data-open="true"] .mode-switch-chevron { transform: rotate(180deg); }
+      .selector-btn[data-open="true"] .selector-btn-chevron { transform: rotate(180deg); }
       /* The options panel — slides out below the pill (a short
          downward travel on the motion tokens) and overlays the page,
          so opening it never shifts the top row's layout. Hidden with
          visibility as well as opacity, which also keeps the options
          out of the tab order while closed. */
-      .mode-switch-options {
+      .selector-btn-options {
         position: absolute;
         top: calc(100% + var(--space-30));
         right: 0;
@@ -1048,7 +1055,7 @@
           transform var(--duration-100) var(--ease-out),
           visibility 0s linear var(--duration-100);
       }
-      .mode-switch[data-open="true"] .mode-switch-options {
+      .selector-btn[data-open="true"] .selector-btn-options {
         opacity: 1;
         visibility: visible;
         pointer-events: auto;
@@ -1058,17 +1065,17 @@
           transform var(--duration-100) var(--ease-out),
           visibility 0s;
       }
-      .mode-switch-option { justify-content: flex-start; width: 100%; white-space: nowrap; }
-      .mode-switch-option[aria-pressed="true"] {
-        --mode-state-ink: var(--surface-bg);
+      .selector-btn-option { justify-content: flex-start; width: 100%; white-space: nowrap; }
+      .selector-btn-option[aria-pressed="true"] {
+        --state-ink: var(--surface-bg);
         background: var(--text-fg-1);
         border-color: var(--text-fg-1);
         color: var(--surface-bg);
       }
       /* Compact single row — tablet and phone widths (≤64rem): the
-         top row never wraps. Logo left; the links and the switch
+         top row never wraps. Logo left; the links and the Mode Switch
          share the one row on the right inside the cluster (its
-         --space-200 separation holds at every width). The switch
+         --space-200 separation holds at every width). The Mode Switch
          goes icon-only — its text labels are clipped away visually
          but stay in the accessibility tree, so the trigger and each
          option keep their accessible names — and the links take
@@ -1079,10 +1086,10 @@
         .top-row .u-container { flex-wrap: nowrap; gap: var(--space-60); }
         .page-links { flex-wrap: nowrap; gap: var(--space-60); }
         .page-links a { font-size: var(--step-80); }
-        .mode-switch-trigger { min-width: 0; }
-        .mode-switch-trigger,
-        .mode-switch-option { padding: 5px 10px; }
-        .mode-switch-text {
+        .selector-btn-trigger { min-width: 0; }
+        .selector-btn-trigger,
+        .selector-btn-option { padding: 5px 10px; }
+        .selector-btn-text {
           position: absolute;
           width: 1px;
           height: 1px;
@@ -1097,10 +1104,10 @@
 
       /* Phone widths (≤40rem): the row tightens one more step so it
          still fits at 390px — the links drop to --step-70, their gaps
-         to --space-30, the switch's padding slims, and the logo slot
+         to --space-30, the Mode Switch's padding slims, and the logo slot
          turns flexible: the wordmark scales down (width 100% with
          height auto keeps its aspect) to absorb whatever width the
-         links and switch don't take, so the single row holds with
+         links and Mode Switch don't take, so the single row holds with
          no page-level overflow. The cluster's --space-200 separation
          is part of what the flexing wordmark slot absorbs. */
       @media (max-width: 40rem) {
@@ -1110,18 +1117,18 @@
         .nav-cluster { flex: none; }
         .page-links { flex: none; gap: var(--space-30); }
         .page-links a { font-size: var(--step-70); }
-        .mode-switch-trigger,
-        .mode-switch-option { padding: 5px 7px; }
+        .selector-btn-trigger,
+        .selector-btn-option { padding: 5px 7px; }
       }
 
       /* Nav tiers below compact — two more layouts under the ≤64rem
          compact row, per the Figma nav designs:
          · Intermediate (≤48rem): the top row wraps to two rows. The
-           logo takes the first row; the links and the mode switch
-           share the second, links left and the switch right (the
+           logo takes the first row; the links and the Mode Switch
+           share the second, links left and the Mode Switch right (the
            cluster's --space-200 separation becomes the minimum gap
            between them). Everything keeps its labels at this tier —
-           the compact tier's clipped switch text is restored —
+           the compact tier's clipped Mode Switch text is restored —
            because the second row has the room the single row lacked.
          · Extra compact (≤30rem): the row defers to a hamburger.
            Logo left, menu button right; the button's glyph swaps to
@@ -1130,14 +1137,14 @@
            the row's Foundations / Components / Strategy / Status
            order, the current page marked by a vertical bar at its
            right (the row's growing underline, turned upright), and
-           the mode switch at the bottom of the panel as three inline
-           pills — no menu within a menu — in the switch's canonical
+           the Mode Switch at the bottom of the panel as three inline
+           pills — no menu within a menu — in the Mode Switch's canonical
            Light / System / Dark order. (Andii placed the pills at
            the bottom, superseding the Figma annotation's top
            placement.) The menu closes from the button, on Escape, or
            by tapping/clicking anywhere outside it. */
       .nav-burger {
-        --mode-state-ink: var(--text-fg-1);
+        --state-ink: var(--text-fg-1);
         appearance: none;
         display: none;
         align-items: center;
@@ -1155,10 +1162,10 @@
           background-color var(--duration-50) var(--ease-in-out);
       }
       .nav-burger:hover {
-        box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--mode-state-ink) calc(var(--opacity-10) * 100%), transparent);
+        box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--state-ink) calc(var(--opacity-10) * 100%), transparent);
       }
       .nav-burger:active {
-        box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--mode-state-ink) calc(var(--opacity-15) * 100%), transparent);
+        box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--state-ink) calc(var(--opacity-15) * 100%), transparent);
       }
       .nav-burger:focus-visible {
         outline: 3px solid var(--action-border);
@@ -1176,10 +1183,10 @@
         .brand-logo { width: auto; height: 1.333rem; }
         .nav-cluster { flex: 1 1 100%; justify-content: space-between; }
         .page-links a { font-size: var(--step-80); }
-        .mode-switch-trigger { min-width: 7.25rem; }
-        .mode-switch-trigger,
-        .mode-switch-option { padding: 5px 12px; }
-        .mode-switch-text {
+        .selector-btn-trigger { min-width: 7.25rem; }
+        .selector-btn-trigger,
+        .selector-btn-option { padding: 5px 12px; }
+        .selector-btn-text {
           position: static;
           width: auto;
           height: auto;
@@ -1226,11 +1233,11 @@
             transform var(--duration-100) var(--ease-out),
             visibility 0s;
         }
-        /* The menu's mode switch — the .mode-switch state recipes as
+        /* The menu's Mode Switch — the .selector-btn state recipes as
            three inline pills in a segmented container. The selected
            pill carries the filled treatment; deselected pills sit
            bare and take the pill shape back as the hover highlight,
-           exactly as in the switch's own panel. */
+           exactly as in the component's own panel. */
         .menu-mode {
           display: flex;
           gap: var(--space-30);
@@ -1239,7 +1246,7 @@
           border-radius: var(--radius-full);
         }
         .menu-mode-option {
-          --mode-state-ink: var(--text-fg-1);
+          --state-ink: var(--text-fg-1);
           appearance: none;
           flex: 1;
           display: inline-flex;
@@ -1264,19 +1271,19 @@
         }
         .menu-mode-option svg { width: 0.9rem; height: 0.9rem; flex: none; }
         .menu-mode-option[aria-pressed="true"] {
-          --mode-state-ink: var(--surface-bg);
+          --state-ink: var(--surface-bg);
           background: var(--text-fg-1);
           border-color: var(--text-fg-1);
           color: var(--surface-bg);
         }
         .menu-mode-option[aria-pressed="true"]:hover {
-          box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--mode-state-ink) calc(var(--opacity-10) * 100%), transparent);
+          box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--state-ink) calc(var(--opacity-10) * 100%), transparent);
         }
         .menu-mode-option:not([aria-pressed="true"]):hover {
           background: var(--page-fill);
         }
         .menu-mode-option:active {
-          box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--mode-state-ink) calc(var(--opacity-15) * 100%), transparent);
+          box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--state-ink) calc(var(--opacity-15) * 100%), transparent);
         }
         .menu-mode-option:focus-visible {
           outline: 3px solid var(--action-border);
@@ -2477,22 +2484,22 @@
             <a href="strategy.html">Strategy</a>
             <a href="status.html">Status</a>
           </nav>
-          <div class="mode-switch" data-mode-switch data-open="false">
-            <button type="button" class="mode-switch-trigger" data-mode-trigger aria-haspopup="true" aria-expanded="false" aria-controls="mode-options" aria-label="Colour mode: System">
-              <span class="mode-switch-current" aria-hidden="true"><svg data-mode-icon="light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M6.34 17.66l-1.41 1.41"/><path d="M19.07 4.93l-1.41 1.41"/></svg><svg data-mode-icon="system" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18V3z" fill="currentColor" stroke="none"/></svg><svg data-mode-icon="dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
-              <span class="mode-switch-text" data-mode-current-label>System</span>
-              <svg class="mode-switch-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          <div class="selector-btn" data-selector-btn data-open="false">
+            <button type="button" class="selector-btn-trigger" data-selector-trigger aria-haspopup="true" aria-expanded="false" aria-controls="selector-options" aria-label="Colour mode: System">
+              <span class="selector-btn-current" aria-hidden="true"><svg data-option-icon="light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M6.34 17.66l-1.41 1.41"/><path d="M19.07 4.93l-1.41 1.41"/></svg><svg data-option-icon="system" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18V3z" fill="currentColor" stroke="none"/></svg><svg data-option-icon="dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+              <span class="selector-btn-text" data-selector-current-label>System</span>
+              <svg class="selector-btn-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
             </button>
-            <div class="mode-switch-options" id="mode-options" role="group" aria-label="Colour mode options">
-              <button type="button" class="mode-switch-option" data-mode-option="light" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M6.34 17.66l-1.41 1.41"/><path d="M19.07 4.93l-1.41 1.41"/></svg><span class="mode-switch-text">Light</span></button>
-              <button type="button" class="mode-switch-option" data-mode-option="system" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18V3z" fill="currentColor" stroke="none"/></svg><span class="mode-switch-text">System</span></button>
-              <button type="button" class="mode-switch-option" data-mode-option="dark" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><span class="mode-switch-text">Dark</span></button>
+            <div class="selector-btn-options" id="selector-options" role="group" aria-label="Colour mode options">
+              <button type="button" class="selector-btn-option" data-selector-option="light" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M6.34 17.66l-1.41 1.41"/><path d="M19.07 4.93l-1.41 1.41"/></svg><span class="selector-btn-text">Light</span></button>
+              <button type="button" class="selector-btn-option" data-selector-option="system" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18V3z" fill="currentColor" stroke="none"/></svg><span class="selector-btn-text">System</span></button>
+              <button type="button" class="selector-btn-option" data-selector-option="dark" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><span class="selector-btn-text">Dark</span></button>
             </div>
           </div>
         </div>
         <button type="button" class="nav-burger" data-nav-burger aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
-          <!-- Hamburger glyph: Tabler menu-3, outline style, stroke 2 (full-width top line; lower lines start at x7 and x10, all ending at the right edge). Do not swap back to equal-length bars. -->
-          <svg class="nav-burger-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16"/><path d="M7 12h13"/><path d="M10 18h10"/></svg>
+          <!-- Hamburger glyph: Tabler menu-3 (@tabler/icons 3.49.0, icons/outline/menu-3.svg), verbatim — short top line from x10, full middle line with its doubled right segment (M4 12h16 then M7 12h13), short bottom line from x4. Do not simplify the doubled middle line or rearrange the paths. -->
+          <svg class="nav-burger-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 6h10"/><path d="M4 12h16"/><path d="M7 12h13"/><path d="M4 18h10"/></svg>
           <svg class="nav-burger-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg>
         </button>
       </div>
@@ -4096,67 +4103,70 @@
       (function () {
         "use strict";
 
-        /* ---------- Colour-mode switch (top row) ----------
-           The .mode-switch component: a trigger pill showing the
-           current selection (System by default) and an options panel
-           that slides out below it. Choosing an option sets data-mode
-           on <html>; the page-scope CSS does everything else —
-           "system" resolves through prefers-color-scheme in CSS, so
-           OS changes apply live with no JS involvement. The choice is
-           held for this page view only. */
-        var modeSwitch = document.querySelector("[data-mode-switch]");
-        var modeButtons = Array.prototype.slice.call(document.querySelectorAll("[data-mode-option]"));
+        /* ---------- Selector Button (top row): the Mode Switch application ----------
+           The .selector-btn component is generic: a trigger pill
+           showing the current selection and an options panel that
+           slides out below it; it only reports selection changes.
+           The wiring in this block is the shell's Mode Switch
+           application — the options are Light / System / Dark, and
+           a reported selection sets data-mode on <html>; the
+           page-scope CSS does everything else — "system" resolves
+           through prefers-color-scheme in CSS, so OS changes apply
+           live with no JS involvement. The choice is held for this
+           page view only. */
+        var selectorBtn = document.querySelector("[data-selector-btn]");
+        var selectorOptions = Array.prototype.slice.call(document.querySelectorAll("[data-selector-option]"));
         var menuModeButtons = Array.prototype.slice.call(document.querySelectorAll("[data-menu-mode-option]"));
-        if (modeSwitch && modeButtons.length) {
-          var modeTrigger = modeSwitch.querySelector("[data-mode-trigger]");
-          var modeCurrentLabel = modeSwitch.querySelector("[data-mode-current-label]");
+        if (selectorBtn && selectorOptions.length) {
+          var selectorTrigger = selectorBtn.querySelector("[data-selector-trigger]");
+          var selectorLabel = selectorBtn.querySelector("[data-selector-current-label]");
           var modeNames = { light: "Light", system: "System", dark: "Dark" };
           var setOpen = function (open) {
-            modeSwitch.setAttribute("data-open", open ? "true" : "false");
-            modeTrigger.setAttribute("aria-expanded", open ? "true" : "false");
+            selectorBtn.setAttribute("data-open", open ? "true" : "false");
+            selectorTrigger.setAttribute("aria-expanded", open ? "true" : "false");
           };
-          var isOpen = function () { return modeSwitch.getAttribute("data-open") === "true"; };
+          var isOpen = function () { return selectorBtn.getAttribute("data-open") === "true"; };
           var setMode = function (mode) {
             document.documentElement.setAttribute("data-mode", mode);
-            modeButtons.forEach(function (b) {
-              b.setAttribute("aria-pressed", b.getAttribute("data-mode-option") === mode ? "true" : "false");
+            selectorOptions.forEach(function (b) {
+              b.setAttribute("aria-pressed", b.getAttribute("data-selector-option") === mode ? "true" : "false");
             });
             menuModeButtons.forEach(function (b) {
               b.setAttribute("aria-pressed", b.getAttribute("data-menu-mode-option") === mode ? "true" : "false");
             });
-            modeCurrentLabel.textContent = modeNames[mode] || modeNames.system;
-            modeTrigger.setAttribute("aria-label", "Colour mode: " + (modeNames[mode] || modeNames.system));
+            selectorLabel.textContent = modeNames[mode] || modeNames.system;
+            selectorTrigger.setAttribute("aria-label", "Colour mode: " + (modeNames[mode] || modeNames.system));
           };
           var focusOption = function (mode) {
-            var target = modeButtons.filter(function (b) {
-              return b.getAttribute("data-mode-option") === mode;
-            })[0] || modeButtons[0];
+            var target = selectorOptions.filter(function (b) {
+              return b.getAttribute("data-selector-option") === mode;
+            })[0] || selectorOptions[0];
             if (target) target.focus();
           };
-          modeTrigger.addEventListener("click", function () { setOpen(!isOpen()); });
-          modeButtons.forEach(function (b, index) {
+          selectorTrigger.addEventListener("click", function () { setOpen(!isOpen()); });
+          selectorOptions.forEach(function (b, index) {
             b.addEventListener("click", function () {
-              setMode(b.getAttribute("data-mode-option"));
+              setMode(b.getAttribute("data-selector-option"));
               setOpen(false);
-              modeTrigger.focus();
+              selectorTrigger.focus();
             });
             b.addEventListener("keydown", function (event) {
               var next = null;
-              if (event.key === "ArrowDown") next = modeButtons[(index + 1) % modeButtons.length];
-              else if (event.key === "ArrowUp") next = modeButtons[(index - 1 + modeButtons.length) % modeButtons.length];
-              else if (event.key === "Home") next = modeButtons[0];
-              else if (event.key === "End") next = modeButtons[modeButtons.length - 1];
+              if (event.key === "ArrowDown") next = selectorOptions[(index + 1) % selectorOptions.length];
+              else if (event.key === "ArrowUp") next = selectorOptions[(index - 1 + selectorOptions.length) % selectorOptions.length];
+              else if (event.key === "Home") next = selectorOptions[0];
+              else if (event.key === "End") next = selectorOptions[selectorOptions.length - 1];
               if (next) { event.preventDefault(); next.focus(); }
             });
           });
-          modeSwitch.addEventListener("keydown", function (event) {
+          selectorBtn.addEventListener("keydown", function (event) {
             if (event.key === "Escape" && isOpen()) {
               event.preventDefault();
               setOpen(false);
-              modeTrigger.focus();
+              selectorTrigger.focus();
             }
           });
-          modeTrigger.addEventListener("keydown", function (event) {
+          selectorTrigger.addEventListener("keydown", function (event) {
             if (event.key === "ArrowDown" || event.key === "ArrowUp") {
               event.preventDefault();
               setOpen(true);
@@ -4164,17 +4174,17 @@
             }
           });
           document.addEventListener("click", function (event) {
-            if (isOpen() && !modeSwitch.contains(event.target)) setOpen(false);
+            if (isOpen() && !selectorBtn.contains(event.target)) setOpen(false);
           });
           document.addEventListener("focusin", function (event) {
-            if (isOpen() && !modeSwitch.contains(event.target)) setOpen(false);
+            if (isOpen() && !selectorBtn.contains(event.target)) setOpen(false);
           });
 
           /* ---------- Extra-compact nav menu ----------
              At the extra-compact tier the top row defers to the
              hamburger button. Its panel carries the page links above
-             the mode switch at the bottom as three inline pills — the
-             same setMode, so the two switches can never disagree.
+             the Mode Switch at the bottom as three inline pills — the
+             same setMode wiring, so the two controls can never disagree.
              The menu closes from the button (its glyph swaps to a
              × while open), on Escape, or on any tap/click outside
              the panel. Choosing a mode keeps the menu open so the
