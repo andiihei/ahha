@@ -379,8 +379,72 @@ function handlePointerOut(e: MouseEvent) {
   }
 }
 
+let floatingToggleBtn: HTMLElement | null = null;
+
+function ensureFloatingToggle() {
+  if (floatingToggleBtn) return floatingToggleBtn;
+
+  floatingToggleBtn = document.createElement("button");
+  floatingToggleBtn.id = "ahha-inspector-toggle-btn";
+  floatingToggleBtn.type = "button";
+  floatingToggleBtn.title = "Toggle CSS Inspector (Shortcut: Alt+I)";
+  floatingToggleBtn.style.cssText = `
+    position: fixed;
+    bottom: 14px;
+    right: 14px;
+    z-index: 999990;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    font-family: var(--font-mono, monospace);
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: var(--radius-full, 9999px);
+    border: 1px solid var(--surface-border, rgba(0, 0, 0, 0.2));
+    background: color-mix(in oklch, var(--surface-bg, #ffffff) 92%, transparent);
+    color: var(--text-fg-1, #1e1e2f);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    transition: all 120ms ease;
+  `;
+
+  floatingToggleBtn.addEventListener("click", () => {
+    setInspectorActive(!inspectorActive);
+  });
+
+  document.body.appendChild(floatingToggleBtn);
+  return floatingToggleBtn;
+}
+
+function updateFloatingToggleUI() {
+  const btn = ensureFloatingToggle();
+  if (inspectorActive) {
+    btn.innerHTML = `<span style="display:inline-block; width:7px; height:7px; border-radius:50%; background:oklch(53.5% 0.098 178.9);"></span> CSS Inspector: On <kbd style="opacity:0.6; font-size:10px;">(Alt+I)</kbd>`;
+    btn.style.borderColor = "var(--action-border, #4f46e5)";
+    btn.style.boxShadow = "0 0 0 1px var(--action-border, #4f46e5), 0 4px 12px rgba(0,0,0,0.15)";
+  } else {
+    btn.innerHTML = `<span style="display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--text-fg-2, #888);"></span> CSS Inspector: Off <kbd style="opacity:0.6; font-size:10px;">(Alt+I)</kbd>`;
+    btn.style.borderColor = "var(--surface-border, rgba(0, 0, 0, 0.2))";
+    btn.style.boxShadow = "0 4px 12px rgba(0,0,0,0.12)";
+  }
+}
+
+// Bind keyboard shortcut Alt+I
+if (typeof window !== "undefined") {
+  window.addEventListener("keydown", (e: KeyboardEvent) => {
+    if (e.altKey && (e.key === "i" || e.key === "I" || e.code === "KeyI")) {
+      e.preventDefault();
+      setInspectorActive(!inspectorActive);
+    }
+  });
+}
+
 export function setInspectorActive(active: boolean) {
   inspectorActive = active;
+  updateFloatingToggleUI();
 
   if (!active) {
     if (currentTarget) {

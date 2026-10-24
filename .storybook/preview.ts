@@ -70,16 +70,17 @@ const preview: Preview = {
       }
     },
     inspectCss: {
-      name: "Inspect CSS",
+      name: "CSS Inspector",
       description: "Live Element Style & Token HUD Inspector",
       defaultValue: false,
       toolbar: {
+        title: "CSS Inspector",
         icon: "eye",
         items: [
-          { value: false, icon: "eyeclose", title: "Inspector: Off" },
-          { value: true, icon: "eye", title: "Inspector: On" }
+          { value: false, icon: "eyeclose", title: "CSS Inspector: Off" },
+          { value: true, icon: "eye", title: "CSS Inspector: On" }
         ],
-        dynamicTitle: true
+        showName: true
       }
     }
   },
