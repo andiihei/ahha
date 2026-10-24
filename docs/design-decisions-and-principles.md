@@ -10,7 +10,7 @@ The AHHA Design System is built upon a deterministic three-tier hierarchy design
 
 ```mermaid
 graph TD
-  A["Layer 1: Design Language (OKLCH Ramps, Typography & Spacing Scales, Motion, Opacity, Radii)"] --> B["Layer 2: Semantic Styles (Roles, Attention, Hierarchy & Scheme Slots)"]
+  A["Layer 1: Design Language (OKLCH Ramps, Typography & Spacing Scales, Motion, Opacity, Radii)"] --> B["Layer 2: Color Roles (Functional Scheme Slots: Surfaces, Inks, Actions, Borders)"]
   B --> C["Layer 3: Components (Component-Specific Classes & Fine-Tuning Tokens)"]
   D["Scope Cascade: [data-style='neutral|purple|...'] × [data-mode='default|invert|system']"] -.-> B
 ```
@@ -31,12 +31,11 @@ Layer 1 encapsulates everything a theme needs to express itself—the complete d
   - Disabled states render at `--opacity-40` (40%) with pointer events suppressed.
   - Micro-interactions use `--duration-50` / `--ease-in-out`; layout shifts use `--duration-100` / `--ease-out`.
 
-### Layer 2: Semantic Styles
+### Layer 2: Color Roles
 
-Layer 2 translates raw design language primitives into functional intent, concerned with roles, attention, and visual hierarchy:
+Layer 2 translates raw design language primitives into functional color roles, establishing intent, attention, and visual hierarchy:
 
-- **Hierarchy & Attention**: Translates contrast, optical weight, and color ramps into semantic roles (Headings, Paragraphs, Actions, Details) and emphasis levels.
-- **Semantic Scheme Slots**: All UI elements bind to functional slot contracts rather than direct primitive tokens:
+- **Functional Color Roles**: Maps Layer 1 color ramps to functional slot contracts rather than direct primitive tokens:
   - **Surfaces**: `--surface-bg`, `--surface-bg-1`, `--surface-border`
   - **Text / Ink**: `--text-fg-1` (high-emphasis headline/current ink), `--text-fg-2` (supporting ink)
   - **Actions**: `--action-bg-1`, `--action-fg-1`, `--action-border`
