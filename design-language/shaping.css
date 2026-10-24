@@ -1,0 +1,81 @@
+/* ---- Shaping (shaping.css) ---- */
+/* Design Language — Shaping: Border Radii, Border Widths, and Elevation.
+   Consolidates the physical silhouette and dimensionality of elements into
+   a unified Layer 1 architectural foundation.
+
+   1. BORDER RADII (formerly radius.css):
+      Scale: Andii's 2023 Foundations values, renamed to unified percentage
+      convention with 8px as base 100, expressed in rem (with 9999px pill sentinel).
+      Concentric nesting law: outer radius = inner radius + gap.
+      Formula: nested radius = max(0, governing radius - inset).
+
+   2. BORDER WIDTHS:
+      Consistent stroke ladder in px (ideal unit for hairline and optical borders).
+      - 0:   no border
+      - 100: standard hairline boundary (cards, buttons, fields) - 1px
+      - 200: focus rings, active accents, emphasized borders - 2px
+      - 400: heavy indicator bars, callout borders - 4px
+
+   3. ELEVATION (formerly elevation.css):
+      Layered natural shadows via color-mix(in oklch) anchored to --neutral-1000.
+      Smooth 5-stop layered umbra/penumbra falloffs (low to very-high). */
+
+:root {
+  /* ---- 1. Border Widths ---- */
+  --border-width-0: 0;
+  --border-width-100: 1px; /* standard hairline boundary (1px) */
+  --border-width-200: 2px; /* active accents / focus rings (2px) */
+  --border-width-400: 4px; /* indicator bars / callouts (4px) */
+
+  /* ---- 2. Border Radii ---- */
+  --radius-0: 0;
+  --radius-25: 0.125rem; /* 2px */
+  --radius-50: 0.25rem; /* 4px */
+  --radius-100: 0.5rem; /* 8px — base 100 */
+  --radius-150: 0.75rem; /* 12px */
+  --radius-250: 1.25rem; /* 20px */
+  --radius-300: 1.5rem; /* 24px */
+  --radius-full: 9999px; /* sentinel: px is the ideal unit here (not a measurement) */
+
+  /* ---- 3. Elevation ---- */
+  --shadow-color: var(--neutral-1000);
+
+  --elevation-low:
+    0 0 0 0 color-mix(in oklch, var(--shadow-color) 10%, transparent),
+    1px 1px 2px 0 color-mix(in oklch, var(--shadow-color) 10%, transparent),
+    2px 2px 3px 0 color-mix(in oklch, var(--shadow-color) 9%, transparent),
+    5px 5px 5px 0 color-mix(in oklch, var(--shadow-color) 5%, transparent),
+    9px 9px 5px 0 color-mix(in oklch, var(--shadow-color) 1%, transparent),
+    15px 15px 6px 0 transparent;
+
+  --elevation-medium:
+    0 0 0 0 color-mix(in oklch, var(--shadow-color) 10%, transparent),
+    1px 1px 3px 0 color-mix(in oklch, var(--shadow-color) 10%, transparent),
+    4px 4px 5px 0 color-mix(in oklch, var(--shadow-color) 9%, transparent),
+    8px 8px 7px 0 color-mix(in oklch, var(--shadow-color) 5%, transparent),
+    14px 14px 8px 0 color-mix(in oklch, var(--shadow-color) 1%, transparent),
+    22px 22px 9px 0 transparent;
+
+  --elevation-high:
+    0 0 0 0 color-mix(in oklch, var(--shadow-color) 10%, transparent),
+    1px 1px 4px 0 color-mix(in oklch, var(--shadow-color) 10%, transparent),
+    5px 5px 8px 0 color-mix(in oklch, var(--shadow-color) 9%, transparent),
+    12px 12px 10px 0 color-mix(in oklch, var(--shadow-color) 5%, transparent),
+    21px 21px 12px 0 color-mix(in oklch, var(--shadow-color) 1%, transparent),
+    33px 33px 13px 0 transparent;
+
+  --elevation-very-high:
+    0 0 0 0 color-mix(in oklch, var(--shadow-color) 10%, transparent),
+    2px 2px 7px 0 color-mix(in oklch, var(--shadow-color) 10%, transparent),
+    9px 9px 13px 0 color-mix(in oklch, var(--shadow-color) 9%, transparent),
+    20px 21px 17px 0 color-mix(in oklch, var(--shadow-color) 5%, transparent),
+    36px 37px 21px 0 color-mix(in oklch, var(--shadow-color) 1%, transparent),
+    56px 57px 22px 0 transparent;
+}
+
+/* Concentric nested corner: radius = governing radius − inset.
+   --radius is inherited from the scoping ancestor; --inset is set by the
+   element itself (default 0). */
+.u-concentric {
+  border-radius: max(0rem, calc(var(--radius, 0rem) - var(--inset, 0rem)));
+}

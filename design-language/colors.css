@@ -259,7 +259,6 @@
 }
 
 @media (prefers-color-scheme: dark) {
-
   [data-mode="system"],
   [data-mode="system"] [data-style]:not([data-mode]) {
     --surface-bg: var(--color-1000);
@@ -278,4 +277,28 @@
 [data-mode] {
   background: var(--surface-bg);
   color: var(--text-fg-1);
+}
+
+/* ============================================================
+   LAYER 1 — OPACITY & STATE LAYERS
+   Verbatim from former opacity.css: opacities are GLOBAL — one
+   Layer 1 scale, defined once. The number is the percentage of
+   full opacity (100 = fully opaque).
+   State layer conventions:
+     - hover:    --opacity-10 (10%)
+     - active:   --opacity-15 (15%)
+     - disabled: --opacity-40 (40%)
+   ============================================================ */
+:root {
+  --opacity-0: 0;
+  --opacity-5: 0.05;
+  --opacity-10: 0.1;
+  --opacity-15: 0.15;
+  --opacity-20: 0.2;
+  --opacity-30: 0.3;
+  --opacity-40: 0.4;
+  --opacity-50: 0.5;
+  --opacity-65: 0.65;
+  --opacity-80: 0.8;
+  --opacity-100: 1;
 }

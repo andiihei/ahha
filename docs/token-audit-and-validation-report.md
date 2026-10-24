@@ -6,16 +6,16 @@ This report provides the full verification and audit across all 8 core token fil
 
 ## 1. Executive Summary & Verification Matrix
 
-| Token File                                                                                         | Declared Tokens | Architectural Role                                                                        |  Status  | Key Validation Finding                                                                                                              |
-| :------------------------------------------------------------------------------------------------- | :-------------: | :---------------------------------------------------------------------------------------- | :------: | :---------------------------------------------------------------------------------------------------------------------------------- |
-| [`colors.css`](file:///Users/UNIT-MBP-02/WebstormProjects/ahha/design-language/colors.css)         |       180       | Layer 1 OKLCH ramps (6 families) + Layer 2 8-slot matrix (`[data-style]` × `[data-mode]`) | **PASS** | APCA perceptual contrast $\ge$ Lc 87–107 across all 6 families in both default & invert modes. Zero hardcoded colors.               |
-| [`typography.css`](file:///Users/UNIT-MBP-02/WebstormProjects/ahha/design-language/typography.css) |       68        | Utopia fluid type engine (steps 60..350) + brand font stacks & role classes               | **PASS** | Continuous `--_progress` interpolation using `progress()` with `tan(atan2())` unit-stripping fallback.                              |
-| [`space.css`](file:///Users/UNIT-MBP-02/WebstormProjects/ahha/design-language/space.css)           |       89        | Utopia fluid space ladder (10..500 + pairs) + frozen static space ladder                  | **PASS** | Clear macro (fluid) vs micro (static) separation; endpoints rounded to 0.0625rem (1px at 16px root).                                |
-| [`radius.css`](file:///Users/UNIT-MBP-02/WebstormProjects/ahha/design-language/radius.css)         |       11        | Concentric corner geometry + percentage scale (0..300, full)                              | **PASS** | Pure concentric law: `outer radius = inner radius + gap`; rem units throughout; 9999px pill sentinel.                               |
-| [`elevation.css`](file:///Users/UNIT-MBP-02/WebstormProjects/ahha/design-language/elevation.css)   |        5        | Multi-layered natural shadows via `color-mix(in oklch)`                                   | **PASS** | Dynamic shadow tinting anchored to `--neutral-1000` with realistic umbra/penumbra falloffs (low to very-high).                      |
-| [`motion.css`](file:///Users/UNIT-MBP-02/WebstormProjects/ahha/design-language/motion.css)         |       26        | Polysemic durations (0..400) + standard cubic-bezier curves + reduced motion              | **PASS** | Full `@media (prefers-reduced-motion: reduce)` zeroing; standard easings (`ease-in`, `ease-out`, `ease-in-out`, `ease-emphasized`). |
-| [`opacity.css`](file:///Users/UNIT-MBP-02/WebstormProjects/ahha/design-language/opacity.css)       |       11        | Unified percentage scale (0..100) for state layers & disabled states                      | **PASS** | Codified state layers: hover = `--opacity-10`, active = `--opacity-15`, disabled = `--opacity-40`.                                  |
-| [`grid.css`](file:///Users/UNIT-MBP-02/WebstormProjects/ahha/design-language/grid.css)             |        3        | 12-column layout + fluid gutter + container max-width                                     | **PASS** | `--grid-max-width: 92.50rem`, `--grid-gutter: var(--space-100-200)`, `--grid-columns: 12`.                                          |
+| Token File                                                                                         | Declared Tokens | Architectural Role                                                                                              |  Status  | Key Validation Finding                                                                                                              |
+| :------------------------------------------------------------------------------------------------- | :-------------: | :-------------------------------------------------------------------------------------------------------------- | :------: | :---------------------------------------------------------------------------------------------------------------------------------- |
+| Token File                                                                                         | Declared Tokens | Architectural Role                                                                                              |  Status  | Key Validation Finding                                                                                                              |
+| :------------------------------------------------------------------------------------------------- | :-------------: | :-------------------------------------------------------------------------------------------------------------- | :------: | :---------------------------------------------------------------------------------------------------------------------------------- |
+| [`colors.css`](file:///Users/UNIT-MBP-02/WebstormProjects/ahha/design-language/colors.css)         |       191       | Layer 1 OKLCH ramps (6 families) + Layer 2 Color Roles matrix + Opacity & State Layers                          | **PASS** | APCA perceptual contrast $\ge$ Lc 87–107 across all 6 families in both default & invert modes. Zero hardcoded colors.               |
+| [`typography.css`](file:///Users/UNIT-MBP-02/WebstormProjects/ahha/design-language/typography.css) |       68        | Utopia fluid type engine (steps 60..350) + brand font stacks & role classes                                     | **PASS** | Continuous `--_progress` interpolation using `progress()` with `tan(atan2())` unit-stripping fallback.                              |
+| [`space.css`](file:///Users/UNIT-MBP-02/WebstormProjects/ahha/design-language/space.css)           |       89        | Utopia fluid space ladder (10..500 + pairs) + frozen static space ladder                                        | **PASS** | Clear macro (fluid) vs micro (static) separation; endpoints rounded to 0.0625rem (1px at 16px root).                                |
+| [`shaping.css`](file:///Users/UNIT-MBP-02/WebstormProjects/ahha/design-language/shaping.css)       |       20        | Silhouette geometry: Concentric radii (0..300, full), Border widths (0..400), Layered natural elevation shadows | **PASS** | Pure concentric law: `outer radius = inner radius + gap`; rem units throughout; standard stroke ladder (1..4px); natural shadows.   |
+| [`motion.css`](file:///Users/UNIT-MBP-02/WebstormProjects/ahha/design-language/motion.css)         |       26        | Polysemic durations (0..400) + standard cubic-bezier curves + reduced motion                                    | **PASS** | Full `@media (prefers-reduced-motion: reduce)` zeroing; standard easings (`ease-in`, `ease-out`, `ease-in-out`, `ease-emphasized`). |
+| [`grid.css`](file:///Users/UNIT-MBP-02/WebstormProjects/ahha/design-language/grid.css)             |        3        | 12-column layout + fluid gutter + container max-width                                                           | **PASS** | `--grid-max-width: 92.50rem`, `--grid-gutter: var(--space-100-200)`, `--grid-columns: 12`.                                          |
 
 ---
 
@@ -58,26 +58,28 @@ This report provides the full verification and audit across all 8 core token fil
   - **Static Space Ladder** (`--space-static-10` to `--space-static-500`): Frozen on a 20px desktop anchor for component-internal paddings, toggle insets, and icon gaps.
 - **Precision**: Utopia whole-pixel endpoint rounding interval of `0.0625rem` (1px).
 
-### 4. `radius.css`
+### 4. `shaping.css`
 
-- **Concentric Rule**:
+Consolidates the physical silhouette and dimensionality of UI elements:
+
+- **Concentric Radii**:
   $$\text{outer radius} = \text{inner radius} + \text{gap}$$
   $$\text{inner radius} = \max(0, \text{governing radius} - \text{inset})$$
-- Nested elements use `.u-concentric` with `--inset` to eliminate corner clash.
-- Full percentage scale: `--radius-0`, `--radius-25`, `--radius-50`, `--radius-100` (base 8px), `--radius-150`, `--radius-250`, `--radius-300`, and `--radius-full` (9999px).
+  - Nested elements use `.u-concentric` with `--inset` to eliminate corner clash.
+  - Full percentage scale: `--radius-0`, `--radius-25`, `--radius-50`, `--radius-100` (base 8px), `--radius-150`, `--radius-250`, `--radius-300`, and `--radius-full` (9999px).
+- **Border Widths**:
+  - Consistent stroke ladder: `--border-width-0` (0), `--border-width-100` (1px hairline), `--border-width-200` (2px focus/accent), `--border-width-400` (4px indicator).
+- **Natural Elevation**:
+  - Multi-layer OKLCH shadows using `color-mix(in oklch, var(--shadow-color) X%, transparent)` anchored to `--neutral-1000`.
+  - 4 realistic tiers (`--elevation-low`, `--elevation-medium`, `--elevation-high`, `--elevation-very-high`) using 5-stop layered box-shadow spreads.
 
-### 5. `elevation.css`
-
-- Natural OKLCH shadows using `color-mix(in oklch, var(--shadow-color) X%, transparent)` anchored to `--neutral-1000`.
-- 4 realistic tiers (`--elevation-low`, `--elevation-medium`, `--elevation-high`, `--elevation-very-high`) using 5-stop layered box-shadow spreads.
-
-### 6. `motion.css` & `opacity.css`
+### 5. `motion.css`
 
 - **Durations**: Base 200ms (`--duration-100`), with steps from `--duration-0` to `--duration-400` (800ms).
 - **Reduced Motion**: Full zeroing of all durations and stagger under `@media (prefers-reduced-motion: reduce)`.
-- **Opacity Layers**: Unified percentage stops (`--opacity-0` to `--opacity-100`). State recipes: hover = `--opacity-10`, active = `--opacity-15`, disabled = `--opacity-40`.
+- **Timing Functions**: Standard cubic-beziers (`--ease-in`, `--ease-out`, `--ease-in-out`, `--ease-emphasized`).
 
-### 7. `grid.css`
+### 6. `grid.css`
 
 - Grid container: `--grid-max-width: 92.50rem` (1480px).
 - Fluid gutter: `--grid-gutter: var(--space-100-200)` (interpolates from 1.125rem to 2.5rem).

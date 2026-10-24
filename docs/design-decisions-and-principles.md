@@ -23,9 +23,12 @@ Layer 1 encapsulates everything a theme needs to express itself—the complete d
 - **Fluid & Static Spacing**:
   - **Fluid Rhythm (`--space-10` to `--space-500`)**: Governed by the Utopia fluid interpolation engine (`progress()` / `@supports tan(atan2())`) scaling from 360px viewport @ 18px base up to 1240px viewport @ 20px base. Reserved exclusively for macro-layouts (page containers, sections, hero blocks).
   - **Static Rhythm (`--space-static-10` to `--space-static-500`)**: Anchored on a fixed 20px base. Reserved for micro-component internals (paddings, gaps, icons, border offsets) to prevent layout distortion on resizing.
-- **Concentric Geometry (`radius.css`)**:
-  - Inner corner radii follow the geometric law: $R_{inner} = \max(0, R_{outer} - \text{inset})$, preventing awkward gaps in nested boundaries.
-- **State Layers & Dynamics (`opacity.css` & `motion.css`)**:
+- **Concentric Geometry, Borders & Elevation (`shaping.css`)**:
+  - **Corner Radii**: Inner corner radii follow the geometric law: $R_{inner} = \max(0, R_{outer} - \text{inset})$, preventing awkward gaps in nested boundaries.
+  - **Border Widths**: Consistent stroke ladder (`--border-width-0`, `--border-width-100: 1px`, `--border-width-200: 2px`, `--border-width-400: 4px`).
+  - **Natural Elevation**: 4 tiers of natural OKLCH shadows (`--elevation-low` to `--elevation-very-high`) using 5-stop layered box-shadow spreads.
+- **State Layers & Dynamics (`colors.css` & `motion.css`)**:
+  - Global opacity scale (`--opacity-0` to `--opacity-100`) co-located with colors.
   - Hover states apply an ink layer at `--opacity-10` (10%).
   - Active/pressed states apply an ink layer at `--opacity-15` (15%).
   - Disabled states render at `--opacity-40` (40%) with pointer events suppressed.

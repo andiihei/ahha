@@ -39,24 +39,17 @@ A comprehensive audit was performed across all 8 token files in `design-language
   - Macro layout (containers, sections, grids) **MUST** use fluid tokens (`--space-*`).
   - Micro component internals (button padding, icon gaps, pill padding, toggle insets) **MUST** use static tokens (`--space-static-*`) to prevent unwanted resizing on viewport changes.
 
-### 4. `radius.css` (Concentric Geometry)
+### 4. `shaping.css` (Concentric Geometry, Border Widths & Elevation)
 
 - **Architecture**:
-  - Scale: `--radius-0` to `--radius-300` (8px base 100), plus `--radius-full` (9999px pill sentinel).
-  - Concentric law: inner radius = max(0, governing radius - inset).
-- **Findings & Status**:
-  - Highly elegant and verified. Eliminates mismatched nested border radii across cards, badges, and controls.
+  - **Concentric Radii**: Scale from `--radius-0` to `--radius-300` (8px base 100), plus `--radius-full` (9999px pill sentinel). Concentric law: inner radius = max(0, governing radius - inset).
+  - **Border Widths**: Consistent stroke ladder: `--border-width-0` (0), `--border-width-100` (1px hairline), `--border-width-200` (2px focus/accent), `--border-width-400` (4px indicator).
+  - **Natural Elevation**: Smooth multi-layer shadow umbra/penumbra definitions using `color-mix(in oklch, var(--shadow-color) X%, transparent)` anchored to `--neutral-1000`. Levels: `--elevation-low`, `--elevation-medium`, `--elevation-high`, `--elevation-very-high`.
 
-### 5. `elevation.css` (Natural OKLCH Shadows)
-
-- **Architecture**:
-  - Smooth multi-layer shadow umbra/penumbra definitions using `color-mix(in oklch, var(--shadow-color) X%, transparent)` anchored to `--neutral-1000`.
-  - Levels: `--elevation-low`, `--elevation-medium`, `--elevation-high`, `--elevation-very-high`.
-
-### 6. `motion.css` & `opacity.css`
+### 5. `motion.css`
 
 - **Motion**: Polysemic durations (`--duration-0` to `--duration-400`, base 200ms) with `prefers-reduced-motion` zeroing; standard cubic-bezier curves (`--ease-in`, `--ease-out`, `--ease-in-out`, `--ease-emphasized`).
-- **Opacity**: Global percentage stops (`--opacity-0` to `--opacity-100`). State layers standard: hover = `--opacity-10`, active = `--opacity-15`, disabled = `--opacity-40`.
+- **Opacity**: Global percentage stops (`--opacity-0` to `--opacity-100`) co-located in `colors.css`. State layers standard: hover = `--opacity-10`, active = `--opacity-15`, disabled = `--opacity-40`.
 
 ---
 
