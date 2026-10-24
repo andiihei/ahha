@@ -45,6 +45,24 @@ Layer 2 translates raw design language primitives into functional color roles, e
   - **Brand**: `--brand-ink`, `--brand-line`, `--brand-faint`
 - **Decoupled Cascading**: Components never hardcode hex, rgb, or specific color family ramps. Theme flipping is achieved simply by toggling `[data-style]` and `[data-mode]` on any ancestor element.
 
+#### Linguistic Foundation: Polysemy in Color Semantics
+
+The architectural decision to decouple raw colors from inherent meaning and allow their semantic significance to be governed by enclosing context is derived directly from linguistics—specifically the concept of **polysemy**:
+
+> **Linguistic Polysemy**: The capacity for a single signifier (a word, token, or symbol) to carry multiple distinct, related meanings depending entirely on the context in which it is situated.
+>
+> _Example_: Consider the word **"optics"**. In physics and engineering, "optics" has a literal, straightforward definition: _the scientific study of sight and the behavior of light_. Yet when situated in political discourse or public relations, "optics" carries an entirely different meaning: _the perceived public impression or political appearance of an action or event_. The word itself does not change; its operational definition is dictated by the surrounding discourse.
+
+In the AHHA Design System, **colors operate polysemously**:
+
+- **Color is a scope, not a fixed meaning**: A color ramp such as `red` or `green` is merely a perceptual signifier. Red does not inherently mean "error", and green does not inherently mean "success".
+- **Context determines semantic significance**:
+  - Inside a form field with validation failure, `[data-style="red"]` signifies an invalid entry or constraint violation.
+  - Inside a destructive dialog or confirmation workflow, `[data-style="red"]` signifies irreversible consequence.
+  - In a system dashboard, `[data-style="red"]` might signify offline server status or build failure.
+  - In a future white-label brand pack or seasonal palette, `red` could simply serve as the primary brand ink for a neutral canvas.
+- By treating colors as polysemic scopes (`[data-style]`) rather than hardcoded semantic states (like `.btn-danger` or `color: red`), AHHA allows UI components to remain 100% theme-agnostic and resilient to any contextual reinterpretation.
+
 #### Color Context & Trigger Decision Matrix (`[data-style="*"]`)
 
 To provide absolute clarity for designers, engineers, and LLMs, `[data-style]` scopes map directly to functional domains across the product:
