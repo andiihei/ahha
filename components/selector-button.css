@@ -124,7 +124,9 @@
   flex: none;
 }
 
-/* The trigger carries the current option's glyph */
+/* The trigger carries the current option's glyph.
+   In static pages using multi-SVG triggers (e.g. Mode Switch), only the SVG
+   matching data-mode on <html> is shown; the rest are hidden. */
 .selector-btn-current {
   display: inline-flex;
   align-items: center;
@@ -133,6 +135,18 @@
 }
 
 .selector-btn-current svg {
+  display: inline-block;
+}
+
+.selector-btn-current svg[data-option-icon] {
+  display: none;
+}
+
+html[data-mode="default"] .selector-btn-current svg[data-option-icon="default"],
+html[data-mode="light"] .selector-btn-current svg[data-option-icon="light"],
+html[data-mode="system"] .selector-btn-current svg[data-option-icon="system"],
+html[data-mode="invert"] .selector-btn-current svg[data-option-icon="invert"],
+html[data-mode="dark"] .selector-btn-current svg[data-option-icon="dark"] {
   display: inline-block;
 }
 
