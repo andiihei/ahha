@@ -10,12 +10,14 @@ The AHHA Design System is built upon a deterministic three-tier hierarchy design
 
 ```mermaid
 graph TD
-  A["Layer 1: Primitive Scales (OKLCH Ramps, Fluid Progress, Static Units)"] --> B["Layer 2: Semantic Scheme Slots (--surface-bg, --text-fg-1, --action-bg-1)"]
-  B --> C["Layer 3: Enterprise Web Components (&lt;ads-nav-menu&gt;, &lt;ads-selector-button&gt;)"]
+  A["Layer 1: Design Language (OKLCH Ramps, Typography & Spacing Scales, Motion, Opacity, Radii)"] --> B["Layer 2: Semantic Styles (Roles, Attention, Hierarchy & Scheme Slots)"]
+  B --> C["Layer 3: Components (Component-Specific Classes & Fine-Tuning Tokens)"]
   D["Scope Cascade: [data-style='neutral|purple|...'] × [data-mode='default|invert|system']"] -.-> B
 ```
 
-### Layer 1: Primitive Scale Ramps
+### Layer 1: Design Language
+
+Layer 1 encapsulates everything a theme needs to express itself—the complete design language foundation:
 
 - **Color Families**: 6 distinct OKLCH families (`neutral`, `purple`, `green`, `red`, `yellow`, `blue`) across 11 discrete luminance steps (`1000..25`, omitting steps 400 and 600).
 - **Fluid & Static Spacing**:
@@ -23,20 +25,30 @@ graph TD
   - **Static Rhythm (`--space-static-10` to `--space-static-500`)**: Anchored on a fixed 20px base. Reserved for micro-component internals (paddings, gaps, icons, border offsets) to prevent layout distortion on resizing.
 - **Concentric Geometry (`radius.css`)**:
   - Inner corner radii follow the geometric law: $R_{inner} = \max(0, R_{outer} - \text{inset})$, preventing awkward gaps in nested boundaries.
-- **State Layers (`opacity.css` & `motion.css`)**:
+- **State Layers & Dynamics (`opacity.css` & `motion.css`)**:
   - Hover states apply an ink layer at `--opacity-10` (10%).
   - Active/pressed states apply an ink layer at `--opacity-15` (15%).
   - Disabled states render at `--opacity-40` (40%) with pointer events suppressed.
   - Micro-interactions use `--duration-50` / `--ease-in-out`; layout shifts use `--duration-100` / `--ease-out`.
 
-### Layer 2: Semantic Scheme Slots
+### Layer 2: Semantic Styles
 
-- All UI elements bind to functional slot contracts rather than direct primitive tokens:
+Layer 2 translates raw design language primitives into functional intent, concerned with roles, attention, and visual hierarchy:
+
+- **Hierarchy & Attention**: Translates contrast, optical weight, and color ramps into semantic roles (Headings, Paragraphs, Actions, Details) and emphasis levels.
+- **Semantic Scheme Slots**: All UI elements bind to functional slot contracts rather than direct primitive tokens:
   - **Surfaces**: `--surface-bg`, `--surface-bg-1`, `--surface-border`
   - **Text / Ink**: `--text-fg-1` (high-emphasis headline/current ink), `--text-fg-2` (supporting ink)
   - **Actions**: `--action-bg-1`, `--action-fg-1`, `--action-border`
   - **Brand**: `--brand-ink`, `--brand-line`, `--brand-faint`
-- Components never hardcode hex, rgb, or specific color family ramps. Theme flipping is achieved simply by toggling `[data-style]` and `[data-mode]` on any ancestor element.
+- **Decoupled Cascading**: Components never hardcode hex, rgb, or specific color family ramps. Theme flipping is achieved simply by toggling `[data-style]` and `[data-mode]` on any ancestor element.
+
+### Layer 3: Components
+
+Layer 3 contains the actual custom elements and UI patterns (`<ads-button>`, `<ads-selector-button>`, `<ads-nav-menu>`, `<ads-card>`), along with:
+
+- **Component-Specific Tokens**: Scoped custom properties for fine-tuning geometry, internal layout, track insets, and knob travel (e.g. `--toggle-width`, `--button-height`).
+- **Compositional Utilities**: Component-level recipe classes that consume Layer 2 semantic slots while maintaining internal state machines (hover, active, focus-visible, selected, disabled).
 
 ---
 
