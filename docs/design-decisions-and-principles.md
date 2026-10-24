@@ -63,6 +63,29 @@ In the AHHA Design System, **colors operate polysemously**:
   - In a future white-label brand pack or seasonal palette, `red` could simply serve as the primary brand ink for a neutral canvas.
 - By treating colors as polysemic scopes (`[data-style]`) rather than hardcoded semantic states (like `.btn-danger` or `color: red`), AHHA allows UI components to remain 100% theme-agnostic and resilient to any contextual reinterpretation.
 
+#### The Anti-Bloat Principle: Resisting Token Hyper-Specialization
+
+Most enterprise design systems succumb to **token bloat** through an obsession with hyper-precision—attempting to coin a distinct, narrowly scoped token for every conceivable visual permutation:
+
+```css
+/* The Token Bloat Anti-Pattern (What AHHA deliberately avoids): */
+--feedback-warning-banner-background-color-subtle-hover: ...;
+--table-cell-border-color-secondary-selected-disabled: ...;
+--form-input-text-color-placeholder-on-elevated-surface: ...;
+```
+
+This explosion creates two severe systemic breakdowns over time:
+
+1. **Human Cognitive Exhaustion**: Designers and engineers cannot maintain a mental model of hundreds of hyper-specific tokens. They begin guessing, duplicating, or abandoning tokens in favor of hardcoded ad-hoc values.
+2. **LLM Amnesia & Hallucination**: AI assistants and code generation models suffer severe context dilution when flooded with thousands of near-identical token permutations. An LLM cannot reliably predict whether to use `--color-border-subtle`, `--color-border-muted`, or `--color-border-neutral-tertiary`, leading to hallucinations and inconsistent generated code.
+
+**AHHA's Solution: High-Utility Polysemy & The 8-Slot Contract**
+
+- Instead of hundreds of single-use tokens, AHHA maintains **exactly 8 functional Layer 2 slots**:
+  `--surface-bg`, `--surface-bg-1`, `--surface-border`, `--text-fg-1`, `--text-fg-2`, `--action-bg-1`, `--action-fg-1`, `--action-border`.
+- Meaning is injected through the **enclosing scope** (`[data-style]` × `[data-mode]`).
+- Both humans and LLMs only need to memorize **one 8-slot vocabulary**. It fits effortlessly within human working memory and inside an LLM's high-attention context window, guaranteeing 100% token consistency across the entire codebase.
+
 #### Color Context & Trigger Decision Matrix (`[data-style="*"]`)
 
 To provide absolute clarity for designers, engineers, and LLMs, `[data-style]` scopes map directly to functional domains across the product:
