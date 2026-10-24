@@ -110,3 +110,16 @@ All enterprise custom elements in `src/components/` adhere to the following codi
    - All interactive controls with visible text must include that exact text in their programmatic accessible name. Decorative glyphs (chevrons, icons) carry `aria-hidden="true"`.
 4. **Autonomous Testing & Storybook Verification**:
    - Every component has a dedicated Storybook story file covering all variants, responsive containers, and color family schemes.
+
+---
+
+## 6. Task Planning & Effort Level Heuristic
+
+To maintain architectural integrity across the design system while moving quickly on tactical updates, all tasks are evaluated against an effort level heuristic with an upfront declaration:
+
+| Level | Scope | Trigger Scenarios | Verification & Protocol |
+| :---: | :--- | :--- | :--- |
+| **Low** | **Tactical & Localized** | Isolated CSS tweaks, inspector formatting, typo/copy edits, minor story updates | Direct targeted edit, Storybook visual verification, clean git commit |
+| **Medium** | **Component & Feature Expansion** | Authoring new Web Components, adding Storybook stories with Vitest interaction tests, tooling configs | Light DOM adherence, APCA contrast validation, WCAG 2.1 SC 2.5.3 Label in Name conformance, 100% test pass |
+| **High** | **Architectural & Multi-Layer Systemic** | Layer 1 OKLCH/Utopia scale changes, Layer 2 semantic slot refactors, global container breakpoint shifts, contrast standard changes | Cross-file impact analysis across all specimen pages, dual light/invert verification, documentation update, full test suite pass |
+
