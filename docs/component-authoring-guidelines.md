@@ -13,7 +13,7 @@ A comprehensive audit was performed across all 8 token files in `design-language
   - **Layer 2**: Matrix of `[data-style]` (family) × `[data-mode]` (polarity: `default`, `invert`, `system`).
   - **Slot Contract**: Defines 8 essential functional slots: `--surface-bg`, `--surface-bg-1`, `--text-fg-1`, `--text-fg-2`, `--surface-border`, `--action-bg-1`, `--action-fg-1`, `--action-border`.
 - **Findings & Status**:
-  - The deprecated `haze` family is preserved dormantly with explicit comments.
+  - The legacy `gray` family (formerly `haze`) is preserved dormantly with explicit comments.
   - Layer 2 maps `--action-bg-1` to `--color-800` in light mode and `--color-100` in dark mode, maintaining WCAG AAA contrast against `--action-fg-1` (`--color-25` / `--color-1000`).
   - **Clean & Consistent**: No hardcoded hex or RGB colors; pure OKLCH ramps with deliberate hue torsion curves.
 

@@ -35,8 +35,8 @@ This report provides the full verification and audit across all 8 core token fil
   - **Light mode action** (`action-fg-1` on `action-bg-1`): **Lc 95–99** (exceeds Bronze requirement of Lc 60–75).
   - **Dark/Invert mode** (`text-fg-1` on `surface-bg`): **Lc 107** (exceeds Bronze requirement).
   - **Dark/Invert mode action** (`action-fg-1` on `action-bg-1`): **Lc 87–92** (exceeds Bronze requirement).
-- **Deprecations**:
-  - The legacy `haze` family is preserved dormantly with clear comments for backwards compatibility until explicit confirmation of removal.
+- **Deprecations & Renames**:
+  - The legacy `gray` family (formerly `haze`) is preserved dormantly with clear comments for backwards compatibility until explicit confirmation of removal.
 
 ### 2. `typography.css`
 
