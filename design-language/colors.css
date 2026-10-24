@@ -103,8 +103,13 @@
 
 /* ============================================================
    LAYER 2 — ORTHOGONAL [data-style] × [data-mode] ARCHITECTURE
-   [data-style] selects the colour family ramp (neutral, purple,
-   green, red, yellow, blue) into --color-1000..--color-25.
+   [data-style] selects the colour family ramp into --color-1000..--color-25:
+     - neutral: default canvas, containers, standard cards, dividers, draft states
+     - purple:  brand identity, portfolio highlights, active navigation tabs
+     - green:   validation success, positive alerts, healthy/live statuses
+     - red:     validation errors, critical alerts, destructive actions, build failures
+     - yellow:  warning alerts, cautionary advisories, pending/in-progress statuses
+     - blue:    informational messaging, system hints, exploration links
    [data-mode] selects the polarity mapping (default, invert, system):
      default: surface-bg=F-25, surface-bg-1=F-50, text-fg-1=F-1000,
               text-fg-2=F-700, surface-border=F-200, action-bg-1=F-700,
@@ -112,6 +117,7 @@
      invert:  surface-bg=F-1000, surface-bg-1=F-900, text-fg-1=F-25,
               text-fg-2=F-300, surface-border=F-800, action-bg-1=F-200,
               action-fg-1=F-1000, action-border=F-200
+   See docs/design-decisions-and-principles.md for full context table.
    ============================================================ */
 
 /* 1. Style family pointers (defaulting to neutral at :root) */
