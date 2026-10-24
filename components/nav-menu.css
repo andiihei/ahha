@@ -11,7 +11,7 @@ ads-nav-menu,
   --brand-ink: var(--color-1000, var(--neutral-1000));
   --brand-line: var(--color-900, var(--neutral-900));
   --brand-faint: var(--color-200, var(--neutral-200));
-  --page-dim: var(--color-300, var(--neutral-300));
+  --page-dim: var(--text-fg-2, var(--color-700, var(--neutral-700)));
   position: relative;
   display: block;
   width: 100%;
@@ -24,7 +24,7 @@ ads-nav-menu,
   --brand-ink: var(--color-25, var(--neutral-200));
   --brand-line: var(--color-300, var(--neutral-300));
   --brand-faint: var(--color-700, var(--neutral-700));
-  --page-dim: var(--color-500, var(--neutral-500));
+  --page-dim: var(--text-fg-2, var(--color-300, var(--neutral-300)));
 }
 
 @media (prefers-color-scheme: dark) {
@@ -35,7 +35,7 @@ ads-nav-menu,
     --brand-ink: var(--color-25, var(--neutral-200));
     --brand-line: var(--color-300, var(--neutral-300));
     --brand-faint: var(--color-700, var(--neutral-700));
-    --page-dim: var(--color-500, var(--neutral-500));
+    --page-dim: var(--text-fg-2, var(--color-300, var(--neutral-300)));
   }
 }
 
