@@ -26,7 +26,7 @@ function ensureHud() {
   hudElement.style.cssText = `
     position: fixed;
     z-index: 999999;
-    max-width: 24rem;
+    max-width: 32rem;
     pointer-events: none;
     font-family: var(--font-mono, "IBM Plex Mono", monospace);
     font-size: 11px;
@@ -53,7 +53,14 @@ function getResolvedToken(style: CSSStyleDeclaration, prop: string): string | nu
   return val ? `${prop}: ${val}` : null;
 }
 
-function resolveTokenChain(target: HTMLElement, token: string): { chain: string; computedVal: string } | null {
+interface TokenChainResult {
+  l2Slot: string;
+  l1Step: string;
+  l1Primitive: string;
+  computedVal: string;
+}
+
+function resolveTokenChain(target: HTMLElement, token: string): TokenChainResult | null {
   const computed = window.getComputedStyle(target);
   const computedVal = computed.getPropertyValue(token).trim();
   if (!computedVal) return null;
@@ -90,7 +97,7 @@ function resolveTokenChain(target: HTMLElement, token: string): { chain: string;
 
   const slotInfo = slotToStep[token];
   if (!slotInfo) {
-    return { chain: computedVal, computedVal };
+    return { l2Slot: token, l1Step: "", l1Primitive: "", computedVal };
   }
 
   const stepVar = mode === "invert" ? slotInfo.invert : slotInfo.default;
@@ -103,13 +110,12 @@ function resolveTokenChain(target: HTMLElement, token: string): { chain: string;
     primitiveVar = `--${styleFamily}-${stepNum}`;
   }
 
-  // Construct inheritance breadcrumb chain
-  // e.g. "→ var(--color-1000) → var(--neutral-1000)" or "var(--color-1000) (neutral)"
-  const chain = primitiveVar
-    ? `${stepVar} &rarr; ${primitiveVar}`
-    : `${stepVar}`;
-
-  return { chain, computedVal };
+  return {
+    l2Slot: token,
+    l1Step: stepVar,
+    l1Primitive: primitiveVar,
+    computedVal,
+  };
 }
 
 function updateHud(target: HTMLElement, e: MouseEvent) {
@@ -133,7 +139,7 @@ function updateHud(target: HTMLElement, e: MouseEvent) {
   const font = `${computed.fontWeight} ${computed.fontSize} / ${computed.lineHeight} ${computed.fontFamily.split(",")[0]}`;
   const border = computed.borderWidth !== "0px" ? `${computed.borderWidth} ${computed.borderStyle} ${computed.borderColor}` : "none";
 
-  // Check key AHHA CSS tokens and expose alias inheritance
+  // Check key AHHA CSS tokens and expose alias inheritance in distinct columns
   const checkTokens = [
     "--surface-bg",
     "--surface-bg-1",
@@ -150,18 +156,22 @@ function updateHud(target: HTMLElement, e: MouseEvent) {
   ];
 
   const resolvedTokens = checkTokens
-    .map((token) => {
-      const res = resolveTokenChain(target, token);
-      if (!res) return null;
+    .map((token) => resolveTokenChain(target, token))
+    .filter((res): res is TokenChainResult => Boolean(res))
+    .slice(0, 6)
+    .map((res) => {
+      const stepDisplay = res.l1Step ? `${res.l1Step}` : "-";
+      const primitiveDisplay = res.l1Primitive ? `&rarr; ${res.l1Primitive}` : "";
       return `
-        <div style="display:flex; justify-content:space-between; align-items:baseline; gap:8px; margin-bottom:2px;">
-          <span style="color:var(--text-fg-2); font-weight:500;">${token}</span>
-          <span style="font-weight:600; color:var(--action-border, #4f46e5); text-align:right;" title="${res.computedVal}">${res.chain}</span>
+        <div style="display:grid; grid-template-columns: minmax(105px, auto) 14px minmax(95px, auto) 14px minmax(100px, auto); align-items:baseline; gap:4px; font-size:10.5px; margin-bottom:2px;" title="${res.computedVal}">
+          <span style="color:var(--text-fg-2); font-weight:500;">${res.l2Slot}</span>
+          <span style="color:var(--text-fg-2); text-align:center;">&rarr;</span>
+          <span style="font-weight:600; color:var(--text-fg-1);">${stepDisplay}</span>
+          <span style="color:var(--text-fg-2); text-align:center;">${res.l1Primitive ? "&rarr;" : ""}</span>
+          <span style="font-weight:600; color:var(--action-border, #4f46e5);">${res.l1Primitive || ""}</span>
         </div>
       `;
     })
-    .filter(Boolean)
-    .slice(0, 6)
     .join("");
 
   hud.innerHTML = `
@@ -176,7 +186,14 @@ function updateHud(target: HTMLElement, e: MouseEvent) {
       ${bg !== "rgba(0, 0, 0, 0)" && bg !== "transparent" ? `<div><span style="color:var(--text-fg-2);">bg:</span> <span style="display:inline-block; width:9px; height:9px; border-radius:2px; vertical-align:middle; background:${bg}; border:1px solid rgba(0,0,0,0.2);"></span> ${bg}</div>` : ""}
       ${border !== "none" ? `<div><span style="color:var(--text-fg-2);">border:</span> ${border}</div>` : ""}
     </div>
-    ${resolvedTokens ? `<div style="border-top:1px dashed var(--surface-border, #ddd); margin-top:6px; padding-top:6px;"><div style="font-size:10px; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-fg-2); margin-bottom:4px; font-weight:600;">Active AHHA Tokens (Alias Chain)</div>${resolvedTokens}</div>` : ""}
+    ${resolvedTokens ? `
+      <div style="border-top:1px dashed var(--surface-border, #ddd); margin-top:6px; padding-top:6px;">
+        <div style="font-size:10px; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-fg-2); margin-bottom:5px; font-weight:700;">
+          Token Inheritance Chain
+        </div>
+        ${resolvedTokens}
+      </div>
+    ` : ""}
   `;
 
   // Position HUD near cursor avoiding screen edges
