@@ -189,27 +189,27 @@
 
 /* Headings — Display family (--font-alt), Tight tracking. Heading 400/300 default to leading None
    (the components' lineHeight toggle switches them to Compact). */
-.u-heading-400 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: var(--font-alt-variations, normal); font-size: var(--step-350); font-weight: 700; line-height: var(--leading-none); letter-spacing: var(--tracking-tight); text-transform: capitalize; }
-.u-heading-300 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: var(--font-alt-variations, normal); font-size: var(--step-250); font-weight: 700; line-height: var(--leading-none); letter-spacing: var(--tracking-tight); text-transform: capitalize; }
-.u-heading-200 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: var(--font-alt-variations, normal); font-size: var(--step-160); font-weight: 400; line-height: var(--leading-compact); letter-spacing: var(--tracking-tight); }
-.u-heading-150 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: var(--font-alt-variations, normal); font-size: var(--step-120); font-weight: 600; line-height: var(--leading-compact); letter-spacing: var(--tracking-tight); }
+.heading-400 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: var(--font-alt-variations, normal); font-size: var(--step-350); font-weight: 700; line-height: var(--leading-none); letter-spacing: var(--tracking-tight); text-transform: capitalize; }
+.heading-300 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: var(--font-alt-variations, normal); font-size: var(--step-250); font-weight: 700; line-height: var(--leading-none); letter-spacing: var(--tracking-tight); text-transform: capitalize; }
+.heading-200 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: var(--font-alt-variations, normal); font-size: var(--step-160); font-weight: 400; line-height: var(--leading-compact); letter-spacing: var(--tracking-tight); }
+.heading-150 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: var(--font-alt-variations, normal); font-size: var(--step-120); font-weight: 600; line-height: var(--leading-compact); letter-spacing: var(--tracking-tight); }
 
 /* Paragraphs. P200/P150 use display family (--font-alt) for lead text; P110/P100 use interface family (--font-main).
-   P100's Comfy variant = .u-paragraph-100 with .u-leading-relaxed applied. */
-.u-paragraph-200 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: var(--font-alt-variations, normal); font-size: var(--step-160); font-weight: 700; line-height: var(--leading-compact); }
-.u-paragraph-150 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: var(--font-alt-variations, normal); font-size: var(--step-120); font-weight: 400; line-height: var(--leading-compact); }
-.u-paragraph-110 { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: var(--font-main-variations, normal); font-feature-settings: var(--font-main-features, normal); font-size: var(--step-100); font-weight: 400; line-height: var(--leading-relaxed); }
-.u-paragraph-100 { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: var(--font-main-variations, normal); font-feature-settings: var(--font-main-features, normal); font-size: var(--step-80); font-weight: 400; line-height: var(--leading-compact); }
+   P100's Comfy variant = .paragraph-100 with .u-leading-relaxed applied. */
+.paragraph-200 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: var(--font-alt-variations, normal); font-size: var(--step-160); font-weight: 700; line-height: var(--leading-compact); }
+.paragraph-150 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: var(--font-alt-variations, normal); font-size: var(--step-120); font-weight: 400; line-height: var(--leading-compact); }
+.paragraph-110 { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: var(--font-main-variations, normal); font-feature-settings: var(--font-main-features, normal); font-size: var(--step-100); font-weight: 400; line-height: var(--leading-relaxed); }
+.paragraph-100 { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: var(--font-main-variations, normal); font-feature-settings: var(--font-main-features, normal); font-size: var(--step-80); font-weight: 400; line-height: var(--leading-compact); }
 
 /* Actions — Interface family (--font-main) Bold. */
-.u-action-110 { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: var(--font-main-variations, normal); font-feature-settings: var(--font-main-features, normal); font-size: var(--step-100); font-weight: 700; line-height: var(--leading-compact); }
-.u-action-100 { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: var(--font-main-variations, normal); font-feature-settings: var(--font-main-features, normal); font-size: var(--step-80); font-weight: 700; line-height: var(--leading-compact); }
-.u-action-75  { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: var(--font-main-variations, normal); font-feature-settings: var(--font-main-features, normal); font-size: var(--step-60); font-weight: 700; line-height: var(--leading-compact); }
+.action-110 { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: var(--font-main-variations, normal); font-feature-settings: var(--font-main-features, normal); font-size: var(--step-100); font-weight: 700; line-height: var(--leading-compact); }
+.action-100 { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: var(--font-main-variations, normal); font-feature-settings: var(--font-main-features, normal); font-size: var(--step-80); font-weight: 700; line-height: var(--leading-compact); }
+.action-75  { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: var(--font-main-variations, normal); font-feature-settings: var(--font-main-features, normal); font-size: var(--step-60); font-weight: 700; line-height: var(--leading-compact); }
 
 /* Detail (formerly Labels & Data / LD) — Interface family (--font-main) SemiBold, Compact leading. */
-.u-detail-100 { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: var(--font-main-variations, normal); font-feature-settings: var(--font-main-features, normal); font-size: var(--step-80); font-weight: 600; line-height: var(--leading-compact); }
-.u-detail-90  { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: var(--font-main-variations, normal); font-feature-settings: var(--font-main-features, normal); font-size: var(--step-70); font-weight: 600; line-height: var(--leading-compact); }
-.u-detail-75  { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: var(--font-main-variations, normal); font-feature-settings: var(--font-main-features, normal); font-size: var(--step-60); font-weight: 600; line-height: var(--leading-compact); }
+.detail-100 { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: var(--font-main-variations, normal); font-feature-settings: var(--font-main-features, normal); font-size: var(--step-80); font-weight: 600; line-height: var(--leading-compact); }
+.detail-90  { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: var(--font-main-variations, normal); font-feature-settings: var(--font-main-features, normal); font-size: var(--step-70); font-weight: 600; line-height: var(--leading-compact); }
+.detail-75  { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: var(--font-main-variations, normal); font-feature-settings: var(--font-main-features, normal); font-size: var(--step-60); font-weight: 600; line-height: var(--leading-compact); }
 
 /* Atomic modifiers — appended to any role class (Andii, 2026-10-20: variant
    classes like -bold/-caps are unnecessary duplication). These rules come

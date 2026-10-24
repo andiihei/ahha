@@ -20,13 +20,13 @@ A comprehensive audit was performed across all 8 token files in `design-language
 - **Architecture**:
   - 3 brand typefaces: `--font-main` ("IBM Plex Sans"), `--font-alt` ("Fraunces"), `--font-mono` ("IBM Plex Mono").
   - Mathematical fluid type engine: shared `--_progress` computed via `progress()` with `@supports` fallback using `tan(atan2())` from Utopia configuration (360px @ 18px base → 1240px @ 20px base).
-  - Explicit roles: Headings (`.u-heading-400..150`), Paragraphs (`.u-paragraph-200..100`), Actions (`.u-action-110..75`), Details (`.u-detail-100..75`).
+  - Explicit roles: Headings (`.heading-400..150`), Paragraphs (`.paragraph-200..100`), Actions (`.action-110..75`), Details (`.detail-100..75`).
   - Atomic modifiers: `.text-caps` applies `text-transform: uppercase; letter-spacing: var(--tracking-loose);` (+5% tracking), `.text-regular`, `.text-medium`, `.text-semibold`, `.text-bold`.
 - **Findings & Status**:
   - Fully standardized and robust. Action roles map directly to button sizing:
-    - `sm` → `.u-action-75` (`--step-60` / 12px)
-    - `md` → `.u-action-100` (`--step-80` / 16px)
-    - `lg` → `.u-action-110` (`--step-100` / 18px)
+    - `sm` → `.action-75` (`--step-60` / 12px)
+    - `md` → `.action-100` (`--step-80` / 16px)
+    - `lg` → `.action-110` (`--step-100` / 18px)
 
 ### 3. `space.css` (Fluid Spacing vs Static Spacing)
 - **Architecture**:
