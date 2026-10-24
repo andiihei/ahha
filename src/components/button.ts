@@ -17,7 +17,10 @@ export class AdsButton extends LitElement {
   variant: "primary" | "secondary" = "primary";
 
   @property({ type: String, reflect: true })
-  size: "110" | "100" | "75" = "100";
+  size: "sm" | "md" | "lg" | "75" | "100" | "110" = "md";
+
+  @property({ type: Boolean, reflect: true })
+  critical = false;
 
   @property({ type: Boolean, reflect: true })
   disabled = false;
@@ -35,14 +38,24 @@ export class AdsButton extends LitElement {
     const isPrimary = this.variant !== "secondary";
     const variantClass = isPrimary ? "state-btn-primary" : "state-btn-secondary";
 
+    // Map size aliases: sm -> 75, md -> 100, lg -> 110
+    const normalizedSize =
+      this.size === "sm" ? "75" : this.size === "lg" ? "110" : this.size === "75" || this.size === "110" ? this.size : "100";
+
+    const labelClasses = ["state-btn-label"];
+    if (this.critical) {
+      labelClasses.push("text-caps");
+    }
+
     return html`
       <button
         type=${this.type}
         class="state-btn ${variantClass}"
+        data-size=${normalizedSize}
         ?disabled=${this.disabled}
         aria-label=${this.ariaLabelText ?? undefined}
       >
-        <span class="state-btn-label">
+        <span class="${labelClasses.join(" ")}">
           ${this.label || html`<slot></slot>`}
         </span>
       </button>

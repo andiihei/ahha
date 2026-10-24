@@ -3,12 +3,42 @@
   position: relative;
   overflow: hidden;
   font: inherit;
+  font-family: var(--font-main);
   font-size: var(--step-80);
-  font-weight: 600;
-  padding: 8px 18px;
-  border-radius: 8px;
+  font-weight: 700;
+  line-height: var(--leading-compact);
+  padding: var(--space-static-50) var(--space-static-80);
+  border-radius: var(--radius-100);
   cursor: pointer;
+  box-sizing: border-box;
 }
+
+/* Sizing variations driven by Action typography roles and static spacing ladder */
+.state-btn[data-size="110"],
+.state-btn[data-size="lg"],
+.state-btn-110,
+.state-btn-lg {
+  font-size: var(--step-100);
+  padding: var(--space-static-60) var(--space-static-100);
+}
+
+.state-btn[data-size="100"],
+.state-btn[data-size="md"],
+.state-btn-100,
+.state-btn-md {
+  font-size: var(--step-80);
+  padding: var(--space-static-50) var(--space-static-80);
+}
+
+.state-btn[data-size="75"],
+.state-btn[data-size="sm"],
+.state-btn-75,
+.state-btn-sm {
+  font-size: var(--step-60);
+  padding: var(--space-static-30) var(--space-static-60);
+  border-radius: var(--radius-50);
+}
+
 .state-btn .state-btn-label { position: relative; z-index: 1; }
 .state-btn::after {
   content: "";
@@ -25,8 +55,8 @@
 .state-btn:hover::after { opacity: var(--opacity-10); }
 .state-btn:active::after { opacity: var(--opacity-15); }
 .state-btn:focus-visible {
-  outline: 3px solid var(--action-border);
-  outline-offset: 2px;
+  outline: 0.1875rem solid var(--action-border);
+  outline-offset: var(--space-static-10);
 }
 .state-btn:disabled {
   opacity: var(--opacity-40);

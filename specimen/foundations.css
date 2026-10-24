@@ -279,28 +279,6 @@
   margin-bottom: var(--space-100);
 }
 
-.btn {
-  appearance: none;
-  font: inherit;
-  font-size: var(--step-80);
-  font-weight: 600;
-  padding: 8px 18px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.btn-primary {
-  background: var(--action-bg-1);
-  color: var(--action-fg-1);
-  border: 1px solid var(--action-bg-1);
-}
-
-.btn-secondary {
-  background: transparent;
-  color: var(--text-fg-1);
-  border: 1px solid var(--action-border);
-}
-
 .field label {
   display: block;
   font-size: var(--step-80);

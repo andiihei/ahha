@@ -21,6 +21,9 @@ export class AdsSelectorButton extends LitElement {
   @property({ type: String, reflect: true })
   value = "";
 
+  @property({ type: String, reflect: true })
+  size: "sm" | "md" | "lg" = "md";
+
   @property({ type: Array })
   options: SelectorOption[] = [];
 
@@ -118,13 +121,13 @@ export class AdsSelectorButton extends LitElement {
     const styleAttr = this.minWidth ? `--selector-min-width: ${this.minWidth};` : "";
 
     return html`
-      <div class="selector-btn" data-open=${this.open ? "true" : "false"} style=${styleAttr}>
+      <div class="selector-btn" data-size=${this.size} data-open=${this.open ? "true" : "false"} style=${styleAttr}>
         <button
           type="button"
           class="selector-btn-trigger"
           aria-haspopup="true"
           aria-expanded=${this.open ? "true" : "false"}
-          aria-label=${this.label}
+          aria-label="${displayLabel}, ${this.label}"
           @click=${this._toggleOpen}
         >
           <span class="selector-btn-current">

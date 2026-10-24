@@ -35,12 +35,13 @@
   appearance: none;
   display: inline-flex;
   align-items: center;
-  gap: var(--space-30);
+  gap: var(--space-static-30);
   font: inherit;
+  font-family: var(--font-main);
   font-size: var(--step-80);
   font-weight: 500;
   line-height: var(--leading-compact);
-  padding: 5px 12px;
+  padding: var(--space-static-30) var(--space-static-60);
   border: 1px solid transparent;
   border-radius: var(--radius-full);
   background: transparent;
@@ -52,6 +53,31 @@
     background-color var(--duration-50) var(--ease-in-out),
     border-color var(--duration-50) var(--ease-in-out),
     color var(--duration-50) var(--ease-in-out);
+}
+
+/* Sizing ladder matching Button action roles */
+.selector-btn[data-size="sm"] .selector-btn-trigger,
+.selector-btn[data-size="sm"] .selector-btn-option,
+.selector-btn-sm .selector-btn-trigger,
+.selector-btn-sm .selector-btn-option {
+  font-size: var(--step-60);
+  padding: var(--space-static-30) var(--space-static-50);
+}
+
+.selector-btn[data-size="md"] .selector-btn-trigger,
+.selector-btn[data-size="md"] .selector-btn-option,
+.selector-btn-md .selector-btn-trigger,
+.selector-btn-md .selector-btn-option {
+  font-size: var(--step-80);
+  padding: var(--space-static-30) var(--space-static-60);
+}
+
+.selector-btn[data-size="lg"] .selector-btn-trigger,
+.selector-btn[data-size="lg"] .selector-btn-option,
+.selector-btn-lg .selector-btn-trigger,
+.selector-btn-lg .selector-btn-option {
+  font-size: var(--step-100);
+  padding: var(--space-static-50) var(--space-static-80);
 }
 
 .selector-btn-trigger {
@@ -88,8 +114,8 @@
 
 .selector-btn-trigger:focus-visible,
 .selector-btn-option:focus-visible {
-  outline: 3px solid var(--action-border);
-  outline-offset: 2px;
+  outline: 0.1875rem solid var(--action-border);
+  outline-offset: var(--space-static-10);
 }
 
 .selector-btn svg {

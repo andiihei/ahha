@@ -22,6 +22,10 @@ const meta: Meta = {
     value: {
       control: "text"
     },
+    size: {
+      control: "select",
+      options: ["sm", "md", "lg"]
+    },
     label: {
       control: "text"
     },
@@ -38,12 +42,14 @@ type Story = StoryObj;
 export const Default: Story = {
   args: {
     value: "alpha",
+    size: "md",
     label: "Demo selector",
-    minWidth: "7.5rem"
+    minWidth: "8rem"
   },
   render: (args) => html`
     <ads-selector-button
       value=${args.value}
+      size=${args.size}
       label=${args.label}
       min-width=${args.minWidth}
       .options=${demoOptions}
@@ -54,15 +60,45 @@ export const Default: Story = {
 export const ModeSwitchApp: Story = {
   args: {
     value: "system",
+    size: "md",
     label: "Colour mode",
     minWidth: "8rem"
   },
   render: (args) => html`
     <ads-selector-button
       value=${args.value}
+      size=${args.size}
       label=${args.label}
       min-width=${args.minWidth}
       .options=${modeOptions}
     ></ads-selector-button>
+  `
+};
+
+export const SizeScale: Story = {
+  render: () => html`
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-60, 0.75rem);">
+      <ads-selector-button
+        value="alpha"
+        size="sm"
+        label="Small selector"
+        min-width="6.5rem"
+        .options=${demoOptions}
+      ></ads-selector-button>
+      <ads-selector-button
+        value="alpha"
+        size="md"
+        label="Medium selector"
+        min-width="8rem"
+        .options=${demoOptions}
+      ></ads-selector-button>
+      <ads-selector-button
+        value="alpha"
+        size="lg"
+        label="Large selector"
+        min-width="9.5rem"
+        .options=${demoOptions}
+      ></ads-selector-button>
+    </div>
   `
 };
