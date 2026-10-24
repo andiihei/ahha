@@ -65,7 +65,7 @@ To provide absolute clarity for designers, engineers, and LLMs, `[data-style]` s
 | **Statuses: Active / Published / Healthy**   | Operational service, active subscription, published post, online status               |            `green`            | Real-time health, stability, and live activity confirmation.                                   | Status indicator dots, "Live" / "Active" pills, healthy service ping badges.                     |
 | **Statuses: In Progress / Pending / Review** | Deployment underway, queue pending, background task processing, draft review          |           `yellow`            | Intermediate state awaiting completion; indicates ongoing progress.                            | "Pending Review" chips, "Syncing" badges, queue progress tags.                                   |
 | **Statuses: Paused / Offline / Draft**       | Suspended queue, offline service, archived item, draft state                          |           `neutral`           | Idle or inert states where items are not actively executing.                                   | "Draft" tags, "Archived" chips, offline indicator pills.                                         |
-| **Statuses: Failed / Error / Broken**        | Deployment failed, test failure, build error, service down                            |             `red`             | Failure state signaling that an entity requires repair or diagnosis.                           | "Build Failed" badges, test runner error pill, offline server indicator.                         |
+| **Future Work: Data Visualization**          | Categorical data series, multi-line charts, bar charts, categorical breakdown tags    |    `purple` _(candidate)_     | Distinct categorical hue separating visual metric series without implying semantic status.     | Chart series lines, categorical breakdown segments, data metric tags.                            |
 | **Unassigned / Alternate Brand**             | Third-party brand packs or white-label theming experiments                            |           `purple`            | Dormant in core AHHA; available for brand-swapping experiments.                                | Non-core external theme showcases.                                                               |
 
 ---
@@ -173,3 +173,16 @@ To maintain architectural integrity across the design system while moving quickl
 |  **Low**   | **Tactical & Localized**                 | Isolated CSS tweaks, inspector formatting, typo/copy edits, minor story updates                                                    | Direct targeted edit, Storybook visual verification, clean git commit                                                            |
 | **Medium** | **Component & Feature Expansion**        | Authoring new Web Components, adding Storybook stories with Vitest interaction tests, tooling configs                              | Light DOM adherence, APCA contrast validation, WCAG 2.1 SC 2.5.3 Label in Name conformance, 100% test pass                       |
 |  **High**  | **Architectural & Multi-Layer Systemic** | Layer 1 OKLCH/Utopia scale changes, Layer 2 semantic slot refactors, global container breakpoint shifts, contrast standard changes | Cross-file impact analysis across all specimen pages, dual light/invert verification, documentation update, full test suite pass |
+
+---
+
+## 7. Future Work & Roadmap: Data Visualization
+
+While the core AHHA design language covers UI controls, navigation, and content scaffolding, **Data Visualization** is codified as a dedicated future work item:
+
+1. **Categorical Color Series**:
+   - `purple` (Purple Rain) is the prime candidate for a non-semantic categorical series hue. It provides distinct visual separation from semantic status colors (green/red/yellow) and neutral structural elements without signaling an alert or health condition.
+2. **Chart Accessibility Standards**:
+   - Data visual patterns (multi-line charts, bar charts, donut breakdown segments, sparklines) will require non-color redundancy (line styling, stroke patterns, and direct data point labelling) to satisfy universal color-blind accessibility under the AHHA APCA standard.
+3. **Component Candidates**:
+   - Future `<ads-chart>`, `<ads-metric-card>`, and `<ads-data-table>` visualizations will bind to Layer 2 data visualization tokens when implemented.
