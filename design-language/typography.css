@@ -21,6 +21,11 @@
   --font-main: "IBM Plex Sans", sans-serif;
   --font-alt: "Fraunces", serif;
   --font-mono: "IBM Plex Mono", monospace;
+
+  /* Brand-pack font feature/variation settings (overridable per brand pack) */
+  --font-main-features: "lnum" 1, "pnum" 1;
+  --font-main-variations: "wdth" 100;
+  --font-alt-variations: "SOFT" 0, "WONK" 1;
 }
 
 /* ---- Fluid type (type.css) ---- */
@@ -177,51 +182,34 @@
   --tracking-extra-loose: 0.1em;
 }
 
-/* Family bases — variation/feature settings as set in Andii's Figma components.
-   Family stacks come from the brand tokens in fonts.css (load fonts.css
-   first): --font-main = IBM Plex Sans, --font-alt = Fraunces,
-   --font-mono = IBM Plex Mono (Andii, 2026-10-22). */
-.u-fraunces {
-  font-family: var(--font-alt);
-  font-optical-sizing: auto;
-  font-variation-settings: "SOFT" 0, "WONK" 1;
-}
-.u-plex {
-  font-family: var(--font-main);
-  font-optical-sizing: auto;
-  font-variation-settings: "wdth" 100;
-  font-feature-settings: "lnum" 1, "pnum" 1;
-}
-
-/* Family utilities — plain family application from the brand tokens. */
-.u-font-main { font-family: var(--font-main); }
-.u-font-alt  { font-family: var(--font-alt); }
+/* Family utilities — brand-agnostic family application. */
+.u-font-main { font-family: var(--font-main); font-feature-settings: var(--font-main-features, normal); font-variation-settings: var(--font-main-variations, normal); }
+.u-font-alt  { font-family: var(--font-alt); font-variation-settings: var(--font-alt-variations, normal); }
 .u-font-mono { font-family: var(--font-mono); }
 
-/* Headings — Fraunces, Tight tracking. Heading 400/300 default to leading None
+/* Headings — Display family (--font-alt), Tight tracking. Heading 400/300 default to leading None
    (the components' lineHeight toggle switches them to Compact). */
-.u-heading-400 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: "SOFT" 0, "WONK" 1; font-size: var(--step-350); font-weight: 700; line-height: var(--leading-none); letter-spacing: var(--tracking-tight); text-transform: capitalize; }
-.u-heading-300 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: "SOFT" 0, "WONK" 1; font-size: var(--step-250); font-weight: 700; line-height: var(--leading-none); letter-spacing: var(--tracking-tight); text-transform: capitalize; }
-.u-heading-200 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: "SOFT" 0, "WONK" 1; font-size: var(--step-160); font-weight: 400; line-height: var(--leading-compact); letter-spacing: var(--tracking-tight); }
-.u-heading-150 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: "SOFT" 0, "WONK" 1; font-size: var(--step-120); font-weight: 600; line-height: var(--leading-compact); letter-spacing: var(--tracking-tight); }
+.u-heading-400 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: var(--font-alt-variations, normal); font-size: var(--step-350); font-weight: 700; line-height: var(--leading-none); letter-spacing: var(--tracking-tight); text-transform: capitalize; }
+.u-heading-300 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: var(--font-alt-variations, normal); font-size: var(--step-250); font-weight: 700; line-height: var(--leading-none); letter-spacing: var(--tracking-tight); text-transform: capitalize; }
+.u-heading-200 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: var(--font-alt-variations, normal); font-size: var(--step-160); font-weight: 400; line-height: var(--leading-compact); letter-spacing: var(--tracking-tight); }
+.u-heading-150 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: var(--font-alt-variations, normal); font-size: var(--step-120); font-weight: 600; line-height: var(--leading-compact); letter-spacing: var(--tracking-tight); }
 
-/* Paragraphs. P200/P150 are Fraunces (lead text); P110/P100 are Plex.
+/* Paragraphs. P200/P150 use display family (--font-alt) for lead text; P110/P100 use interface family (--font-main).
    P100's Comfy variant = .u-paragraph-100 with .u-leading-relaxed applied. */
-.u-paragraph-200  { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: "SOFT" 0, "WONK" 1; font-size: var(--step-160); font-weight: 700; line-height: var(--leading-compact); }
-.u-paragraph-150    { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: "SOFT" 0, "WONK" 1; font-size: var(--step-120); font-weight: 400; line-height: var(--leading-compact); }
-.u-paragraph-110 { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: "wdth" 100; font-feature-settings: "lnum" 1, "pnum" 1; font-size: var(--step-100); font-weight: 400; line-height: var(--leading-relaxed); }
-.u-paragraph-100    { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: "wdth" 100; font-feature-settings: "lnum" 1, "pnum" 1; font-size: var(--step-80); font-weight: 400; line-height: var(--leading-compact); }
+.u-paragraph-200 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: var(--font-alt-variations, normal); font-size: var(--step-160); font-weight: 700; line-height: var(--leading-compact); }
+.u-paragraph-150 { font-family: var(--font-alt); font-optical-sizing: auto; font-variation-settings: var(--font-alt-variations, normal); font-size: var(--step-120); font-weight: 400; line-height: var(--leading-compact); }
+.u-paragraph-110 { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: var(--font-main-variations, normal); font-feature-settings: var(--font-main-features, normal); font-size: var(--step-100); font-weight: 400; line-height: var(--leading-relaxed); }
+.u-paragraph-100 { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: var(--font-main-variations, normal); font-feature-settings: var(--font-main-features, normal); font-size: var(--step-80); font-weight: 400; line-height: var(--leading-compact); }
 
-/* Actions — Plex Bold. Uppercase was a component toggle in Figma (default on);
-   here it is the atomic .text-caps modifier, appended when needed. */
-.u-action-110      { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: "wdth" 100; font-feature-settings: "lnum" 1, "pnum" 1; font-size: var(--step-100); font-weight: 700; line-height: var(--leading-compact); }
-.u-action-100      { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: "wdth" 100; font-feature-settings: "lnum" 1, "pnum" 1; font-size: var(--step-80); font-weight: 700; line-height: var(--leading-compact); }
-.u-action-75       { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: "wdth" 100; font-feature-settings: "lnum" 1, "pnum" 1; font-size: var(--step-60); font-weight: 700; line-height: var(--leading-compact); }
+/* Actions — Interface family (--font-main) Bold. */
+.u-action-110 { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: var(--font-main-variations, normal); font-feature-settings: var(--font-main-features, normal); font-size: var(--step-100); font-weight: 700; line-height: var(--leading-compact); }
+.u-action-100 { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: var(--font-main-variations, normal); font-feature-settings: var(--font-main-features, normal); font-size: var(--step-80); font-weight: 700; line-height: var(--leading-compact); }
+.u-action-75  { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: var(--font-main-variations, normal); font-feature-settings: var(--font-main-features, normal); font-size: var(--step-60); font-weight: 700; line-height: var(--leading-compact); }
 
-/* Detail (formerly Labels & Data / LD) — Plex SemiBold, Compact leading. */
-.u-detail-100     { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: "wdth" 100; font-feature-settings: "lnum" 1, "pnum" 1; font-size: var(--step-80); font-weight: 600; line-height: var(--leading-compact); }
-.u-detail-90      { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: "wdth" 100; font-feature-settings: "lnum" 1, "pnum" 1; font-size: var(--step-70); font-weight: 600; line-height: var(--leading-compact); }
-.u-detail-75      { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: "wdth" 100; font-feature-settings: "lnum" 1, "pnum" 1; font-size: var(--step-60); font-weight: 600; line-height: var(--leading-compact); }
+/* Detail (formerly Labels & Data / LD) — Interface family (--font-main) SemiBold, Compact leading. */
+.u-detail-100 { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: var(--font-main-variations, normal); font-feature-settings: var(--font-main-features, normal); font-size: var(--step-80); font-weight: 600; line-height: var(--leading-compact); }
+.u-detail-90  { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: var(--font-main-variations, normal); font-feature-settings: var(--font-main-features, normal); font-size: var(--step-70); font-weight: 600; line-height: var(--leading-compact); }
+.u-detail-75  { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: var(--font-main-variations, normal); font-feature-settings: var(--font-main-features, normal); font-size: var(--step-60); font-weight: 600; line-height: var(--leading-compact); }
 
 /* Atomic modifiers — appended to any role class (Andii, 2026-10-20: variant
    classes like -bold/-caps are unnecessary duplication). These rules come
