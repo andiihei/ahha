@@ -28,12 +28,12 @@ This report provides the full verification and audit across all 8 core token fil
   - `yellow`: Torsion from amber ($60.7^\circ$) to bright lime/marigold ($100.4^\circ$).
 - **Layer 2 Contract Slots**: Exactly 8 functional slots:
   `--surface-bg`, `--surface-bg-1`, `--text-fg-1`, `--text-fg-2`, `--surface-border`, `--action-bg-1`, `--action-border`, `--action-fg-1`.
-- **Perceptual Contrast Validation (APCA & WCAG Level AA Target)**:
-  - **Standard Baseline**: WCAG 2.1 Level AA (4.5:1 for body, 3:1 for large text/UI) with APCA equivalent targets ($L_c \ge 60\text{--}75$). Level AAA is intentionally not mandated, preserving aesthetic nuance and subtle tints suitable for a design portfolio.
-  - **Light mode** (`text-fg-1` on `surface-bg`): **Lc 105** (substantially exceeds the AA threshold of Lc 60–75).
-  - **Light mode action** (`action-fg-1` on `action-bg-1`): **Lc 95–99**.
-  - **Dark/Invert mode** (`text-fg-1` on `surface-bg`): **Lc 107**.
-  - **Dark/Invert mode action** (`action-fg-1` on `action-bg-1`): **Lc 87–92**.
+- **Perceptual Contrast Validation (APCA Bronze Level Target)**:
+  - **Standard Baseline**: **APCA Bronze Level** (conforming to WCAG 2.1 Level AA equivalent thresholds: body $\ge L_c 60\text{--}75$, headings $\ge L_c 45$, controls $\ge L_c 30$). Silver/Gold/AAA are intentionally not mandated to preserve visual subtlety and nuanced tints.
+  - **Light mode** (`text-fg-1` on `surface-bg`): **Lc 105** (exceeds Bronze requirement of Lc 60–75).
+  - **Light mode action** (`action-fg-1` on `action-bg-1`): **Lc 95–99** (exceeds Bronze requirement of Lc 60–75).
+  - **Dark/Invert mode** (`text-fg-1` on `surface-bg`): **Lc 107** (exceeds Bronze requirement).
+  - **Dark/Invert mode action** (`action-fg-1` on `action-bg-1`): **Lc 87–92** (exceeds Bronze requirement).
 - **Deprecations**:
   - The legacy `haze` family is preserved dormantly with clear comments for backwards compatibility until explicit confirmation of removal.
 

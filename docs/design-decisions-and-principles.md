@@ -61,8 +61,13 @@ The adoption of APCA is grounded in accessibility law and standards provisions t
    - Conformance to APCA provides scientifically validated, perceptually accurate readability across font sizes, weights, and color contexts, thereby exceeding the real-world accessibility provided by legacy WCAG 2.x flat ratios.
 
 ### System Policy & Target Conformance Level
-- **Target Conformance: WCAG Level AA**: For this personal design portfolio, **WCAG 2.1 Level AA** (with APCA equivalents) is the governing benchmark. Level AAA is intentionally not enforced: Level AA ensures fully verified, legally sound accessibility without the harsh starkness of AAA, preserving visual nuance, subtle tints, and sophisticated brand expression.
-- The AHHA Design System formally adopts **APCA (WCAG 3.0 draft)** calibrated to Level AA targets ($L_c \ge 60\text{--}75$ for body, $L_c \ge 45\text{--}60$ for headings, $L_c \ge 30\text{--}45$ for controls) as its governing readability standard under the **Equivalent Facilitation** provision.
+- **Target Conformance: APCA Bronze Level (WCAG 2.1 Level AA Equivalent)**: For this personal design portfolio, the governing standard is the **APCA Bronze Level** (conforming to WCAG 2.1 Level AA equivalent thresholds). Higher tiers (Silver/Gold or WCAG AAA) are intentionally not mandated: the Bronze level guarantees verified, comfortable perceptual readability while preserving visual subtlety, tinted surfaces, and expressive brand character.
+- **APCA Bronze Thresholds Applied**:
+  - **Body Text**: $L_c \ge 60\text{--}75$ (depending on font weight and size).
+  - **Headings & Large Content**: $L_c \ge 45$.
+  - **Interactive Controls, Borders & Icons**: $L_c \ge 30$.
+  - **Incidental & Disabled Elements**: Exempted / permitted below $L_c 30$.
+- The AHHA Design System formally adopts **APCA Bronze** as its governing readability standard under the **Equivalent Facilitation** provision (Section 508 § E101.2).
 - Page links and supporting elements in navigation use `--color-300` / `--neutral-300` on light mode (`--page-dim`) and `--color-500` / `--neutral-500` on dark mode. This creates intentional visual hierarchy where the active page link (`--text-fg-1` with underline indicator) stands out distinctly without sacrificing reading comfort or perceptual clarity.
 - Automated test suites (e.g., axe) flagging secondary link states under flat WCAG 2.x math are documented and excused under this equivalent facilitation principle.
 
