@@ -4,11 +4,11 @@ import { customElement, property } from "lit/decorators.js";
 /**
  * @tag ads-button
  * An enterprise-grade, accessible button custom element rendered in Light DOM
- * allowing full cascade of AHHA typography, atomic modifiers (.text-caps), and scheme slots.
+ * allowing full cascade of AHHA typography, atomic modifiers (.u-text-caps), and scheme slots.
  */
 @customElement("ads-button")
 export class AdsButton extends LitElement {
-  // Render in Light DOM so global utility classes (.text-caps, typography roles) apply cleanly
+  // Render in Light DOM so global utility classes (.u-text-caps, typography roles) apply cleanly
   override createRenderRoot() {
     return this;
   }
@@ -44,7 +44,7 @@ export class AdsButton extends LitElement {
 
     const labelClasses = ["state-btn-label"];
     if (this.critical) {
-      labelClasses.push("text-caps");
+      labelClasses.push("u-text-caps");
     }
 
     return html`

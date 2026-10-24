@@ -211,16 +211,15 @@
 .detail-90  { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: var(--font-main-variations, normal); font-feature-settings: var(--font-main-features, normal); font-size: var(--step-70); font-weight: 600; line-height: var(--leading-compact); }
 .detail-75  { font-family: var(--font-main); font-optical-sizing: auto; font-variation-settings: var(--font-main-variations, normal); font-feature-settings: var(--font-main-features, normal); font-size: var(--step-60); font-weight: 600; line-height: var(--leading-compact); }
 
-/* Atomic modifiers — appended to any role class (Andii, 2026-10-20: variant
-   classes like -bold/-caps are unnecessary duplication). These rules come
-   AFTER the role classes so they win at equal specificity.
-   .text-caps also carries Loose tracking: in the Figma components, caps
+/* Atomic modifiers / utilities — single-property utilities appended to any role class
+   (or used standalone). These rules come AFTER the role classes so they win at equal specificity.
+   .u-text-caps also carries Loose tracking: in the Figma components, caps
    always pairs with +5% letter spacing. */
-.text-regular  { font-weight: 400; }
-.text-medium   { font-weight: 500; }
-.text-semibold { font-weight: 600; }
-.text-bold     { font-weight: 700; }
-.text-caps     { text-transform: uppercase; letter-spacing: var(--tracking-loose); }
+.u-text-regular  { font-weight: 400; }
+.u-text-medium   { font-weight: 500; }
+.u-text-semibold { font-weight: 600; }
+.u-text-bold     { font-weight: 700; }
+.u-text-caps     { text-transform: uppercase; letter-spacing: var(--tracking-loose); }
 
 /* Leading overrides (the components' lineHeight toggles, as utilities). */
 .u-leading-none    { line-height: var(--leading-none); }

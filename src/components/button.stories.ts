@@ -17,7 +17,7 @@ const meta: Meta = {
     },
     critical: {
       control: "boolean",
-      description: "Applies the .text-caps uppercase utility class to button text"
+      description: "Applies the .u-text-caps uppercase utility class to button text"
     },
     disabled: {
       control: "boolean"

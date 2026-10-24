@@ -21,7 +21,7 @@ A comprehensive audit was performed across all 8 token files in `design-language
   - 3 brand typefaces: `--font-main` ("IBM Plex Sans"), `--font-alt` ("Fraunces"), `--font-mono` ("IBM Plex Mono").
   - Mathematical fluid type engine: shared `--_progress` computed via `progress()` with `@supports` fallback using `tan(atan2())` from Utopia configuration (360px @ 18px base → 1240px @ 20px base).
   - Explicit roles: Headings (`.heading-400..150`), Paragraphs (`.paragraph-200..100`), Actions (`.action-110..75`), Details (`.detail-100..75`).
-  - Atomic modifiers: `.text-caps` applies `text-transform: uppercase; letter-spacing: var(--tracking-loose);` (+5% tracking), `.text-regular`, `.text-medium`, `.text-semibold`, `.text-bold`.
+  - Atomic modifier utilities: `.u-text-caps` applies `text-transform: uppercase; letter-spacing: var(--tracking-loose);` (+5% tracking), `.u-text-regular`, `.u-text-medium`, `.u-text-semibold`, `.u-text-bold`.
 - **Findings & Status**:
   - Fully standardized and robust. Action roles map directly to button sizing:
     - `sm` → `.action-75` (`--step-60` / 12px)
@@ -60,7 +60,7 @@ To ensure all future AHHA Web Components (`<ads-card>`, `<ads-nav-menu>`, `<ads-
 
 ### Rule 1: Light DOM Rendering (`createRenderRoot() { return this; }`)
 - **Requirement**: All AHHA custom elements must render into the Light DOM.
-- **Rationale**: Allows the AHHA design language tokens, typography roles, atomic modifiers (`.text-caps`), and contextual `[data-style]` / `[data-mode]` scope cascades to apply without piercing or duplicating styles across Shadow DOM boundaries.
+- **Rationale**: Allows the AHHA design language tokens, typography roles, atomic modifiers (`.u-text-caps`), and contextual `[data-style]` / `[data-mode]` scope cascades to apply without piercing or duplicating styles across Shadow DOM boundaries.
 
 ### Rule 2: Token-First Styling (Zero Raw Pixels or Raw Colors)
 - **Color Slots Only**: Never reference Layer 1 colors directly (`--neutral-800`, `#333`, etc.) inside component stylesheets. Always bind to Layer 2 slots:
@@ -80,7 +80,7 @@ To ensure all future AHHA Web Components (`<ads-card>`, `<ads-nav-menu>`, `<ads-
 
 ### Rule 4: Feature Flags & Atomic Composition
 - Specialized visual states (such as `critical`) should reflect as boolean attributes and compose with the atomic utility ladder:
-  - e.g. `critical` on `<ads-button>` maps to `.text-caps` (`text-transform: uppercase; letter-spacing: var(--tracking-loose);`).
+  - e.g. `critical` on `<ads-button>` maps to `.u-text-caps` (`text-transform: uppercase; letter-spacing: var(--tracking-loose);`).
 
 ### Rule 5: State Naming Standards
 - Controls with binary states use web standards:
