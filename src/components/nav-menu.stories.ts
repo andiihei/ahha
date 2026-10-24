@@ -25,7 +25,7 @@ const meta: Meta = {
       description: "Force responsive tier: full (desktop), compact (tablet 2-row layout), xCompact (mobile burger), or auto (container/viewport responsive)"
     },
     containerWidth: {
-      control: { type: "range", min: 300, max: 1200, step: 20 },
+      control: { type: "range", min: 380, max: 1200, step: 20 },
       description: "Width in px of the container wrapper for interactive responsiveness testing"
     },
     mode: {
@@ -53,8 +53,8 @@ export const Default: Story = {
   },
   argTypes: {
     containerWidth: {
-      control: { type: "range", min: 300, max: 1200, step: 20 },
-      description: "Container width in px (fluid across all responsive tiers)"
+      control: { type: "range", min: 380, max: 1200, step: 20 },
+      description: "Container width in px (fluid across all responsive tiers, min: 380px)"
     }
   },
   render: (args) => html`
@@ -62,7 +62,7 @@ export const Default: Story = {
       style="
         width: 100%;
         max-width: ${args.containerWidth}px;
-        min-width: 300px;
+        min-width: 380px;
         margin-inline: auto;
         background: var(--surface-bg);
         border: 1px dashed var(--surface-border);
@@ -191,8 +191,8 @@ export const ExtraCompactMobile: Story = {
   },
   argTypes: {
     containerWidth: {
-      control: { type: "range", min: 280, max: 544, step: 10 },
-      description: "Mobile tier container width (280px – 544px / max: 34rem)"
+      control: { type: "range", min: 380, max: 544, step: 10 },
+      description: "Mobile tier container width (380px – 544px / max: 34rem)"
     }
   },
   render: (args) => html`
@@ -200,7 +200,7 @@ export const ExtraCompactMobile: Story = {
       style="
         width: 100%;
         max-width: ${args.containerWidth}px;
-        min-width: 280px;
+        min-width: 380px;
         margin-inline: auto;
         background: var(--surface-bg);
         border: 1px dashed var(--surface-border);
@@ -212,7 +212,7 @@ export const ExtraCompactMobile: Story = {
       "
     >
       <div style="padding: 0.5rem 1rem; font-size: var(--step-70); color: var(--text-fg-2); border-bottom: 1px solid var(--surface-border); display: flex; justify-content: space-between;">
-        <span>Container width: <strong>${args.containerWidth}px</strong> (max 544px)</span>
+        <span>Container width: <strong>${args.containerWidth}px</strong> (380px – 544px)</span>
         <span>Variant: <strong>xCompact</strong></span>
       </div>
       <ads-nav-menu
