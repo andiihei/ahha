@@ -51,11 +51,18 @@ export const Default: Story = {
     mode: "system",
     hideModeSwitch: false
   },
+  argTypes: {
+    containerWidth: {
+      control: { type: "range", min: 300, max: 1200, step: 20 },
+      description: "Container width in px (fluid across all responsive tiers)"
+    }
+  },
   render: (args) => html`
     <div
       style="
         width: 100%;
         max-width: ${args.containerWidth}px;
+        min-width: 300px;
         margin-inline: auto;
         background: var(--surface-bg);
         border: 1px dashed var(--surface-border);
@@ -90,11 +97,18 @@ export const FullDesktop: Story = {
     mode: "system",
     hideModeSwitch: false
   },
+  argTypes: {
+    containerWidth: {
+      control: { type: "range", min: 896, max: 1400, step: 20 },
+      description: "Desktop tier container width (min: 896px / 56rem)"
+    }
+  },
   render: (args) => html`
     <div
       style="
         width: 100%;
         max-width: ${args.containerWidth}px;
+        min-width: 896px;
         margin-inline: auto;
         background: var(--surface-bg);
         border: 1px dashed var(--surface-border);
@@ -106,7 +120,7 @@ export const FullDesktop: Story = {
       "
     >
       <div style="padding: 0.5rem 1rem; font-size: var(--step-70); color: var(--text-fg-2); border-bottom: 1px solid var(--surface-border); display: flex; justify-content: space-between;">
-        <span>Container width: <strong>${args.containerWidth}px</strong></span>
+        <span>Container width: <strong>${args.containerWidth}px</strong> (min 896px)</span>
         <span>Variant: <strong>full</strong></span>
       </div>
       <ads-nav-menu
@@ -129,11 +143,18 @@ export const CompactTablet: Story = {
     mode: "system",
     hideModeSwitch: false
   },
+  argTypes: {
+    containerWidth: {
+      control: { type: "range", min: 544, max: 896, step: 10 },
+      description: "Compact tablet tier container width (544px – 896px / 34rem – 56rem)"
+    }
+  },
   render: (args) => html`
     <div
       style="
         width: 100%;
         max-width: ${args.containerWidth}px;
+        min-width: 544px;
         margin-inline: auto;
         background: var(--surface-bg);
         border: 1px dashed var(--surface-border);
@@ -145,7 +166,7 @@ export const CompactTablet: Story = {
       "
     >
       <div style="padding: 0.5rem 1rem; font-size: var(--step-70); color: var(--text-fg-2); border-bottom: 1px solid var(--surface-border); display: flex; justify-content: space-between;">
-        <span>Container width: <strong>${args.containerWidth}px</strong></span>
+        <span>Container width: <strong>${args.containerWidth}px</strong> (544px – 896px)</span>
         <span>Variant: <strong>compact</strong></span>
       </div>
       <ads-nav-menu
@@ -168,11 +189,18 @@ export const ExtraCompactMobile: Story = {
     mode: "system",
     hideModeSwitch: false
   },
+  argTypes: {
+    containerWidth: {
+      control: { type: "range", min: 280, max: 544, step: 10 },
+      description: "Mobile tier container width (280px – 544px / max: 34rem)"
+    }
+  },
   render: (args) => html`
     <div
       style="
         width: 100%;
         max-width: ${args.containerWidth}px;
+        min-width: 280px;
         margin-inline: auto;
         background: var(--surface-bg);
         border: 1px dashed var(--surface-border);
@@ -184,7 +212,7 @@ export const ExtraCompactMobile: Story = {
       "
     >
       <div style="padding: 0.5rem 1rem; font-size: var(--step-70); color: var(--text-fg-2); border-bottom: 1px solid var(--surface-border); display: flex; justify-content: space-between;">
-        <span>Container width: <strong>${args.containerWidth}px</strong></span>
+        <span>Container width: <strong>${args.containerWidth}px</strong> (max 544px)</span>
         <span>Variant: <strong>xCompact</strong></span>
       </div>
       <ads-nav-menu
