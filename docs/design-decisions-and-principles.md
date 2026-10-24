@@ -60,8 +60,9 @@ The adoption of APCA is grounded in accessibility law and standards provisions t
    - The W3C Silver / Accessibility Guidelines Working Group (AGWG) developed **APCA** specifically to replace the flawed WCAG 2.x contrast math for **WCAG 3.0**.
    - Conformance to APCA provides scientifically validated, perceptually accurate readability across font sizes, weights, and color contexts, thereby exceeding the real-world accessibility provided by legacy WCAG 2.x flat ratios.
 
-### System Policy
-- The AHHA Design System formally adopts **APCA (WCAG 3.0 draft)** as its governing readability and contrast standard under the **Equivalent Facilitation** provision.
+### System Policy & Target Conformance Level
+- **Target Conformance: WCAG Level AA**: For this personal design portfolio, **WCAG 2.1 Level AA** (with APCA equivalents) is the governing benchmark. Level AAA is intentionally not enforced: Level AA ensures fully verified, legally sound accessibility without the harsh starkness of AAA, preserving visual nuance, subtle tints, and sophisticated brand expression.
+- The AHHA Design System formally adopts **APCA (WCAG 3.0 draft)** calibrated to Level AA targets ($L_c \ge 60\text{--}75$ for body, $L_c \ge 45\text{--}60$ for headings, $L_c \ge 30\text{--}45$ for controls) as its governing readability standard under the **Equivalent Facilitation** provision.
 - Page links and supporting elements in navigation use `--color-300` / `--neutral-300` on light mode (`--page-dim`) and `--color-500` / `--neutral-500` on dark mode. This creates intentional visual hierarchy where the active page link (`--text-fg-1` with underline indicator) stands out distinctly without sacrificing reading comfort or perceptual clarity.
 - Automated test suites (e.g., axe) flagging secondary link states under flat WCAG 2.x math are documented and excused under this equivalent facilitation principle.
 
