@@ -118,6 +118,64 @@ function resolveTokenChain(target: HTMLElement, token: string): TokenChainResult
   };
 }
 
+function findMatchingToken(computed: CSSStyleDeclaration, prop: string, val: string): string | null {
+  if (!val || val === "none" || val === "transparent" || val === "rgba(0, 0, 0, 0)") return null;
+
+  // 1. Font family mapping
+  if (prop === "font-family") {
+    if (val.includes("IBM Plex Mono") || val.includes("monospace")) return "var(--font-mono)";
+    if (val.includes("Fraunces") || val.includes("serif")) return "var(--font-alt)";
+    if (val.includes("IBM Plex Sans") || val.includes("sans-serif")) return "var(--font-main)";
+    return null;
+  }
+
+  // 2. Line height mapping
+  if (prop === "line-height") {
+    // --leading-none: 1, --leading-compact: 1.25, --leading-snug: 1.35, --leading-base: 1.5, --leading-relaxed: 1.6
+    const num = parseFloat(val);
+    const fontSize = parseFloat(computed.fontSize);
+    if (!isNaN(num) && !isNaN(fontSize) && fontSize > 0) {
+      const ratio = num / fontSize;
+      if (Math.abs(ratio - 1.0) < 0.05) return "var(--leading-none)";
+      if (Math.abs(ratio - 1.25) < 0.05) return "var(--leading-compact)";
+      if (Math.abs(ratio - 1.35) < 0.05) return "var(--leading-snug)";
+      if (Math.abs(ratio - 1.5) < 0.05) return "var(--leading-base)";
+      if (Math.abs(ratio - 1.6) < 0.05) return "var(--leading-relaxed)";
+    }
+    return null;
+  }
+
+  // 3. Color matching against active Layer 2 / Layer 1 tokens
+  if (prop === "color" || prop === "background-color" || prop === "border-color") {
+    const candidateTokens = [
+      "--text-fg-1",
+      "--text-fg-2",
+      "--action-fg-1",
+      "--action-bg-1",
+      "--action-border",
+      "--surface-bg",
+      "--surface-bg-1",
+      "--surface-border",
+      "--brand-ink",
+      "--brand-line",
+      "--brand-faint",
+      "--page-fill",
+      "--page-dim",
+      "--page-line",
+    ];
+
+    for (const t of candidateTokens) {
+      const tokenVal = computed.getPropertyValue(t).trim();
+      if (tokenVal && tokenVal === val) {
+        return `var(${t})`;
+      }
+    }
+    return null;
+  }
+
+  return null;
+}
+
 function updateHud(target: HTMLElement, e: MouseEvent) {
   const hud = ensureHud();
   const rect = target.getBoundingClientRect();
@@ -136,8 +194,85 @@ function updateHud(target: HTMLElement, e: MouseEvent) {
   const display = computed.display;
   const color = computed.color;
   const bg = computed.backgroundColor;
-  const font = `${computed.fontWeight} ${computed.fontSize} / ${computed.lineHeight} ${computed.fontFamily.split(",")[0]}`;
+  const fontFam = computed.fontFamily.split(",")[0].replace(/['"]/g, "").trim();
+  const fontSize = computed.fontSize;
+  const fontWeight = computed.fontWeight;
+  const lineHeight = computed.lineHeight;
   const border = computed.borderWidth !== "0px" ? `${computed.borderWidth} ${computed.borderStyle} ${computed.borderColor}` : "none";
+
+  // Check token usage for properties
+  const colorToken = findMatchingToken(computed, "color", color);
+  const bgToken = bg !== "rgba(0, 0, 0, 0)" && bg !== "transparent" ? findMatchingToken(computed, "background-color", bg) : null;
+  const fontFamToken = findMatchingToken(computed, "font-family", computed.fontFamily);
+  const borderToken = border !== "none" ? findMatchingToken(computed, "border-color", computed.borderColor) : null;
+
+  // Format readout rows with right-aligned value/token and red highlight if no token
+  const rows: { label: string; tokenUsed: string | null; fallbackVal: string; previewColor?: string }[] = [
+    { label: "layout", tokenUsed: display, fallbackVal: display },
+    {
+      label: "font-family",
+      tokenUsed: fontFamToken,
+      fallbackVal: fontFam,
+    },
+    {
+      label: "font-size",
+      tokenUsed: null, // Fluid/relative step rendered in px
+      fallbackVal: `${fontWeight} ${fontSize} / ${lineHeight}`,
+    },
+    {
+      label: "color",
+      tokenUsed: colorToken,
+      fallbackVal: color,
+      previewColor: color,
+    },
+  ];
+
+  if (bg !== "rgba(0, 0, 0, 0)" && bg !== "transparent") {
+    rows.push({
+      label: "bg",
+      tokenUsed: bgToken,
+      fallbackVal: bg,
+      previewColor: bg,
+    });
+  }
+
+  if (border !== "none") {
+    rows.push({
+      label: "border",
+      tokenUsed: borderToken,
+      fallbackVal: border,
+    });
+  }
+
+  const readoutHtml = rows
+    .map((r) => {
+      // If a token is detected, render in standard accent style.
+      // If it's a property that should consume tokens (color, bg, border, font-family) and lacks a token, highlight in red!
+      const isTokenized = Boolean(r.tokenUsed);
+      const requiresToken = ["font-family", "color", "bg", "border"].includes(r.label);
+      const isViolation = requiresToken && !isTokenized;
+
+      const displayVal = r.tokenUsed ? r.tokenUsed : r.fallbackVal;
+      const colorStyle = isViolation
+        ? "color: oklch(56.5% 0.202 4.7); font-weight: 700; background: color-mix(in oklch, oklch(56.5% 0.202 4.7) 12%, transparent); padding: 0 4px; border-radius: 3px;"
+        : isTokenized
+          ? "color: var(--action-border, #4f46e5); font-weight: 600;"
+          : "color: var(--text-fg-1);";
+
+      const previewBadge = r.previewColor
+        ? `<span style="display:inline-block; width:8px; height:8px; border-radius:2px; vertical-align:middle; margin-right:4px; background:${r.previewColor}; border:1px solid rgba(0,0,0,0.2);"></span>`
+        : "";
+
+      return `
+        <div style="display:flex; justify-content:space-between; align-items:baseline; gap:8px; margin-bottom:2px;">
+          <span style="color:var(--text-fg-2);">${r.label}:</span>
+          <span style="text-align:right; max-width:240px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; ${colorStyle}" title="${r.fallbackVal}">
+            ${previewBadge}${displayVal}
+          </span>
+        </div>
+      `;
+    })
+    .join("");
 
   // Check key AHHA CSS tokens and expose alias inheritance in distinct columns
   const checkTokens = [
@@ -161,7 +296,6 @@ function updateHud(target: HTMLElement, e: MouseEvent) {
     .slice(0, 6)
     .map((res) => {
       const stepDisplay = res.l1Step ? `${res.l1Step}` : "-";
-      const primitiveDisplay = res.l1Primitive ? `&rarr; ${res.l1Primitive}` : "";
       return `
         <div style="display:grid; grid-template-columns: minmax(105px, auto) 14px minmax(95px, auto) 14px minmax(100px, auto); align-items:baseline; gap:4px; font-size:10.5px; margin-bottom:2px;" title="${res.computedVal}">
           <span style="color:var(--text-fg-2); font-weight:500;">${res.l2Slot}</span>
@@ -179,12 +313,8 @@ function updateHud(target: HTMLElement, e: MouseEvent) {
       <span style="font-weight:700; color:var(--action-border, #4f46e5);">&lt;${tag}&gt;<span style="color:var(--text-fg-2);">${idStr}${classStr}</span></span>
       <span style="background:var(--surface-bg-1, #eee); padding:1px 5px; border-radius:4px; font-weight:600;">${width} &times; ${height}px</span>
     </div>
-    <div style="display:grid; gap:3px;">
-      <div><span style="color:var(--text-fg-2);">layout:</span> ${display}</div>
-      <div><span style="color:var(--text-fg-2);">type:</span> ${font}</div>
-      <div><span style="color:var(--text-fg-2);">color:</span> <span style="display:inline-block; width:9px; height:9px; border-radius:2px; vertical-align:middle; background:${color}; border:1px solid rgba(0,0,0,0.2);"></span> ${color}</div>
-      ${bg !== "rgba(0, 0, 0, 0)" && bg !== "transparent" ? `<div><span style="color:var(--text-fg-2);">bg:</span> <span style="display:inline-block; width:9px; height:9px; border-radius:2px; vertical-align:middle; background:${bg}; border:1px solid rgba(0,0,0,0.2);"></span> ${bg}</div>` : ""}
-      ${border !== "none" ? `<div><span style="color:var(--text-fg-2);">border:</span> ${border}</div>` : ""}
+    <div style="display:grid; gap:1px;">
+      ${readoutHtml}
     </div>
     ${resolvedTokens ? `
       <div style="border-top:1px dashed var(--surface-border, #ddd); margin-top:6px; padding-top:6px;">
