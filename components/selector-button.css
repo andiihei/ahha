@@ -24,9 +24,25 @@
    --action-border ring on focus-visible — transitions on
    --duration-50 / --ease-in-out, per the state recipes. */
 .selector-btn {
+  --selector-min-width: 8rem;
   position: relative;
   display: inline-block;
   flex: none;
+}
+
+.selector-btn[data-size="sm"],
+.selector-btn-sm {
+  --selector-min-width: 6.5rem;
+}
+
+.selector-btn[data-size="md"],
+.selector-btn-md {
+  --selector-min-width: 8rem;
+}
+
+.selector-btn[data-size="lg"],
+.selector-btn-lg {
+  --selector-min-width: 9.5rem;
 }
 
 .selector-btn-trigger,
@@ -83,7 +99,7 @@
 .selector-btn-trigger {
   --state-ink: var(--action-fg-1);
   width: 100%;
-  min-width: var(--selector-min-width, 7.5rem);
+  min-width: var(--selector-min-width, 8rem);
   justify-content: flex-start;
   background: var(--action-bg-1);
   border-color: var(--action-bg-1);
