@@ -104,8 +104,8 @@
 /* ============================================================
    LAYER 2 — ORTHOGONAL [data-style] × [data-mode] ARCHITECTURE
    [data-style] selects the colour family ramp into --color-1000..--color-25:
-     - neutral: default canvas, containers, standard cards, dividers, draft states
-     - purple:  brand identity, portfolio highlights, active navigation tabs
+     - neutral: AHHA brand foundation, default canvas, containers, standard cards, dividers
+     - purple:  unassigned / dormant palette (reserved for external white-label brands)
      - green:   validation success, positive alerts, healthy/live statuses
      - red:     validation errors, critical alerts, destructive actions, build failures
      - yellow:  warning alerts, cautionary advisories, pending/in-progress statuses
