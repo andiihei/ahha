@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
+import { expect, userEvent, within } from "storybook/test";
 import "../components/selector-button.js";
 
 const demoOptions = [
@@ -101,4 +102,42 @@ export const SizeScale: Story = {
       ></ads-selector-button>
     </div>
   `
+};
+
+export const InteractiveSelection: Story = {
+  args: {
+    value: "alpha",
+    size: "md",
+    label: "Demo selector",
+    minWidth: "8rem"
+  },
+  render: (args) => html`
+    <ads-selector-button
+      value=${args.value}
+      size=${args.size}
+      label=${args.label}
+      min-width=${args.minWidth}
+      .options=${demoOptions}
+    ></ads-selector-button>
+  `,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole("button", { expanded: false });
+
+    // Initially closed, label contains Alpha
+    await expect(trigger).toHaveAttribute("aria-expanded", "false");
+    await expect(trigger).toHaveTextContent("Alpha");
+
+    // Click trigger to open menu
+    await userEvent.click(trigger);
+    await expect(trigger).toHaveAttribute("aria-expanded", "true");
+
+    // Select "Beta" option
+    const betaOption = canvas.getByRole("button", { name: /Beta/i });
+    await userEvent.click(betaOption);
+
+    // Menu closes and trigger displays Beta
+    await expect(trigger).toHaveAttribute("aria-expanded", "false");
+    await expect(trigger).toHaveTextContent("Beta");
+  }
 };

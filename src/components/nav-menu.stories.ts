@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
+import { expect, userEvent, within } from "storybook/test";
 import "../components/nav-menu.js";
 
 const demoLinks = [
@@ -223,5 +224,24 @@ export const ExtraCompactMobile: Story = {
         ?hide-mode-switch=${args.hideModeSwitch}
       ></ads-nav-menu>
     </div>
-  `
+  `,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const burger = canvas.getByRole("button", { name: /open menu/i });
+
+    // Initially drawer is closed
+    await expect(burger).toHaveAttribute("aria-expanded", "false");
+
+    // Click burger to open mobile drawer
+    await userEvent.click(burger);
+    await expect(burger).toHaveAttribute("aria-expanded", "true");
+
+    // Drawer link is visible and accessible
+    const drawerLinks = canvas.getAllByRole("link", { name: /strategy/i });
+    await expect(drawerLinks.length).toBeGreaterThan(0);
+
+    // Click burger again to close drawer
+    await userEvent.click(burger);
+    await expect(burger).toHaveAttribute("aria-expanded", "false");
+  }
 };

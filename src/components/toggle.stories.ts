@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
+import { expect, userEvent, within } from "storybook/test";
 import "../components/toggle.js";
 
 const meta: Meta = {
@@ -77,4 +78,32 @@ export const SpecimenList: Story = {
       </div>
     </div>
   `
+};
+
+export const InteractiveToggle: Story = {
+  args: {
+    checked: false,
+    label: "Interactive Test Toggle"
+  },
+  render: (args) => html`
+    <ads-toggle
+      ?checked=${args.checked}
+      .label=${args.label}
+    ></ads-toggle>
+  `,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole("switch");
+
+    // Initially off
+    await expect(button).toHaveAttribute("aria-checked", "false");
+
+    // Click to turn on
+    await userEvent.click(button);
+    await expect(button).toHaveAttribute("aria-checked", "true");
+
+    // Click again to turn off
+    await userEvent.click(button);
+    await expect(button).toHaveAttribute("aria-checked", "false");
+  }
 };
