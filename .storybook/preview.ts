@@ -1,5 +1,6 @@
 import type { Preview } from "@storybook/web-components";
 import { html } from "lit";
+import { setInspectorActive } from "./style-inspector.js";
 
 // Load AHHA design language tokens
 import "../design-language/colors.css";
@@ -67,12 +68,28 @@ const preview: Preview = {
         ],
         showName: true
       }
+    },
+    inspectCss: {
+      name: "Inspect CSS",
+      description: "Live Element Style & Token HUD Inspector",
+      defaultValue: "off",
+      toolbar: {
+        icon: "eye",
+        items: [
+          { value: "off", title: "Inspector: Off" },
+          { value: "on", title: "Inspector: On" }
+        ],
+        showName: true
+      }
     }
   },
   decorators: [
     (story, context) => {
       const family = context.globals.family || "neutral";
       const mode = context.globals.mode || "default";
+      const inspect = context.globals.inspectCss === "on";
+
+      setInspectorActive(inspect);
 
       return html`
         <div

@@ -28,14 +28,14 @@
     "@storybook/web-components-vite": "^10.6.3",
     "@tabler/icons": "^3.49.0",
     "@types/node": "^26.6.5",
+    "@vitest/browser-playwright": "latest",
+    "@vitest/coverage-v8": "latest",
     "@whitespace/storybook-addon-html": "^9.0.0",
+    "playwright": "latest",
     "prettier": "^3.9.10",
     "storybook": "^10.6.3",
     "typescript": "^7.0.2",
     "vite": "^8.3.5",
-    "vitest": "latest",
-    "@vitest/browser-playwright": "latest",
-    "@vitest/coverage-v8": "latest",
-    "playwright": "latest"
+    "vitest": "latest"
   }
 }
