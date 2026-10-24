@@ -11,11 +11,12 @@ The AHHA Design System is built upon a deterministic three-tier hierarchy design
 ```mermaid
 graph TD
   A["Layer 1: Primitive Scales (OKLCH Ramps, Fluid Progress, Static Units)"] --> B["Layer 2: Semantic Scheme Slots (--surface-bg, --text-fg-1, --action-bg-1)"]
-  B --> C["Layer 3: Enterprise Web Components (<ads-nav-menu>, <ads-selector-button>)"]
+  B --> C["Layer 3: Enterprise Web Components (&lt;ads-nav-menu&gt;, &lt;ads-selector-button&gt;)"]
   D["Scope Cascade: [data-style='neutral|purple|...'] × [data-mode='default|invert|system']"] -.-> B
 ```
 
 ### Layer 1: Primitive Scale Ramps
+
 - **Color Families**: 6 distinct OKLCH families (`neutral`, `purple`, `green`, `red`, `yellow`, `blue`) across 11 discrete luminance steps (`1000..25`, omitting steps 400 and 600).
 - **Fluid & Static Spacing**:
   - **Fluid Rhythm (`--space-10` to `--space-500`)**: Governed by the Utopia fluid interpolation engine (`progress()` / `@supports tan(atan2())`) scaling from 360px viewport @ 18px base up to 1240px viewport @ 20px base. Reserved exclusively for macro-layouts (page containers, sections, hero blocks).
@@ -29,6 +30,7 @@ graph TD
   - Micro-interactions use `--duration-50` / `--ease-in-out`; layout shifts use `--duration-100` / `--ease-out`.
 
 ### Layer 2: Semantic Scheme Slots
+
 - All UI elements bind to functional slot contracts rather than direct primitive tokens:
   - **Surfaces**: `--surface-bg`, `--surface-bg-1`, `--surface-border`
   - **Text / Ink**: `--text-fg-1` (high-emphasis headline/current ink), `--text-fg-2` (supporting ink)
@@ -43,16 +45,18 @@ graph TD
 A deliberate design and technical decision was made regarding color contrast evaluation:
 
 ### Decision: APCA (Advanced Perceptual Contrast Algorithm) over Legacy WCAG 2.x AA
+
 - **Limitations of WCAG 2.x Math**:
   - Legacy WCAG 2.x relative luminance (4.5:1 / 3:1) relies on a simplified flat mathematical formula developed in the CRT monitor era that does not account for human vision physiology, modern display technologies, spatial frequency (stroke weight, font size), or optical polarity effects (light-on-dark vs. dark-on-light).
   - As a result, automated evaluation engines (such as axe) frequently produce false positives—flagging comfortable, legible secondary text or tinted backgrounds as violations—while simultaneously permitting genuinely illegible combinations (such as thin yellow text on white).
 
 ### Regulatory & Standards Framework: Equivalent Facilitation
+
 The adoption of APCA is grounded in accessibility law and standards provisions that permit alternative, superior methods:
 
 1. **Revised Section 508 (§ E101.2 Equivalent Facilitation)**:
    - Under the federal Section 508 standards (36 CFR Part 1194, Appendix A § E101.2):
-     > *"Nothing in these Revised 508 Standards shall be considered to prevent the use of designs, products, or technologies as alternatives to those provided in the Revised 508 Standards that result in substantially equivalent or greater accessibility and usability."*
+     > _"Nothing in these Revised 508 Standards shall be considered to prevent the use of designs, products, or technologies as alternatives to those provided in the Revised 508 Standards that result in substantially equivalent or greater accessibility and usability."_
    - Furthermore, Section 508 evaluates alternative solutions against its Chapter 3 **Functional Performance Criteria (FPC)**—measuring real-world human visual perception rather than rigid algorithmic adherence.
 2. **Rehabilitation Act Context (Section 501 / Section 504 / Section 508)**:
    - Across federal accessibility mandates (including federal employment under Section 501 and technology access under Section 508), statutory frameworks explicitly recognize that rigid technical specifications must not penalize technologies that deliver equal or superior accessibility outcomes.
@@ -61,6 +65,7 @@ The adoption of APCA is grounded in accessibility law and standards provisions t
    - Conformance to APCA provides scientifically validated, perceptually accurate readability across font sizes, weights, and color contexts, thereby exceeding the real-world accessibility provided by legacy WCAG 2.x flat ratios.
 
 ### System Policy & Target Conformance Level
+
 - **Target Conformance: APCA Bronze Level (WCAG 2.1 Level AA Equivalent)**: For this personal design portfolio, the governing standard is the **APCA Bronze Level** (conforming to WCAG 2.1 Level AA equivalent thresholds). Higher tiers (Silver/Gold or WCAG AAA) are intentionally not mandated: the Bronze level guarantees verified, comfortable perceptual readability while preserving visual subtlety, tinted surfaces, and expressive brand character.
 - **APCA Bronze Thresholds Applied**:
   - **Body Text**: $L_c \ge 60\text{--}75$ (depending on font weight and size).
@@ -77,13 +82,14 @@ The adoption of APCA is grounded in accessibility law and standards provisions t
 
 The AHHA Navigation Menu (`<ads-nav-menu>`) defines three distinct responsive tiers governed by container queries with viewport fallbacks:
 
-| Tier Name | Code Variant | Width Range | Layout Behavior |
-| :--- | :--- | :--- | :--- |
-| **Extra Compact (Mobile)** | `xCompact` | **380px – 574px** | Brand logo + Tabler glyph burger (`menu-3`) with expandable vertical drawer and mobile segmented mode switcher. |
-| **Compact (Tablet)** | `compact` | **574px – 896px** | Two-row layout: Full brand logo on Row 1 (safe space protected), page links and desktop Mode Switcher distributed across Row 2. |
-| **Full (Desktop)** | `full` | **896px – 1400px+** | Single-row horizontal layout: Brand logo on the left, cluster with page links and Selector Button on the right. |
+| Tier Name                  | Code Variant | Width Range         | Layout Behavior                                                                                                                 |
+| :------------------------- | :----------- | :------------------ | :------------------------------------------------------------------------------------------------------------------------------ |
+| **Extra Compact (Mobile)** | `xCompact`   | **380px – 574px**   | Brand logo + Tabler glyph burger (`menu-3`) with expandable vertical drawer and mobile segmented mode switcher.                 |
+| **Compact (Tablet)**       | `compact`    | **574px – 896px**   | Two-row layout: Full brand logo on Row 1 (safe space protected), page links and desktop Mode Switcher distributed across Row 2. |
+| **Full (Desktop)**         | `full`       | **896px – 1400px+** | Single-row horizontal layout: Brand logo on the left, cluster with page links and Selector Button on the right.                 |
 
 ### Minimum Supported Viewport Hard Floor: 380px
+
 - The system establishes **380px** as the absolute minimum supported viewport width.
 - Sub-380px viewports (e.g. legacy 320px feature phones) are outside the design system target matrix.
 - In Storybook interactive specimens, container sliders and wrapper elements enforce explicit `min-width` and `max-width` hard stops matching these exact thresholds.
@@ -123,9 +129,8 @@ All enterprise custom elements in `src/components/` adhere to the following codi
 
 To maintain architectural integrity across the design system while moving quickly on tactical updates, all tasks are evaluated against an effort level heuristic with an upfront declaration:
 
-| Level | Scope | Trigger Scenarios | Verification & Protocol |
-| :---: | :--- | :--- | :--- |
-| **Low** | **Tactical & Localized** | Isolated CSS tweaks, inspector formatting, typo/copy edits, minor story updates | Direct targeted edit, Storybook visual verification, clean git commit |
-| **Medium** | **Component & Feature Expansion** | Authoring new Web Components, adding Storybook stories with Vitest interaction tests, tooling configs | Light DOM adherence, APCA contrast validation, WCAG 2.1 SC 2.5.3 Label in Name conformance, 100% test pass |
-| **High** | **Architectural & Multi-Layer Systemic** | Layer 1 OKLCH/Utopia scale changes, Layer 2 semantic slot refactors, global container breakpoint shifts, contrast standard changes | Cross-file impact analysis across all specimen pages, dual light/invert verification, documentation update, full test suite pass |
-
+|   Level    | Scope                                    | Trigger Scenarios                                                                                                                  | Verification & Protocol                                                                                                          |
+| :--------: | :--------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------- |
+|  **Low**   | **Tactical & Localized**                 | Isolated CSS tweaks, inspector formatting, typo/copy edits, minor story updates                                                    | Direct targeted edit, Storybook visual verification, clean git commit                                                            |
+| **Medium** | **Component & Feature Expansion**        | Authoring new Web Components, adding Storybook stories with Vitest interaction tests, tooling configs                              | Light DOM adherence, APCA contrast validation, WCAG 2.1 SC 2.5.3 Label in Name conformance, 100% test pass                       |
+|  **High**  | **Architectural & Multi-Layer Systemic** | Layer 1 OKLCH/Utopia scale changes, Layer 2 semantic slot refactors, global container breakpoint shifts, contrast standard changes | Cross-file impact analysis across all specimen pages, dual light/invert verification, documentation update, full test suite pass |
