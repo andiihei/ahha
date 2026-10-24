@@ -13,7 +13,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test": "vitest --project=storybook --run",
-    "test:watch": "vitest --project=storybook"
+    "test:watch": "vitest --project=storybook",
+    "chromatic": "npx chromatic --project-token=chpt_04d458071297f1c"
   },
   "keywords": [],
   "author": "",
