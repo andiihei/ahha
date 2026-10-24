@@ -53,6 +53,65 @@ function getResolvedToken(style: CSSStyleDeclaration, prop: string): string | nu
   return val ? `${prop}: ${val}` : null;
 }
 
+function resolveTokenChain(target: HTMLElement, token: string): { chain: string; computedVal: string } | null {
+  const computed = window.getComputedStyle(target);
+  const computedVal = computed.getPropertyValue(token).trim();
+  if (!computedVal) return null;
+
+  // Detect style attribute or active context
+  const hostWithStyle = target.closest("[data-style]") as HTMLElement | null;
+  const hostWithMode = target.closest("[data-mode]") as HTMLElement | null;
+
+  const styleFamily = hostWithStyle?.getAttribute("data-style") || "neutral";
+  let mode = hostWithMode?.getAttribute("data-mode") || "default";
+
+  if (mode === "system") {
+    const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    mode = isDark ? "invert" : "default";
+  }
+
+  // Map Layer 2 Semantic Slot -> Layer 1 Ramp Step
+  const slotToStep: Record<string, { default: string; invert: string }> = {
+    "--surface-bg": { default: "--color-25", invert: "--color-1000" },
+    "--surface-bg-1": { default: "--color-50", invert: "--color-900" },
+    "--text-fg-1": { default: "--color-1000", invert: "--color-25" },
+    "--text-fg-2": { default: "--color-700", invert: "--color-300" },
+    "--surface-border": { default: "--color-200", invert: "--color-800" },
+    "--action-bg-1": { default: "--color-800", invert: "--color-100" },
+    "--action-border": { default: "--color-700", invert: "--color-200" },
+    "--action-fg-1": { default: "--color-25", invert: "--color-1000" },
+    "--brand-ink": { default: "--color-1000", invert: "--color-25" },
+    "--brand-faint": { default: "--color-50", invert: "--color-900" },
+    "--brand-line": { default: "--color-700", invert: "--color-300" },
+    "--page-fill": { default: "--neutral-100", invert: "--neutral-800" },
+    "--page-line": { default: "--neutral-300", invert: "--neutral-700" },
+    "--page-dim": { default: "--neutral-300", invert: "--neutral-500" },
+  };
+
+  const slotInfo = slotToStep[token];
+  if (!slotInfo) {
+    return { chain: computedVal, computedVal };
+  }
+
+  const stepVar = mode === "invert" ? slotInfo.invert : slotInfo.default;
+  let primitiveVar = "";
+
+  if (stepVar.startsWith("--neutral-")) {
+    primitiveVar = stepVar;
+  } else if (stepVar.startsWith("--color-")) {
+    const stepNum = stepVar.replace("--color-", "");
+    primitiveVar = `--${styleFamily}-${stepNum}`;
+  }
+
+  // Construct inheritance breadcrumb chain
+  // e.g. "→ var(--color-1000) → var(--neutral-1000)" or "var(--color-1000) (neutral)"
+  const chain = primitiveVar
+    ? `${stepVar} &rarr; ${primitiveVar}`
+    : `${stepVar}`;
+
+  return { chain, computedVal };
+}
+
 function updateHud(target: HTMLElement, e: MouseEvent) {
   const hud = ensureHud();
   const rect = target.getBoundingClientRect();
@@ -69,15 +128,13 @@ function updateHud(target: HTMLElement, e: MouseEvent) {
   const height = Math.round(rect.height);
 
   const display = computed.display;
-  const padding = `${computed.paddingTop} ${computed.paddingRight} ${computed.paddingBottom} ${computed.paddingLeft}`
-    .replace(/px/g, "");
   const color = computed.color;
   const bg = computed.backgroundColor;
   const font = `${computed.fontWeight} ${computed.fontSize} / ${computed.lineHeight} ${computed.fontFamily.split(",")[0]}`;
   const border = computed.borderWidth !== "0px" ? `${computed.borderWidth} ${computed.borderStyle} ${computed.borderColor}` : "none";
 
-  // Check key AHHA CSS tokens
-  const tokens = [
+  // Check key AHHA CSS tokens and expose alias inheritance
+  const checkTokens = [
     "--surface-bg",
     "--surface-bg-1",
     "--text-fg-1",
@@ -87,16 +144,24 @@ function updateHud(target: HTMLElement, e: MouseEvent) {
     "--action-fg-1",
     "--action-border",
     "--brand-ink",
-    "--brand-faint",
     "--brand-line",
-    "--page-dim"
-  ]
+    "--page-fill",
+    "--page-dim",
+  ];
+
+  const resolvedTokens = checkTokens
     .map((token) => {
-      const val = computed.getPropertyValue(token).trim();
-      return val ? `<div style="display:flex; justify-content:space-between; gap:8px;"><span style="color:var(--text-fg-2);">${token}</span><span style="font-weight:600; text-overflow:ellipsis; overflow:hidden; max-width:140px; white-space:nowrap;">${val}</span></div>` : null;
+      const res = resolveTokenChain(target, token);
+      if (!res) return null;
+      return `
+        <div style="display:flex; justify-content:space-between; align-items:baseline; gap:8px; margin-bottom:2px;">
+          <span style="color:var(--text-fg-2); font-weight:500;">${token}</span>
+          <span style="font-weight:600; color:var(--action-border, #4f46e5); text-align:right;" title="${res.computedVal}">${res.chain}</span>
+        </div>
+      `;
     })
     .filter(Boolean)
-    .slice(0, 4)
+    .slice(0, 6)
     .join("");
 
   hud.innerHTML = `
@@ -111,7 +176,7 @@ function updateHud(target: HTMLElement, e: MouseEvent) {
       ${bg !== "rgba(0, 0, 0, 0)" && bg !== "transparent" ? `<div><span style="color:var(--text-fg-2);">bg:</span> <span style="display:inline-block; width:9px; height:9px; border-radius:2px; vertical-align:middle; background:${bg}; border:1px solid rgba(0,0,0,0.2);"></span> ${bg}</div>` : ""}
       ${border !== "none" ? `<div><span style="color:var(--text-fg-2);">border:</span> ${border}</div>` : ""}
     </div>
-    ${tokens ? `<div style="border-top:1px dashed var(--surface-border, #ddd); margin-top:6px; padding-top:6px;"><div style="font-size:10px; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-fg-2); margin-bottom:4px; font-weight:600;">Active AHHA Tokens</div>${tokens}</div>` : ""}
+    ${resolvedTokens ? `<div style="border-top:1px dashed var(--surface-border, #ddd); margin-top:6px; padding-top:6px;"><div style="font-size:10px; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-fg-2); margin-bottom:4px; font-weight:600;">Active AHHA Tokens (Alias Chain)</div>${resolvedTokens}</div>` : ""}
   `;
 
   // Position HUD near cursor avoiding screen edges
