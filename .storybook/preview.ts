@@ -13,6 +13,7 @@ import "../design-language/opacity.css";
 import "../components/button.css";
 import "../components/toggle.css";
 import "../components/selector-button.css";
+import "../components/nav-menu.css";
 
 const preview: Preview = {
   parameters: {

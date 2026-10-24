@@ -1,0 +1,310 @@
+/* ---- Navigation Menu (nav-menu.css) ----
+   Codified enterprise navigation custom element (.ads-nav-menu)
+   rendered in Light DOM. Supports brand logo slot, nav links,
+   desktop Mode Switch (Selector Button), and mobile drawer with
+   the canonical Tabler menu-3 burger glyph.
+*/
+
+.ads-nav-menu-wrap {
+  position: relative;
+  width: 100%;
+  padding-block: var(--space-150);
+}
+
+.ads-nav-menu-wrap .u-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-60) var(--space-100);
+}
+
+.ads-nav-menu-brand {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  flex: none;
+}
+
+.ads-nav-menu-brand svg {
+  display: block;
+  height: 1.333rem;
+  width: auto;
+}
+
+.ads-nav-menu-cluster {
+  display: flex;
+  align-items: center;
+  gap: var(--space-200);
+}
+
+.ads-nav-menu-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-60) var(--space-100);
+}
+
+.ads-nav-menu-links a {
+  position: relative;
+  color: var(--page-dim, var(--text-fg-2));
+  text-decoration: none;
+  font-family: var(--font-main);
+  font-size: var(--step-100);
+  font-weight: 700;
+  white-space: nowrap;
+  transition: color var(--duration-50) var(--ease-in-out);
+}
+
+.ads-nav-menu-links a:hover {
+  color: var(--text-fg-1);
+}
+
+.ads-nav-menu-links a[aria-current="page"] {
+  color: var(--text-fg-1);
+}
+
+.ads-nav-menu-links a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: calc(100% + var(--space-static-10));
+  width: 100%;
+  height: 0.222rem;
+  background: var(--brand-line, var(--text-fg-1));
+  transform-origin: left center;
+  animation: page-link-underline var(--duration-100) var(--ease-out);
+}
+
+@keyframes page-link-underline {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+/* Hamburger button for small viewports */
+.ads-nav-menu-burger {
+  --state-ink: var(--text-fg-1);
+  appearance: none;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-fg-1);
+  cursor: pointer;
+  transition:
+    box-shadow var(--duration-50) var(--ease-in-out),
+    background-color var(--duration-50) var(--ease-in-out);
+}
+
+.ads-nav-menu-burger:hover {
+  box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--state-ink) calc(var(--opacity-10) * 100%), transparent);
+}
+
+.ads-nav-menu-burger:active {
+  box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--state-ink) calc(var(--opacity-15) * 100%), transparent);
+}
+
+.ads-nav-menu-burger:focus-visible {
+  outline: 0.1875rem solid var(--action-border);
+  outline-offset: var(--space-static-10);
+}
+
+.ads-nav-menu-burger svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: none;
+}
+
+.ads-nav-menu-burger .nav-burger-close {
+  display: none;
+}
+
+.ads-nav-menu-burger.is-open .nav-burger-close {
+  display: block;
+}
+
+.ads-nav-menu-burger.is-open .nav-burger-open {
+  display: none;
+}
+
+/* Dropdown drawer menu */
+.ads-nav-menu-drawer {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-100);
+  padding: var(--space-100) var(--grid-gutter, var(--space-100)) var(--space-150);
+  border-bottom: 1px solid var(--surface-border);
+  background: var(--surface-bg);
+  box-shadow: var(--elevation-medium);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(calc(var(--space-30) * -1));
+  transition:
+    opacity var(--duration-100) var(--ease-out),
+    transform var(--duration-100) var(--ease-out),
+    visibility 0s linear var(--duration-100);
+}
+
+.ads-nav-menu-drawer.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition:
+    opacity var(--duration-100) var(--ease-out),
+    transform var(--duration-100) var(--ease-out),
+    visibility 0s;
+}
+
+.ads-nav-menu-drawer-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-60);
+}
+
+.ads-nav-menu-drawer-links a {
+  position: relative;
+  padding-right: var(--space-100);
+  color: var(--page-dim, var(--text-fg-2));
+  text-decoration: none;
+  font-family: var(--font-main);
+  font-size: var(--step-100);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.ads-nav-menu-drawer-links a[aria-current="page"] {
+  color: var(--text-fg-1);
+}
+
+.ads-nav-menu-drawer-links a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 0.222rem;
+  background: var(--brand-line, var(--text-fg-1));
+}
+
+/* Mobile segmented mode switch at bottom of drawer */
+.ads-nav-menu-mode {
+  display: flex;
+  gap: var(--space-static-30);
+  padding: var(--space-static-30);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-full);
+}
+
+.ads-nav-menu-mode-btn {
+  --state-ink: var(--text-fg-1);
+  appearance: none;
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-static-30);
+  font: inherit;
+  font-family: var(--font-main);
+  font-size: var(--step-80);
+  font-weight: 500;
+  line-height: var(--leading-compact);
+  padding: var(--space-static-30) var(--space-static-50);
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-fg-1);
+  cursor: pointer;
+  transition:
+    box-shadow var(--duration-50) var(--ease-in-out),
+    background-color var(--duration-50) var(--ease-in-out),
+    border-color var(--duration-50) var(--ease-in-out),
+    color var(--duration-50) var(--ease-in-out);
+}
+
+.ads-nav-menu-mode-btn svg {
+  width: 0.9em;
+  height: 0.9em;
+  flex: none;
+}
+
+.ads-nav-menu-mode-btn[aria-pressed="true"] {
+  --state-ink: var(--action-fg-1);
+  background: var(--action-bg-1);
+  border-color: var(--action-bg-1);
+  color: var(--action-fg-1);
+}
+
+.ads-nav-menu-mode-btn[aria-pressed="true"]:hover {
+  box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--state-ink) calc(var(--opacity-10) * 100%), transparent);
+}
+
+.ads-nav-menu-mode-btn:not([aria-pressed="true"]):hover {
+  background: var(--surface-bg-1);
+}
+
+.ads-nav-menu-mode-btn:active {
+  box-shadow: inset 0 0 0 2rem color-mix(in oklch, var(--state-ink) calc(var(--opacity-15) * 100%), transparent);
+}
+
+.ads-nav-menu-mode-btn:focus-visible {
+  outline: 0.1875rem solid var(--action-border);
+  outline-offset: var(--space-static-10);
+}
+
+/* Responsive Tiers */
+@media (max-width: 64rem) {
+  .ads-nav-menu-wrap .u-container {
+    flex-wrap: nowrap;
+    gap: var(--space-60);
+  }
+
+  .ads-nav-menu-links {
+    flex-wrap: nowrap;
+    gap: var(--space-80);
+  }
+
+  .ads-nav-menu-links a {
+    font-size: var(--step-80);
+  }
+}
+
+@media (max-width: 48rem) {
+  .ads-nav-menu-wrap .u-container {
+    flex-wrap: wrap;
+  }
+
+  .ads-nav-menu-cluster {
+    flex: 1 1 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 30rem) {
+  .ads-nav-menu-wrap .u-container {
+    flex-wrap: nowrap;
+  }
+
+  .ads-nav-menu-cluster {
+    display: none;
+  }
+
+  .ads-nav-menu-burger {
+    display: inline-flex;
+    flex: none;
+  }
+}
