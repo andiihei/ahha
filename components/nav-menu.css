@@ -47,7 +47,7 @@ ads-nav-menu,
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: var(--space-60) var(--space-100);
 }
 
@@ -68,13 +68,14 @@ ads-nav-menu,
 .ads-nav-menu-cluster {
   display: flex;
   align-items: center;
+  flex-wrap: nowrap;
   gap: var(--space-200);
 }
 
 .ads-nav-menu-links {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: var(--space-60) var(--space-100);
 }
 
@@ -388,33 +389,8 @@ ads-nav-menu[variant="xCompact"] .ads-nav-menu-burger,
   }
 }
 
-@container nav (max-width: 48rem) {
-  ads-nav-menu:not([variant="full"]) .ads-nav-menu-wrap .u-container {
-    flex-wrap: wrap;
-  }
-
-  ads-nav-menu:not([variant="full"]) .ads-nav-menu-cluster {
-    flex: 1 1 100%;
-    justify-content: space-between;
-  }
-
-  ads-nav-menu:not([variant="full"]) .selector-btn-trigger {
-    min-width: 7.25rem;
-    padding: 5px 12px;
-  }
-
-  ads-nav-menu:not([variant="full"]) .selector-btn-text {
-    position: static;
-    width: auto;
-    height: auto;
-    margin: 0;
-    overflow: visible;
-    clip-path: none;
-    white-space: nowrap;
-  }
-}
-
-@container nav (max-width: 32rem) {
+/* When space drops below ~46rem (736px), defer to xCompact (hamburger) so it never awkwardly wraps */
+@container nav (max-width: 46rem) {
   ads-nav-menu:not([variant="full"]):not([variant="compact"]) .ads-nav-menu-wrap .u-container {
     flex-wrap: nowrap;
   }
@@ -468,48 +444,18 @@ ads-nav-menu[variant="xCompact"] .ads-nav-menu-burger,
   }
 }
 
-@media (max-width: 48rem) {
-  ads-nav-menu:not([variant]) .ads-nav-menu-wrap .u-container,
-  ads-nav-menu[variant="auto"] .ads-nav-menu-wrap .u-container {
-    flex-wrap: wrap;
-  }
-
-  ads-nav-menu:not([variant]) .ads-nav-menu-cluster,
-  ads-nav-menu[variant="auto"] .ads-nav-menu-cluster {
-    flex: 1 1 100%;
-    justify-content: space-between;
-  }
-
-  ads-nav-menu:not([variant]) .selector-btn-trigger,
-  ads-nav-menu[variant="auto"] .selector-btn-trigger {
-    min-width: 7.25rem;
-    padding: 5px 12px;
-  }
-
-  ads-nav-menu:not([variant]) .selector-btn-text,
-  ads-nav-menu[variant="auto"] .selector-btn-text {
-    position: static;
-    width: auto;
-    height: auto;
-    margin: 0;
-    overflow: visible;
-    clip-path: none;
-    white-space: nowrap;
-  }
-}
-
-@media (max-width: 30rem) {
-  ads-nav-menu:not([variant]) .ads-nav-menu-wrap .u-container,
+@media (max-width: 46rem) {
+  ads-nav-menu:not([variant]):not([variant="full"]):not([variant="compact"]) .ads-nav-menu-wrap .u-container,
   ads-nav-menu[variant="auto"] .ads-nav-menu-wrap .u-container {
     flex-wrap: nowrap;
   }
 
-  ads-nav-menu:not([variant]) .ads-nav-menu-cluster,
+  ads-nav-menu:not([variant]):not([variant="full"]):not([variant="compact"]) .ads-nav-menu-cluster,
   ads-nav-menu[variant="auto"] .ads-nav-menu-cluster {
     display: none;
   }
 
-  ads-nav-menu:not([variant]) .ads-nav-menu-burger,
+  ads-nav-menu:not([variant]):not([variant="full"]):not([variant="compact"]) .ads-nav-menu-burger,
   ads-nav-menu[variant="auto"] .ads-nav-menu-burger {
     display: inline-flex;
     flex: none;
