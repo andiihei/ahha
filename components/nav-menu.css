@@ -5,9 +5,41 @@
    the canonical Tabler menu-3 burger glyph.
 */
 
+ads-nav-menu,
 .ads-nav-menu-wrap {
+  /* Brand and page slot tokens with fallback to Neutral Midnight tokens */
+  --brand-ink: var(--color-1000, var(--neutral-1000));
+  --brand-line: var(--color-900, var(--neutral-900));
+  --brand-faint: var(--color-200, var(--neutral-200));
+  --page-dim: var(--color-300, var(--neutral-300));
   position: relative;
+  display: block;
   width: 100%;
+}
+
+:root[data-mode="invert"] ads-nav-menu,
+[data-mode="invert"] ads-nav-menu,
+:root[data-mode="invert"] .ads-nav-menu-wrap,
+[data-mode="invert"] .ads-nav-menu-wrap {
+  --brand-ink: var(--color-25, var(--neutral-200));
+  --brand-line: var(--color-300, var(--neutral-300));
+  --brand-faint: var(--color-700, var(--neutral-700));
+  --page-dim: var(--color-500, var(--neutral-500));
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-mode="system"] ads-nav-menu,
+  [data-mode="system"] ads-nav-menu,
+  :root[data-mode="system"] .ads-nav-menu-wrap,
+  [data-mode="system"] .ads-nav-menu-wrap {
+    --brand-ink: var(--color-25, var(--neutral-200));
+    --brand-line: var(--color-300, var(--neutral-300));
+    --brand-faint: var(--color-700, var(--neutral-700));
+    --page-dim: var(--color-500, var(--neutral-500));
+  }
+}
+
+.ads-nav-menu-wrap {
   padding-block: var(--space-150);
 }
 
@@ -266,44 +298,219 @@
   outline-offset: var(--space-static-10);
 }
 
-/* Responsive Tiers */
-@media (max-width: 64rem) {
-  .ads-nav-menu-wrap .u-container {
+/* Responsive Tiers via Container Queries and Media Queries,
+   plus explicit variant classes: [variant="full"], [variant="compact"], [variant="xCompact"] */
+
+/* 1. Explicit Variant Overrides (allows testing/forcing a tier directly via prop) */
+ads-nav-menu[variant="compact"] .ads-nav-menu-wrap .u-container,
+.ads-nav-menu-wrap.is-compact .u-container {
+  flex-wrap: nowrap;
+  gap: var(--space-60);
+}
+
+ads-nav-menu[variant="compact"] .ads-nav-menu-links,
+.ads-nav-menu-wrap.is-compact .ads-nav-menu-links {
+  flex-wrap: nowrap;
+  gap: var(--space-80);
+}
+
+ads-nav-menu[variant="compact"] .ads-nav-menu-links a,
+.ads-nav-menu-wrap.is-compact .ads-nav-menu-links a {
+  font-size: var(--step-80);
+}
+
+ads-nav-menu[variant="compact"] .selector-btn-trigger,
+.ads-nav-menu-wrap.is-compact .selector-btn-trigger {
+  min-width: 0;
+  padding: 5px 10px;
+}
+
+ads-nav-menu[variant="compact"] .selector-btn-text,
+.ads-nav-menu-wrap.is-compact .selector-btn-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+ads-nav-menu[variant="xCompact"] .ads-nav-menu-wrap .u-container,
+.ads-nav-menu-wrap.is-xcompact .u-container {
+  flex-wrap: nowrap;
+}
+
+ads-nav-menu[variant="xCompact"] .ads-nav-menu-cluster,
+.ads-nav-menu-wrap.is-xcompact .ads-nav-menu-cluster {
+  display: none;
+}
+
+ads-nav-menu[variant="xCompact"] .ads-nav-menu-burger,
+.ads-nav-menu-wrap.is-xcompact .ads-nav-menu-burger {
+  display: inline-flex;
+  flex: none;
+}
+
+/* 2. Container Queries (responds to container width when variant="auto" or unspecified) */
+@container nav (max-width: 64rem) {
+  ads-nav-menu:not([variant="full"]) .ads-nav-menu-wrap .u-container {
     flex-wrap: nowrap;
     gap: var(--space-60);
   }
 
-  .ads-nav-menu-links {
+  ads-nav-menu:not([variant="full"]) .ads-nav-menu-links {
     flex-wrap: nowrap;
     gap: var(--space-80);
   }
 
-  .ads-nav-menu-links a {
+  ads-nav-menu:not([variant="full"]) .ads-nav-menu-links a {
     font-size: var(--step-80);
+  }
+
+  ads-nav-menu:not([variant="full"]) .selector-btn-trigger {
+    min-width: 0;
+    padding: 5px 10px;
+  }
+
+  ads-nav-menu:not([variant="full"]) .selector-btn-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
+@container nav (max-width: 48rem) {
+  ads-nav-menu:not([variant="full"]) .ads-nav-menu-wrap .u-container {
+    flex-wrap: wrap;
+  }
+
+  ads-nav-menu:not([variant="full"]) .ads-nav-menu-cluster {
+    flex: 1 1 100%;
+    justify-content: space-between;
+  }
+
+  ads-nav-menu:not([variant="full"]) .selector-btn-trigger {
+    min-width: 7.25rem;
+    padding: 5px 12px;
+  }
+
+  ads-nav-menu:not([variant="full"]) .selector-btn-text {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip-path: none;
+    white-space: nowrap;
+  }
+}
+
+@container nav (max-width: 32rem) {
+  ads-nav-menu:not([variant="full"]):not([variant="compact"]) .ads-nav-menu-wrap .u-container {
+    flex-wrap: nowrap;
+  }
+
+  ads-nav-menu:not([variant="full"]):not([variant="compact"]) .ads-nav-menu-cluster {
+    display: none;
+  }
+
+  ads-nav-menu:not([variant="full"]):not([variant="compact"]) .ads-nav-menu-burger {
+    display: inline-flex;
+    flex: none;
+  }
+}
+
+/* 3. Viewport Media Query fallback (when not inside a sized container root) */
+@media (max-width: 64rem) {
+  ads-nav-menu:not([variant]) .ads-nav-menu-wrap .u-container,
+  ads-nav-menu[variant="auto"] .ads-nav-menu-wrap .u-container {
+    flex-wrap: nowrap;
+    gap: var(--space-60);
+  }
+
+  ads-nav-menu:not([variant]) .ads-nav-menu-links,
+  ads-nav-menu[variant="auto"] .ads-nav-menu-links {
+    flex-wrap: nowrap;
+    gap: var(--space-80);
+  }
+
+  ads-nav-menu:not([variant]) .ads-nav-menu-links a,
+  ads-nav-menu[variant="auto"] .ads-nav-menu-links a {
+    font-size: var(--step-80);
+  }
+
+  ads-nav-menu:not([variant]) .selector-btn-trigger,
+  ads-nav-menu[variant="auto"] .selector-btn-trigger {
+    min-width: 0;
+    padding: 5px 10px;
+  }
+
+  ads-nav-menu:not([variant]) .selector-btn-text,
+  ads-nav-menu[variant="auto"] .selector-btn-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
   }
 }
 
 @media (max-width: 48rem) {
-  .ads-nav-menu-wrap .u-container {
+  ads-nav-menu:not([variant]) .ads-nav-menu-wrap .u-container,
+  ads-nav-menu[variant="auto"] .ads-nav-menu-wrap .u-container {
     flex-wrap: wrap;
   }
 
-  .ads-nav-menu-cluster {
+  ads-nav-menu:not([variant]) .ads-nav-menu-cluster,
+  ads-nav-menu[variant="auto"] .ads-nav-menu-cluster {
     flex: 1 1 100%;
     justify-content: space-between;
+  }
+
+  ads-nav-menu:not([variant]) .selector-btn-trigger,
+  ads-nav-menu[variant="auto"] .selector-btn-trigger {
+    min-width: 7.25rem;
+    padding: 5px 12px;
+  }
+
+  ads-nav-menu:not([variant]) .selector-btn-text,
+  ads-nav-menu[variant="auto"] .selector-btn-text {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip-path: none;
+    white-space: nowrap;
   }
 }
 
 @media (max-width: 30rem) {
-  .ads-nav-menu-wrap .u-container {
+  ads-nav-menu:not([variant]) .ads-nav-menu-wrap .u-container,
+  ads-nav-menu[variant="auto"] .ads-nav-menu-wrap .u-container {
     flex-wrap: nowrap;
   }
 
-  .ads-nav-menu-cluster {
+  ads-nav-menu:not([variant]) .ads-nav-menu-cluster,
+  ads-nav-menu[variant="auto"] .ads-nav-menu-cluster {
     display: none;
   }
 
-  .ads-nav-menu-burger {
+  ads-nav-menu:not([variant]) .ads-nav-menu-burger,
+  ads-nav-menu[variant="auto"] .ads-nav-menu-burger {
     display: inline-flex;
     flex: none;
   }
