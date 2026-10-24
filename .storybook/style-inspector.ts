@@ -347,7 +347,16 @@ function updateHud(target: HTMLElement, e: MouseEvent) {
 function handlePointerOver(e: MouseEvent) {
   if (!inspectorActive) return;
   const target = (e.target as HTMLElement)?.closest("*") as HTMLElement;
-  if (!target || target === document.body || target === document.documentElement || target.id === "ahha-style-hud" || target.id === "story-component-root") return;
+  if (
+    !target ||
+    target === document.body ||
+    target === document.documentElement ||
+    target.id === "ahha-style-hud" ||
+    target.id === "ahha-inspector-toggle-btn" ||
+    target.closest("#ahha-inspector-toggle-btn") ||
+    target.closest("#ahha-style-hud") ||
+    target.id === "story-component-root"
+  ) return;
 
   if (currentTarget && currentTarget !== target) {
     currentTarget.style.outline = "";
@@ -387,32 +396,27 @@ function ensureFloatingToggle() {
   floatingToggleBtn = document.createElement("button");
   floatingToggleBtn.id = "ahha-inspector-toggle-btn";
   floatingToggleBtn.type = "button";
-  floatingToggleBtn.title = "Toggle CSS Inspector (Shortcut: Alt+I)";
   floatingToggleBtn.style.cssText = `
     position: fixed;
-    bottom: 14px;
-    right: 14px;
+    bottom: 16px;
+    right: 16px;
     z-index: 999990;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 6px 10px;
-    font-family: var(--font-mono, monospace);
-    font-size: 11px;
+    gap: var(--space-static-30, 6px);
+    padding: var(--space-static-30, 6px) var(--space-static-60, 12px);
+    font-family: var(--font-main, -apple-system, sans-serif);
+    font-size: var(--step-70, 12px);
     font-weight: 600;
+    line-height: 1;
     cursor: pointer;
     border-radius: var(--radius-full, 9999px);
-    border: 1px solid var(--surface-border, rgba(0, 0, 0, 0.2));
-    background: color-mix(in oklch, var(--surface-bg, #ffffff) 92%, transparent);
-    color: var(--text-fg-1, #1e1e2f);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    border: 1px solid transparent;
     transition: all 120ms ease;
   `;
 
   floatingToggleBtn.addEventListener("click", () => {
-    setInspectorActive(!inspectorActive);
+    toggleInspector();
   });
 
   document.body.appendChild(floatingToggleBtn);
@@ -422,13 +426,58 @@ function ensureFloatingToggle() {
 function updateFloatingToggleUI() {
   const btn = ensureFloatingToggle();
   if (inspectorActive) {
-    btn.innerHTML = `<span style="display:inline-block; width:7px; height:7px; border-radius:50%; background:oklch(53.5% 0.098 178.9);"></span> CSS Inspector: On <kbd style="opacity:0.6; font-size:10px;">(Alt+I)</kbd>`;
-    btn.style.borderColor = "var(--action-border, #4f46e5)";
-    btn.style.boxShadow = "0 0 0 1px var(--action-border, #4f46e5), 0 4px 12px rgba(0,0,0,0.15)";
+    // Selector-button pressed pattern: strong fill background with bright text
+    btn.innerHTML = `<span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:currentColor;"></span> CSS Inspector: On`;
+    btn.title = "Turn off CSS Inspector";
+    btn.style.background = "var(--action-bg-1, #312e81)";
+    btn.style.color = "var(--action-fg-1, #ffffff)";
+    btn.style.borderColor = "var(--action-bg-1, #312e81)";
+    btn.style.boxShadow = "0 4px 14px rgba(0,0,0,0.18)";
   } else {
-    btn.innerHTML = `<span style="display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--text-fg-2, #888);"></span> CSS Inspector: Off <kbd style="opacity:0.6; font-size:10px;">(Alt+I)</kbd>`;
+    // Idle pattern: surface tint with shortcut shown in tooltip text
+    btn.innerHTML = `<span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--text-fg-2, #888);"></span> CSS Inspector: Off`;
+    btn.title = "Toggle CSS Inspector (Shortcut: Alt+I)";
+    btn.style.background = "color-mix(in oklch, var(--surface-bg, #ffffff) 92%, transparent)";
+    btn.style.color = "var(--text-fg-1, #1e1e2f)";
     btn.style.borderColor = "var(--surface-border, rgba(0, 0, 0, 0.2))";
-    btn.style.boxShadow = "0 4px 12px rgba(0,0,0,0.12)";
+    btn.style.boxShadow = "0 2px 8px rgba(0,0,0,0.1)";
+  }
+}
+
+/**
+ * Toggles the inspector and synchronizes with Storybook's URL/global channel so the top toolbar updates in sync
+ */
+export function toggleInspector() {
+  const next = !inspectorActive;
+  setInspectorActive(next);
+
+  // Sync to Storybook parent window / channel
+  try {
+    const parentWin = window.parent;
+    if (parentWin && parentWin !== window) {
+      // 1. Post Storybook channel message to update globals
+      parentWin.postMessage(
+        JSON.stringify({
+          key: "storybook-channel",
+          event: {
+            type: "updateGlobals",
+            args: [{ globals: { inspectCss: next } }]
+          }
+        }),
+        "*"
+      );
+
+      // 2. Update parent URL search params if path exists
+      const url = new URL(parentWin.location.href);
+      const currentGlobals = url.searchParams.get("globals") || "";
+      const pairs = currentGlobals ? currentGlobals.split(";") : [];
+      const updatedPairs = pairs.filter((p) => !p.startsWith("inspectCss:"));
+      updatedPairs.push(`inspectCss:${next}`);
+      url.searchParams.set("globals", updatedPairs.join(";"));
+      parentWin.history.replaceState(null, "", url.toString());
+    }
+  } catch (err) {
+    // Cross-origin fallback
   }
 }
 
@@ -437,7 +486,7 @@ if (typeof window !== "undefined") {
   window.addEventListener("keydown", (e: KeyboardEvent) => {
     if (e.altKey && (e.key === "i" || e.key === "I" || e.code === "KeyI")) {
       e.preventDefault();
-      setInspectorActive(!inspectorActive);
+      toggleInspector();
     }
   });
 }
