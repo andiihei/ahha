@@ -352,8 +352,6 @@ function handlePointerOver(e: MouseEvent) {
     target === document.body ||
     target === document.documentElement ||
     target.id === "ahha-style-hud" ||
-    target.id === "ahha-inspector-toggle-btn" ||
-    target.closest("#ahha-inspector-toggle-btn") ||
     target.closest("#ahha-style-hud") ||
     target.id === "story-component-root"
   ) return;
@@ -385,62 +383,6 @@ function handlePointerOut(e: MouseEvent) {
   if (hudElement) {
     hudElement.style.opacity = "0";
     hudElement.style.display = "none";
-  }
-}
-
-let floatingToggleBtn: HTMLElement | null = null;
-
-function ensureFloatingToggle() {
-  if (floatingToggleBtn) return floatingToggleBtn;
-
-  floatingToggleBtn = document.createElement("button");
-  floatingToggleBtn.id = "ahha-inspector-toggle-btn";
-  floatingToggleBtn.type = "button";
-  floatingToggleBtn.style.cssText = `
-    position: fixed;
-    bottom: 16px;
-    right: 16px;
-    z-index: 999990;
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-static-30, 6px);
-    padding: var(--space-static-30, 6px) var(--space-static-60, 12px);
-    font-family: var(--font-main, -apple-system, sans-serif);
-    font-size: var(--step-70, 12px);
-    font-weight: 600;
-    line-height: 1;
-    cursor: pointer;
-    border-radius: var(--radius-full, 9999px);
-    border: 1px solid transparent;
-    transition: all 120ms ease;
-  `;
-
-  floatingToggleBtn.addEventListener("click", () => {
-    toggleInspector();
-  });
-
-  document.body.appendChild(floatingToggleBtn);
-  return floatingToggleBtn;
-}
-
-function updateFloatingToggleUI() {
-  const btn = ensureFloatingToggle();
-  if (inspectorActive) {
-    // Selector-button pressed pattern: strong fill background with bright text
-    btn.innerHTML = `<span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:currentColor;"></span> CSS Inspector: On`;
-    btn.title = "Turn off CSS Inspector";
-    btn.style.background = "var(--action-bg-1, #312e81)";
-    btn.style.color = "var(--action-fg-1, #ffffff)";
-    btn.style.borderColor = "var(--action-bg-1, #312e81)";
-    btn.style.boxShadow = "0 4px 14px rgba(0,0,0,0.18)";
-  } else {
-    // Idle pattern: surface tint with shortcut shown in tooltip text
-    btn.innerHTML = `<span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--text-fg-2, #888);"></span> CSS Inspector: Off`;
-    btn.title = "Toggle CSS Inspector (Shortcut: Alt+I)";
-    btn.style.background = "color-mix(in oklch, var(--surface-bg, #ffffff) 92%, transparent)";
-    btn.style.color = "var(--text-fg-1, #1e1e2f)";
-    btn.style.borderColor = "var(--surface-border, rgba(0, 0, 0, 0.2))";
-    btn.style.boxShadow = "0 2px 8px rgba(0,0,0,0.1)";
   }
 }
 
@@ -493,7 +435,6 @@ if (typeof window !== "undefined") {
 
 export function setInspectorActive(active: boolean) {
   inspectorActive = active;
-  updateFloatingToggleUI();
 
   if (!active) {
     if (currentTarget) {
