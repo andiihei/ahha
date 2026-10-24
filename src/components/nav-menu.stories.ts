@@ -145,8 +145,8 @@ export const CompactTablet: Story = {
   },
   argTypes: {
     containerWidth: {
-      control: { type: "range", min: 544, max: 896, step: 10 },
-      description: "Compact tablet tier container width (544px – 896px / 34rem – 56rem)"
+      control: { type: "range", min: 574, max: 896, step: 10 },
+      description: "Compact tablet tier container width (574px – 896px)"
     }
   },
   render: (args) => html`
@@ -154,7 +154,7 @@ export const CompactTablet: Story = {
       style="
         width: 100%;
         max-width: ${args.containerWidth}px;
-        min-width: 544px;
+        min-width: 574px;
         margin-inline: auto;
         background: var(--surface-bg);
         border: 1px dashed var(--surface-border);
@@ -166,7 +166,7 @@ export const CompactTablet: Story = {
       "
     >
       <div style="padding: 0.5rem 1rem; font-size: var(--step-70); color: var(--text-fg-2); border-bottom: 1px solid var(--surface-border); display: flex; justify-content: space-between;">
-        <span>Container width: <strong>${args.containerWidth}px</strong> (544px – 896px)</span>
+        <span>Container width: <strong>${args.containerWidth}px</strong> (574px – 896px)</span>
         <span>Variant: <strong>compact</strong></span>
       </div>
       <ads-nav-menu
@@ -191,8 +191,8 @@ export const ExtraCompactMobile: Story = {
   },
   argTypes: {
     containerWidth: {
-      control: { type: "range", min: 380, max: 544, step: 10 },
-      description: "Mobile tier container width (380px – 544px / max: 34rem)"
+      control: { type: "range", min: 380, max: 574, step: 10 },
+      description: "Mobile tier container width (380px – 574px)"
     }
   },
   render: (args) => html`
@@ -212,7 +212,7 @@ export const ExtraCompactMobile: Story = {
       "
     >
       <div style="padding: 0.5rem 1rem; font-size: var(--step-70); color: var(--text-fg-2); border-bottom: 1px solid var(--surface-border); display: flex; justify-content: space-between;">
-        <span>Container width: <strong>${args.containerWidth}px</strong> (380px – 544px)</span>
+        <span>Container width: <strong>${args.containerWidth}px</strong> (380px – 574px)</span>
         <span>Variant: <strong>xCompact</strong></span>
       </div>
       <ads-nav-menu

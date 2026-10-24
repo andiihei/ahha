@@ -417,8 +417,8 @@ ads-nav-menu[variant="xCompact"] .ads-nav-menu-burger,
   }
 }
 
-/* When space drops below 34rem (~544px), defer to xCompact (hamburger drawer) */
-@container nav (max-width: 34rem) {
+/* When space drops below 35.875rem (574px), defer to xCompact (hamburger drawer) */
+@container nav (max-width: 35.875rem) {
   ads-nav-menu:not([variant="full"]):not([variant="compact"]) .ads-nav-menu-wrap .u-container {
     flex-wrap: nowrap;
   }
@@ -488,7 +488,7 @@ ads-nav-menu[variant="xCompact"] .ads-nav-menu-burger,
   }
 }
 
-@media (max-width: 34rem) {
+@media (max-width: 35.875rem) {
   ads-nav-menu:not([variant]):not([variant="full"]):not([variant="compact"]) .ads-nav-menu-wrap .u-container,
   ads-nav-menu[variant="auto"] .ads-nav-menu-wrap .u-container {
     flex-wrap: nowrap;
