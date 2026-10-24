@@ -303,10 +303,27 @@ ads-nav-menu,
    plus explicit variant classes: [variant="full"], [variant="compact"], [variant="xCompact"] */
 
 /* 1. Explicit Variant Overrides (allows testing/forcing a tier directly via prop) */
+
+/* Compact variant: shifts the page links and mode switch cluster to the second line,
+   ensuring the brand logo gets its dedicated first row without violating safe space. */
 ads-nav-menu[variant="compact"] .ads-nav-menu-wrap .u-container,
 .ads-nav-menu-wrap.is-compact .u-container {
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   gap: var(--space-60);
+}
+
+ads-nav-menu[variant="compact"] .ads-nav-menu-brand,
+.ads-nav-menu-wrap.is-compact .ads-nav-menu-brand {
+  flex: 0 0 100%;
+}
+
+ads-nav-menu[variant="compact"] .ads-nav-menu-cluster,
+.ads-nav-menu-wrap.is-compact .ads-nav-menu-cluster {
+  flex: 1 1 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-100);
 }
 
 ads-nav-menu[variant="compact"] .ads-nav-menu-links,
@@ -323,20 +340,18 @@ ads-nav-menu[variant="compact"] .ads-nav-menu-links a,
 ads-nav-menu[variant="compact"] .selector-btn-trigger,
 .ads-nav-menu-wrap.is-compact .selector-btn-trigger {
   min-width: 0;
-  padding: 5px 10px;
+  padding: 5px 12px;
 }
 
 ads-nav-menu[variant="compact"] .selector-btn-text,
 .ads-nav-menu-wrap.is-compact .selector-btn-text {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip-path: inset(50%);
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip-path: none;
   white-space: nowrap;
-  border: 0;
 }
 
 ads-nav-menu[variant="xCompact"] .ads-nav-menu-wrap .u-container,
@@ -356,43 +371,60 @@ ads-nav-menu[variant="xCompact"] .ads-nav-menu-burger,
 }
 
 /* 2. Container Queries (responds to container width when variant="auto" or unspecified) */
-@container nav (max-width: 64rem) {
-  ads-nav-menu:not([variant="full"]) .ads-nav-menu-wrap .u-container {
-    flex-wrap: nowrap;
+
+/* At or below 56rem (896px), drop links & mode switch to the second row (Compact 2-row layout),
+   keeping the logo's safe space completely clear. */
+@container nav (max-width: 56rem) {
+  ads-nav-menu:not([variant="full"]):not([variant="xCompact"]) .ads-nav-menu-wrap .u-container {
+    flex-wrap: wrap;
     gap: var(--space-60);
   }
 
-  ads-nav-menu:not([variant="full"]) .ads-nav-menu-links {
+  ads-nav-menu:not([variant="full"]):not([variant="xCompact"]) .ads-nav-menu-brand {
+    flex: 0 0 100%;
+  }
+
+  ads-nav-menu:not([variant="full"]):not([variant="xCompact"]) .ads-nav-menu-cluster {
+    flex: 1 1 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-100);
+  }
+
+  ads-nav-menu:not([variant="full"]):not([variant="xCompact"]) .ads-nav-menu-links {
     flex-wrap: nowrap;
     gap: var(--space-80);
   }
 
-  ads-nav-menu:not([variant="full"]) .ads-nav-menu-links a {
+  ads-nav-menu:not([variant="full"]):not([variant="xCompact"]) .ads-nav-menu-links a {
     font-size: var(--step-80);
   }
 
-  ads-nav-menu:not([variant="full"]) .selector-btn-trigger {
+  ads-nav-menu:not([variant="full"]):not([variant="xCompact"]) .selector-btn-trigger {
     min-width: 0;
-    padding: 5px 10px;
+    padding: 5px 12px;
   }
 
-  ads-nav-menu:not([variant="full"]) .selector-btn-text {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip-path: inset(50%);
+  ads-nav-menu:not([variant="full"]):not([variant="xCompact"]) .selector-btn-text {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip-path: none;
     white-space: nowrap;
-    border: 0;
   }
 }
 
-/* When space drops below ~46rem (736px), defer to xCompact (hamburger) so it never awkwardly wraps */
-@container nav (max-width: 46rem) {
+/* When space drops below 34rem (~544px), defer to xCompact (hamburger drawer) */
+@container nav (max-width: 34rem) {
   ads-nav-menu:not([variant="full"]):not([variant="compact"]) .ads-nav-menu-wrap .u-container {
     flex-wrap: nowrap;
+  }
+
+  ads-nav-menu:not([variant="full"]):not([variant="compact"]) .ads-nav-menu-brand {
+    flex: none;
   }
 
   ads-nav-menu:not([variant="full"]):not([variant="compact"]) .ads-nav-menu-cluster {
@@ -406,48 +438,65 @@ ads-nav-menu[variant="xCompact"] .ads-nav-menu-burger,
 }
 
 /* 3. Viewport Media Query fallback (when not inside a sized container root) */
-@media (max-width: 64rem) {
-  ads-nav-menu:not([variant]) .ads-nav-menu-wrap .u-container,
+@media (max-width: 56rem) {
+  ads-nav-menu:not([variant]):not([variant="full"]):not([variant="xCompact"]) .ads-nav-menu-wrap .u-container,
   ads-nav-menu[variant="auto"] .ads-nav-menu-wrap .u-container {
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     gap: var(--space-60);
   }
 
-  ads-nav-menu:not([variant]) .ads-nav-menu-links,
+  ads-nav-menu:not([variant]):not([variant="full"]):not([variant="xCompact"]) .ads-nav-menu-brand,
+  ads-nav-menu[variant="auto"] .ads-nav-menu-brand {
+    flex: 0 0 100%;
+  }
+
+  ads-nav-menu:not([variant]):not([variant="full"]):not([variant="xCompact"]) .ads-nav-menu-cluster,
+  ads-nav-menu[variant="auto"] .ads-nav-menu-cluster {
+    flex: 1 1 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-100);
+  }
+
+  ads-nav-menu:not([variant]):not([variant="full"]):not([variant="xCompact"]) .ads-nav-menu-links,
   ads-nav-menu[variant="auto"] .ads-nav-menu-links {
     flex-wrap: nowrap;
     gap: var(--space-80);
   }
 
-  ads-nav-menu:not([variant]) .ads-nav-menu-links a,
+  ads-nav-menu:not([variant]):not([variant="full"]):not([variant="xCompact"]) .ads-nav-menu-links a,
   ads-nav-menu[variant="auto"] .ads-nav-menu-links a {
     font-size: var(--step-80);
   }
 
-  ads-nav-menu:not([variant]) .selector-btn-trigger,
+  ads-nav-menu:not([variant]):not([variant="full"]):not([variant="xCompact"]) .selector-btn-trigger,
   ads-nav-menu[variant="auto"] .selector-btn-trigger {
     min-width: 0;
-    padding: 5px 10px;
+    padding: 5px 12px;
   }
 
-  ads-nav-menu:not([variant]) .selector-btn-text,
+  ads-nav-menu:not([variant]):not([variant="full"]):not([variant="xCompact"]) .selector-btn-text,
   ads-nav-menu[variant="auto"] .selector-btn-text {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip-path: inset(50%);
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip-path: none;
     white-space: nowrap;
-    border: 0;
   }
 }
 
-@media (max-width: 46rem) {
+@media (max-width: 34rem) {
   ads-nav-menu:not([variant]):not([variant="full"]):not([variant="compact"]) .ads-nav-menu-wrap .u-container,
   ads-nav-menu[variant="auto"] .ads-nav-menu-wrap .u-container {
     flex-wrap: nowrap;
+  }
+
+  ads-nav-menu:not([variant]):not([variant="full"]):not([variant="compact"]) .ads-nav-menu-brand,
+  ads-nav-menu[variant="auto"] .ads-nav-menu-brand {
+    flex: none;
   }
 
   ads-nav-menu:not([variant]):not([variant="full"]):not([variant="compact"]) .ads-nav-menu-cluster,
