@@ -72,14 +72,14 @@ const preview: Preview = {
     inspectCss: {
       name: "Inspect CSS",
       description: "Live Element Style & Token HUD Inspector",
-      defaultValue: "off",
+      defaultValue: false,
       toolbar: {
         icon: "eye",
         items: [
-          { value: "off", title: "Inspector: Off" },
-          { value: "on", title: "Inspector: On" }
+          { value: false, icon: "eyeclose", title: "Inspector: Off" },
+          { value: true, icon: "eye", title: "Inspector: On" }
         ],
-        showName: true
+        dynamicTitle: true
       }
     }
   },
@@ -87,7 +87,7 @@ const preview: Preview = {
     (story, context) => {
       const family = context.globals.family || "neutral";
       const mode = context.globals.mode || "default";
-      const inspect = context.globals.inspectCss === "on";
+      const inspect = Boolean(context.globals.inspectCss);
 
       setInspectorActive(inspect);
 
