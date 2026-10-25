@@ -4,7 +4,7 @@ import './concentric-demo.js';
 import type { AdsConcentricDemo } from './concentric-demo.js';
 
 const meta: Meta<AdsConcentricDemo> = {
-  title: 'Components/Concentric Demo',
+  title: 'Specimens/Concentric Radii',
   component: 'ads-concentric-demo',
   parameters: {
     docs: {

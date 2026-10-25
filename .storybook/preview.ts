@@ -17,6 +17,29 @@ import "../src/components/concentric-demo.css";
 
 const preview: Preview = {
   parameters: {
+    options: {
+      storySort: {
+        order: [
+          "Foundations",
+          [
+            "Colors",
+            "Typography",
+            "Space",
+            "Shaping",
+            "Motion",
+            "Token Export"
+          ],
+          "Specimens",
+          "Components",
+          [
+            "Button",
+            "Toggle",
+            "Selector Button",
+            "Nav Menu"
+          ]
+        ]
+      }
+    },
     docs: {
       source: {
         type: "dynamic"
