@@ -237,8 +237,15 @@ export const StaticMicroSpacing: Story = {
 
 export const InteractiveSpacingPreview: Story = {
   argTypes: {
-    selectedSpace: {
-      name: 'Spacing Token',
+    // Padding controls
+    enablePadding: {
+      name: 'Enable Padding',
+      control: { type: 'boolean' },
+      defaultValue: true,
+      description: 'Apply spacing as inner container padding',
+    },
+    paddingSpace: {
+      name: 'Padding Token',
       control: { type: 'select' },
       options: [
         '--space-25',
@@ -253,25 +260,57 @@ export const InteractiveSpacingPreview: Story = {
         '--space-300',
       ],
       defaultValue: '--space-100',
-      description: 'The active spacing token to apply across enabled properties',
+      description: 'Spacing token applied to container padding',
     },
-    enablePadding: {
-      name: 'Enable Padding',
-      control: { type: 'boolean' },
-      defaultValue: true,
-      description: 'Apply spacing as inner container padding',
-    },
+    // Margin controls
     enableMargin: {
       name: 'Enable Margin',
       control: { type: 'boolean' },
       defaultValue: false,
       description: 'Apply spacing as outer margin around the container',
     },
+    marginSpace: {
+      name: 'Margin Token',
+      control: { type: 'select' },
+      options: [
+        '--space-25',
+        '--space-50',
+        '--space-60',
+        '--space-75',
+        '--space-100',
+        '--space-125',
+        '--space-150',
+        '--space-200',
+        '--space-250',
+        '--space-300',
+      ],
+      defaultValue: '--space-150',
+      description: 'Spacing token applied to container margin',
+    },
+    // Gap controls
     enableGap: {
       name: 'Enable Gap',
       control: { type: 'boolean' },
       defaultValue: true,
       description: 'Apply spacing as flex gap between items',
+    },
+    gapSpace: {
+      name: 'Gap Token',
+      control: { type: 'select' },
+      options: [
+        '--space-25',
+        '--space-50',
+        '--space-60',
+        '--space-75',
+        '--space-100',
+        '--space-125',
+        '--space-150',
+        '--space-200',
+        '--space-250',
+        '--space-300',
+      ],
+      defaultValue: '--space-50',
+      description: 'Spacing token applied to flex gap between items',
     },
     itemType: {
       name: 'Item Element Type',
@@ -282,17 +321,22 @@ export const InteractiveSpacingPreview: Story = {
     },
   },
   args: {
-    selectedSpace: '--space-100',
     enablePadding: true,
+    paddingSpace: '--space-100',
     enableMargin: false,
+    marginSpace: '--space-150',
     enableGap: true,
+    gapSpace: '--space-50',
     itemType: 'shapes',
   },
   render: (args) => {
-    const spaceToken = args.selectedSpace;
-    const paddingStyle = args.enablePadding ? `var(${spaceToken})` : '0px';
-    const marginStyle = args.enableMargin ? `var(${spaceToken})` : '0px';
-    const gapStyle = args.enableGap ? `var(${spaceToken})` : '0px';
+    const padToken = args.paddingSpace || '--space-100';
+    const marToken = args.marginSpace || '--space-150';
+    const gapToken = args.gapSpace || '--space-50';
+
+    const paddingStyle = args.enablePadding ? `var(${padToken})` : '0px';
+    const marginStyle = args.enableMargin ? `var(${marToken})` : '0px';
+    const gapStyle = args.enableGap ? `var(${gapToken})` : '0px';
 
     const items = [1, 2, 3, 4, 5];
 
@@ -386,13 +430,13 @@ export const InteractiveSpacingPreview: Story = {
     };
 
     return html`
-      <div style="display: flex; flex-direction: column; gap: 1.5rem; max-width: 800px; width: 100%;">
+      <div style="display: flex; flex-direction: column; gap: 1.5rem; max-width: 820px; width: 100%;">
         <div>
           <h3 style="font-family: var(--font-alt); font-size: var(--step-125); margin: 0 0 0.5rem 0;">
             Interactive Spacing Dynamics (Padding, Margin & Gaps)
           </h3>
           <p style="font-size: var(--step-80); color: var(--text-fg-2); margin: 0 0 1rem 0;">
-            Test combinations of <strong>margin</strong>, <strong>padding</strong>, and <strong>flex gap</strong> using <code>${spaceToken}</code>. Toggle controls in the Storybook panel to inspect spatial interplay across 5 items.
+            Customize independent spacing tokens for <strong>margin</strong>, <strong>padding</strong>, and <strong>flex gap</strong>. Toggle controls in the Storybook panel to test spatial combinations across 5 dynamic items.
           </p>
 
           <div
@@ -408,13 +452,26 @@ export const InteractiveSpacingPreview: Story = {
               border-radius: var(--radius-100);
             "
           >
-            <span>Token: <strong>${spaceToken}</strong></span>
+            <span>
+              Padding:
+              <strong style="color: ${args.enablePadding ? 'var(--green-700, green)' : 'var(--text-fg-2)'};">
+                ${args.enablePadding ? `ON (${padToken})` : 'OFF'}
+              </strong>
+            </span>
             <span>·</span>
-            <span>Padding: <strong style="color: ${args.enablePadding ? 'var(--green-700, green)' : 'var(--text-fg-2)'};">${args.enablePadding ? 'ON' : 'OFF'}</strong></span>
+            <span>
+              Margin:
+              <strong style="color: ${args.enableMargin ? 'var(--green-700, green)' : 'var(--text-fg-2)'};">
+                ${args.enableMargin ? `ON (${marToken})` : 'OFF'}
+              </strong>
+            </span>
             <span>·</span>
-            <span>Margin: <strong style="color: ${args.enableMargin ? 'var(--green-700, green)' : 'var(--text-fg-2)'};">${args.enableMargin ? 'ON' : 'OFF'}</strong></span>
-            <span>·</span>
-            <span>Gap: <strong style="color: ${args.enableGap ? 'var(--green-700, green)' : 'var(--text-fg-2)'};">${args.enableGap ? 'ON' : 'OFF'}</strong></span>
+            <span>
+              Gap:
+              <strong style="color: ${args.enableGap ? 'var(--green-700, green)' : 'var(--text-fg-2)'};">
+                ${args.enableGap ? `ON (${gapToken})` : 'OFF'}
+              </strong>
+            </span>
             <span>·</span>
             <span>Items: <strong>5 (${args.itemType})</strong></span>
           </div>
@@ -440,7 +497,7 @@ export const InteractiveSpacingPreview: Story = {
               color: var(--yellow-700, orange);
             "
           >
-            ${args.enableMargin ? `Outer Margin Zone: var(${spaceToken})` : 'Outer Margin: 0px'}
+            ${args.enableMargin ? `Outer Margin Zone: var(${marToken})` : 'Outer Margin: 0px (disabled)'}
           </div>
 
           <!-- Main Container applying Margin and Padding -->
@@ -456,7 +513,7 @@ export const InteractiveSpacingPreview: Story = {
             "
           >
             <div style="font-family: var(--font-mono); font-size: var(--step-60); color: var(--action-fg-1); margin-bottom: 0.5rem;">
-              ${args.enablePadding ? `Inner Padding Zone: var(${spaceToken})` : 'Inner Padding: 0px'}
+              ${args.enablePadding ? `Inner Padding Zone: var(${padToken})` : 'Inner Padding: 0px (disabled)'}
             </div>
 
             <!-- Content Flex Row with Gap and 5 Items -->
