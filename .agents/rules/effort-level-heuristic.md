@@ -14,11 +14,25 @@ When working on the AHHA Design System, evaluate every incoming task against thi
 
 ---
 
-## 2. Upfront Declaration Requirement
+## 2. Upfront Declaration & Interactive Approval Protocol
 
-At the start of every response addressing a new task, the assistant MUST provide an upfront recommendation banner in this format:
+At the start of every response addressing a new task, the assistant MUST provide an upfront recommendation banner:
 
 ```markdown
 > 💡 **Effort Recommendation: [Low | Medium | High]**
 > *Rationale*: [1-2 sentences explaining blast radius, architectural impact, and verification scope]
 ```
+
+### Execution Rules by Effort Tier:
+
+1. **Low Effort Tasks (Tactical / Localized)**:
+   - Provide the banner and rationale.
+   - **Proceed immediately with autonomous execution** to keep velocity fast and avoid unnecessary conversational roundtrips on small, non-breaking edits.
+
+2. **Medium & High Effort Tasks (Feature Expansion / Architectural Ripple)**:
+   - Provide the banner, rationale, and a clear outline of the proposed plan / blast radius.
+   - **MANDATORY PAUSE**: The assistant MUST STOP and request explicit user confirmation (via an interactive prompt or awaiting response) BEFORE modifying any code or files.
+   - The user has the opportunity to:
+     - **Approve**: Confirm the plan and proceed with execution.
+     - **Adjust Effort / Scope**: Tell the assistant to downgrade to Low (quick prototype), upgrade to High (full systemic rigor), or alter the boundaries.
+     - **Change Model Effort**: Adjust the IDE reasoning budget in the chat selector if a deeper or faster deliberation is desired.

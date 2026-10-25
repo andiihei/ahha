@@ -215,9 +215,13 @@ To maintain architectural integrity across the design system while moving quickl
 
 |   Level    | Scope                                    | Trigger Scenarios                                                                                                                  | Verification & Protocol                                                                                                          |
 | :--------: | :--------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------- |
-|  **Low**   | **Tactical & Localized**                 | Isolated CSS tweaks, inspector formatting, typo/copy edits, minor story updates                                                    | Direct targeted edit, Storybook visual verification, clean git commit                                                            |
-| **Medium** | **Component & Feature Expansion**        | Authoring new Web Components, adding Storybook stories with Vitest interaction tests, tooling configs                              | Light DOM adherence, APCA contrast validation, WCAG 2.1 SC 2.5.3 Label in Name conformance, 100% test pass                       |
-|  **High**  | **Architectural & Multi-Layer Systemic** | Layer 1 OKLCH/Utopia scale changes, Layer 2 semantic slot refactors, global container breakpoint shifts, contrast standard changes | Cross-file impact analysis across all specimen pages, dual light/invert verification, documentation update, full test suite pass |
+|  **Low**   | **Tactical & Localized**                 | Isolated CSS tweaks, inspector formatting, typo/copy edits, minor story updates                                                    | Direct targeted edit (autonomous execution), Storybook visual verification, clean git commit.                                    |
+| **Medium** | **Component & Feature Expansion**        | Authoring new Web Components, adding Storybook stories with Vitest interaction tests, tooling configs                              | **Pause & Confirm**: Plan proposal + user approval before edit. Light DOM adherence, APCA contrast, 100% test pass.              |
+|  **High**  | **Architectural & Multi-Layer Systemic** | Layer 1 OKLCH/Utopia scale changes, Layer 2 semantic slot refactors, global container breakpoint shifts, contrast standard changes | **Pause & Confirm**: Deep impact analysis + user approval before edit. Cross-page verification, dual-mode contrast, full tests. |
+
+### Interactive Approval Protocol
+- **Low**: Declares recommendation and executes directly to maintain high velocity on cosmetic or single-file edits.
+- **Medium / High**: Declares recommendation, details the proposed blast radius and execution plan, and **strictly pauses** for user confirmation, scope adjustments, or model reasoning effort changes before any file edits are applied.
 
 ---
 
