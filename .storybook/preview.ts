@@ -29,14 +29,14 @@ const preview: Preview = {
             "Motion",
             "Token Export"
           ],
-          "Specimens",
           "Components",
           [
             "Button",
             "Toggle",
             "Selector Button",
             "Nav Menu"
-          ]
+          ],
+          "Specimens"
         ]
       }
     },
