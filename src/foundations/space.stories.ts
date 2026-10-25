@@ -21,14 +21,19 @@ AHHA establishes a clear division of responsibility between two spatial domains:
       name: 'Sample Spacing Token',
       control: { type: 'select' },
       options: [
-        '--space-25',
+        '--space-10',
+        '--space-30',
         '--space-50',
-        '--space-75',
+        '--space-60',
+        '--space-70',
+        '--space-80',
         '--space-100',
+        '--space-125',
         '--space-150',
         '--space-200',
-        '--space-250',
         '--space-300',
+        '--space-400',
+        '--space-500',
       ],
       defaultValue: '--space-100',
       description: 'Test container padding live',
@@ -55,19 +60,20 @@ export const FluidSpacingLadder: Story = {
     const rootPx = 16;
     const progress = Math.min(Math.max((args.containerWidth - 360) / (1240 - 360), 0), 1);
 
+    // Exact steps from global/space.css (360px @ 18px base -> 1240px @ 20px base)
+    // Multipliers: 10->0.125, 30->0.25, 50->0.5, 60->0.6, 70->0.7, 80->0.8, 100->1, 125->1.25, 150->1.5, 200->2, 300->3, 400->4, 500->5
     const steps = [
-      { name: '10', min: 1, max: 1 },
-      { name: '20', min: 2, max: 2 },
-      { name: '25', min: 3, max: 4 },
+      { name: '10', min: 2, max: 3 },
+      { name: '30', min: 5, max: 5 },
       { name: '50', min: 9, max: 10 },
       { name: '60', min: 11, max: 12 },
-      { name: '75', min: 13, max: 15 },
+      { name: '70', min: 13, max: 14 },
+      { name: '80', min: 14, max: 16 },
       { name: '100', min: 18, max: 20 },
-      { name: '125', min: 22, max: 25 },
-      { name: '150', min: 27, max: 31 },
+      { name: '125', min: 23, max: 25 },
+      { name: '150', min: 27, max: 30 },
       { name: '200', min: 36, max: 40 },
-      { name: '250', min: 44, max: 50 },
-      { name: '300', min: 54, max: 62 },
+      { name: '300', min: 54, max: 60 },
       { name: '400', min: 72, max: 80 },
       { name: '500', min: 90, max: 100 },
     ];
@@ -79,7 +85,7 @@ export const FluidSpacingLadder: Story = {
             Fluid Spacing Scale (Macro Layout)
           </h3>
           <p style="font-size: var(--step-80); color: var(--text-fg-2); margin: 0 0 1rem 0;">
-            Thirteen steps scaling continuously between 360px and 1240px. The bars take the authentic specimen styling: <strong>pale Neutral fill with 1px border edges on the left and right</strong>. Drag the container slider in Controls to watch the bars breathe.
+            Thirteen fluid steps scaling continuously between 360px and 1240px from <code>global/space.css</code>. The bars take the authentic specimen styling: <strong>pale Neutral fill with 1px border edges on the left and right</strong>. Drag the container slider in Controls to watch the bars breathe.
           </p>
 
           <div
@@ -167,15 +173,21 @@ export const FluidSpacingLadder: Story = {
 
 export const StaticMicroSpacing: Story = {
   render: () => {
+    // Exact static steps from global/space.css (anchored to 20px base)
     const staticSteps = [
-      { name: '10', rem: '0.0625rem', px: 1 },
-      { name: '20', rem: '0.125rem', px: 2 },
-      { name: '25', rem: '0.25rem', px: 4 },
-      { name: '50', rem: '0.5rem', px: 8 },
-      { name: '75', rem: '0.75rem', px: 12 },
+      { name: '10', rem: '0.125rem', px: 2 },
+      { name: '30', rem: '0.375rem', px: 6 },
+      { name: '50', rem: '0.625rem', px: 10 },
+      { name: '60', rem: '0.75rem', px: 12 },
+      { name: '70', rem: '0.875rem', px: 14 },
+      { name: '80', rem: '1rem', px: 16 },
       { name: '100', rem: '1.25rem', px: 20 },
+      { name: '125', rem: '1.5625rem', px: 25 },
       { name: '150', rem: '1.875rem', px: 30 },
       { name: '200', rem: '2.5rem', px: 40 },
+      { name: '300', rem: '3.75rem', px: 60 },
+      { name: '400', rem: '5rem', px: 80 },
+      { name: '500', rem: '6.25rem', px: 100 },
     ];
 
     return html`
@@ -185,7 +197,7 @@ export const StaticMicroSpacing: Story = {
             Static Spacing Scale (Micro Components)
           </h3>
           <p style="font-size: var(--step-80); color: var(--text-fg-2); margin: 0;">
-            Frozen dimensional units anchored to a 20px base, ensuring buttons, toggles, and form controls stay invariant. Styled in Cerise (pale red fill with 1px dark red left/right borders).
+            Frozen dimensional units anchored to a 20px base from <code>global/space.css</code>, ensuring buttons, toggles, and form controls stay invariant. Styled in Cerise (pale red fill with 1px dark red left/right borders).
           </p>
         </div>
 
@@ -235,6 +247,22 @@ export const StaticMicroSpacing: Story = {
   },
 };
 
+const FLUID_SPACE_OPTIONS = [
+  '--space-10',
+  '--space-30',
+  '--space-50',
+  '--space-60',
+  '--space-70',
+  '--space-80',
+  '--space-100',
+  '--space-125',
+  '--space-150',
+  '--space-200',
+  '--space-300',
+  '--space-400',
+  '--space-500',
+];
+
 export const InteractiveSpacingPreview: Story = {
   argTypes: {
     // Padding controls
@@ -247,18 +275,7 @@ export const InteractiveSpacingPreview: Story = {
     paddingSpace: {
       name: 'Padding Token',
       control: { type: 'select' },
-      options: [
-        '--space-25',
-        '--space-50',
-        '--space-60',
-        '--space-75',
-        '--space-100',
-        '--space-125',
-        '--space-150',
-        '--space-200',
-        '--space-250',
-        '--space-300',
-      ],
+      options: FLUID_SPACE_OPTIONS,
       defaultValue: '--space-100',
       description: 'Spacing token applied to container padding',
     },
@@ -266,24 +283,13 @@ export const InteractiveSpacingPreview: Story = {
     enableMargin: {
       name: 'Enable Margin',
       control: { type: 'boolean' },
-      defaultValue: false,
+      defaultValue: true,
       description: 'Apply spacing as outer margin around the container',
     },
     marginSpace: {
       name: 'Margin Token',
       control: { type: 'select' },
-      options: [
-        '--space-25',
-        '--space-50',
-        '--space-60',
-        '--space-75',
-        '--space-100',
-        '--space-125',
-        '--space-150',
-        '--space-200',
-        '--space-250',
-        '--space-300',
-      ],
+      options: FLUID_SPACE_OPTIONS,
       defaultValue: '--space-150',
       description: 'Spacing token applied to container margin',
     },
@@ -297,18 +303,7 @@ export const InteractiveSpacingPreview: Story = {
     gapSpace: {
       name: 'Gap Token',
       control: { type: 'select' },
-      options: [
-        '--space-25',
-        '--space-50',
-        '--space-60',
-        '--space-75',
-        '--space-100',
-        '--space-125',
-        '--space-150',
-        '--space-200',
-        '--space-250',
-        '--space-300',
-      ],
+      options: FLUID_SPACE_OPTIONS,
       defaultValue: '--space-50',
       description: 'Spacing token applied to flex gap between items',
     },
@@ -323,7 +318,7 @@ export const InteractiveSpacingPreview: Story = {
   args: {
     enablePadding: true,
     paddingSpace: '--space-100',
-    enableMargin: false,
+    enableMargin: true,
     marginSpace: '--space-150',
     enableGap: true,
     gapSpace: '--space-50',
@@ -477,63 +472,101 @@ export const InteractiveSpacingPreview: Story = {
           </div>
         </div>
 
-        <!-- Outer Boundary Area to visualize Margins -->
-        <div
-          style="
-            background: color-mix(in oklch, var(--yellow-500, orange) 10%, transparent);
-            border: 1px dashed var(--yellow-700, orange);
-            border-radius: var(--radius-250);
-            position: relative;
-            box-sizing: border-box;
-          "
-        >
-          <div
-            style="
-              position: absolute;
-              top: 0.25rem;
-              left: 0.5rem;
-              font-family: var(--font-mono);
-              font-size: var(--step-60);
-              color: var(--yellow-700, orange);
-            "
-          >
-            ${args.enableMargin ? `Outer Margin Zone: var(${marToken})` : 'Outer Margin: 0px (disabled)'}
-          </div>
+        <!-- Interactive Demo Container: show outer boundary ONLY when Margin is enabled -->
+        ${args.enableMargin
+          ? html`
+              <div
+                style="
+                  background: color-mix(in oklch, var(--yellow-500, orange) 10%, transparent);
+                  border: 1px dashed var(--yellow-700, orange);
+                  border-radius: var(--radius-250);
+                  position: relative;
+                  box-sizing: border-box;
+                  transition: all var(--duration-200) var(--ease-out);
+                "
+              >
+                <div
+                  style="
+                    position: absolute;
+                    top: 0.25rem;
+                    left: 0.5rem;
+                    font-family: var(--font-mono);
+                    font-size: var(--step-60);
+                    color: var(--yellow-700, orange);
+                  "
+                >
+                  Outer Margin Zone: var(${marToken})
+                </div>
 
-          <!-- Main Container applying Margin and Padding -->
-          <div
-            style="
-              margin: ${marginStyle};
-              padding: ${paddingStyle};
-              background: color-mix(in oklch, var(--action-bg-1) 12%, transparent);
-              border: 1.5px solid var(--action-border);
-              border-radius: var(--radius-150);
-              box-sizing: border-box;
-              transition: all var(--duration-200) var(--ease-out);
-            "
-          >
-            <div style="font-family: var(--font-mono); font-size: var(--step-60); color: var(--action-fg-1); margin-bottom: 0.5rem;">
-              ${args.enablePadding ? `Inner Padding Zone: var(${padToken})` : 'Inner Padding: 0px (disabled)'}
-            </div>
+                <div
+                  style="
+                    margin: ${marginStyle};
+                    padding: ${paddingStyle};
+                    background: color-mix(in oklch, var(--action-bg-1) 12%, transparent);
+                    border: 1.5px solid var(--action-border);
+                    border-radius: var(--radius-150);
+                    box-sizing: border-box;
+                    transition: all var(--duration-200) var(--ease-out);
+                  "
+                >
+                  <div style="font-family: var(--font-mono); font-size: var(--step-60); color: var(--action-fg-1); margin-bottom: 0.5rem;">
+                    ${args.enablePadding ? `Inner Padding Zone: var(${padToken})` : 'Inner Padding: 0px'}
+                  </div>
 
-            <!-- Content Flex Row with Gap and 5 Items -->
-            <div
-              style="
-                display: flex;
-                flex-wrap: wrap;
-                align-items: center;
-                gap: ${gapStyle};
-                background: var(--surface-bg);
-                border: 1px solid var(--surface-border);
-                border-radius: var(--radius-100);
-                padding: 1rem;
-                transition: gap var(--duration-200) var(--ease-out);
-              "
-            >
-              ${items.map((idx) => renderItemContent(idx))}
-            </div>
-          </div>
-        </div>
+                  <!-- Content Flex Row with Gap and 5 Items -->
+                  <div
+                    style="
+                      display: flex;
+                      flex-wrap: wrap;
+                      align-items: center;
+                      gap: ${gapStyle};
+                      background: var(--surface-bg);
+                      border: 1px solid var(--surface-border);
+                      border-radius: var(--radius-100);
+                      padding: 1rem;
+                      transition: gap var(--duration-200) var(--ease-out);
+                    "
+                  >
+                    ${items.map((idx) => renderItemContent(idx))}
+                  </div>
+                </div>
+              </div>
+            `
+          : html`
+              <!-- Margin OFF: Outer boundary is hidden, container renders directly -->
+              <div
+                style="
+                  margin: 0px;
+                  padding: ${paddingStyle};
+                  background: color-mix(in oklch, var(--action-bg-1) 12%, transparent);
+                  border: 1.5px solid var(--action-border);
+                  border-radius: var(--radius-150);
+                  box-sizing: border-box;
+                  transition: all var(--duration-200) var(--ease-out);
+                "
+              >
+                <div style="font-family: var(--font-mono); font-size: var(--step-60); color: var(--action-fg-1); margin-bottom: 0.5rem;">
+                  ${args.enablePadding ? `Inner Padding Zone: var(${padToken})` : 'Inner Padding: 0px'}
+                </div>
+
+                <!-- Content Flex Row with Gap and 5 Items -->
+                <div
+                  style="
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    gap: ${gapStyle};
+                    background: var(--surface-bg);
+                    border: 1px solid var(--surface-border);
+                    border-radius: var(--radius-100);
+                    padding: 1rem;
+                    transition: gap var(--duration-200) var(--ease-out);
+                  "
+                >
+                  ${items.map((idx) => renderItemContent(idx))}
+                </div>
+              </div>
+            `}
       </div>
     `;
   },

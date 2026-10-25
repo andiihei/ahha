@@ -135,31 +135,35 @@ export const TYPOGRAPHY_TOKENS: Record<string, DesignToken<string>> = {
 // 3. SPACE
 // ==========================================
 export const SPACE_TOKENS: Record<string, DesignToken<string>> = {
-  // Fluid Spacing Scale (Macro layout)
-  'space-10': { $value: 'clamp(0.0625rem, 0.0625rem + 0vw, 0.0625rem)', $type: 'dimension', $description: 'Fluid 1px static boundary offset' },
-  'space-20': { $value: 'clamp(0.125rem, 0.125rem + 0vw, 0.125rem)', $type: 'dimension', $description: 'Fluid 2px gap' },
-  'space-25': { $value: 'clamp(0.1875rem, 0.1619rem + 0.1136vw, 0.25rem)', $type: 'dimension', $description: 'Fluid 3px to 4px' },
-  'space-50': { $value: 'clamp(0.5625rem, 0.5369rem + 0.1136vw, 0.625rem)', $type: 'dimension', $description: 'Fluid 9px to 10px' },
-  'space-60': { $value: 'clamp(0.6875rem, 0.6619rem + 0.1136vw, 0.75rem)', $type: 'dimension', $description: 'Fluid 11px to 12px' },
-  'space-75': { $value: 'clamp(0.8125rem, 0.7614rem + 0.2273vw, 0.9375rem)', $type: 'dimension', $description: 'Fluid 13px to 15px' },
+  // Fluid Spacing Scale (Macro layout) - matched to global/space.css
+  'space-10': { $value: 'clamp(0.125rem, 0.0994rem + 0.1136vw, 0.1875rem)', $type: 'dimension', $description: 'Fluid 2px to 3px (0.125rem - 0.1875rem)' },
+  'space-30': { $value: 'clamp(0.3125rem, 0.3125rem + 0vw, 0.3125rem)', $type: 'dimension', $description: 'Fluid 5px constant (0.3125rem)' },
+  'space-50': { $value: 'clamp(0.5625rem, 0.5369rem + 0.1136vw, 0.625rem)', $type: 'dimension', $description: 'Fluid 9px to 10px (0.5625rem - 0.625rem)' },
+  'space-60': { $value: 'clamp(0.6875rem, 0.6619rem + 0.1136vw, 0.75rem)', $type: 'dimension', $description: 'Fluid 11px to 12px (0.6875rem - 0.75rem)' },
+  'space-70': { $value: 'clamp(0.8125rem, 0.7869rem + 0.1136vw, 0.875rem)', $type: 'dimension', $description: 'Fluid 13px to 14px (0.8125rem - 0.875rem)' },
+  'space-80': { $value: 'clamp(0.875rem, 0.8239rem + 0.2273vw, 1rem)', $type: 'dimension', $description: 'Fluid 14px to 16px (0.875rem - 1rem)' },
   'space-100': { $value: 'clamp(1.125rem, 1.0739rem + 0.2273vw, 1.25rem)', $type: 'dimension', $description: 'Base fluid spacing step (fluid 18px to 20px)' },
-  'space-125': { $value: 'clamp(1.375rem, 1.2983rem + 0.3409vw, 1.5625rem)', $type: 'dimension', $description: 'Fluid 22px to 25px' },
-  'space-150': { $value: 'clamp(1.6875rem, 1.5852rem + 0.4545vw, 1.9375rem)', $type: 'dimension', $description: 'Fluid 27px to 31px' },
-  'space-200': { $value: 'clamp(2.25rem, 2.1477rem + 0.4545vw, 2.5rem)', $type: 'dimension', $description: 'Fluid 36px to 40px' },
-  'space-250': { $value: 'clamp(2.75rem, 2.5966rem + 0.6818vw, 3.125rem)', $type: 'dimension', $description: 'Fluid 44px to 50px' },
-  'space-300': { $value: 'clamp(3.375rem, 3.1705rem + 0.9091vw, 3.875rem)', $type: 'dimension', $description: 'Fluid 54px to 62px' },
-  'space-400': { $value: 'clamp(4.5rem, 4.2955rem + 0.9091vw, 5rem)', $type: 'dimension', $description: 'Fluid 72px to 80px' },
-  'space-500': { $value: 'clamp(5.625rem, 5.3693rem + 1.1364vw, 6.25rem)', $type: 'dimension', $description: 'Fluid 90px to 100px section boundary' },
+  'space-125': { $value: 'clamp(1.4375rem, 1.3864rem + 0.2273vw, 1.5625rem)', $type: 'dimension', $description: 'Fluid 23px to 25px (1.4375rem - 1.5625rem)' },
+  'space-150': { $value: 'clamp(1.6875rem, 1.6108rem + 0.3409vw, 1.875rem)', $type: 'dimension', $description: 'Fluid 27px to 30px (1.6875rem - 1.875rem)' },
+  'space-200': { $value: 'clamp(2.25rem, 2.1477rem + 0.4545vw, 2.5rem)', $type: 'dimension', $description: 'Fluid 36px to 40px (2.25rem - 2.5rem)' },
+  'space-300': { $value: 'clamp(3.375rem, 3.2216rem + 0.6818vw, 3.75rem)', $type: 'dimension', $description: 'Fluid 54px to 60px (3.375rem - 3.75rem)' },
+  'space-400': { $value: 'clamp(4.5rem, 4.2955rem + 0.9091vw, 5rem)', $type: 'dimension', $description: 'Fluid 72px to 80px (4.5rem - 5rem)' },
+  'space-500': { $value: 'clamp(5.625rem, 5.3693rem + 1.1364vw, 6.25rem)', $type: 'dimension', $description: 'Fluid 90px to 100px (5.625rem - 6.25rem)' },
 
-  // Static Spacing Scale (Micro components)
-  'space-static-10': { $value: '0.0625rem', $type: 'dimension', $description: 'Static 1px border/inset' },
-  'space-static-20': { $value: '0.125rem', $type: 'dimension', $description: 'Static 2px gap' },
-  'space-static-25': { $value: '0.25rem', $type: 'dimension', $description: 'Static 4px micro gap' },
-  'space-static-50': { $value: '0.5rem', $type: 'dimension', $description: 'Static 8px compact padding' },
-  'space-static-75': { $value: '0.75rem', $type: 'dimension', $description: 'Static 12px button vertical padding' },
-  'space-static-100': { $value: '1.25rem', $type: 'dimension', $description: 'Static 20px base component padding' },
-  'space-static-150': { $value: '1.875rem', $type: 'dimension', $description: 'Static 30px container inset' },
-  'space-static-200': { $value: '2.5rem', $type: 'dimension', $description: 'Static 40px card gutter' },
+  // Static Spacing Scale (Micro components) - matched to global/space.css
+  'space-static-10': { $value: '0.125rem', $type: 'dimension', $description: 'Static 2px (0.125rem)' },
+  'space-static-30': { $value: '0.375rem', $type: 'dimension', $description: 'Static 6px (0.375rem)' },
+  'space-static-50': { $value: '0.625rem', $type: 'dimension', $description: 'Static 10px (0.625rem)' },
+  'space-static-60': { $value: '0.75rem', $type: 'dimension', $description: 'Static 12px (0.75rem)' },
+  'space-static-70': { $value: '0.875rem', $type: 'dimension', $description: 'Static 14px (0.875rem)' },
+  'space-static-80': { $value: '1rem', $type: 'dimension', $description: 'Static 16px (1rem)' },
+  'space-static-100': { $value: '1.25rem', $type: 'dimension', $description: 'Static 20px (1.25rem)' },
+  'space-static-125': { $value: '1.5625rem', $type: 'dimension', $description: 'Static 25px (1.5625rem)' },
+  'space-static-150': { $value: '1.875rem', $type: 'dimension', $description: 'Static 30px (1.875rem)' },
+  'space-static-200': { $value: '2.5rem', $type: 'dimension', $description: 'Static 40px (2.5rem)' },
+  'space-static-300': { $value: '3.75rem', $type: 'dimension', $description: 'Static 60px (3.75rem)' },
+  'space-static-400': { $value: '5rem', $type: 'dimension', $description: 'Static 80px (5rem)' },
+  'space-static-500': { $value: '6.25rem', $type: 'dimension', $description: 'Static 100px (6.25rem)' },
 };
 
 // ==========================================
