@@ -13,6 +13,7 @@ import "../components/button.css";
 import "../components/toggle.css";
 import "../components/selector-button.css";
 import "../components/nav-menu.css";
+import "../src/components/concentric-demo.css";
 
 const preview: Preview = {
   parameters: {
