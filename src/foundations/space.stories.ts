@@ -40,124 +40,199 @@ export default meta;
 type Story = StoryObj;
 
 export const FluidSpacingLadder: Story = {
-  render: () => html`
-    <div style="display: flex; flex-direction: column; gap: 2rem; width: 100%; max-width: 850px;">
-      <div>
-        <h3 style="font-family: var(--font-alt); font-size: var(--step-125); margin: 0 0 0.5rem 0;">
-          Fluid Spacing Scale (Macro Layout)
-        </h3>
-        <p style="font-size: var(--step-80); color: var(--text-fg-2); margin: 0;">
-          Tokens expand fluidly as the viewport scales from 360px up to 1240px.
-        </p>
-      </div>
+  argTypes: {
+    containerWidth: {
+      name: 'Container / Viewport Width',
+      control: { type: 'range', min: 360, max: 1440, step: 20 },
+      defaultValue: 1000,
+      description: 'Simulate responsive container width to observe fluid expansion',
+    },
+  },
+  args: {
+    containerWidth: 1000,
+  },
+  render: (args) => {
+    const rootPx = 16;
+    const progress = Math.min(Math.max((args.containerWidth - 360) / (1240 - 360), 0), 1);
 
-      <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-        ${[
-          'space-10',
-          'space-20',
-          'space-25',
-          'space-50',
-          'space-60',
-          'space-75',
-          'space-100',
-          'space-125',
-          'space-150',
-          'space-200',
-          'space-250',
-          'space-300',
-          'space-400',
-          'space-500',
-        ].map(
-          (step) => html`
-            <div
-              style="
-                display: grid;
-                grid-template-columns: 10rem 1fr;
-                gap: 1rem;
-                align-items: center;
-              "
-            >
-              <div style="font-family: var(--font-mono); font-size: var(--step-75); color: var(--text-fg-1);">
-                --${step}
-              </div>
-              <div style="display: flex; align-items: center; gap: 1rem;">
+    const steps = [
+      { name: '10', min: 1, max: 1 },
+      { name: '20', min: 2, max: 2 },
+      { name: '25', min: 3, max: 4 },
+      { name: '50', min: 9, max: 10 },
+      { name: '60', min: 11, max: 12 },
+      { name: '75', min: 13, max: 15 },
+      { name: '100', min: 18, max: 20 },
+      { name: '125', min: 22, max: 25 },
+      { name: '150', min: 27, max: 31 },
+      { name: '200', min: 36, max: 40 },
+      { name: '250', min: 44, max: 50 },
+      { name: '300', min: 54, max: 62 },
+      { name: '400', min: 72, max: 80 },
+      { name: '500', min: 90, max: 100 },
+    ];
+
+    return html`
+      <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 100%; max-width: 900px;">
+        <div>
+          <h3 style="font-family: var(--font-alt); font-size: var(--step-125); margin: 0 0 0.5rem 0;">
+            Fluid Spacing Scale (Macro Layout)
+          </h3>
+          <p style="font-size: var(--step-80); color: var(--text-fg-2); margin: 0 0 1rem 0;">
+            Thirteen steps scaling continuously between 360px and 1240px. The bars take the authentic specimen styling: <strong>pale Neutral fill with 1px border edges on the left and right</strong>. Drag the container slider in Controls to watch the bars breathe.
+          </p>
+
+          <div
+            style="
+              display: inline-flex;
+              align-items: center;
+              gap: 0.75rem;
+              padding: 0.5rem 1rem;
+              background: var(--surface-bg-1);
+              border: 1px solid var(--surface-border);
+              border-radius: var(--radius-100);
+              font-family: var(--font-mono);
+              font-size: var(--step-75);
+              margin-bottom: 1rem;
+            "
+          >
+            <span>Simulated Viewport: <strong>${args.containerWidth}px</strong></span>
+            <span>·</span>
+            <span>Progress: <strong>${Math.round(progress * 100)}%</strong></span>
+          </div>
+        </div>
+
+        <div
+          style="
+            width: 100%;
+            max-width: ${args.containerWidth}px;
+            background: var(--surface-bg);
+            border: 1px dashed var(--surface-border);
+            border-radius: var(--radius-150);
+            padding: 1.5rem;
+            box-sizing: border-box;
+            transition: max-width var(--duration-100) var(--ease-out);
+          "
+        >
+          <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+            ${steps.map((s) => {
+              const currentPx = Math.round(s.min + (s.max - s.min) * progress);
+              const currentRem = (currentPx / rootPx).toFixed(4);
+
+              return html`
                 <div
                   style="
-                    height: 24px;
-                    width: var(--${step});
-                    background: var(--action-bg-1);
-                    border-radius: var(--radius-50);
-                    min-width: 2px;
-                    transition: width var(--duration-100) var(--ease-out);
+                    display: grid;
+                    grid-template-columns: 14rem 1fr;
+                    gap: 1.25rem;
+                    align-items: center;
+                    padding-block: 4px;
+                    border-bottom: 1px solid color-mix(in oklch, var(--surface-border) 40%, transparent);
                   "
-                ></div>
-                <span style="font-family: var(--font-mono); font-size: var(--step-60); color: var(--text-fg-2);">
-                  ${SPACE_TOKENS[step]?.$description || ''}
-                </span>
-              </div>
-            </div>
-          `
-        )}
+                >
+                  <div style="display: flex; flex-direction: column; font-size: var(--step-75);">
+                    <span style="font-family: var(--font-mono); font-weight: 600; color: var(--text-fg-1);">
+                      --space-${s.name}
+                    </span>
+                    <span style="font-family: var(--font-mono); font-size: var(--step-60); color: var(--text-fg-2);">
+                      now ${currentRem}rem · ${currentPx}px
+                    </span>
+                  </div>
+
+                  <div style="min-width: 0; display: flex; align-items: center;">
+                    <div
+                      style="
+                        height: 16px;
+                        width: ${currentPx}px;
+                        background: var(--neutral-100);
+                        border-left: 1px solid var(--neutral-700);
+                        border-right: 1px solid var(--neutral-700);
+                        border-radius: 0;
+                        min-width: 2px;
+                        box-sizing: border-box;
+                        transition: width var(--duration-100) var(--ease-out);
+                      "
+                      title="--space-${s.name}: ${currentRem}rem (${currentPx}px)"
+                    ></div>
+                  </div>
+                </div>
+              `;
+            })}
+          </div>
+        </div>
       </div>
-    </div>
-  `,
+    `;
+  },
 };
 
 export const StaticMicroSpacing: Story = {
-  render: () => html`
-    <div style="display: flex; flex-direction: column; gap: 2rem; width: 100%; max-width: 850px;">
-      <div>
-        <h3 style="font-family: var(--font-alt); font-size: var(--step-125); margin: 0 0 0.5rem 0;">
-          Static Spacing Scale (Micro Components)
-        </h3>
-        <p style="font-size: var(--step-80); color: var(--text-fg-2); margin: 0;">
-          Frozen dimensional units anchored to a 20px base, ensuring buttons, toggles, and form controls stay invariant.
-        </p>
-      </div>
+  render: () => {
+    const staticSteps = [
+      { name: '10', rem: '0.0625rem', px: 1 },
+      { name: '20', rem: '0.125rem', px: 2 },
+      { name: '25', rem: '0.25rem', px: 4 },
+      { name: '50', rem: '0.5rem', px: 8 },
+      { name: '75', rem: '0.75rem', px: 12 },
+      { name: '100', rem: '1.25rem', px: 20 },
+      { name: '150', rem: '1.875rem', px: 30 },
+      { name: '200', rem: '2.5rem', px: 40 },
+    ];
 
-      <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-        ${[
-          'space-static-10',
-          'space-static-20',
-          'space-static-25',
-          'space-static-50',
-          'space-static-75',
-          'space-static-100',
-          'space-static-150',
-          'space-static-200',
-        ].map(
-          (step) => html`
-            <div
-              style="
-                display: grid;
-                grid-template-columns: 12rem 1fr;
-                gap: 1rem;
-                align-items: center;
-              "
-            >
-              <div style="font-family: var(--font-mono); font-size: var(--step-75); color: var(--text-fg-1);">
-                --${step}
+    return html`
+      <div style="display: flex; flex-direction: column; gap: 2rem; width: 100%; max-width: 850px;">
+        <div>
+          <h3 style="font-family: var(--font-alt); font-size: var(--step-125); margin: 0 0 0.5rem 0;">
+            Static Spacing Scale (Micro Components)
+          </h3>
+          <p style="font-size: var(--step-80); color: var(--text-fg-2); margin: 0;">
+            Frozen dimensional units anchored to a 20px base, ensuring buttons, toggles, and form controls stay invariant. Styled in Cerise (pale red fill with 1px dark red left/right borders).
+          </p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+          ${staticSteps.map(
+            (s) => html`
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 14rem 1fr;
+                  gap: 1.25rem;
+                  align-items: center;
+                  padding-block: 4px;
+                  border-bottom: 1px solid color-mix(in oklch, var(--surface-border) 40%, transparent);
+                "
+              >
+                <div style="display: flex; flex-direction: column; font-size: var(--step-75);">
+                  <span style="font-family: var(--font-mono); font-weight: 600; color: var(--text-fg-1);">
+                    --space-static-${s.name}
+                  </span>
+                  <span style="font-family: var(--font-mono); font-size: var(--step-60); color: var(--text-fg-2);">
+                    ${s.rem} · ${s.px}px — fixed
+                  </span>
+                </div>
+
+                <div style="min-width: 0; display: flex; align-items: center;">
+                  <div
+                    style="
+                      height: 16px;
+                      width: ${s.px}px;
+                      background: var(--red-100);
+                      border-left: 1px solid var(--red-700);
+                      border-right: 1px solid var(--red-700);
+                      border-radius: 0;
+                      min-width: 1px;
+                      box-sizing: border-box;
+                    "
+                    title="--space-static-${s.name}: ${s.rem} (${s.px}px)"
+                  ></div>
+                </div>
               </div>
-              <div style="display: flex; align-items: center; gap: 1rem;">
-                <div
-                  style="
-                    height: 24px;
-                    width: var(--${step});
-                    background: color-mix(in oklch, var(--action-bg-1) 70%, transparent);
-                    border-radius: var(--radius-50);
-                    min-width: 1px;
-                  "
-                ></div>
-                <span style="font-family: var(--font-mono); font-size: var(--step-60); color: var(--text-fg-2);">
-                  ${SPACE_TOKENS[step]?.$description || ''} (${SPACE_TOKENS[step]?.$value || ''})
-                </span>
-              </div>
-            </div>
-          `
-        )}
+            `
+          )}
+        </div>
       </div>
-    </div>
-  `,
+    `;
+  },
 };
 
 export const InteractiveSpacingPreview: Story = {
