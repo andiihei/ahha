@@ -2,9 +2,9 @@
 
 ---
 
-## Part 1: Design Language Audit (Review of `design-language/*.css`)
+## Part 1: Design Language Audit (Review of `global/*.css`)
 
-A comprehensive audit was performed across all 8 token files in `design-language/` to identify design intent, verify mathematical formulas, check for Muse artifacts, and eliminate inconsistencies.
+A comprehensive audit was performed across all 6 token files in `global/` to identify design intent, verify mathematical formulas, check for Muse artifacts, and eliminate inconsistencies.
 
 ### 1. `colors.css` (Layer 1 Ramps & Layer 2 [data-style] × [data-mode])
 

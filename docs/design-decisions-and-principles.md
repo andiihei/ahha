@@ -15,9 +15,9 @@ graph TD
   D["Scope Cascade: [data-style='neutral|purple|...'] × [data-mode='default|invert|system']"] -.-> B
 ```
 
-### Layer 1: Design Language
+### Layer 1: Design Language (Global Scope: `global/`)
 
-Layer 1 encapsulates everything a theme needs to express itself—the complete design language foundation:
+Layer 1 encapsulates everything a theme needs to express itself—the complete design language foundation. The physical files reside in the `global/` directory (e.g. `global/colors.css`, `global/typography.css`, `global/space.css`, `global/shaping.css`, `global/motion.css`, `global/grid.css`), reflecting the global extent and reach of the design language across all components, layouts, and applications:
 
 - **Color Families**: 6 distinct OKLCH families (`neutral`, `purple`, `green`, `red`, `yellow`, `blue`) across 11 discrete luminance steps (`1000..25`, omitting steps 400 and 600).
 - **Fluid & Static Spacing**:

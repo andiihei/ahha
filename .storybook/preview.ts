@@ -3,12 +3,12 @@ import { html } from "lit";
 import { setInspectorActive } from "./style-inspector.js";
 
 // Load AHHA design language tokens
-import "../design-language/colors.css";
-import "../design-language/typography.css";
-import "../design-language/space.css";
-import "../design-language/grid.css";
-import "../design-language/shaping.css";
-import "../design-language/motion.css";
+import "../global/colors.css";
+import "../global/typography.css";
+import "../global/space.css";
+import "../global/grid.css";
+import "../global/shaping.css";
+import "../global/motion.css";
 import "../components/button.css";
 import "../components/toggle.css";
 import "../components/selector-button.css";
