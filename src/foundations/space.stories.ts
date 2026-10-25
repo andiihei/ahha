@@ -236,46 +236,249 @@ export const StaticMicroSpacing: Story = {
 };
 
 export const InteractiveSpacingPreview: Story = {
+  argTypes: {
+    selectedSpace: {
+      name: 'Spacing Token',
+      control: { type: 'select' },
+      options: [
+        '--space-25',
+        '--space-50',
+        '--space-60',
+        '--space-75',
+        '--space-100',
+        '--space-125',
+        '--space-150',
+        '--space-200',
+        '--space-250',
+        '--space-300',
+      ],
+      defaultValue: '--space-100',
+      description: 'The active spacing token to apply across enabled properties',
+    },
+    enablePadding: {
+      name: 'Enable Padding',
+      control: { type: 'boolean' },
+      defaultValue: true,
+      description: 'Apply spacing as inner container padding',
+    },
+    enableMargin: {
+      name: 'Enable Margin',
+      control: { type: 'boolean' },
+      defaultValue: false,
+      description: 'Apply spacing as outer margin around the container',
+    },
+    enableGap: {
+      name: 'Enable Gap',
+      control: { type: 'boolean' },
+      defaultValue: true,
+      description: 'Apply spacing as flex gap between items',
+    },
+    itemType: {
+      name: 'Item Element Type',
+      control: { type: 'select' },
+      options: ['shapes', 'icons', 'text', 'badges'],
+      defaultValue: 'shapes',
+      description: 'Type of elements rendered inside the gap preview',
+    },
+  },
   args: {
     selectedSpace: '--space-100',
+    enablePadding: true,
+    enableMargin: false,
+    enableGap: true,
+    itemType: 'shapes',
   },
-  render: (args) => html`
-    <div style="display: flex; flex-direction: column; gap: 1.5rem; max-width: 650px; width: 100%;">
-      <div>
-        <h3 style="font-family: var(--font-alt); font-size: var(--step-125); margin: 0 0 0.5rem 0;">
-          Interactive Spacing Box Preview
-        </h3>
-        <p style="font-size: var(--step-80); color: var(--text-fg-2); margin: 0;">
-          Select different spacing tokens in Storybook <strong>Controls</strong> to preview padding dynamics.
-        </p>
-      </div>
+  render: (args) => {
+    const spaceToken = args.selectedSpace;
+    const paddingStyle = args.enablePadding ? `var(${spaceToken})` : '0px';
+    const marginStyle = args.enableMargin ? `var(${spaceToken})` : '0px';
+    const gapStyle = args.enableGap ? `var(${spaceToken})` : '0px';
 
-      <div
-        style="
-          background: color-mix(in oklch, var(--action-bg-1) 15%, transparent);
-          border: 1px dashed var(--action-border);
-          border-radius: var(--radius-150);
-          padding: var(${args.selectedSpace});
-          transition: padding var(--duration-200) var(--ease-out);
-        "
-      >
+    const items = [1, 2, 3, 4, 5];
+
+    const renderItemContent = (idx: number) => {
+      switch (args.itemType) {
+        case 'icons':
+          return html`
+            <div
+              style="
+                width: 48px;
+                height: 48px;
+                background: var(--surface-bg-1);
+                border: 1px solid var(--surface-border);
+                border-radius: var(--radius-100);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--action-fg-1);
+                font-family: var(--font-mono);
+                font-size: var(--step-80);
+                flex: none;
+              "
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                ${idx === 1 ? html`<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>` : ''}
+                ${idx === 2 ? html`<circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline>` : ''}
+                ${idx === 3 ? html`<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>` : ''}
+                ${idx === 4 ? html`<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>` : ''}
+                ${idx === 5 ? html`<rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path>` : ''}
+              </svg>
+            </div>
+          `;
+        case 'text':
+          return html`
+            <div
+              style="
+                padding: 0.5rem 0.85rem;
+                background: var(--surface-bg-1);
+                border: 1px solid var(--surface-border);
+                border-radius: var(--radius-100);
+                font-family: var(--font-main);
+                font-size: var(--step-75);
+                color: var(--text-fg-1);
+                white-space: nowrap;
+              "
+            >
+              Paragraph Item #${idx}
+            </div>
+          `;
+        case 'badges':
+          return html`
+            <div
+              style="
+                padding: 0.25rem 0.75rem;
+                background: var(--action-bg-1);
+                color: var(--action-fg-1);
+                border-radius: var(--radius-full);
+                font-family: var(--font-mono);
+                font-size: var(--step-70);
+                font-weight: 600;
+                white-space: nowrap;
+              "
+            >
+              Tag ${idx}
+            </div>
+          `;
+        case 'shapes':
+        default:
+          return html`
+            <div
+              style="
+                width: 52px;
+                height: 52px;
+                background: var(--action-bg-1);
+                border: 1px solid var(--action-border);
+                border-radius: ${idx % 2 === 0 ? 'var(--radius-100)' : 'var(--radius-full)'};
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--action-fg-1);
+                font-family: var(--font-mono);
+                font-size: var(--step-75);
+                font-weight: 700;
+                flex: none;
+              "
+            >
+              #${idx}
+            </div>
+          `;
+      }
+    };
+
+    return html`
+      <div style="display: flex; flex-direction: column; gap: 1.5rem; max-width: 800px; width: 100%;">
+        <div>
+          <h3 style="font-family: var(--font-alt); font-size: var(--step-125); margin: 0 0 0.5rem 0;">
+            Interactive Spacing Dynamics (Padding, Margin & Gaps)
+          </h3>
+          <p style="font-size: var(--step-80); color: var(--text-fg-2); margin: 0 0 1rem 0;">
+            Test combinations of <strong>margin</strong>, <strong>padding</strong>, and <strong>flex gap</strong> using <code>${spaceToken}</code>. Toggle controls in the Storybook panel to inspect spatial interplay across 5 items.
+          </p>
+
+          <div
+            style="
+              display: flex;
+              flex-wrap: wrap;
+              gap: 0.5rem 1rem;
+              font-family: var(--font-mono);
+              font-size: var(--step-75);
+              padding: 0.75rem 1.25rem;
+              background: var(--surface-bg-1);
+              border: 1px solid var(--surface-border);
+              border-radius: var(--radius-100);
+            "
+          >
+            <span>Token: <strong>${spaceToken}</strong></span>
+            <span>·</span>
+            <span>Padding: <strong style="color: ${args.enablePadding ? 'var(--green-700, green)' : 'var(--text-fg-2)'};">${args.enablePadding ? 'ON' : 'OFF'}</strong></span>
+            <span>·</span>
+            <span>Margin: <strong style="color: ${args.enableMargin ? 'var(--green-700, green)' : 'var(--text-fg-2)'};">${args.enableMargin ? 'ON' : 'OFF'}</strong></span>
+            <span>·</span>
+            <span>Gap: <strong style="color: ${args.enableGap ? 'var(--green-700, green)' : 'var(--text-fg-2)'};">${args.enableGap ? 'ON' : 'OFF'}</strong></span>
+            <span>·</span>
+            <span>Items: <strong>5 (${args.itemType})</strong></span>
+          </div>
+        </div>
+
+        <!-- Outer Boundary Area to visualize Margins -->
         <div
           style="
-            background: var(--surface-bg-1);
-            border: 1px solid var(--surface-border);
-            border-radius: var(--radius-100);
-            padding: var(--space-static-100);
-            text-align: center;
+            background: color-mix(in oklch, var(--yellow-500, orange) 10%, transparent);
+            border: 1px dashed var(--yellow-700, orange);
+            border-radius: var(--radius-250);
+            position: relative;
+            box-sizing: border-box;
           "
         >
-          <div style="font-family: var(--font-mono); font-size: var(--step-80); font-weight: 600;">
-            Padding: var(${args.selectedSpace})
+          <div
+            style="
+              position: absolute;
+              top: 0.25rem;
+              left: 0.5rem;
+              font-family: var(--font-mono);
+              font-size: var(--step-60);
+              color: var(--yellow-700, orange);
+            "
+          >
+            ${args.enableMargin ? `Outer Margin Zone: var(${spaceToken})` : 'Outer Margin: 0px'}
           </div>
-          <div style="font-size: var(--step-75); color: var(--text-fg-2); margin-top: 0.25rem;">
-            Content area inside dynamic spatial padding
+
+          <!-- Main Container applying Margin and Padding -->
+          <div
+            style="
+              margin: ${marginStyle};
+              padding: ${paddingStyle};
+              background: color-mix(in oklch, var(--action-bg-1) 12%, transparent);
+              border: 1.5px solid var(--action-border);
+              border-radius: var(--radius-150);
+              box-sizing: border-box;
+              transition: all var(--duration-200) var(--ease-out);
+            "
+          >
+            <div style="font-family: var(--font-mono); font-size: var(--step-60); color: var(--action-fg-1); margin-bottom: 0.5rem;">
+              ${args.enablePadding ? `Inner Padding Zone: var(${spaceToken})` : 'Inner Padding: 0px'}
+            </div>
+
+            <!-- Content Flex Row with Gap and 5 Items -->
+            <div
+              style="
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: ${gapStyle};
+                background: var(--surface-bg);
+                border: 1px solid var(--surface-border);
+                border-radius: var(--radius-100);
+                padding: 1rem;
+                transition: gap var(--duration-200) var(--ease-out);
+              "
+            >
+              ${items.map((idx) => renderItemContent(idx))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  `,
+    `;
+  },
 };
+
