@@ -30,16 +30,16 @@
 
 /* ---- Fluid type (type.css) ---- */
 /* Design Language — Fluid typography.
-   Configuration as supplied by Andii 2026-10-20 (Utopia): 360px → 18px base
-   @ 1.125 scale; 1240px → 20px base @ 1.2 scale.
-   @link https://utopia.fyi/type/calculator?c=360,18,1.125,1240,20,1.2,8,3,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12
+   Configuration: 380px minimum viewport floor (matches the system's
+   supported viewport boundary) → 18px base @ 1.125 scale;
+   1240px → 20px base @ 1.2 scale.
 
    REFACTORED 2026-10-22 (Andii's direction) from per-step clamp() magic
    numbers to the shared-progress model (Kevin Powell, "No more clamp()
    magic numbers"; Master.dev, "Fluid Typography with progress()"; MDN
    progress() reference): one --_progress value — how far the viewport sits
-   between 360px and 1240px, 0 → 1 — drives every step. Each step is
-   derived from the configuration by formula: its size at 360px is
+   between 380px and 1240px, 0 → 1 — drives every step. Each step is
+   derived from the configuration by formula: its size at 380px is
    --type-min-base × --type-min-ratio^step, at 1240px --type-max-base ×
    --type-max-ratio^step, interpolated by --_progress. Changing the
    configuration (base sizes, ratios, viewport range) re-derives the whole
@@ -47,30 +47,30 @@
 
    Variable NAMES unchanged (unified percentage convention, 100 = base):
    60/70/80/100/120/140/160/180/200/250/300/350 = Utopia steps -3..8.
-   Rendered VALUES preserved: endpoints identical to the previous Utopia
-   clamp() output at all 12 steps; mid-range deviation ≤ 0.0013px (the old
-   clamps' rounded slope/intercept). Steps 60/70 keep their negative slope
-   (min size > max size) — the interpolation handles it directly.
+   Rendered VALUES preserved: endpoints identical to Utopia output at all
+   12 steps; mid-range deviation ≤ 0.0013px (the clamps' rounded slope/intercept).
+   Steps 60/70 keep their negative slope (min size > max size) — the
+   interpolation handles it directly.
 
-   Fallback architecture: the original clamp() definitions stand below and
-   apply wherever neither progress() nor the tan(atan2()) route is
-   supported. Inside the @supports block, --_progress is computed with
-   tan(atan2()) (works in every current browser); where progress() itself
-   is supported it replaces that computation. */
+   Fallback architecture: the clamp() definitions stand below and apply
+   wherever neither progress() nor the tan(atan2()) route is supported.
+   Inside the @supports block, --_progress is computed with tan(atan2())
+   (works in every current browser); where progress() itself is supported
+   it replaces that computation. */
 
 :root {
-  --step-60: clamp(0.7234rem, 0.8174rem + -0.1214vw, 0.7901rem);
-  --step-70: clamp(0.8681rem, 0.8974rem + -0.0379vw, 0.8889rem);
-  --step-80: clamp(1rem, 0.983rem + 0.0758vw, 1.0417rem);
-  --step-100: clamp(1.125rem, 1.0739rem + 0.2273vw, 1.25rem);
-  --step-120: clamp(1.2656rem, 1.1697rem + 0.4261vw, 1.5rem);
-  --step-140: clamp(1.4238rem, 1.2699rem + 0.6839vw, 1.8rem);
-  --step-160: clamp(1.6018rem, 1.3735rem + 1.0149vw, 2.16rem);
-  --step-180: clamp(1.802rem, 1.4789rem + 1.4363vw, 2.592rem);
-  --step-200: clamp(2.0273rem, 1.5842rem + 1.9693vw, 3.1104rem);
-  --step-250: clamp(2.2807rem, 1.6868rem + 2.6396vw, 3.7325rem);
-  --step-300: clamp(2.5658rem, 1.7831rem + 3.4785vw, 4.479rem);
-  --step-350: clamp(2.8865rem, 1.8686rem + 4.5241vw, 5.3748rem);
+  --step-60: clamp(0.7234rem, 0.8196rem + -0.1242vw, 0.7901rem);
+  --step-70: clamp(0.8681rem, 0.8981rem + -0.0388vw, 0.8889rem);
+  --step-80: clamp(1.0000rem, 0.9816rem + 0.0775vw, 1.0417rem);
+  --step-100: clamp(1.1250rem, 1.0698rem + 0.2326vw, 1.2500rem);
+  --step-120: clamp(1.2656rem, 1.1621rem + 0.4360vw, 1.5000rem);
+  --step-140: clamp(1.4238rem, 1.2576rem + 0.6999vw, 1.8000rem);
+  --step-160: clamp(1.6018rem, 1.3552rem + 1.0385vw, 2.1600rem);
+  --step-180: clamp(1.8020rem, 1.4530rem + 1.4697vw, 2.5920rem);
+  --step-200: clamp(2.0273rem, 1.5487rem + 2.0151vw, 3.1104rem);
+  --step-250: clamp(2.2807rem, 1.6392rem + 2.7010vw, 3.7325rem);
+  --step-300: clamp(2.5658rem, 1.7204rem + 3.5594vw, 4.4790rem);
+  --step-350: clamp(2.8865rem, 1.7870rem + 4.6293vw, 5.3748rem);
 }
 
 /* Registered so atan2() receives a resolved <length> (CSS-Tricks recipe). */
@@ -83,20 +83,20 @@
 @supports (opacity: progress(1px, 0px, 1px)) or (width: calc(1px * tan(atan2(1px, 1px)))) {
   :root {
     /* The configuration — the only numbers a future change touches. */
-    --type-min-viewport: 360px;
+    --type-min-viewport: 380px;
     --type-max-viewport: 1240px;
-    --type-min-base: 1.125rem; /* 18px at 360px */
+    --type-min-base: 1.125rem; /* 18px at 380px */
     --type-max-base: 1.25rem; /* 20px at 1240px */
     --type-min-ratio: 1.125;
     --type-max-ratio: 1.2;
 
-    /* Shared progress, 0 at 360px → 1 at 1240px, clamped outside.
+    /* Shared progress, 0 at 380px → 1 at 1240px, clamped outside.
        Default route: tan(atan2()) strips the unit from the viewport
        width so the ratio can be computed by hand. The bounds below are
        the unitless forms of --type-min/max-viewport. */
     --_100vw: 100vw;
     --_viewport-int: calc(10000 * tan(atan2(var(--_100vw), 10000px)));
-    --_progress: calc((clamp(360, var(--_viewport-int), 1240) - 360) / (1240 - 360));
+    --_progress: calc((clamp(380, var(--_viewport-int), 1240) - 380) / (1240 - 380));
 
     /* Steps: min + progress × (max − min), endpoints derived by pow(). */
     --_min-60: calc(var(--type-min-base) * pow(var(--type-min-ratio), -3));

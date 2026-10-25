@@ -62,7 +62,7 @@ export const FluidScaleLadder: Story = {
           Utopia Fluid Scale Ladder (Steps 60..350)
         </h3>
         <p style="font-size: var(--step-80); color: var(--text-fg-2); margin: 0;">
-          Resize your browser window to observe continuous fluid typography breathing between 360px and 1240px.
+          Resize your browser window to observe continuous fluid typography breathing between 380px and 1240px.
         </p>
       </div>
 

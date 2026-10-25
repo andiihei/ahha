@@ -1,24 +1,22 @@
 /* ---- Fluid space (space.css) ---- */
 /* Design Language — Fluid spacing.
-   Configuration as supplied by Andii 2026-10-20 (Utopia space scale on the
-   same config as the type scale: 360px/18px → 1240px/20px).
+   Configuration: 380px minimum viewport floor (matches the system's
+   supported viewport boundary) → 18px base @ 1.125 scale;
+   1240px → 20px base @ 1.2 scale.
    Note: --space-100 is identical to --step-100 by design (spacing anchors
    to the base font size).
-   @link https://utopia.fyi/space/calculator?c=360,18,1.125,1240,20,1.2,8,3,&s=0.8|0.7|0.6|0.5|0.25|0.125,1.25|1.5|2|3|4|5,&g=s,l,xl,12
 
    REFACTORED 2026-10-22 (Andii's direction), following the type.css
    refactor of the same day: no per-step clamp() magic numbers. This file
    consumes the shared configuration and --_progress defined in type.css
-   (the two files are one set — type.css loads first) and derives every
+   (the two files are one set — typography.css loads first) and derives every
    step from its multiplier of the base size:
 
      step endpoints = round(multiplier × base, 0.0625rem)
      step value     = min + --_progress × (max − min)
 
    The 0.0625rem rounding interval (1px at the 16px reference root)
-   reproduces Utopia's whole-pixel endpoint rounding exactly — including
-   --space-30, whose endpoints coincide (0.25 × 18px rounds to 5px;
-   0.25 × 20px is 5px), making it constant. Multipliers: 10→0.125,
+   reproduces whole-pixel endpoint rounding exactly. Multipliers: 10→0.125,
    30→0.25, 50→0.5, 60→0.6, 70→0.7, 80→0.8, 100→1, 125→1.25, 150→1.5,
    200→2, 300→3, 400→4, 500→5.
 
@@ -31,41 +29,40 @@
    NAMES unchanged (unified percentage convention, 100 = base):
    10/30/50/60/70/80/100/125/150/200/300/400/500, pairs <low>-<high>.
    Rendered VALUES preserved: every step and pair endpoint is identical
-   to the previous Utopia clamp() output (verified numerically);
-   mid-range deviation is the same ≤0.0013px rounding residue as type.
+   to Utopia output; mid-range deviation is the same ≤0.0013px rounding residue as type.
 
-   Fallback: the original clamp() definitions stand below and apply
-   wherever the shared-progress block in type.css is inactive or round()
+   Fallback: the clamp() definitions stand below and apply
+   wherever the shared-progress block in typography.css is inactive or round()
    is unsupported. */
 
 :root {
-  --space-10: clamp(0.125rem, 0.0994rem + 0.1136vw, 0.1875rem);
-  --space-30: clamp(0.3125rem, 0.3125rem + 0vw, 0.3125rem);
-  --space-50: clamp(0.5625rem, 0.5369rem + 0.1136vw, 0.625rem);
-  --space-60: clamp(0.6875rem, 0.6619rem + 0.1136vw, 0.75rem);
-  --space-70: clamp(0.8125rem, 0.7869rem + 0.1136vw, 0.875rem);
-  --space-80: clamp(0.875rem, 0.8239rem + 0.2273vw, 1rem);
-  --space-100: clamp(1.125rem, 1.0739rem + 0.2273vw, 1.25rem);
-  --space-125: clamp(1.4375rem, 1.3864rem + 0.2273vw, 1.5625rem);
-  --space-150: clamp(1.6875rem, 1.6108rem + 0.3409vw, 1.875rem);
-  --space-200: clamp(2.25rem, 2.1477rem + 0.4545vw, 2.5rem);
-  --space-300: clamp(3.375rem, 3.2216rem + 0.6818vw, 3.75rem);
-  --space-400: clamp(4.5rem, 4.2955rem + 0.9091vw, 5rem);
-  --space-500: clamp(5.625rem, 5.3693rem + 1.1364vw, 6.25rem);
+  --space-10: clamp(0.1250rem, 0.1250rem + 0vw, 0.1250rem);
+  --space-30: clamp(0.2500rem, 0.2224rem + 0.1163vw, 0.3125rem);
+  --space-50: clamp(0.5625rem, 0.5349rem + 0.1163vw, 0.6250rem);
+  --space-60: clamp(0.6875rem, 0.6599rem + 0.1163vw, 0.7500rem);
+  --space-70: clamp(0.8125rem, 0.7849rem + 0.1163vw, 0.8750rem);
+  --space-80: clamp(0.8750rem, 0.8198rem + 0.2326vw, 1.0000rem);
+  --space-100: clamp(1.1250rem, 1.0698rem + 0.2326vw, 1.2500rem);
+  --space-125: clamp(1.3750rem, 1.2922rem + 0.3488vw, 1.5625rem);
+  --space-150: clamp(1.6875rem, 1.6047rem + 0.3488vw, 1.8750rem);
+  --space-200: clamp(2.2500rem, 2.1395rem + 0.4651vw, 2.5000rem);
+  --space-300: clamp(3.3750rem, 3.2093rem + 0.6977vw, 3.7500rem);
+  --space-400: clamp(4.5000rem, 4.2791rem + 0.9302vw, 5.0000rem);
+  --space-500: clamp(5.6250rem, 5.3488rem + 1.1628vw, 6.2500rem);
 
   /* One-up pairs */
-  --space-10-30: clamp(0.125rem, 0.0483rem + 0.3409vw, 0.3125rem);
-  --space-30-50: clamp(0.3125rem, 0.1847rem + 0.5682vw, 0.625rem);
-  --space-50-60: clamp(0.5625rem, 0.4858rem + 0.3409vw, 0.75rem);
-  --space-60-70: clamp(0.6875rem, 0.6108rem + 0.3409vw, 0.875rem);
-  --space-70-80: clamp(0.8125rem, 0.7358rem + 0.3409vw, 1rem);
-  --space-80-100: clamp(0.875rem, 0.7216rem + 0.6818vw, 1.25rem);
-  --space-100-125: clamp(1.125rem, 0.946rem + 0.7955vw, 1.5625rem);
-  --space-125-150: clamp(1.4375rem, 1.2585rem + 0.7955vw, 1.875rem);
-  --space-150-200: clamp(1.6875rem, 1.3551rem + 1.4773vw, 2.5rem);
-  --space-200-300: clamp(2.25rem, 1.6364rem + 2.7273vw, 3.75rem);
-  --space-300-400: clamp(3.375rem, 2.7102rem + 2.9545vw, 5rem);
-  --space-400-500: clamp(4.5rem, 3.7841rem + 3.1818vw, 6.25rem);
+  --space-10-30: clamp(0.1250rem, 0.0422rem + 0.3488vw, 0.3125rem);
+  --space-30-50: clamp(0.2500rem, 0.0843rem + 0.6977vw, 0.6250rem);
+  --space-50-60: clamp(0.5625rem, 0.4797rem + 0.3488vw, 0.7500rem);
+  --space-60-70: clamp(0.6875rem, 0.6047rem + 0.3488vw, 0.8750rem);
+  --space-70-80: clamp(0.8125rem, 0.7297rem + 0.3488vw, 1.0000rem);
+  --space-80-100: clamp(0.8750rem, 0.7093rem + 0.6977vw, 1.2500rem);
+  --space-100-125: clamp(1.1250rem, 0.9317rem + 0.8140vw, 1.5625rem);
+  --space-125-150: clamp(1.3750rem, 1.1541rem + 0.9302vw, 1.8750rem);
+  --space-150-200: clamp(1.6875rem, 1.3285rem + 1.5116vw, 2.5000rem);
+  --space-200-300: clamp(2.2500rem, 1.5872rem + 2.7907vw, 3.7500rem);
+  --space-300-400: clamp(3.3750rem, 2.6570rem + 3.0233vw, 5.0000rem);
+  --space-400-500: clamp(4.5000rem, 3.7267rem + 3.2558vw, 6.2500rem);
 }
 
 @supports (width: round(1.5px, 1px)) and ((opacity: progress(1px, 0px, 1px)) or (width: calc(1px * tan(atan2(1px, 1px))))) {

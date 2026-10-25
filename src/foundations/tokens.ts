@@ -114,41 +114,39 @@ export const TYPOGRAPHY_TOKENS: Record<string, DesignToken<string>> = {
   'font-alt': { $value: '"Fraunces", Georgia, serif', $type: 'fontFamily', $description: 'Expressive editorial display typeface with variable optical size, softness, and wonk' },
   'font-mono': { $value: '"IBM Plex Mono", Menlo, Consolas, monospace', $type: 'fontFamily', $description: 'Precision monospaced font for code, data tokens, and readouts' },
 
-  // Fluid Steps (Utopia curve from 360px @ 18px base to 1240px @ 20px base)
-  'step-60': { $value: 'clamp(0.6875rem, 0.6619rem + 0.1136vw, 0.75rem)', $type: 'dimension', $description: 'Sub-detail / micro legal copy (fluid 11px to 12px)' },
-  'step-75': { $value: 'clamp(0.75rem, 0.7244rem + 0.1136vw, 0.8125rem)', $type: 'dimension', $description: 'Micro action / caption (fluid 12px to 13px)' },
-  'step-80': { $value: 'clamp(0.8125rem, 0.7869rem + 0.1136vw, 0.875rem)', $type: 'dimension', $description: 'Secondary text / helper text (fluid 13px to 14px)' },
-  'step-90': { $value: 'clamp(0.875rem, 0.8239rem + 0.2273vw, 1rem)', $type: 'dimension', $description: 'Small body / control label (fluid 14px to 16px)' },
-  'step-100': { $value: 'clamp(1rem, 0.9489rem + 0.2273vw, 1.125rem)', $type: 'dimension', $description: 'Base paragraph body text (fluid 16px to 18px)' },
-  'step-110': { $value: 'clamp(1.125rem, 1.0739rem + 0.2273vw, 1.25rem)', $type: 'dimension', $description: 'Lead paragraph / subtitle (fluid 18px to 20px)' },
-  'step-125': { $value: 'clamp(1.25rem, 1.1477rem + 0.4545vw, 1.5rem)', $type: 'dimension', $description: 'H5 / Card title (fluid 20px to 24px)' },
-  'step-140': { $value: 'clamp(1.375rem, 1.2216rem + 0.6818vw, 1.75rem)', $type: 'dimension', $description: 'H4 section title (fluid 22px to 28px)' },
-  'step-150': { $value: 'clamp(1.5rem, 1.2955rem + 0.9091vw, 2rem)', $type: 'dimension', $description: 'H3 subsection header (fluid 24px to 32px)' },
-  'step-175': { $value: 'clamp(1.75rem, 1.4432rem + 1.3636vw, 2.5rem)', $type: 'dimension', $description: 'H2 major section heading (fluid 28px to 40px)' },
-  'step-200': { $value: 'clamp(2rem, 1.5909rem + 1.8182vw, 3rem)', $type: 'dimension', $description: 'H1 page title (fluid 32px to 48px)' },
-  'step-250': { $value: 'clamp(2.5rem, 1.8864rem + 2.7273vw, 4rem)', $type: 'dimension', $description: 'Display hero headline (fluid 40px to 64px)' },
-  'step-300': { $value: 'clamp(3rem, 2.1818rem + 3.6364vw, 5rem)', $type: 'dimension', $description: 'Super-display hero (fluid 48px to 80px)' },
-  'step-350': { $value: 'clamp(3.5rem, 2.4773rem + 4.5455vw, 6rem)', $type: 'dimension', $description: 'Monumental banner headline (fluid 56px to 96px)' },
+  // Fluid Steps (Utopia curve from 380px @ 18px base to 1240px @ 20px base)
+  'step-60': { $value: 'clamp(0.7234rem, 0.8196rem + -0.1242vw, 0.7901rem)', $type: 'dimension', $description: 'Sub-detail / micro legal copy (fluid 12.6px to 11.6px)' },
+  'step-70': { $value: 'clamp(0.8681rem, 0.8981rem + -0.0388vw, 0.8889rem)', $type: 'dimension', $description: 'Micro action / caption (fluid 14.2px to 13.9px)' },
+  'step-80': { $value: 'clamp(1.0000rem, 0.9816rem + 0.0775vw, 1.0417rem)', $type: 'dimension', $description: 'Secondary text / helper text (fluid 16px to 16.7px)' },
+  'step-100': { $value: 'clamp(1.1250rem, 1.0698rem + 0.2326vw, 1.2500rem)', $type: 'dimension', $description: 'Base paragraph body text (fluid 18px to 20px)' },
+  'step-120': { $value: 'clamp(1.2656rem, 1.1621rem + 0.4360vw, 1.5000rem)', $type: 'dimension', $description: 'Lead paragraph / subtitle (fluid 20.25px to 24px)' },
+  'step-140': { $value: 'clamp(1.4238rem, 1.2576rem + 0.6999vw, 1.8000rem)', $type: 'dimension', $description: 'H4 section title (fluid 22.8px to 28.8px)' },
+  'step-160': { $value: 'clamp(1.6018rem, 1.3552rem + 1.0385vw, 2.1600rem)', $type: 'dimension', $description: 'H3 subsection header (fluid 25.6px to 34.6px)' },
+  'step-180': { $value: 'clamp(1.8020rem, 1.4530rem + 1.4697vw, 2.5920rem)', $type: 'dimension', $description: 'H2 major section heading (fluid 28.8px to 41.5px)' },
+  'step-200': { $value: 'clamp(2.0273rem, 1.5487rem + 2.0151vw, 3.1104rem)', $type: 'dimension', $description: 'H1 page title (fluid 32.4px to 49.8px)' },
+  'step-250': { $value: 'clamp(2.2807rem, 1.6392rem + 2.7010vw, 3.7325rem)', $type: 'dimension', $description: 'Display hero headline (fluid 36.5px to 59.7px)' },
+  'step-300': { $value: 'clamp(2.5658rem, 1.7204rem + 3.5594vw, 4.4790rem)', $type: 'dimension', $description: 'Super-display hero (fluid 41px to 71.7px)' },
+  'step-350': { $value: 'clamp(2.8865rem, 1.7870rem + 4.6293vw, 5.3748rem)', $type: 'dimension', $description: 'Monumental banner headline (fluid 46.2px to 86px)' },
 };
 
 // ==========================================
 // 3. SPACE
 // ==========================================
 export const SPACE_TOKENS: Record<string, DesignToken<string>> = {
-  // Fluid Spacing Scale (Macro layout) - matched to global/space.css
-  'space-10': { $value: 'clamp(0.125rem, 0.0994rem + 0.1136vw, 0.1875rem)', $type: 'dimension', $description: 'Fluid 2px to 3px (0.125rem - 0.1875rem)' },
-  'space-30': { $value: 'clamp(0.3125rem, 0.3125rem + 0vw, 0.3125rem)', $type: 'dimension', $description: 'Fluid 5px constant (0.3125rem)' },
-  'space-50': { $value: 'clamp(0.5625rem, 0.5369rem + 0.1136vw, 0.625rem)', $type: 'dimension', $description: 'Fluid 9px to 10px (0.5625rem - 0.625rem)' },
-  'space-60': { $value: 'clamp(0.6875rem, 0.6619rem + 0.1136vw, 0.75rem)', $type: 'dimension', $description: 'Fluid 11px to 12px (0.6875rem - 0.75rem)' },
-  'space-70': { $value: 'clamp(0.8125rem, 0.7869rem + 0.1136vw, 0.875rem)', $type: 'dimension', $description: 'Fluid 13px to 14px (0.8125rem - 0.875rem)' },
-  'space-80': { $value: 'clamp(0.875rem, 0.8239rem + 0.2273vw, 1rem)', $type: 'dimension', $description: 'Fluid 14px to 16px (0.875rem - 1rem)' },
-  'space-100': { $value: 'clamp(1.125rem, 1.0739rem + 0.2273vw, 1.25rem)', $type: 'dimension', $description: 'Base fluid spacing step (fluid 18px to 20px)' },
-  'space-125': { $value: 'clamp(1.4375rem, 1.3864rem + 0.2273vw, 1.5625rem)', $type: 'dimension', $description: 'Fluid 23px to 25px (1.4375rem - 1.5625rem)' },
-  'space-150': { $value: 'clamp(1.6875rem, 1.6108rem + 0.3409vw, 1.875rem)', $type: 'dimension', $description: 'Fluid 27px to 30px (1.6875rem - 1.875rem)' },
-  'space-200': { $value: 'clamp(2.25rem, 2.1477rem + 0.4545vw, 2.5rem)', $type: 'dimension', $description: 'Fluid 36px to 40px (2.25rem - 2.5rem)' },
-  'space-300': { $value: 'clamp(3.375rem, 3.2216rem + 0.6818vw, 3.75rem)', $type: 'dimension', $description: 'Fluid 54px to 60px (3.375rem - 3.75rem)' },
-  'space-400': { $value: 'clamp(4.5rem, 4.2955rem + 0.9091vw, 5rem)', $type: 'dimension', $description: 'Fluid 72px to 80px (4.5rem - 5rem)' },
-  'space-500': { $value: 'clamp(5.625rem, 5.3693rem + 1.1364vw, 6.25rem)', $type: 'dimension', $description: 'Fluid 90px to 100px (5.625rem - 6.25rem)' },
+  // Fluid Spacing Scale (Macro layout) - matched to global/space.css (380px floor)
+  'space-10': { $value: 'clamp(0.1250rem, 0.1250rem + 0vw, 0.1250rem)', $type: 'dimension', $description: 'Fluid 2px constant (0.125rem)' },
+  'space-30': { $value: 'clamp(0.2500rem, 0.2224rem + 0.1163vw, 0.3125rem)', $type: 'dimension', $description: 'Fluid 4px to 5px (0.25rem - 0.3125rem)' },
+  'space-50': { $value: 'clamp(0.5625rem, 0.5349rem + 0.1163vw, 0.6250rem)', $type: 'dimension', $description: 'Fluid 9px to 10px (0.5625rem - 0.625rem)' },
+  'space-60': { $value: 'clamp(0.6875rem, 0.6599rem + 0.1163vw, 0.7500rem)', $type: 'dimension', $description: 'Fluid 11px to 12px (0.6875rem - 0.75rem)' },
+  'space-70': { $value: 'clamp(0.8125rem, 0.7849rem + 0.1163vw, 0.8750rem)', $type: 'dimension', $description: 'Fluid 13px to 14px (0.8125rem - 0.875rem)' },
+  'space-80': { $value: 'clamp(0.8750rem, 0.8198rem + 0.2326vw, 1.0000rem)', $type: 'dimension', $description: 'Fluid 14px to 16px (0.875rem - 1rem)' },
+  'space-100': { $value: 'clamp(1.1250rem, 1.0698rem + 0.2326vw, 1.2500rem)', $type: 'dimension', $description: 'Base fluid spacing step (fluid 18px to 20px)' },
+  'space-125': { $value: 'clamp(1.3750rem, 1.2922rem + 0.3488vw, 1.5625rem)', $type: 'dimension', $description: 'Fluid 22px to 25px (1.375rem - 1.5625rem)' },
+  'space-150': { $value: 'clamp(1.6875rem, 1.6047rem + 0.3488vw, 1.8750rem)', $type: 'dimension', $description: 'Fluid 27px to 30px (1.6875rem - 1.875rem)' },
+  'space-200': { $value: 'clamp(2.2500rem, 2.1395rem + 0.4651vw, 2.5000rem)', $type: 'dimension', $description: 'Fluid 36px to 40px (2.25rem - 2.5rem)' },
+  'space-300': { $value: 'clamp(3.3750rem, 3.2093rem + 0.6977vw, 3.7500rem)', $type: 'dimension', $description: 'Fluid 54px to 60px (3.375rem - 3.75rem)' },
+  'space-400': { $value: 'clamp(4.5000rem, 4.2791rem + 0.9302vw, 5.0000rem)', $type: 'dimension', $description: 'Fluid 72px to 80px (4.5rem - 5rem)' },
+  'space-500': { $value: 'clamp(5.6250rem, 5.3488rem + 1.1628vw, 6.2500rem)', $type: 'dimension', $description: 'Fluid 90px to 100px (5.625rem - 6.25rem)' },
 
   // Static Spacing Scale (Micro components) - matched to global/space.css
   'space-static-10': { $value: '0.125rem', $type: 'dimension', $description: 'Static 2px (0.125rem)' },

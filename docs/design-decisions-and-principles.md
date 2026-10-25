@@ -21,7 +21,7 @@ Layer 1 encapsulates everything a theme needs to express itself—the complete d
 
 - **Color Families**: 6 distinct OKLCH families (`neutral`, `purple`, `green`, `red`, `yellow`, `blue`) across 11 discrete luminance steps (`1000..25`, omitting steps 400 and 600).
 - **Fluid & Static Spacing**:
-  - **Fluid Rhythm (`--space-10` to `--space-500`)**: Governed by the Utopia fluid interpolation engine (`progress()` / `@supports tan(atan2())`) scaling from 360px viewport @ 18px base up to 1240px viewport @ 20px base. Reserved exclusively for macro-layouts (page containers, sections, hero blocks).
+  - **Fluid Rhythm (`--space-10` to `--space-500`)**: Governed by the Utopia fluid interpolation engine (`progress()` / `@supports tan(atan2())`) scaling from 380px viewport @ 18px base up to 1240px viewport @ 20px base. Reserved exclusively for macro-layouts (page containers, sections, hero blocks).
   - **Static Rhythm (`--space-static-10` to `--space-static-500`)**: Anchored on a fixed 20px base. Reserved for micro-component internals (paddings, gaps, icons, border offsets) to prevent layout distortion on resizing.
 - **Concentric Geometry, Borders & Elevation (`shaping.css`)**:
   - **Corner Radii**: Inner corner radii follow the geometric law: $R_{inner} = \max(0, R_{outer} - \text{inset})$, preventing awkward gaps in nested boundaries.

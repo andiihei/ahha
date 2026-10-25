@@ -109,7 +109,7 @@
           <div class="item-row">
             <div class="item-main">
               <p class="item-title"><strong>Fluid type scale</strong> <span class="pill pill-captured">Captured</span></p>
-              <p class="item-desc">Utopia, 360/18/1.125 &rarr; 1240/20/1.2; refactored 2026-10-22 — no per-step <code>clamp()</code>: one shared <code>--_progress</code> (0 at 360px &rarr; 1 at 1240px) drives all twelve steps, each derived from the configuration as <code>base &times; ratio<sup>step</sup></code> at both ends and interpolated by it; the progress is computed by <code>progress()</code> where supported, the <code>tan(atan2())</code> construction elsewhere, with the original <code>clamp()</code> definitions kept as the floor for engines with neither; names and rendered values unchanged</p>
+              <p class="item-desc">Utopia, 380/18/1.125 &rarr; 1240/20/1.2; refactored 2026-10-22 — no per-step <code>clamp()</code>: one shared <code>--_progress</code> (0 at 380px &rarr; 1 at 1240px) drives all twelve steps, each derived from the configuration as <code>base &times; ratio<sup>step</sup></code> at both ends and interpolated by it; the progress is computed by <code>progress()</code> where supported, the <code>tan(atan2())</code> construction elsewhere, with the <code>clamp()</code> definitions kept as the floor for engines with neither; names and rendered values unchanged</p>
             </div>
             <a class="issue-link" href="https://github.com/andiihei/ahha/issues/4" aria-label="Fluid type scale — GitHub issue 4">#4 &#8599;</a>
           </div>

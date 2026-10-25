@@ -48,9 +48,9 @@ export const FluidSpacingLadder: Story = {
   argTypes: {
     containerWidth: {
       name: 'Container / Viewport Width',
-      control: { type: 'range', min: 360, max: 1440, step: 20 },
+      control: { type: 'range', min: 380, max: 1440, step: 20 },
       defaultValue: 1000,
-      description: 'Simulate responsive container width to observe fluid expansion',
+      description: 'Simulate responsive container width to observe fluid expansion (min supported: 380px)',
     },
   },
   args: {
@@ -58,19 +58,19 @@ export const FluidSpacingLadder: Story = {
   },
   render: (args) => {
     const rootPx = 16;
-    const progress = Math.min(Math.max((args.containerWidth - 360) / (1240 - 360), 0), 1);
+    const progress = Math.min(Math.max((args.containerWidth - 380) / (1240 - 380), 0), 1);
 
-    // Exact steps from global/space.css (360px @ 18px base -> 1240px @ 20px base)
+    // Exact steps from global/space.css (380px @ 18px base -> 1240px @ 20px base)
     // Multipliers: 10->0.125, 30->0.25, 50->0.5, 60->0.6, 70->0.7, 80->0.8, 100->1, 125->1.25, 150->1.5, 200->2, 300->3, 400->4, 500->5
     const steps = [
       { name: '10', min: 2, max: 3 },
-      { name: '30', min: 5, max: 5 },
+      { name: '30', min: 4, max: 5 },
       { name: '50', min: 9, max: 10 },
       { name: '60', min: 11, max: 12 },
       { name: '70', min: 13, max: 14 },
       { name: '80', min: 14, max: 16 },
       { name: '100', min: 18, max: 20 },
-      { name: '125', min: 23, max: 25 },
+      { name: '125', min: 22, max: 25 },
       { name: '150', min: 27, max: 30 },
       { name: '200', min: 36, max: 40 },
       { name: '300', min: 54, max: 60 },
@@ -85,7 +85,7 @@ export const FluidSpacingLadder: Story = {
             Fluid Spacing Scale (Macro Layout)
           </h3>
           <p style="font-size: var(--step-80); color: var(--text-fg-2); margin: 0 0 1rem 0;">
-            Thirteen fluid steps scaling continuously between 360px and 1240px from <code>global/space.css</code>. The bars take the authentic specimen styling: <strong>pale Neutral fill with 1px border edges on the left and right</strong>. Drag the container slider in Controls to watch the bars breathe.
+            Thirteen fluid steps scaling continuously between 380px and 1240px from <code>global/space.css</code>. The bars take the authentic specimen styling: <strong>pale Neutral fill with 1px border edges on the left and right</strong>. Drag the container slider in Controls to watch the bars breathe.
           </p>
 
           <div
