@@ -18,36 +18,15 @@ The AHHA typography engine marries two systems:
     },
   },
   argTypes: {
-    previewText: {
-      name: 'Sample Preview Text',
-      control: { type: 'text' },
-      defaultValue: 'The quick brown fox jumps over the lazy dog',
-      description: 'Editable preview text',
+    containerWidth: {
+      name: 'Container / Viewport Width',
+      control: { type: 'range', min: 380, max: 1440, step: 20 },
+      defaultValue: 1000,
+      description: 'Simulate responsive container width to observe fluid typography breathing (min supported: 380px)',
     },
-    sampleStep: {
-      name: 'Selected Fluid Step',
-      control: {
-        type: 'select',
-      },
-      options: [
-        '--step-60',
-        '--step-75',
-        '--step-80',
-        '--step-90',
-        '--step-100',
-        '--step-110',
-        '--step-125',
-        '--step-140',
-        '--step-150',
-        '--step-175',
-        '--step-200',
-        '--step-250',
-        '--step-300',
-        '--step-350',
-      ],
-      defaultValue: '--step-150',
-      description: 'Select step token to preview live',
-    },
+  },
+  args: {
+    containerWidth: 1000,
   },
 };
 
@@ -184,306 +163,444 @@ export const FluidTypeRamp: Story = {
 };
 
 export const Headings: Story = {
-  render: () => html`
-    <div style="display: flex; flex-direction: column; gap: 2rem; width: 100%; max-width: 850px;">
-      <div>
-        <h3 style="font-family: var(--font-alt); font-size: var(--step-125); margin: 0 0 0.5rem 0;">
-          Heading Roles (Display Voice)
-        </h3>
-        <p style="font-size: var(--step-80); color: var(--text-fg-2); margin: 0;">
-          Display family (<code>--font-alt</code>, Fraunces), Tight tracking (<code>--tracking-tight</code>), with optical sizing and calibrated weights.
-        </p>
-      </div>
+  render: (args) => {
+    const progress = Math.min(Math.max(((args.containerWidth || 1000) - 380) / (1240 - 380), 0), 1);
 
-      <div style="display: flex; flex-direction: column; gap: 1.75rem;">
-        <div style="padding-bottom: 1.5rem; border-bottom: 1px solid var(--surface-border);">
-          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
-            <span style="font-family: var(--font-mono); font-size: var(--step-75); color: var(--text-fg-2);">
-              .heading-400 &middot; --step-350 &middot; Bold 700 &middot; Leading None
-            </span>
-          </div>
-          <h1 class="heading-400" style="margin: 0;">
-            Autonomous Architecture
-          </h1>
-        </div>
-
-        <div style="padding-bottom: 1.5rem; border-bottom: 1px solid var(--surface-border);">
-          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
-            <span style="font-family: var(--font-mono); font-size: var(--step-75); color: var(--text-fg-2);">
-              .heading-300 &middot; --step-250 &middot; Bold 700 &middot; Leading None
-            </span>
-          </div>
-          <h2 class="heading-300" style="margin: 0;">
-            Adaptive Token Primitives
-          </h2>
-        </div>
-
-        <div style="padding-bottom: 1.5rem; border-bottom: 1px solid var(--surface-border);">
-          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
-            <span style="font-family: var(--font-mono); font-size: var(--step-75); color: var(--text-fg-2);">
-              .heading-200 &middot; --step-160 &middot; Regular 400 &middot; Leading Compact
-            </span>
-          </div>
-          <h3 class="heading-200" style="margin: 0;">
-            Unified Fluid Progression Curve
+    return html`
+      <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 100%; max-width: 900px;">
+        <div>
+          <h3 style="font-family: var(--font-alt); font-size: var(--step-125); margin: 0 0 0.5rem 0;">
+            Heading Roles (Display Voice)
           </h3>
+          <p style="font-size: var(--step-80); color: var(--text-fg-2); margin: 0 0 1rem 0;">
+            Display family (<code>--font-alt</code>, Fraunces), Tight tracking (<code>--tracking-tight</code>), with optical sizing and calibrated weights. Drag the container width slider in Controls to watch headings scale.
+          </p>
+
+          <div
+            style="
+              display: inline-flex;
+              align-items: center;
+              gap: 0.75rem;
+              padding: 0.5rem 1rem;
+              background: var(--surface-bg-1);
+              border: 1px solid var(--surface-border);
+              border-radius: var(--radius-100);
+              font-family: var(--font-mono);
+              font-size: var(--step-75);
+              margin-bottom: 1rem;
+            "
+          >
+            <span>Simulated Viewport: <strong>${args.containerWidth}px</strong></span>
+            <span>·</span>
+            <span>Progress: <strong>${Math.round(progress * 100)}%</strong></span>
+          </div>
         </div>
 
-        <div style="padding-bottom: 1rem;">
-          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
-            <span style="font-family: var(--font-mono); font-size: var(--step-75); color: var(--text-fg-2);">
-              .heading-150 &middot; --step-120 &middot; SemiBold 600 &middot; Leading Compact
-            </span>
+        <div
+          style="
+            width: 100%;
+            max-width: ${args.containerWidth}px;
+            background: var(--surface-bg);
+            border: 1px dashed var(--surface-border);
+            border-radius: var(--radius-150);
+            padding: 1.5rem;
+            box-sizing: border-box;
+            transition: max-width var(--duration-100) var(--ease-out);
+          "
+        >
+          <div style="display: flex; flex-direction: column; gap: 1.75rem;">
+            <div style="padding-bottom: 1.5rem; border-bottom: 1px solid var(--surface-border);">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
+                <span style="font-family: var(--font-mono); font-size: var(--step-75); color: var(--text-fg-2);">
+                  .heading-400 &middot; --step-350 &middot; Bold 700 &middot; Leading None
+                </span>
+              </div>
+              <h1 class="heading-400" style="margin: 0; transition: font-size var(--duration-100) var(--ease-out);">
+                Autonomous Architecture
+              </h1>
+            </div>
+
+            <div style="padding-bottom: 1.5rem; border-bottom: 1px solid var(--surface-border);">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
+                <span style="font-family: var(--font-mono); font-size: var(--step-75); color: var(--text-fg-2);">
+                  .heading-300 &middot; --step-250 &middot; Bold 700 &middot; Leading None
+                </span>
+              </div>
+              <h2 class="heading-300" style="margin: 0; transition: font-size var(--duration-100) var(--ease-out);">
+                Adaptive Token Primitives
+              </h2>
+            </div>
+
+            <div style="padding-bottom: 1.5rem; border-bottom: 1px solid var(--surface-border);">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
+                <span style="font-family: var(--font-mono); font-size: var(--step-75); color: var(--text-fg-2);">
+                  .heading-200 &middot; --step-160 &middot; Regular 400 &middot; Leading Compact
+                </span>
+              </div>
+              <h3 class="heading-200" style="margin: 0; transition: font-size var(--duration-100) var(--ease-out);">
+                Unified Fluid Progression Curve
+              </h3>
+            </div>
+
+            <div style="padding-bottom: 1rem;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
+                <span style="font-family: var(--font-mono); font-size: var(--step-75); color: var(--text-fg-2);">
+                  .heading-150 &middot; --step-120 &middot; SemiBold 600 &middot; Leading Compact
+                </span>
+              </div>
+              <h4 class="heading-150" style="margin: 0; transition: font-size var(--duration-100) var(--ease-out);">
+                Card & Section Subsection Header
+              </h4>
+            </div>
           </div>
-          <h4 class="heading-150" style="margin: 0;">
-            Card & Section Subsection Header
-          </h4>
         </div>
       </div>
-    </div>
-  `,
+    `;
+  },
 };
 
 export const Paragraphs: Story = {
-  render: () => html`
-    <div style="display: flex; flex-direction: column; gap: 2rem; width: 100%; max-width: 850px;">
-      <div>
-        <h3 style="font-family: var(--font-alt); font-size: var(--step-125); margin: 0 0 0.5rem 0;">
-          Paragraph Roles (Prose & Body)
-        </h3>
-        <p style="font-size: var(--step-80); color: var(--text-fg-2); margin: 0;">
-          Lead paragraphs (P200, P150) employ the expressive display voice (<code>--font-alt</code>); standard narrative body text (P110, P100) employs the workhorse interface voice (<code>--font-main</code>).
-        </p>
+  render: (args) => {
+    const progress = Math.min(Math.max(((args.containerWidth || 1000) - 380) / (1240 - 380), 0), 1);
+
+    return html`
+      <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 100%; max-width: 900px;">
+        <div>
+          <h3 style="font-family: var(--font-alt); font-size: var(--step-125); margin: 0 0 0.5rem 0;">
+            Paragraph Roles (Prose & Body)
+          </h3>
+          <p style="font-size: var(--step-80); color: var(--text-fg-2); margin: 0 0 1rem 0;">
+            Lead paragraphs (P200, P150) employ the expressive display voice (<code>--font-alt</code>); standard narrative body text (P110, P100) employs the workhorse interface voice (<code>--font-main</code>). Drag the slider to observe fluid resizing.
+          </p>
+
+          <div
+            style="
+              display: inline-flex;
+              align-items: center;
+              gap: 0.75rem;
+              padding: 0.5rem 1rem;
+              background: var(--surface-bg-1);
+              border: 1px solid var(--surface-border);
+              border-radius: var(--radius-100);
+              font-family: var(--font-mono);
+              font-size: var(--step-75);
+              margin-bottom: 1rem;
+            "
+          >
+            <span>Simulated Viewport: <strong>${args.containerWidth}px</strong></span>
+            <span>·</span>
+            <span>Progress: <strong>${Math.round(progress * 100)}%</strong></span>
+          </div>
+        </div>
+
+        <div
+          style="
+            width: 100%;
+            max-width: ${args.containerWidth}px;
+            background: var(--surface-bg);
+            border: 1px dashed var(--surface-border);
+            border-radius: var(--radius-150);
+            padding: 1.5rem;
+            box-sizing: border-box;
+            transition: max-width var(--duration-100) var(--ease-out);
+          "
+        >
+          <div style="display: flex; flex-direction: column; gap: 1.75rem;">
+            <div style="padding-bottom: 1.5rem; border-bottom: 1px solid var(--surface-border);">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
+                <span style="font-family: var(--font-mono); font-size: var(--step-75); color: var(--text-fg-2);">
+                  .paragraph-200 &middot; --font-alt &middot; --step-160 &middot; Bold 700 &middot; Leading Compact
+                </span>
+              </div>
+              <p class="paragraph-200" style="margin: 0; transition: font-size var(--duration-100) var(--ease-out);">
+                Lead editorial callout: A design system is not a project; it is an organic, self-calibrating infrastructure that establishes shared understanding.
+              </p>
+            </div>
+
+            <div style="padding-bottom: 1.5rem; border-bottom: 1px solid var(--surface-border);">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
+                <span style="font-family: var(--font-mono); font-size: var(--step-75); color: var(--text-fg-2);">
+                  .paragraph-150 &middot; --font-alt &middot; --step-120 &middot; Regular 400 &middot; Leading Compact
+                </span>
+              </div>
+              <p class="paragraph-150" style="margin: 0; transition: font-size var(--duration-100) var(--ease-out);">
+                Sub-lead introduction: Typography bridges cold technical data and human expression, anchoring the brand voice across viewport widths from 380px to 1240px.
+              </p>
+            </div>
+
+            <div style="padding-bottom: 1.5rem; border-bottom: 1px solid var(--surface-border);">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
+                <span style="font-family: var(--font-mono); font-size: var(--step-75); color: var(--text-fg-2);">
+                  .paragraph-110 &middot; --font-main &middot; --step-100 &middot; Regular 400 &middot; Leading Relaxed
+                </span>
+              </div>
+              <p class="paragraph-110" style="margin: 0; transition: font-size var(--duration-100) var(--ease-out);">
+                Standard longform body: Generous leading provides effortless reading across articles, technical documentation, and complex multi-column layouts without optical fatigue.
+              </p>
+            </div>
+
+            <div style="padding-bottom: 1rem;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
+                <span style="font-family: var(--font-mono); font-size: var(--step-75); color: var(--text-fg-2);">
+                  .paragraph-100 &middot; --font-main &middot; --step-80 &middot; Regular 400 &middot; Leading Compact
+                </span>
+              </div>
+              <p class="paragraph-100" style="margin: 0; transition: font-size var(--duration-100) var(--ease-out);">
+                Compact UI body: Optimized for dense dashboards, table cells, modal dialog descriptions, and secondary card content.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div style="display: flex; flex-direction: column; gap: 1.75rem;">
-        <div style="padding-bottom: 1.5rem; border-bottom: 1px solid var(--surface-border);">
-          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
-            <span style="font-family: var(--font-mono); font-size: var(--step-75); color: var(--text-fg-2);">
-              .paragraph-200 &middot; --font-alt &middot; --step-160 &middot; Bold 700 &middot; Leading Compact
-            </span>
-          </div>
-          <p class="paragraph-200" style="margin: 0;">
-            Lead editorial callout: A design system is not a project; it is an organic, self-calibrating infrastructure that establishes shared understanding.
-          </p>
-        </div>
-
-        <div style="padding-bottom: 1.5rem; border-bottom: 1px solid var(--surface-border);">
-          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
-            <span style="font-family: var(--font-mono); font-size: var(--step-75); color: var(--text-fg-2);">
-              .paragraph-150 &middot; --font-alt &middot; --step-120 &middot; Regular 400 &middot; Leading Compact
-            </span>
-          </div>
-          <p class="paragraph-150" style="margin: 0;">
-            Sub-lead introduction: Typography bridges cold technical data and human expression, anchoring the brand voice across viewport widths from 380px to 1240px.
-          </p>
-        </div>
-
-        <div style="padding-bottom: 1.5rem; border-bottom: 1px solid var(--surface-border);">
-          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
-            <span style="font-family: var(--font-mono); font-size: var(--step-75); color: var(--text-fg-2);">
-              .paragraph-110 &middot; --font-main &middot; --step-100 &middot; Regular 400 &middot; Leading Relaxed
-            </span>
-          </div>
-          <p class="paragraph-110" style="margin: 0;">
-            Standard longform body: Generous leading provides effortless reading across articles, technical documentation, and complex multi-column layouts without optical fatigue.
-          </p>
-        </div>
-
-        <div style="padding-bottom: 1rem;">
-          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
-            <span style="font-family: var(--font-mono); font-size: var(--step-75); color: var(--text-fg-2);">
-              .paragraph-100 &middot; --font-main &middot; --step-80 &middot; Regular 400 &middot; Leading Compact
-            </span>
-          </div>
-          <p class="paragraph-100" style="margin: 0;">
-            Compact UI body: Optimized for dense dashboards, table cells, modal dialog descriptions, and secondary card content.
-          </p>
-        </div>
-      </div>
-    </div>
-  `,
+    `;
+  },
 };
 
 export const Actions: Story = {
-  render: () => html`
-    <div style="display: flex; flex-direction: column; gap: 2rem; width: 100%; max-width: 850px;">
-      <div>
-        <h3 style="font-family: var(--font-alt); font-size: var(--step-125); margin: 0 0 0.5rem 0;">
-          Action Roles (Interactive & Control Typography)
-        </h3>
-        <p style="font-size: var(--step-80); color: var(--text-fg-2); margin: 0;">
-          Interface family (<code>--font-main</code>), Bold weight (700), Compact leading (1.25). Used for buttons, menu triggers, and interactive controls.
-        </p>
+  render: (args) => {
+    const progress = Math.min(Math.max(((args.containerWidth || 1000) - 380) / (1240 - 380), 0), 1);
+
+    return html`
+      <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 100%; max-width: 900px;">
+        <div>
+          <h3 style="font-family: var(--font-alt); font-size: var(--step-125); margin: 0 0 0.5rem 0;">
+            Action Roles (Interactive & Control Typography)
+          </h3>
+          <p style="font-size: var(--step-80); color: var(--text-fg-2); margin: 0 0 1rem 0;">
+            Interface family (<code>--font-main</code>), Bold weight (700), Compact leading (1.25). Used for buttons, menu triggers, and interactive controls.
+          </p>
+
+          <div
+            style="
+              display: inline-flex;
+              align-items: center;
+              gap: 0.75rem;
+              padding: 0.5rem 1rem;
+              background: var(--surface-bg-1);
+              border: 1px solid var(--surface-border);
+              border-radius: var(--radius-100);
+              font-family: var(--font-mono);
+              font-size: var(--step-75);
+              margin-bottom: 1rem;
+            "
+          >
+            <span>Simulated Viewport: <strong>${args.containerWidth}px</strong></span>
+            <span>·</span>
+            <span>Progress: <strong>${Math.round(progress * 100)}%</strong></span>
+          </div>
+        </div>
+
+        <div
+          style="
+            width: 100%;
+            max-width: ${args.containerWidth}px;
+            background: var(--surface-bg);
+            border: 1px dashed var(--surface-border);
+            border-radius: var(--radius-150);
+            padding: 1.5rem;
+            box-sizing: border-box;
+            transition: max-width var(--duration-100) var(--ease-out);
+          "
+        >
+          <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding: 1.25rem; border-radius: var(--radius-100); border: 1px solid var(--surface-border); background: var(--surface-bg-1);">
+              <div>
+                <div style="font-family: var(--font-mono); font-size: var(--step-60); color: var(--text-fg-2); margin-bottom: 0.25rem;">
+                  .action-110 &middot; --step-100 &middot; Bold 700
+                </div>
+                <span class="action-110" style="transition: font-size var(--duration-100) var(--ease-out);">Primary Call to Action</span>
+              </div>
+              <button class="action-110" style="padding: 0.75rem 1.5rem; background: var(--action-bg-1); color: var(--action-fg-1); border: 1px solid var(--action-border); border-radius: var(--radius-100); cursor: pointer; transition: font-size var(--duration-100) var(--ease-out);">
+                Explore Catalog
+              </button>
+            </div>
+
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding: 1.25rem; border-radius: var(--radius-100); border: 1px solid var(--surface-border); background: var(--surface-bg-1);">
+              <div>
+                <div style="font-family: var(--font-mono); font-size: var(--step-60); color: var(--text-fg-2); margin-bottom: 0.25rem;">
+                  .action-100 &middot; --step-80 &middot; Bold 700
+                </div>
+                <span class="action-100" style="transition: font-size var(--duration-100) var(--ease-out);">Standard Button Action</span>
+              </div>
+              <button class="action-100" style="padding: 0.5rem 1.25rem; background: var(--action-bg-1); color: var(--action-fg-1); border: 1px solid var(--action-border); border-radius: var(--radius-100); cursor: pointer; transition: font-size var(--duration-100) var(--ease-out);">
+                Confirm Selection
+              </button>
+            </div>
+
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding: 1.25rem; border-radius: var(--radius-100); border: 1px solid var(--surface-border); background: var(--surface-bg-1);">
+              <div>
+                <div style="font-family: var(--font-mono); font-size: var(--step-60); color: var(--text-fg-2); margin-bottom: 0.25rem;">
+                  .action-75 &middot; --step-60 &middot; Bold 700
+                </div>
+                <span class="action-75" style="transition: font-size var(--duration-100) var(--ease-out);">Micro Action Label</span>
+              </div>
+              <button class="action-75" style="padding: 0.35rem 0.85rem; background: var(--surface-bg); color: var(--text-fg-1); border: 1px solid var(--surface-border); border-radius: var(--radius-100); cursor: pointer; transition: font-size var(--duration-100) var(--ease-out);">
+                View Details
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-        <div style="display: flex; align-items: center; justify-content: space-between; padding: 1.25rem; border-radius: var(--radius-100); border: 1px solid var(--surface-border); background: var(--surface-bg-1);">
-          <div>
-            <div style="font-family: var(--font-mono); font-size: var(--step-60); color: var(--text-fg-2); margin-bottom: 0.25rem;">
-              .action-110 &middot; --step-100 &middot; Bold 700
-            </div>
-            <span class="action-110">Primary Call to Action</span>
-          </div>
-          <button class="action-110" style="padding: 0.75rem 1.5rem; background: var(--action-bg-1); color: var(--action-fg-1); border: 1px solid var(--action-border); border-radius: var(--radius-100); cursor: pointer;">
-            Explore Catalog
-          </button>
-        </div>
-
-        <div style="display: flex; align-items: center; justify-content: space-between; padding: 1.25rem; border-radius: var(--radius-100); border: 1px solid var(--surface-border); background: var(--surface-bg-1);">
-          <div>
-            <div style="font-family: var(--font-mono); font-size: var(--step-60); color: var(--text-fg-2); margin-bottom: 0.25rem;">
-              .action-100 &middot; --step-80 &middot; Bold 700
-            </div>
-            <span class="action-100">Standard Button Action</span>
-          </div>
-          <button class="action-100" style="padding: 0.5rem 1.25rem; background: var(--action-bg-1); color: var(--action-fg-1); border: 1px solid var(--action-border); border-radius: var(--radius-100); cursor: pointer;">
-            Confirm Selection
-          </button>
-        </div>
-
-        <div style="display: flex; align-items: center; justify-content: space-between; padding: 1.25rem; border-radius: var(--radius-100); border: 1px solid var(--surface-border); background: var(--surface-bg-1);">
-          <div>
-            <div style="font-family: var(--font-mono); font-size: var(--step-60); color: var(--text-fg-2); margin-bottom: 0.25rem;">
-              .action-75 &middot; --step-60 &middot; Bold 700
-            </div>
-            <span class="action-75">Micro Action Label</span>
-          </div>
-          <button class="action-75" style="padding: 0.35rem 0.85rem; background: var(--surface-bg); color: var(--text-fg-1); border: 1px solid var(--surface-border); border-radius: var(--radius-100); cursor: pointer;">
-            View Details
-          </button>
-        </div>
-      </div>
-    </div>
-  `,
+    `;
+  },
 };
 
 export const Details: Story = {
-  render: () => html`
-    <div style="display: flex; flex-direction: column; gap: 2rem; width: 100%; max-width: 850px;">
-      <div>
-        <h3 style="font-family: var(--font-alt); font-size: var(--step-125); margin: 0 0 0.5rem 0;">
-          Detail Roles (Labels, Captions & Data)
-        </h3>
-        <p style="font-size: var(--step-80); color: var(--text-fg-2); margin: 0;">
-          Interface family (<code>--font-main</code>), SemiBold weight (600), Compact leading (1.25). Used for form labels, badges, captions, and micro status indicators.
-        </p>
+  render: (args) => {
+    const progress = Math.min(Math.max(((args.containerWidth || 1000) - 380) / (1240 - 380), 0), 1);
+
+    return html`
+      <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 100%; max-width: 900px;">
+        <div>
+          <h3 style="font-family: var(--font-alt); font-size: var(--step-125); margin: 0 0 0.5rem 0;">
+            Detail Roles (Labels, Captions & Data)
+          </h3>
+          <p style="font-size: var(--step-80); color: var(--text-fg-2); margin: 0 0 1rem 0;">
+            Interface family (<code>--font-main</code>), SemiBold weight (600), Compact leading (1.25). Used for form labels, badges, captions, and micro status indicators. Drag the slider to observe fluid scaling.
+          </p>
+
+          <div
+            style="
+              display: inline-flex;
+              align-items: center;
+              gap: 0.75rem;
+              padding: 0.5rem 1rem;
+              background: var(--surface-bg-1);
+              border: 1px solid var(--surface-border);
+              border-radius: var(--radius-100);
+              font-family: var(--font-mono);
+              font-size: var(--step-75);
+              margin-bottom: 1rem;
+            "
+          >
+            <span>Simulated Viewport: <strong>${args.containerWidth}px</strong></span>
+            <span>·</span>
+            <span>Progress: <strong>${Math.round(progress * 100)}%</strong></span>
+          </div>
+        </div>
+
+        <div
+          style="
+            width: 100%;
+            max-width: ${args.containerWidth}px;
+            background: var(--surface-bg);
+            border: 1px dashed var(--surface-border);
+            border-radius: var(--radius-150);
+            padding: 1.5rem;
+            box-sizing: border-box;
+            transition: max-width var(--duration-100) var(--ease-out);
+          "
+        >
+          <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; padding: 1.25rem; border-radius: var(--radius-100); border: 1px solid var(--surface-border); background: var(--surface-bg-1);">
+              <div style="font-family: var(--font-mono); font-size: var(--step-60); color: var(--text-fg-2);">
+                .detail-100 &middot; --step-80 &middot; SemiBold 600
+              </div>
+              <label class="detail-100" style="color: var(--text-fg-1); transition: font-size var(--duration-100) var(--ease-out);">
+                Account Identification & Organization Name
+              </label>
+              <span style="font-size: var(--step-75); color: var(--text-fg-2);">Primary input field label</span>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; padding: 1.25rem; border-radius: var(--radius-100); border: 1px solid var(--surface-border); background: var(--surface-bg-1);">
+              <div style="font-family: var(--font-mono); font-size: var(--step-60); color: var(--text-fg-2);">
+                .detail-90 &middot; --step-70 &middot; SemiBold 600
+              </div>
+              <span class="detail-90" style="color: var(--text-fg-1); transition: font-size var(--duration-100) var(--ease-out);">
+                Active Deployment &middot; Production Cluster (EU-Central-1)
+              </span>
+              <span style="font-size: var(--step-70); color: var(--text-fg-2);">Secondary status readout</span>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; padding: 1.25rem; border-radius: var(--radius-100); border: 1px solid var(--surface-border); background: var(--surface-bg-1);">
+              <div style="font-family: var(--font-mono); font-size: var(--step-60); color: var(--text-fg-2);">
+                .detail-75 &middot; --step-60 &middot; SemiBold 600
+              </div>
+              <span class="detail-75" style="color: var(--text-fg-2); text-transform: uppercase; letter-spacing: 0.05em; transition: font-size var(--duration-100) var(--ease-out);">
+                CONFIDENTIAL &middot; INTERNAL COMPLIANCE PROTOCOL
+              </span>
+              <span style="font-size: var(--step-60); color: var(--text-fg-2);">Micro legal watermark / badge</span>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-        <div style="display: flex; flex-direction: column; gap: 0.4rem; padding: 1.25rem; border-radius: var(--radius-100); border: 1px solid var(--surface-border); background: var(--surface-bg-1);">
-          <div style="font-family: var(--font-mono); font-size: var(--step-60); color: var(--text-fg-2);">
-            .detail-100 &middot; --step-80 &middot; SemiBold 600
-          </div>
-          <label class="detail-100" style="color: var(--text-fg-1);">
-            Account Identification & Organization Name
-          </label>
-          <span style="font-size: var(--step-75); color: var(--text-fg-2);">Primary input field label</span>
-        </div>
-
-        <div style="display: flex; flex-direction: column; gap: 0.4rem; padding: 1.25rem; border-radius: var(--radius-100); border: 1px solid var(--surface-border); background: var(--surface-bg-1);">
-          <div style="font-family: var(--font-mono); font-size: var(--step-60); color: var(--text-fg-2);">
-            .detail-90 &middot; --step-70 &middot; SemiBold 600
-          </div>
-          <span class="detail-90" style="color: var(--text-fg-1);">
-            Active Deployment &middot; Production Cluster (EU-Central-1)
-          </span>
-          <span style="font-size: var(--step-70); color: var(--text-fg-2);">Secondary status readout</span>
-        </div>
-
-        <div style="display: flex; flex-direction: column; gap: 0.4rem; padding: 1.25rem; border-radius: var(--radius-100); border: 1px solid var(--surface-border); background: var(--surface-bg-1);">
-          <div style="font-family: var(--font-mono); font-size: var(--step-60); color: var(--text-fg-2);">
-            .detail-75 &middot; --step-60 &middot; SemiBold 600
-          </div>
-          <span class="detail-75" style="color: var(--text-fg-2); text-transform: uppercase; letter-spacing: 0.05em;">
-            CONFIDENTIAL &middot; INTERNAL COMPLIANCE PROTOCOL
-          </span>
-          <span style="font-size: var(--step-60); color: var(--text-fg-2);">Micro legal watermark / badge</span>
-        </div>
-      </div>
-    </div>
-  `,
+    `;
+  },
 };
 
 export const FontStacks: Story = {
-  render: () => html`
-    <div style="display: flex; flex-direction: column; gap: 2rem; width: 100%; max-width: 800px;">
-      <div>
-        <h3 style="font-family: var(--font-alt); font-size: var(--step-125); margin: 0 0 0.5rem 0;">
-          Font Stacks & Brand Packs
-        </h3>
-        <p style="font-size: var(--step-80); color: var(--text-fg-2); margin: 0;">
-          Three brand-pack family tokens decouples font selection from component classes and utility roles.
-        </p>
-      </div>
+  render: (args) => {
+    const progress = Math.min(Math.max(((args.containerWidth || 1000) - 380) / (1240 - 380), 0), 1);
 
-      <div style="padding: 1.5rem; border-radius: var(--radius-150); border: 1px solid var(--surface-border); background: var(--surface-bg-1);">
-        <span style="font-family: var(--font-mono); font-size: var(--step-75); color: var(--text-fg-2);">--font-main</span>
-        <h4 style="font-family: var(--font-main); font-size: var(--step-140); margin: 0.5rem 0;">IBM Plex Sans</h4>
-        <p style="font-family: var(--font-main); font-size: var(--step-90); color: var(--text-fg-2); margin: 0; line-height: 1.5;">
-          The primary interface and structural workhorse. Engineered for maximum legibility at compact body sizes, form inputs, and system navigation.
-        </p>
-      </div>
+    return html`
+      <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 100%; max-width: 900px;">
+        <div>
+          <h3 style="font-family: var(--font-alt); font-size: var(--step-125); margin: 0 0 0.5rem 0;">
+            Font Stacks & Brand Packs
+          </h3>
+          <p style="font-size: var(--step-80); color: var(--text-fg-2); margin: 0 0 1rem 0;">
+            Three brand-pack family tokens decouple font selection from component classes and utility roles. Drag the container width slider in Controls to preview responsive typography.
+          </p>
 
-      <div style="padding: 1.5rem; border-radius: var(--radius-150); border: 1px solid var(--surface-border); background: var(--surface-bg-1);">
-        <span style="font-family: var(--font-mono); font-size: var(--step-75); color: var(--text-fg-2);">--font-alt</span>
-        <h4 style="font-family: var(--font-alt); font-size: var(--step-175); margin: 0.5rem 0;">Fraunces (Variable Display)</h4>
-        <p style="font-family: var(--font-alt); font-size: var(--step-100); color: var(--text-fg-2); margin: 0; line-height: 1.5;">
-          The expressive editorial voice. Features variable optical sizing, softness, and wonk axes, delivering a warm human touch to section headlines and brand logotypes.
-        </p>
-      </div>
-
-      <div style="padding: 1.5rem; border-radius: var(--radius-150); border: 1px solid var(--surface-border); background: var(--surface-bg-1);">
-        <span style="font-family: var(--font-mono); font-size: var(--step-75); color: var(--text-fg-2);">--font-mono</span>
-        <h4 style="font-family: var(--font-mono); font-size: var(--step-125); margin: 0.5rem 0;">IBM Plex Mono</h4>
-        <p style="font-family: var(--font-mono); font-size: var(--step-80); color: var(--text-fg-2); margin: 0; line-height: 1.5;">
-          The precision data layer. Used for token values, code blocks, inspection readouts, geometry coordinates, and financial metrics.
-        </p>
-      </div>
-    </div>
-  `,
-};
-
-export const LiveTypographyTester: Story = {
-  args: {
-    previewText: 'Design is intelligence made visible.',
-    sampleStep: '--step-150',
-  },
-  render: (args) => html`
-    <div style="display: flex; flex-direction: column; gap: 1.5rem; max-width: 700px; width: 100%;">
-      <div>
-        <h3 style="font-family: var(--font-alt); font-size: var(--step-125); margin: 0 0 0.5rem 0;">
-          Interactive Typography Tester
-        </h3>
-        <p style="font-size: var(--step-80); color: var(--text-fg-2); margin: 0;">
-          Change the sample text and fluid step in Storybook <strong>Controls</strong> below.
-        </p>
-      </div>
-
-      <div
-        style="
-          padding: 2rem;
-          border-radius: var(--radius-150);
-          border: 1px solid var(--surface-border);
-          background: var(--surface-bg-1);
-          box-shadow: var(--elevation-low);
-        "
-      >
-        <div style="font-family: var(--font-mono); font-size: var(--step-75); color: var(--text-fg-2); margin-bottom: 0.75rem;">
-          Applied Token: <strong>${args.sampleStep}</strong>
+          <div
+            style="
+              display: inline-flex;
+              align-items: center;
+              gap: 0.75rem;
+              padding: 0.5rem 1rem;
+              background: var(--surface-bg-1);
+              border: 1px solid var(--surface-border);
+              border-radius: var(--radius-100);
+              font-family: var(--font-mono);
+              font-size: var(--step-75);
+              margin-bottom: 1rem;
+            "
+          >
+            <span>Simulated Viewport: <strong>${args.containerWidth}px</strong></span>
+            <span>·</span>
+            <span>Progress: <strong>${Math.round(progress * 100)}%</strong></span>
+          </div>
         </div>
+
         <div
           style="
-            font-size: var(${args.sampleStep});
-            font-family: var(--font-main);
-            color: var(--text-fg-1);
-            line-height: 1.25;
-            word-break: break-word;
+            width: 100%;
+            max-width: ${args.containerWidth}px;
+            background: var(--surface-bg);
+            border: 1px dashed var(--surface-border);
+            border-radius: var(--radius-150);
+            padding: 1.5rem;
+            box-sizing: border-box;
+            transition: max-width var(--duration-100) var(--ease-out);
           "
         >
-          ${args.previewText}
+          <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <div style="padding: 1.5rem; border-radius: var(--radius-150); border: 1px solid var(--surface-border); background: var(--surface-bg-1);">
+              <span style="font-family: var(--font-mono); font-size: var(--step-75); color: var(--text-fg-2);">--font-main</span>
+              <h4 style="font-family: var(--font-main); font-size: var(--step-140); margin: 0.5rem 0; transition: font-size var(--duration-100) var(--ease-out);">IBM Plex Sans</h4>
+              <p style="font-family: var(--font-main); font-size: var(--step-90); color: var(--text-fg-2); margin: 0; line-height: 1.5; transition: font-size var(--duration-100) var(--ease-out);">
+                The primary interface and structural workhorse. Engineered for maximum legibility at compact body sizes, form inputs, and system navigation.
+              </p>
+            </div>
+
+            <div style="padding: 1.5rem; border-radius: var(--radius-150); border: 1px solid var(--surface-border); background: var(--surface-bg-1);">
+              <span style="font-family: var(--font-mono); font-size: var(--step-75); color: var(--text-fg-2);">--font-alt</span>
+              <h4 style="font-family: var(--font-alt); font-size: var(--step-175); margin: 0.5rem 0; transition: font-size var(--duration-100) var(--ease-out);">Fraunces (Variable Display)</h4>
+              <p style="font-family: var(--font-alt); font-size: var(--step-100); color: var(--text-fg-2); margin: 0; line-height: 1.5; transition: font-size var(--duration-100) var(--ease-out);">
+                The expressive editorial voice. Features variable optical sizing, softness, and wonk axes, delivering a warm human touch to section headlines and brand logotypes.
+              </p>
+            </div>
+
+            <div style="padding: 1.5rem; border-radius: var(--radius-150); border: 1px solid var(--surface-border); background: var(--surface-bg-1);">
+              <span style="font-family: var(--font-mono); font-size: var(--step-75); color: var(--text-fg-2);">--font-mono</span>
+              <h4 style="font-family: var(--font-mono); font-size: var(--step-125); margin: 0.5rem 0; transition: font-size var(--duration-100) var(--ease-out);">IBM Plex Mono</h4>
+              <p style="font-family: var(--font-mono); font-size: var(--step-80); color: var(--text-fg-2); margin: 0; line-height: 1.5; transition: font-size var(--duration-100) var(--ease-out);">
+                The precision data layer. Used for token values, code blocks, inspection readouts, geometry coordinates, and financial metrics.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  `,
+    `;
+  },
 };
