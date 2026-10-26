@@ -48,7 +48,7 @@ export const AllColorRamps: Story = {
                 ${family} ${family === 'neutral' ? '(Midnight — Brand Core)' : ''}
               </h3>
               <span style="font-family: var(--font-mono); font-size: var(--step-75); color: var(--text-fg-2);">
-                --color-${family}-*
+                --${family}-*
               </span>
             </div>
 
@@ -56,7 +56,7 @@ export const AllColorRamps: Story = {
               ${COLOR_STEPS.map((step) => {
                 const tokenName = `color-${family}-${step}`;
                 const token = COLOR_TOKENS[tokenName];
-                const bg = `var(--color-${family}-${step}, ${token?.$value || '#ccc'})`;
+                const bg = `var(--${family}-${step}, ${token?.$value || '#ccc'})`;
                 const textColor = step >= 500 ? '#fff' : '#000';
 
                 return html`

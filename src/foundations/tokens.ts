@@ -5,105 +5,15 @@ import type { DesignToken, DesignTokenGroup, TokenCategorySummary, ExportFormat 
  * Structured according to the W3C Design Tokens Community Group (DTCG) specification.
  */
 
-// ==========================================
-// 1. COLORS & OPACITY
-// ==========================================
-export const COLOR_FAMILIES = ['neutral', 'purple', 'green', 'red', 'yellow', 'blue'] as const;
-export type ColorFamily = typeof COLOR_FAMILIES[number];
+import {
+  COLOR_FAMILIES,
+  COLOR_STEPS,
+  COLOR_TOKENS,
+  type ColorFamily,
+  type ColorStep,
+} from './parse-colors.js';
 
-export const COLOR_STEPS = [1000, 900, 800, 700, 500, 300, 200, 100, 75, 50, 25] as const;
-export type ColorStep = typeof COLOR_STEPS[number];
-
-export const COLOR_TOKENS: Record<string, DesignToken<string>> = {
-  // Neutral (Midnight - Brand Core)
-  'color-neutral-1000': { $value: 'oklch(0.18 0.015 270)', $type: 'color', $description: 'Midnight deepest ink / canvas' },
-  'color-neutral-900': { $value: 'oklch(0.24 0.018 270)', $type: 'color', $description: 'Midnight high-contrast text and solid surfaces' },
-  'color-neutral-800': { $value: 'oklch(0.32 0.022 270)', $type: 'color', $description: 'Midnight strong border / secondary solid surface' },
-  'color-neutral-700': { $value: 'oklch(0.42 0.025 270)', $type: 'color', $description: 'Midnight subdued border / muted text' },
-  'color-neutral-500': { $value: 'oklch(0.60 0.028 270)', $type: 'color', $description: 'Midnight midtone divider / placeholder' },
-  'color-neutral-300': { $value: 'oklch(0.78 0.020 270)', $type: 'color', $description: 'Midnight subtle border / tinted surface' },
-  'color-neutral-200': { $value: 'oklch(0.86 0.015 270)', $type: 'color', $description: 'Midnight card / elevated surface tint' },
-  'color-neutral-100': { $value: 'oklch(0.92 0.010 270)', $type: 'color', $description: 'Midnight soft background tint' },
-  'color-neutral-75': { $value: 'oklch(0.95 0.008 270)', $type: 'color', $description: 'Midnight faint page background tint' },
-  'color-neutral-50': { $value: 'oklch(0.97 0.005 270)', $type: 'color', $description: 'Midnight ultra-light canvas tint' },
-  'color-neutral-25': { $value: 'oklch(0.99 0.002 270)', $type: 'color', $description: 'Midnight white-adjacent canvas background' },
-
-  // Purple (Purple Rain - Categorical / White-Label)
-  'color-purple-1000': { $value: 'oklch(0.22 0.09 302)', $type: 'color', $description: 'Purple deepest ink' },
-  'color-purple-900': { $value: 'oklch(0.30 0.12 302)', $type: 'color', $description: 'Purple dark solid surface' },
-  'color-purple-800': { $value: 'oklch(0.38 0.15 302)', $type: 'color', $description: 'Purple high-salience button / border' },
-  'color-purple-700': { $value: 'oklch(0.48 0.18 302)', $type: 'color', $description: 'Purple accent indicator' },
-  'color-purple-500': { $value: 'oklch(0.64 0.16 302)', $type: 'color', $description: 'Purple midtone icon / tag' },
-  'color-purple-300': { $value: 'oklch(0.80 0.10 302)', $type: 'color', $description: 'Purple subtle border' },
-  'color-purple-200': { $value: 'oklch(0.88 0.07 302)', $type: 'color', $description: 'Purple card surface' },
-  'color-purple-100': { $value: 'oklch(0.93 0.04 302)', $type: 'color', $description: 'Purple soft background' },
-  'color-purple-75': { $value: 'oklch(0.96 0.025 302)', $type: 'color', $description: 'Purple faint tint' },
-  'color-purple-50': { $value: 'oklch(0.98 0.015 302)', $type: 'color', $description: 'Purple ultra-light surface' },
-  'color-purple-25': { $value: 'oklch(0.99 0.008 302)', $type: 'color', $description: 'Purple lightest canvas' },
-
-  // Green (Fern - Success / Validated)
-  'color-green-1000': { $value: 'oklch(0.20 0.06 199.8)', $type: 'color', $description: 'Fern deep teal-tinted ink' },
-  'color-green-900': { $value: 'oklch(0.28 0.08 195)', $type: 'color', $description: 'Fern dark solid surface' },
-  'color-green-800': { $value: 'oklch(0.38 0.10 188)', $type: 'color', $description: 'Fern high-salience action' },
-  'color-green-700': { $value: 'oklch(0.48 0.12 180)', $type: 'color', $description: 'Fern status badge / border' },
-  'color-green-500': { $value: 'oklch(0.64 0.14 172)', $type: 'color', $description: 'Fern midtone indicator' },
-  'color-green-300': { $value: 'oklch(0.80 0.10 165)', $type: 'color', $description: 'Fern subtle border' },
-  'color-green-200': { $value: 'oklch(0.88 0.07 162)', $type: 'color', $description: 'Fern card surface tint' },
-  'color-green-100': { $value: 'oklch(0.93 0.04 160)', $type: 'color', $description: 'Fern soft background tint' },
-  'color-green-75': { $value: 'oklch(0.96 0.025 159)', $type: 'color', $description: 'Fern faint background tint' },
-  'color-green-50': { $value: 'oklch(0.98 0.015 158.5)', $type: 'color', $description: 'Fern ultra-light tint' },
-  'color-green-25': { $value: 'oklch(0.99 0.008 158.01)', $type: 'color', $description: 'Fern lightest canvas' },
-
-  // Red (Cerise - Error / Destructive)
-  'color-red-1000': { $value: 'oklch(0.22 0.08 18)', $type: 'color', $description: 'Cerise deep danger ink' },
-  'color-red-900': { $value: 'oklch(0.30 0.12 20)', $type: 'color', $description: 'Cerise dark solid surface' },
-  'color-red-800': { $value: 'oklch(0.40 0.16 23)', $type: 'color', $description: 'Cerise critical action button' },
-  'color-red-700': { $value: 'oklch(0.50 0.19 25)', $type: 'color', $description: 'Cerise alert badge / border' },
-  'color-red-500': { $value: 'oklch(0.66 0.18 26)', $type: 'color', $description: 'Cerise midtone icon' },
-  'color-red-300': { $value: 'oklch(0.82 0.11 25)', $type: 'color', $description: 'Cerise subtle border' },
-  'color-red-200': { $value: 'oklch(0.89 0.07 24)', $type: 'color', $description: 'Cerise warning card surface' },
-  'color-red-100': { $value: 'oklch(0.94 0.04 22)', $type: 'color', $description: 'Cerise soft alert tint' },
-  'color-red-75': { $value: 'oklch(0.96 0.025 20)', $type: 'color', $description: 'Cerise faint alert tint' },
-  'color-red-50': { $value: 'oklch(0.98 0.015 19)', $type: 'color', $description: 'Cerise ultra-light background' },
-  'color-red-25': { $value: 'oklch(0.99 0.008 18)', $type: 'color', $description: 'Cerise lightest canvas' },
-
-  // Yellow (Marigold - Warning / In-Progress)
-  'color-yellow-1000': { $value: 'oklch(0.25 0.07 60.7)', $type: 'color', $description: 'Marigold deep amber ink' },
-  'color-yellow-900': { $value: 'oklch(0.35 0.09 65)', $type: 'color', $description: 'Marigold dark warning surface' },
-  'color-yellow-800': { $value: 'oklch(0.46 0.11 72)', $type: 'color', $description: 'Marigold caution button / border' },
-  'color-yellow-700': { $value: 'oklch(0.58 0.13 80)', $type: 'color', $description: 'Marigold caution badge / indicator' },
-  'color-yellow-500': { $value: 'oklch(0.72 0.14 88)', $type: 'color', $description: 'Marigold midtone warning' },
-  'color-yellow-300': { $value: 'oklch(0.85 0.11 94)', $type: 'color', $description: 'Marigold subtle border' },
-  'color-yellow-200': { $value: 'oklch(0.91 0.08 97)', $type: 'color', $description: 'Marigold card background' },
-  'color-yellow-100': { $value: 'oklch(0.95 0.05 99)', $type: 'color', $description: 'Marigold soft background tint' },
-  'color-yellow-75': { $value: 'oklch(0.97 0.03 100)', $type: 'color', $description: 'Marigold faint tint' },
-  'color-yellow-50': { $value: 'oklch(0.985 0.018 100.2)', $type: 'color', $description: 'Marigold ultra-light tint' },
-  'color-yellow-25': { $value: 'oklch(0.995 0.008 100.4)', $type: 'color', $description: 'Marigold lightest canvas' },
-
-  // Blue (Cobalt - Info / Interactive)
-  'color-blue-1000': { $value: 'oklch(0.20 0.08 245)', $type: 'color', $description: 'Cobalt deep ink' },
-  'color-blue-900': { $value: 'oklch(0.28 0.11 245)', $type: 'color', $description: 'Cobalt dark solid surface' },
-  'color-blue-800': { $value: 'oklch(0.38 0.14 245)', $type: 'color', $description: 'Cobalt primary action / border' },
-  'color-blue-700': { $value: 'oklch(0.48 0.17 245)', $type: 'color', $description: 'Cobalt info badge / link' },
-  'color-blue-500': { $value: 'oklch(0.64 0.16 245)', $type: 'color', $description: 'Cobalt midtone indicator' },
-  'color-blue-300': { $value: 'oklch(0.80 0.11 245)', $type: 'color', $description: 'Cobalt subtle border' },
-  'color-blue-200': { $value: 'oklch(0.88 0.07 245)', $type: 'color', $description: 'Cobalt card surface' },
-  'color-blue-100': { $value: 'oklch(0.93 0.04 245)', $type: 'color', $description: 'Cobalt soft info background' },
-  'color-blue-75': { $value: 'oklch(0.96 0.025 245)', $type: 'color', $description: 'Cobalt faint background' },
-  'color-blue-50': { $value: 'oklch(0.98 0.015 245)', $type: 'color', $description: 'Cobalt ultra-light surface' },
-  'color-blue-25': { $value: 'oklch(0.99 0.008 245)', $type: 'color', $description: 'Cobalt lightest canvas' },
-
-  // Opacity Tokens
-  'opacity-0': { $value: '0', $type: 'number', $description: 'Fully transparent' },
-  'opacity-5': { $value: '0.05', $type: 'number', $description: 'Subtle surface tint / wash' },
-  'opacity-10': { $value: '0.10', $type: 'number', $description: 'Hover state layer overlay' },
-  'opacity-15': { $value: '0.15', $type: 'number', $description: 'Active / pressed state layer overlay' },
-  'opacity-20': { $value: '0.20', $type: 'number', $description: 'Ghost border / gentle divider' },
-  'opacity-40': { $value: '0.40', $type: 'number', $description: 'Disabled component state' },
-  'opacity-60': { $value: '0.60', $type: 'number', $description: 'Secondary muted content' },
-  'opacity-80': { $value: '0.80', $type: 'number', $description: 'High emphasis supporting text' },
-  'opacity-100': { $value: '1', $type: 'number', $description: 'Fully opaque' },
-};
+export { COLOR_FAMILIES, COLOR_STEPS, COLOR_TOKENS, type ColorFamily, type ColorStep };
 
 // ==========================================
 // 2. TYPOGRAPHY
