@@ -118,6 +118,13 @@ The AHHA typography engine marries two systems:
       defaultValue: 'none',
       description: 'Utility: line-height override (.u-leading-none=1, compact=1.25, relaxed=1.5)',
     },
+    trackingOverride: {
+      name: 'Tracking / Letter-Spacing Utility',
+      control: { type: 'select' },
+      options: ['none', 'u-tracking-tight', 'u-tracking-none', 'u-tracking-loose', 'u-tracking-extra-loose'],
+      defaultValue: 'none',
+      description: 'Utility: letter-spacing override (.u-tracking-tight=-0.03em, none=0em, loose=0.05em, extra-loose=0.1em)',
+    },
     textCaps: {
       name: 'Caps & Tracking Utility',
       control: { type: 'boolean' },
@@ -130,6 +137,7 @@ The AHHA typography engine marries two systems:
     familyOverride: 'none',
     weightOverride: 'none',
     leadingOverride: 'none',
+    trackingOverride: 'none',
     textCaps: false,
   },
 };
@@ -142,6 +150,7 @@ function getAppliedUtilities(args: any) {
   if (args.familyOverride && args.familyOverride !== 'none') classes.push(args.familyOverride);
   if (args.weightOverride && args.weightOverride !== 'none') classes.push(args.weightOverride);
   if (args.leadingOverride && args.leadingOverride !== 'none') classes.push(args.leadingOverride);
+  if (args.trackingOverride && args.trackingOverride !== 'none') classes.push(args.trackingOverride);
   if (args.textCaps) classes.push('u-text-caps');
   return classes.join(' ');
 }

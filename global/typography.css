@@ -195,6 +195,12 @@
 .u-text-bold     { font-weight: 700; }
 .u-text-caps     { text-transform: uppercase; letter-spacing: var(--tracking-loose); }
 
+/* Tracking / Letter-spacing utilities */
+.u-tracking-tight       { letter-spacing: var(--tracking-tight); }
+.u-tracking-none        { letter-spacing: var(--tracking-none); }
+.u-tracking-loose       { letter-spacing: var(--tracking-loose); }
+.u-tracking-extra-loose { letter-spacing: var(--tracking-extra-loose); }
+
 /* Leading overrides (the components' lineHeight toggles, as utilities). */
 .u-leading-none    { line-height: var(--leading-none); }
 .u-leading-compact { line-height: var(--leading-compact); }
