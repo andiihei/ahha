@@ -14,7 +14,9 @@
     "build-storybook": "storybook build",
     "test": "vitest --project=storybook --run",
     "test:watch": "vitest --project=storybook",
-    "chromatic": "npx chromatic --project-token=chpt_04d458071297f1c"
+    "chromatic": "npx chromatic --project-token=chpt_04d458071297f1c --only-changed --exit-zero-on-changes",
+    "chromatic:all": "npx chromatic --project-token=chpt_04d458071297f1c --exit-zero-on-changes",
+    "chromatic:accept": "npx chromatic --project-token=chpt_04d458071297f1c --auto-accept-changes"
   },
   "keywords": [],
   "author": "",
