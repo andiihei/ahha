@@ -496,24 +496,24 @@ export const Actions: Story = {
         stepToken: 'step-100',
         label: 'Primary Call to Action',
         buttonText: 'Explore Catalog',
-        buttonPadding: '0.75rem 1.5rem',
-        primary: true,
+        size: '110',
+        variantClass: 'state-btn-primary',
       },
       {
         role: 'action-100',
         stepToken: 'step-80',
         label: 'Standard Button Action',
         buttonText: 'Confirm Selection',
-        buttonPadding: '0.5rem 1.25rem',
-        primary: true,
+        size: '100',
+        variantClass: 'state-btn-primary',
       },
       {
         role: 'action-75',
         stepToken: 'step-60',
         label: 'Micro Action Label',
         buttonText: 'View Details',
-        buttonPadding: '0.35rem 0.85rem',
-        primary: false,
+        size: '75',
+        variantClass: 'state-btn-secondary',
       },
     ];
 
@@ -582,18 +582,12 @@ export const Actions: Story = {
                     <span class="${a.role} ${utilityClasses}" style="transition: font-size var(--duration-100) var(--ease-out);">${a.label}</span>
                   </div>
                   <button
-                    class="${a.role} ${utilityClasses}"
-                    style="
-                      padding: ${a.buttonPadding};
-                      background: ${a.primary ? 'var(--action-bg-1)' : 'var(--surface-bg)'};
-                      color: ${a.primary ? 'var(--action-fg-1)' : 'var(--text-fg-1)'};
-                      border: 1px solid ${a.primary ? 'var(--action-border)' : 'var(--surface-border)'};
-                      border-radius: var(--radius-100);
-                      cursor: pointer;
-                      transition: font-size var(--duration-100) var(--ease-out);
-                    "
+                    type="button"
+                    class="state-btn ${a.variantClass} ${utilityClasses}"
+                    data-size="${a.size}"
+                    style="transition: font-size var(--duration-100) var(--ease-out);"
                   >
-                    ${a.buttonText}
+                    <span class="state-btn-label">${a.buttonText}</span>
                   </button>
                 </div>
               `;
