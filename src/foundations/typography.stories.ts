@@ -237,8 +237,6 @@ export const FluidTypeRamp: Story = {
                     class="${utilityClasses}"
                     style="
                       font-size: var(--${s.name});
-                      font-family: var(--font-main);
-                      font-weight: 500;
                       line-height: 1.2;
                       transition: font-size var(--duration-100) var(--ease-out);
                     "
