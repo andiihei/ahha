@@ -12,8 +12,10 @@
     "typecheck": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test": "vitest --project=storybook --run",
-    "test:watch": "vitest --project=storybook",
+    "test": "vitest --run",
+    "test:unit": "vitest --project=unit --run",
+    "test:storybook": "vitest --project=storybook --run",
+    "test:watch": "vitest",
     "chromatic": "npx chromatic --project-token=chpt_04d458071297f1c --only-changed --exit-zero-on-changes",
     "chromatic:all": "npx chromatic --project-token=chpt_04d458071297f1c --exit-zero-on-changes",
     "chromatic:accept": "npx chromatic --project-token=chpt_04d458071297f1c --auto-accept-changes"

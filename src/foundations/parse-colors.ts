@@ -1,4 +1,5 @@
 import colorsCss from '../../global/colors.css?raw';
+import { extractCssVars } from './css-parser.js';
 import type { DesignToken } from './token-types.js';
 
 export interface ParsedColorTokens {
@@ -8,19 +9,7 @@ export interface ParsedColorTokens {
 }
 
 export function parseColorsCss(cssText: string): ParsedColorTokens {
-  // Match all :root { ... } rule bodies
-  const rootMatches = [...cssText.matchAll(/:root\s*\{([\s\S]*?)\}/g)];
-  const cssVars: Record<string, string> = {};
-
-  for (const match of rootMatches) {
-    const lines = match[1].split('\n');
-    for (const line of lines) {
-      const declMatch = line.match(/^\s*--([\w-]+)\s*:\s*([^;]+);/);
-      if (declMatch) {
-        cssVars[declMatch[1]] = declMatch[2].trim();
-      }
-    }
-  }
+  const cssVars = extractCssVars(cssText);
 
   const families = ['neutral', 'purple', 'green', 'red', 'yellow', 'blue'] as const;
   const steps = [1000, 950, 900, 800, 700, 500, 300, 200, 100, 50, 25] as const;
@@ -72,4 +61,3 @@ export const { COLOR_FAMILIES, COLOR_STEPS, COLOR_TOKENS } = parseColorsCss(colo
 
 export type ColorFamily = (typeof COLOR_FAMILIES)[number];
 export type ColorStep = (typeof COLOR_STEPS)[number];
-

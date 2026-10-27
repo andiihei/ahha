@@ -62,19 +62,19 @@ export const SpecimenList: Story = {
     <div style="display: grid; gap: var(--space-100, 1.25rem); width: 100%; max-width: 32rem;">
       <div style="display: flex; align-items: center; justify-content: space-between;">
         <ads-toggle checked label="Notifications"></ads-toggle>
-        <span style="font-family: 'IBM Plex Mono', monospace; font-size: var(--step-70); color: var(--text-fg-2);">On</span>
+        <span style="font-family: var(--font-mono); font-size: var(--step-70); color: var(--text-fg-2);">On</span>
       </div>
       <div style="display: flex; align-items: center; justify-content: space-between;">
         <ads-toggle label="Weekly digest"></ads-toggle>
-        <span style="font-family: 'IBM Plex Mono', monospace; font-size: var(--step-70); color: var(--text-fg-2);">Off</span>
+        <span style="font-family: var(--font-mono); font-size: var(--step-70); color: var(--text-fg-2);">Off</span>
       </div>
       <div style="display: flex; align-items: center; justify-content: space-between;">
         <ads-toggle checked disabled label="Two-factor authentication"></ads-toggle>
-        <span style="font-family: 'IBM Plex Mono', monospace; font-size: var(--step-70); color: var(--text-fg-2);">On · disabled</span>
+        <span style="font-family: var(--font-mono); font-size: var(--step-70); color: var(--text-fg-2);">On · disabled</span>
       </div>
       <div style="display: flex; align-items: center; justify-content: space-between;">
         <ads-toggle disabled label="Beta features"></ads-toggle>
-        <span style="font-family: 'IBM Plex Mono', monospace; font-size: var(--step-70); color: var(--text-fg-2);">Off · disabled</span>
+        <span style="font-family: var(--font-mono); font-size: var(--step-70); color: var(--text-fg-2);">Off · disabled</span>
       </div>
     </div>
   `
